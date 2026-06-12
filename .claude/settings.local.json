@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(npx skills list -g)",
+      "PowerShell(npx skills add https://github.com/Leonxlnx/taste-skill --skill \"design-taste-frontend\")",
+      "PowerShell(npx skills add vercel-labs/agent-skills --skill vercel-react-best-practices)",
+      "PowerShell(npx skills add https://github.com/Leonxlnx/taste-skill --skill \"design-taste-frontend\" -g)",
+      "PowerShell(npx skills add vercel-labs/agent-skills --skill vercel-react-best-practices -g)",
+      "PowerShell($files = @\\(\"Reveal\",\"Hero\",\"Navbar\",\"WhatsIncluded\",\"HowItWorks\",\"Proof\",\"Pricing\",\"FAQ\",\"Contact\",\"Footer\"\\); foreach \\($f in $files\\) { $first = Get-Content \"C:\\\\Users\\\\amuom\\\\Desktop\\\\careerswitchkit\\\\app\\\\components\\\\$f.tsx\" -TotalCount 1; Write-Host \"$f : $first\" })",
+      "PowerShell(npx skills add h3nryprod01/design-taste)",
+      "PowerShell(npx skills add mattpocock/skills@grill-me)",
+      "Bash(npx tsc *)"
+    ]
+  }
+}
