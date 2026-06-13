@@ -119,15 +119,15 @@ export default function WhatsIncluded() {
                     <Icon size={22} strokeWidth={1.75} className="text-accent" />
                   </div>
 
-                  {/* Title */}
-                  <h3 className="relative z-10 font-sora text-xl font-bold text-white mb-1">
+                  {/* Title + optional badge */}
+                  <h3 className="relative z-10 font-sora text-xl font-bold text-white">
                     {item.title}
-                    {item.subtitle && (
-                      <span className="ml-2 text-xs font-medium px-2 py-0.5 rounded-full bg-accent/10 text-accent align-middle">
-                        {item.subtitle}
-                      </span>
-                    )}
                   </h3>
+                  {item.subtitle && (
+                    <span className="relative z-10 inline-block mt-1.5 mb-0.5 text-xs font-semibold px-2 py-0.5 rounded-full bg-accent/10 text-accent">
+                      {item.subtitle}
+                    </span>
+                  )}
 
                   {/* Bullets */}
                   <ul className="relative z-10 mt-4 flex flex-col gap-2">
