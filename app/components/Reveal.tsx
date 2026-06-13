@@ -17,10 +17,6 @@ export function Reveal({
 }: RevealProps) {
   const reduce = useReducedMotion();
 
-  if (reduce) {
-    return <div className={className}>{children}</div>;
-  }
-
   const hidden = {
     opacity: 0,
     y: direction === "up" ? 24 : 0,
@@ -31,10 +27,10 @@ export function Reveal({
     <motion.div
       suppressHydrationWarning
       className={className}
-      initial={hidden}
+      initial={reduce ? false : hidden}
       whileInView={{ opacity: 1, y: 0, x: 0 }}
-      viewport={{ once: true, amount: 0.12 }}
-      transition={{ duration: 0.6, delay, ease: [0.25, 0.1, 0.25, 1] }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.65, delay, ease: [0.16, 1, 0.3, 1] }}
     >
       {children}
     </motion.div>
