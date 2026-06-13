@@ -15,7 +15,10 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "CareerSwitchKit - Land Your New Career Faster",
   description:
-    "An ATS-friendly resume, cover letter, and 50 AI prompts to help you switch careers in the US. One kit, $49.",
+    "Switching careers in the US? Get an ATS-ready resume, cover letters, and 50 AI prompts built specifically for career switchers. Instant download, $49, 30-day guarantee.",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
