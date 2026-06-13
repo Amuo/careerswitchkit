@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Sora, DM_Sans } from "next/font/google";
-import Script from "next/script";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "@/app/globals.css";
 
 const sora = Sora({
@@ -56,12 +56,8 @@ export default function RootLayout({
         className={`${sora.variable} ${dmSans.variable} font-sans antialiased`}
       >
         {children}
-        <Script
-          defer
-          data-domain="careerswitchkit.org"
-          src="https://plausible.io/js/script.js"
-          strategy="afterInteractive"
-        />
+        {/* Replace G-XXXXXXXXXX with your real GA4 Measurement ID from analytics.google.com */}
+        <GoogleAnalytics gaId="G-XXXXXXXXXX" />
       </body>
     </html>
   );

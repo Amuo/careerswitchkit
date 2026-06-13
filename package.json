@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@next/third-parties": "^16.2.9",
     "@radix-ui/react-accordion": "^1.2.13",
     "@radix-ui/react-slot": "^1.2.5",
     "@tabler/icons-react": "^3.44.0",
