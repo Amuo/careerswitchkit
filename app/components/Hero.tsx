@@ -69,7 +69,7 @@ export default function Hero() {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-32 lg:py-40">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-32 pb-16 lg:pt-40 lg:pb-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
           {/* Left column */}
@@ -86,23 +86,12 @@ export default function Hero() {
             {/* Headline */}
             <motion.h1
               suppressHydrationWarning
-              className="font-sora text-5xl md:text-6xl lg:text-7xl font-black leading-tight max-w-2xl"
+              {...fadeUp(0.1)}
+              className="font-sora text-5xl md:text-6xl lg:text-7xl font-black leading-tight text-white max-w-2xl"
             >
-              <motion.span
-                suppressHydrationWarning
-                {...fadeUp(0.1)}
-                className="block text-white"
-              >
-                Switch careers in the US,
-              </motion.span>
-              <motion.span
-                suppressHydrationWarning
-                {...fadeUp(0.2)}
-                className="block"
-                style={{ color: "#3792E8" }}
-              >
-                without starting from zero.
-              </motion.span>
+              Switch careers in the US,{" "}
+              <br className="hidden sm:block" />
+              <span className="text-[#3792E8]">without starting from zero.</span>
             </motion.h1>
 
             {/* Subheadline */}

@@ -116,7 +116,7 @@ function SpotlightCard({
 
 export default function WhatsIncluded() {
   return (
-    <section id="included" className="bg-white py-28 lg:py-36">
+    <section id="included" className="bg-white pt-16 pb-28 lg:pt-20 lg:pb-36">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Reveal className="mb-14">
           <p className="text-sm font-bold uppercase tracking-widest text-accent mb-3">

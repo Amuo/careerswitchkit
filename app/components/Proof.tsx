@@ -4,7 +4,7 @@ import { Reveal } from "./Reveal";
 
 export default function Proof() {
   return (
-    <section className="bg-white py-28 lg:py-36">
+    <section className="bg-white py-16 lg:py-20">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <Reveal className="mb-12">
           <p className="text-sm font-bold uppercase tracking-widest text-accent mb-3">

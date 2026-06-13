@@ -89,7 +89,7 @@ export default function HowItWorks() {
   return (
     <section
       id="how-it-works"
-      className="relative bg-[#070719] py-28 lg:py-36 overflow-hidden"
+      className="relative bg-[#070719] py-16 lg:py-20 overflow-hidden"
     >
       {/* Noise texture */}
       <div
@@ -118,9 +118,9 @@ export default function HowItWorks() {
             const stepDelay = i * 0.15;
 
             return (
-              <Reveal key={step.number} delay={stepDelay}>
+              <Reveal key={step.number} delay={stepDelay} className="h-full">
                 <div
-                  className="group relative rounded-2xl p-8 border border-white/10 overflow-hidden transition-all duration-300 hover:border-accent"
+                  className="group relative h-full rounded-2xl p-8 border border-white/10 overflow-hidden transition-all duration-300 hover:border-accent"
                   style={{
                     background: "rgba(255,255,255,0.04)",
                     minHeight: "280px",

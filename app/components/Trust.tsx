@@ -23,7 +23,7 @@ const stats = [
 
 export default function Trust() {
   return (
-    <section className="bg-white py-24 border-t border-gray-100">
+    <section className="bg-white pt-16 pb-24 border-t border-gray-100">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <Reveal className="text-center mb-14">
           <p className="text-sm font-bold uppercase tracking-widest text-accent mb-0">
@@ -32,12 +32,11 @@ export default function Trust() {
         </Reveal>
 
         <Reveal delay={0.08}>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 text-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16 text-center">
             {stats.map((s) => (
               <div key={s.label} className="flex flex-col items-center gap-2">
                 <span
-                  className="font-sora text-5xl font-black leading-none"
-                  style={{ color: "#3792E8" }}
+                  className="font-sora text-5xl md:text-6xl font-black leading-none text-[#3792E8]/80"
                 >
                   {s.number}
                 </span>
@@ -53,7 +52,7 @@ export default function Trust() {
         </Reveal>
 
         <Reveal delay={0.18}>
-          <p className="mt-14 text-center font-sora text-xl md:text-2xl font-semibold text-[#070719] leading-snug max-w-[44ch] mx-auto">
+          <p className="mt-14 text-center font-sora text-lg font-semibold text-[#334155] leading-snug max-w-[44ch] mx-auto">
             &ldquo;Built specifically for career switchers — not adapted from a
             generic resume template pack.&rdquo;
           </p>
