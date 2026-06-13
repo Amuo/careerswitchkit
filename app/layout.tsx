@@ -56,8 +56,7 @@ export default function RootLayout({
         className={`${sora.variable} ${dmSans.variable} font-sans antialiased`}
       >
         {children}
-        {/* Replace G-XXXXXXXXXX with your real GA4 Measurement ID from analytics.google.com */}
-        <GoogleAnalytics gaId="G-XXXXXXXXXX" />
+        <GoogleAnalytics gaId="G-T395SJKKNW" />
       </body>
     </html>
   );
