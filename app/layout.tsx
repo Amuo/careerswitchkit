@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Sora, DM_Sans } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import PageTransition from "@/app/components/PageTransition";
 import "@/app/globals.css";
 
 const sora = Sora({
@@ -55,7 +56,7 @@ export default function RootLayout({
       <body
         className={`${sora.variable} ${dmSans.variable} font-sans antialiased`}
       >
-        {children}
+        <PageTransition>{children}</PageTransition>
         <GoogleAnalytics gaId="G-T395SJKKNW" />
       </body>
     </html>

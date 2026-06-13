@@ -1,6 +1,8 @@
 "use client";
 
+import { useRef } from "react";
 import { IconTemplate, IconBulb, IconSend } from "@tabler/icons-react";
+import { motion, useInView } from "motion/react";
 import { Reveal } from "./Reveal";
 
 const steps = [
@@ -33,9 +35,62 @@ const steps = [
   },
 ];
 
-export default function HowItWorks() {
+const EASE = [0.25, 0.1, 0.25, 1] as const;
+
+function AnimatedConnector() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px 0px" });
+
   return (
-    <section id="how-it-works" className="relative bg-[#070719] py-28 lg:py-36 overflow-hidden">
+    <div
+      ref={ref}
+      className="hidden md:block absolute top-14 -right-3 w-6 h-px z-20 overflow-hidden"
+      aria-hidden="true"
+    >
+      <motion.div
+        className="h-full"
+        style={{ background: "rgba(55,146,232,0.40)" }}
+        initial={{ scaleX: 0, originX: 0 }}
+        animate={inView ? { scaleX: 1 } : { scaleX: 0 }}
+        transition={{ duration: 0.6, delay: 0.5, ease: EASE }}
+      />
+    </div>
+  );
+}
+
+function PingIcon({ Icon, inView }: { Icon: React.ElementType; inView: boolean }) {
+  return (
+    <div className="relative z-10 w-12 h-12 flex items-center justify-center mb-6">
+      {/* Ping ring — triggers when in view */}
+      {inView && (
+        <div
+          className="absolute inset-0 rounded-xl"
+          style={{
+            border: "1px solid rgba(55,146,232,0.5)",
+            animation: "ping 1.2s ease-out forwards",
+          }}
+          aria-hidden="true"
+        />
+      )}
+      <div
+        className="w-12 h-12 rounded-xl flex items-center justify-center"
+        style={{ background: "rgba(55,146,232,0.10)" }}
+      >
+        <Icon size={22} strokeWidth={1.75} className="text-accent" />
+      </div>
+    </div>
+  );
+}
+
+export default function HowItWorks() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const sectionInView = useInView(sectionRef, { once: true, margin: "-80px 0px" });
+
+  return (
+    <section
+      id="how-it-works"
+      className="relative bg-[#070719] py-28 lg:py-36 overflow-hidden"
+    >
       {/* Noise texture */}
       <div
         className="absolute inset-0 noise-texture pointer-events-none select-none"
@@ -56,13 +111,14 @@ export default function HowItWorks() {
           </p>
         </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div ref={sectionRef} className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {steps.map((step, i) => {
             const Icon = step.icon;
             const isLast = i === steps.length - 1;
+            const stepDelay = i * 0.15;
 
             return (
-              <Reveal key={step.number} delay={i * 0.12}>
+              <Reveal key={step.number} delay={stepDelay}>
                 <div
                   className="group relative rounded-2xl p-8 border border-white/10 overflow-hidden transition-all duration-300 hover:border-accent"
                   style={{
@@ -70,7 +126,7 @@ export default function HowItWorks() {
                     minHeight: "280px",
                   }}
                 >
-                  {/* Accent top border — 3px */}
+                  {/* Accent top border */}
                   <div
                     className="absolute top-0 left-0 right-0 rounded-t-2xl"
                     style={{ height: "3px", background: "#3792E8" }}
@@ -93,13 +149,8 @@ export default function HowItWorks() {
                     aria-hidden="true"
                   />
 
-                  {/* Icon */}
-                  <div
-                    className="relative z-10 w-12 h-12 rounded-xl flex items-center justify-center mb-6"
-                    style={{ background: "rgba(55,146,232,0.10)" }}
-                  >
-                    <Icon size={22} strokeWidth={1.75} className="text-accent" />
-                  </div>
+                  {/* Icon with ping ring */}
+                  <PingIcon Icon={Icon} inView={sectionInView} />
 
                   <h3 className="relative z-10 font-sora text-xl font-bold text-white mb-3">
                     {step.title}
@@ -111,14 +162,8 @@ export default function HowItWorks() {
                     {step.detail}
                   </p>
 
-                  {/* Dashed connector to next step - desktop only */}
-                  {!isLast && (
-                    <div
-                      className="hidden md:block absolute top-14 -right-[0.625rem] w-5 border-t-2 border-dashed z-20"
-                      style={{ borderColor: "rgba(55,146,232,0.30)" }}
-                      aria-hidden="true"
-                    />
-                  )}
+                  {/* Animated connector to next step */}
+                  {!isLast && <AnimatedConnector />}
                 </div>
               </Reveal>
             );

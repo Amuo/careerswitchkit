@@ -18,10 +18,11 @@ export default function Proof() {
           </p>
         </Reveal>
 
-        <Reveal delay={0.1}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 items-stretch">
-            {/* Before */}
-            <div className="rounded-xl p-6 border-l-4 border-red-400 bg-red-50">
+        {/* Before / VS / After — each animates independently */}
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-0 items-center">
+          {/* Before — slides from left */}
+          <Reveal direction="left">
+            <div className="rounded-xl p-6 border-l-4 border-red-400 bg-red-50 h-full">
               <span className="text-xs font-bold uppercase tracking-widest text-red-500 block mb-4">
                 Before
               </span>
@@ -33,9 +34,21 @@ export default function Proof() {
                 Vague. No numbers. No keywords. Fails most ATS scans.
               </p>
             </div>
+          </Reveal>
 
-            {/* After */}
-            <div className="rounded-xl p-6 border-l-4 border-emerald-500 bg-emerald-50">
+          {/* VS divider */}
+          <div className="flex items-center justify-center px-4 md:px-6" aria-hidden="true">
+            <span
+              className="text-xs font-black tracking-widest text-gray-300 animate-pulse"
+              style={{ animationDuration: "2s" }}
+            >
+              VS
+            </span>
+          </div>
+
+          {/* After — slides from right */}
+          <Reveal direction="right" delay={0.2}>
+            <div className="rounded-xl p-6 border-l-4 border-emerald-500 bg-emerald-50 h-full">
               <span className="text-xs font-bold uppercase tracking-widest text-emerald-600 block mb-4">
                 After
               </span>
@@ -47,10 +60,12 @@ export default function Proof() {
                 Specific. Quantified. Keyword-rich. Passes ATS filters.
               </p>
             </div>
-          </div>
+          </Reveal>
+        </div>
 
-          {/* Honest disclaimer */}
-          <div className="mt-6 flex items-start gap-2.5 bg-gray-50 border border-gray-100 rounded-xl px-5 py-4">
+        {/* Honest disclaimer */}
+        <Reveal delay={0.35} className="mt-6">
+          <div className="flex items-start gap-2.5 bg-gray-50 border border-gray-100 rounded-xl px-5 py-4">
             <p className="text-sm text-gray-500 leading-relaxed">
               <strong className="text-gray-700 font-medium">Example only.</strong>{" "}
               This rewrite uses Prompt 12 from the AI Pack. Results depend on

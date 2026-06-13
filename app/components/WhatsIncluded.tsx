@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useState } from "react";
 import {
   IconFileDescription,
   IconMail,
@@ -7,6 +8,7 @@ import {
   IconListCheck,
   IconEye,
 } from "@tabler/icons-react";
+import { motion } from "motion/react";
 import { Reveal } from "./Reveal";
 
 const items = [
@@ -68,6 +70,50 @@ const items = [
   },
 ];
 
+function SpotlightCard({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [spotlight, setSpotlight] = useState({ x: 0, y: 0, visible: false });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    setSpotlight({ x: e.clientX - rect.left, y: e.clientY - rect.top, visible: true });
+  };
+
+  return (
+    <motion.div
+      ref={cardRef}
+      className={className}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={() => setSpotlight((s) => ({ ...s, visible: false }))}
+      whileHover={{
+        scale: 1.02,
+        borderColor: "rgba(55,146,232,0.40)",
+        boxShadow: "0 0 30px rgba(55,146,232,0.08)",
+      }}
+      transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+    >
+      {/* Cursor spotlight */}
+      {spotlight.visible && (
+        <div
+          className="absolute inset-0 pointer-events-none rounded-2xl z-0"
+          style={{
+            background: `radial-gradient(200px circle at ${spotlight.x}px ${spotlight.y}px, rgba(55,146,232,0.05), transparent 70%)`,
+          }}
+          aria-hidden="true"
+        />
+      )}
+      {children}
+    </motion.div>
+  );
+}
+
 export default function WhatsIncluded() {
   return (
     <section id="included" className="bg-white py-28 lg:py-36">
@@ -80,11 +126,10 @@ export default function WhatsIncluded() {
             What&apos;s Included
           </h2>
           <p className="mt-3 text-gray-500 text-lg max-w-[48ch]">
-            Everything you need to apply confidently - no extra tools, no guesswork.
+            Everything you need to apply confidently — no extra tools, no guesswork.
           </p>
         </Reveal>
 
-        {/* Bento grid: featured (col-span-2) + 1, then 3 equal */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {items.map((item, i) => {
             const Icon = item.icon;
@@ -93,23 +138,16 @@ export default function WhatsIncluded() {
             return (
               <Reveal
                 key={item.title}
-                delay={i * 0.07}
+                delay={i * 0.08}
                 className={isFeatured ? "sm:col-span-2 lg:col-span-2" : ""}
               >
-                <div
-                  className="group relative h-full rounded-2xl p-8 border border-white/10 transition-all duration-300 hover:border-accent overflow-hidden"
-                  style={{ background: "#10102D" }}
+                <SpotlightCard
+                  className="group relative h-full rounded-2xl p-8 border border-white/10 overflow-hidden cursor-default"
+                  style={{ background: "#10102D" } as React.CSSProperties}
                 >
-                  {/* Hover glow */}
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl"
-                    style={{ boxShadow: "0 0 30px rgba(55,146,232,0.12) inset" }}
-                    aria-hidden="true"
-                  />
-
                   {/* Watermark number */}
                   <span
-                    className="absolute top-4 right-6 font-sora font-black text-white/5 select-none leading-none pointer-events-none"
+                    className="absolute top-4 right-6 font-sora font-black text-white/5 select-none leading-none pointer-events-none z-0"
                     style={{ fontSize: "72px" }}
                     aria-hidden="true"
                   >
@@ -154,7 +192,7 @@ export default function WhatsIncluded() {
                       </li>
                     ))}
                   </ul>
-                </div>
+                </SpotlightCard>
               </Reveal>
             );
           })}

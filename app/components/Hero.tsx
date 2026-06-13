@@ -11,13 +11,21 @@ const bullets = [
   "ATS keyword checklist + scoring sheet",
 ];
 
+const EASE = [0.25, 0.1, 0.25, 1] as const;
+
 export default function Hero() {
   const reduce = useReducedMotion();
 
   const fadeUp = (delay: number) => ({
     initial: reduce ? {} : { opacity: 0, y: 24 },
     animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.65, delay, ease: [0.16, 1, 0.3, 1] as const },
+    transition: { duration: 0.6, delay, ease: EASE },
+  });
+
+  const fadeLeft = (delay: number) => ({
+    initial: reduce ? {} : { opacity: 0, x: -20 },
+    animate: { opacity: 1, x: 0 },
+    transition: { duration: 0.6, delay, ease: EASE },
   });
 
   return (
@@ -29,32 +37,34 @@ export default function Hero() {
         aria-hidden="true"
       />
 
-      {/* Glow 1 — top-left, 800×800 */}
-      <div
-        className="absolute pointer-events-none"
-        style={{
-          width: "800px",
-          height: "800px",
-          background: "rgba(55,146,232,0.08)",
-          filter: "blur(150px)",
-          borderRadius: "9999px",
-          top: "-200px",
-          left: "-200px",
-        }}
-        aria-hidden="true"
-      />
-
-      {/* Glow 2 — bottom-right, 600×600 */}
+      {/* Orb 1 — top-left, slow float */}
       <div
         className="absolute pointer-events-none"
         style={{
           width: "600px",
           height: "600px",
-          background: "rgba(55,146,232,0.06)",
-          filter: "blur(120px)",
+          background: "rgba(55,146,232,0.05)",
+          filter: "blur(100px)",
           borderRadius: "9999px",
-          bottom: "-100px",
-          right: "-100px",
+          top: "-100px",
+          left: "-150px",
+          animation: "float 8s ease-in-out infinite",
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Orb 2 — bottom-right, slower float reverse */}
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          width: "400px",
+          height: "400px",
+          background: "rgba(55,146,232,0.08)",
+          filter: "blur(80px)",
+          borderRadius: "9999px",
+          bottom: "-50px",
+          right: "-80px",
+          animation: "float 10s ease-in-out infinite reverse",
         }}
         aria-hidden="true"
       />
@@ -64,32 +74,55 @@ export default function Hero() {
 
           {/* Left column */}
           <div className="max-w-xl flex flex-col gap-6">
-            <motion.h1
-              suppressHydrationWarning
-              {...fadeUp(0.1)}
-              className="font-sora text-5xl md:text-6xl lg:text-7xl font-black leading-tight max-w-2xl"
-            >
-              <span className="text-white">Switch careers in the US,</span>
-              <br />
-              <span style={{ color: "#3792E8" }}>without starting from zero.</span>
-            </motion.h1>
-
+            {/* Eyebrow */}
             <motion.p
               suppressHydrationWarning
-              {...fadeUp(0.2)}
-              className="text-xl text-white/70 leading-relaxed max-w-lg mt-2"
+              {...fadeUp(0)}
+              className="text-sm font-bold uppercase tracking-widest text-accent"
+            >
+              Career Switcher&apos;s Toolkit
+            </motion.p>
+
+            {/* Headline */}
+            <motion.h1
+              suppressHydrationWarning
+              className="font-sora text-5xl md:text-6xl lg:text-7xl font-black leading-tight max-w-2xl"
+            >
+              <motion.span
+                suppressHydrationWarning
+                {...fadeUp(0.1)}
+                className="block text-white"
+              >
+                Switch careers in the US,
+              </motion.span>
+              <motion.span
+                suppressHydrationWarning
+                {...fadeUp(0.2)}
+                className="block"
+                style={{ color: "#3792E8" }}
+              >
+                without starting from zero.
+              </motion.span>
+            </motion.h1>
+
+            {/* Subheadline */}
+            <motion.p
+              suppressHydrationWarning
+              {...fadeUp(0.3)}
+              className="text-xl text-white/70 leading-relaxed max-w-lg"
             >
               Get an ATS-friendly resume, cover letter, and 50 AI prompts — ready in 30–60 minutes.
             </motion.p>
 
-            <motion.ul
-              suppressHydrationWarning
-              {...fadeUp(0.3)}
-              className="flex flex-col gap-3"
-              aria-label="Kit includes"
-            >
-              {bullets.map((b) => (
-                <li key={b} className="flex items-center gap-3">
+            {/* Bullets — each staggered from left */}
+            <ul className="flex flex-col gap-3" aria-label="Kit includes">
+              {bullets.map((b, i) => (
+                <motion.li
+                  key={b}
+                  suppressHydrationWarning
+                  {...fadeLeft(0.4 + i * 0.1)}
+                  className="flex items-center gap-3"
+                >
                   <span
                     className="flex-shrink-0 w-5 h-5 bg-[#3792E8] rounded-sm flex items-center justify-center"
                     aria-hidden="true"
@@ -97,13 +130,14 @@ export default function Hero() {
                     <IconCheck size={11} className="text-white" strokeWidth={3} />
                   </span>
                   <span className="text-white/90 text-base font-medium">{b}</span>
-                </li>
+                </motion.li>
               ))}
-            </motion.ul>
+            </ul>
 
+            {/* Buttons */}
             <motion.div
               suppressHydrationWarning
-              {...fadeUp(0.4)}
+              {...fadeUp(0.7)}
               className="flex flex-wrap gap-3"
             >
               <button
@@ -124,15 +158,15 @@ export default function Hero() {
           {/* Right column: resume document mockup */}
           <motion.div
             suppressHydrationWarning
-            initial={reduce ? {} : { opacity: 0, x: 24 }}
+            initial={reduce ? {} : { opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.75, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.75, delay: 0.3, ease: EASE }}
             className="hidden lg:flex items-center justify-center"
             aria-label="Resume template preview"
           >
-            {/* Badge + card wrapper — relative without overflow-hidden so badge can overlap */}
+            {/* Badge + card wrapper */}
             <div className="relative max-w-sm w-full">
-              {/* ATS-Optimized badge — overlaps top-right corner */}
+              {/* ATS-Optimized badge */}
               <div
                 className="absolute -top-3 -right-3 z-20 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold"
                 style={{

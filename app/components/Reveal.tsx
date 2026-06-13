@@ -1,23 +1,44 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { useRef } from "react";
+import { motion, useInView, useReducedMotion } from "motion/react";
 
 interface RevealProps {
   children: React.ReactNode;
   delay?: number;
+  direction?: "up" | "left" | "right";
   className?: string;
 }
 
-export function Reveal({ children, delay = 0, className }: RevealProps) {
+export function Reveal({
+  children,
+  delay = 0,
+  direction = "up",
+  className,
+}: RevealProps) {
+  const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
+  const inView = useInView(ref, { once: true, margin: "-80px 0px" });
+
+  if (reduce) {
+    return <div ref={ref} className={className}>{children}</div>;
+  }
+
+  const hidden = {
+    opacity: 0,
+    y: direction === "up" ? 24 : 0,
+    x: direction === "left" ? -24 : direction === "right" ? 24 : 0,
+  };
+
+  const visible = { opacity: 1, y: 0, x: 0 };
+
   return (
     <motion.div
-      suppressHydrationWarning
+      ref={ref}
       className={className}
-      initial={reduce ? false : { opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.65, delay, ease: [0.16, 1, 0.3, 1] }}
+      initial={hidden}
+      animate={inView ? visible : hidden}
+      transition={{ duration: 0.6, delay, ease: [0.25, 0.1, 0.25, 1] }}
     >
       {children}
     </motion.div>

@@ -1,5 +1,7 @@
 "use client";
 
+import { useRef, useState, useEffect } from "react";
+import { useInView } from "motion/react";
 import { IconCheck } from "@tabler/icons-react";
 import { Reveal } from "./Reveal";
 import { handleCheckout } from "@/lib/checkout";
@@ -13,6 +15,37 @@ const features = [
   "Works with ChatGPT, Claude, Gemini, or any AI tool",
   "Instant download — no subscription, no account required",
 ];
+
+function PriceCounter() {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px 0px" });
+  const [count, setCount] = useState(0);
+  const started = useRef(false);
+
+  useEffect(() => {
+    if (!inView || started.current) return;
+    started.current = true;
+    const target = 49;
+    const duration = 800;
+    const startTime = performance.now();
+
+    const tick = (now: number) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.round(eased * target));
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+
+    requestAnimationFrame(tick);
+  }, [inView]);
+
+  return (
+    <span ref={ref} className="font-sora text-8xl font-black text-white leading-none">
+      ${count}
+    </span>
+  );
+}
 
 export default function Pricing() {
   return (
@@ -31,13 +64,12 @@ export default function Pricing() {
         </Reveal>
 
         <Reveal delay={0.1}>
-          {/* Premium dark card */}
+          {/* Premium dark card with breathing glow */}
           <div
-            className="rounded-3xl overflow-hidden"
+            className="rounded-3xl overflow-hidden pricing-card-glow"
             style={{
               background: "linear-gradient(135deg, #10102D 0%, #070719 100%)",
               border: "1px solid rgba(55,146,232,0.30)",
-              boxShadow: "0 0 60px rgba(55,146,232,0.12)",
               padding: "48px",
             }}
           >
@@ -49,9 +81,7 @@ export default function Pricing() {
               <p className="text-white/40 text-sm mb-2">
                 Less than one hour of a career coach. Yours to keep forever.
               </p>
-              <span className="font-sora text-8xl font-black text-white leading-none">
-                $49
-              </span>
+              <PriceCounter />
               <p className="mt-2 text-white/45 text-[15px]">
                 Career-switch kit — instant download
               </p>
