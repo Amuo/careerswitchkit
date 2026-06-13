@@ -87,11 +87,12 @@ export default function Hero() {
             <motion.h1
               suppressHydrationWarning
               {...fadeUp(0.1)}
-              className="font-sora text-5xl md:text-6xl lg:text-7xl font-black leading-tight text-white max-w-2xl"
+              className="font-sora font-black leading-tight text-5xl lg:text-6xl xl:text-7xl text-white max-w-2xl"
             >
               Switch careers in the US,{" "}
-              <br className="hidden sm:block" />
-              <span className="text-[#3792E8]">without starting from zero.</span>
+              <span className="text-[#3792E8] block sm:inline">
+                without starting from zero.
+              </span>
             </motion.h1>
 
             {/* Subheadline */}

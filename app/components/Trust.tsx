@@ -36,7 +36,7 @@ export default function Trust() {
             {stats.map((s) => (
               <div key={s.label} className="flex flex-col items-center gap-2">
                 <span
-                  className="font-sora text-5xl md:text-6xl font-black leading-none text-[#3792E8]/80"
+                  className="font-sora text-5xl md:text-6xl font-black leading-none text-[#3792E8]/80 whitespace-nowrap"
                 >
                   {s.number}
                 </span>
