@@ -11,7 +11,7 @@ const features = [
   "ATS keyword checklist + scoring sheet",
   "1 completed career-switch example (resume + cover letter)",
   "Works with ChatGPT, Claude, Gemini, or any AI tool",
-  "Instant download - no subscription, no account required",
+  "Instant download — no subscription, no account required",
 ];
 
 export default function Pricing() {
@@ -50,7 +50,7 @@ export default function Pricing() {
                 $49
               </span>
               <p className="mt-2 text-white/45 text-[15px]">
-                Career-switch kit - instant download
+                Career-switch kit — instant download
               </p>
             </div>
 
@@ -79,7 +79,7 @@ export default function Pricing() {
               className="w-full bg-accent text-white font-semibold py-5 rounded-xl transition-all duration-200 active:scale-[0.98] text-lg hover:bg-accent-hover hover:shadow-[0_0_32px_rgba(55,146,232,0.5)]"
               aria-label="Get the CareerSwitchKit for $49"
             >
-              Get the Kit - $49
+              Get the Kit — $49
             </button>
           </div>
 

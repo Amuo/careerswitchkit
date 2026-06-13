@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Sora, DM_Sans } from "next/font/google";
+import Script from "next/script";
 import "@/app/globals.css";
 
 const sora = Sora({
@@ -19,6 +20,29 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.svg",
   },
+  openGraph: {
+    title: "CareerSwitchKit — Land Your New Career Faster",
+    description:
+      "Switching careers in the US? Get an ATS-ready resume, cover letters, and 50 AI prompts built specifically for career switchers. Instant download, $49.",
+    url: "https://careerswitchkit.org",
+    siteName: "CareerSwitchKit",
+    images: [
+      {
+        url: "https://careerswitchkit.org/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "CareerSwitchKit — Land Your New Career Faster",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CareerSwitchKit — Land Your New Career Faster",
+    description:
+      "Switching careers in the US? Get an ATS-ready resume, cover letters, and 50 AI prompts built for career switchers. $49, instant download.",
+    images: ["https://careerswitchkit.org/og-image.png"],
+  },
 };
 
 export default function RootLayout({
@@ -32,6 +56,12 @@ export default function RootLayout({
         className={`${sora.variable} ${dmSans.variable} font-sans antialiased`}
       >
         {children}
+        <Script
+          defer
+          data-domain="careerswitchkit.org"
+          src="https://plausible.io/js/script.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
