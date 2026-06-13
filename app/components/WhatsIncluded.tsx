@@ -142,8 +142,7 @@ export default function WhatsIncluded() {
                 className={isFeatured ? "sm:col-span-2 lg:col-span-2" : ""}
               >
                 <SpotlightCard
-                  className="group relative h-full rounded-2xl p-8 border border-white/10 overflow-hidden cursor-default"
-                  style={{ background: "#10102D" } as React.CSSProperties}
+                  className="group relative h-full rounded-2xl p-8 border border-white/10 overflow-hidden cursor-default bg-[#10102D]"
                 >
                   {/* Watermark number */}
                   <span
