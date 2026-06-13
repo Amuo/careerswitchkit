@@ -14,7 +14,7 @@ export default function Proof() {
             What a rewrite looks like
           </h2>
           <p className="mt-3 text-gray-500 text-lg max-w-[50ch]">
-            A single resume bullet, before and after using the AI Prompt Pack. Real example - not a testimonial.
+            A single resume bullet, before and after using the AI Prompt Pack. Real example — not a testimonial.
           </p>
         </Reveal>
 
@@ -55,7 +55,7 @@ export default function Proof() {
               <strong className="text-gray-700 font-medium">Example only.</strong>{" "}
               This rewrite uses Prompt 12 from the AI Pack. Results depend on
               your experience, the role you&apos;re targeting, and how you work
-              with the prompts. The kit gives you the tools - you do the work.
+              with the prompts. The kit gives you the tools — you do the work.
             </p>
           </div>
         </Reveal>
