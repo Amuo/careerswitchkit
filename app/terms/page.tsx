@@ -110,8 +110,8 @@ const sections = [
         intellectual property of Zorby&amp;Co and are protected by applicable
         copyright law. Your purchase grants you a personal, non-exclusive license for
         your own job-search use only. Redistribution, resale, sublicensing, or
-        sharing of any materials from this kit - in whole or in part, in any format
-        - is strictly prohibited.
+        sharing of any materials from this kit — in whole or in part, in any format
+        — is strictly prohibited.
       </p>
     ),
   },

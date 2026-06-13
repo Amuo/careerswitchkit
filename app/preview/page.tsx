@@ -97,7 +97,7 @@ export default function PreviewPage() {
             aria-hidden="true"
           />
 
-          <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 pb-20 text-center">
+          <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16 text-center">
             <Reveal>
               <p
                 className="text-xs font-bold tracking-[0.2em] uppercase mb-5"
@@ -105,7 +105,7 @@ export default function PreviewPage() {
               >
                 What&apos;s Inside
               </p>
-              <h1 className="font-sora text-5xl md:text-6xl lg:text-7xl font-black text-white leading-tight tracking-tight text-balance mb-6">
+              <h1 className="font-sora text-5xl lg:text-6xl xl:text-7xl font-black text-white leading-tight tracking-tight text-balance mb-6">
                 Everything in the kit,<br />laid out.
               </h1>
               <p className="text-white/55 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto text-balance">
@@ -120,7 +120,7 @@ export default function PreviewPage() {
         <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-4">
           {files.map((file, i) => (
             <Reveal key={file.number} delay={0.05}>
-              <div className="py-16 grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-10 lg:gap-20 items-start">
+              <div className="py-12 grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-10 lg:gap-20 items-start">
 
                 {/* Left: file info */}
                 <div>
@@ -172,9 +172,9 @@ export default function PreviewPage() {
 
         {/* ── Pull Quote ── */}
         <Reveal>
-          <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+          <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
             <div
-              className="py-16 text-center"
+              className="py-12 text-center"
               style={{
                 borderTop: "1px solid rgba(55,146,232,0.3)",
                 borderBottom: "1px solid rgba(55,146,232,0.3)",
@@ -193,7 +193,7 @@ export default function PreviewPage() {
         </Reveal>
 
         {/* ── CTA ── */}
-        <section style={{ background: "#10102D" }} className="py-28">
+        <section style={{ background: "#10102D" }} className="py-20">
           <Reveal>
             <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
               <h2 className="font-sora text-4xl md:text-5xl font-black text-white tracking-tight mb-4 text-balance">
