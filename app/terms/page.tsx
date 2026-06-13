@@ -174,15 +174,21 @@ export default function TermsPage() {
     <>
       <Navbar />
       <main className="bg-white min-h-screen">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20">
-          {/* Page header */}
-          <div className="mb-12">
-            <h1 className="font-sora text-4xl md:text-5xl font-bold text-[#070719] tracking-tight">
-              Terms, Refund &amp; Privacy Policy
+        {/* Branded hero header */}
+        <section className="bg-[#070719] pt-28 pb-16">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p className="text-sm font-bold uppercase tracking-widest text-accent mb-3">
+              Legal
+            </p>
+            <h1 className="font-sora text-4xl md:text-5xl font-bold text-white tracking-tight">
+              Terms, Refund &amp; Privacy
             </h1>
-            <p className="mt-3 text-gray-400 text-sm">Last updated: June 2026</p>
+            <p className="mt-3 text-white/40 text-sm">Last updated: June 2026</p>
           </div>
+        </section>
 
+        {/* Body */}
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20">
           {/* Sections */}
           {sections.map((section, i) => (
             <div key={section.id}>

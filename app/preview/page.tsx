@@ -116,90 +116,85 @@ export default function PreviewPage() {
           </div>
         </section>
 
-        {/* ── File Showcase ── */}
-        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-4">
-          {files.map((file, i) => (
-            <Reveal key={file.number} delay={0.05}>
-              <div className="py-12 grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-10 lg:gap-20 items-start">
+        {/* ── File Showcase — alternating bands for rhythm ── */}
+        {files.map((file, i) => {
+          const lighter = i % 2 === 1;
+          return (
+            <section
+              key={file.number}
+              className={
+                lighter
+                  ? "bg-[#10102D] border-t border-white/5"
+                  : "bg-[#070719]"
+              }
+            >
+              <Reveal>
+                <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-10 lg:gap-20 items-center">
 
-                {/* Left: file info */}
-                <div>
-                  <div className="flex items-baseline gap-5 mb-5">
-                    <span
-                      className="font-sora text-5xl font-black leading-none flex-shrink-0"
-                      style={{ color: "#3792E8" }}
-                      aria-hidden="true"
-                    >
-                      {file.number}
-                    </span>
-                    <div>
-                      <h2 className="font-sora text-2xl font-bold text-white leading-snug">
-                        {file.name}
-                      </h2>
-                      <span className="text-xs text-white/30 font-mono tracking-widest uppercase">
-                        {file.format}
+                  {/* Left: file info */}
+                  <div>
+                    <div className="flex items-baseline gap-5 mb-5">
+                      <span
+                        className="font-sora text-6xl font-black leading-none flex-shrink-0 text-[#3792E8]/40"
+                        aria-hidden="true"
+                      >
+                        {file.number}
                       </span>
+                      <div>
+                        <h2 className="font-sora text-2xl font-bold text-white leading-snug">
+                          {file.name}
+                        </h2>
+                        <span className="text-xs text-white/30 font-mono tracking-widest uppercase">
+                          {file.format}
+                        </span>
+                      </div>
                     </div>
+                    <p className="text-white/60 text-base leading-relaxed max-w-md">
+                      {file.description}
+                    </p>
                   </div>
-                  <p className="text-white/60 text-base leading-relaxed max-w-md">
-                    {file.description}
-                  </p>
-                </div>
 
-                {/* Right: screenshot placeholder */}
-                <div
-                  className="w-full aspect-video rounded-xl flex items-center justify-center"
-                  style={{
-                    background: "#10102D",
-                    border: "1px solid rgba(55,146,232,0.18)",
-                  }}
-                >
-                  <span className="text-white/25 text-sm tracking-wide">
-                    Screenshot coming soon
-                  </span>
+                  {/* Right: screenshot placeholder with inner glow */}
+                  <div className="relative w-full aspect-video rounded-xl flex items-center justify-center overflow-hidden bg-[#0D1528] border border-[#3792E8]/15">
+                    <div
+                      className="absolute inset-0 pointer-events-none"
+                      style={{
+                        background:
+                          "linear-gradient(135deg, rgba(55,146,232,0.03), transparent)",
+                      }}
+                      aria-hidden="true"
+                    />
+                    <span className="relative text-white/20 text-sm tracking-wide">
+                      Screenshot coming soon
+                    </span>
+                  </div>
                 </div>
-              </div>
-
-              {i < files.length - 1 && (
-                <hr
-                  className="border-0 border-t"
-                  style={{ borderColor: "rgba(255,255,255,0.07)" }}
-                />
-              )}
-            </Reveal>
-          ))}
-        </section>
+              </Reveal>
+            </section>
+          );
+        })}
 
         {/* ── Pull Quote ── */}
-        <Reveal>
-          <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            <div
-              className="py-12 text-center"
-              style={{
-                borderTop: "1px solid rgba(55,146,232,0.3)",
-                borderBottom: "1px solid rgba(55,146,232,0.3)",
-              }}
+        <section className="bg-[#070719] border-t border-white/5 py-12">
+          <Reveal>
+            <blockquote
+              className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pl-8 text-xl italic text-white/80 leading-relaxed text-balance"
+              style={{ borderLeft: "3px solid #3792E8" }}
             >
-              <p
-                className="font-sora text-2xl md:text-3xl leading-relaxed text-balance"
-                style={{ color: "#3792E8" }}
-              >
-                &ldquo;You are not buying templates. You are buying a system
-                that tells you exactly what to do, in what order, with what
-                tools.&rdquo;
-              </p>
-            </div>
-          </section>
-        </Reveal>
+              &ldquo;You are not buying templates. You are buying a system that
+              tells you exactly what to do, in what order, with what tools.&rdquo;
+            </blockquote>
+          </Reveal>
+        </section>
 
         {/* ── CTA ── */}
-        <section style={{ background: "#10102D" }} className="py-20">
+        <section className="bg-[#070719] border-t border-white/5 py-20">
           <Reveal>
             <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
               <h2 className="font-sora text-4xl md:text-5xl font-black text-white tracking-tight mb-4 text-balance">
                 Ready to get started?
               </h2>
-              <p className="text-white/50 text-lg mb-10 leading-relaxed">
+              <p className="text-white/60 text-lg mb-10 leading-relaxed">
                 Instant download. 30-day money-back guarantee. Works with any
                 AI tool.
               </p>
