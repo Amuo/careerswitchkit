@@ -1,6 +1,6 @@
 "use client";
 
-import { IconCheck, IconDownload, IconShieldCheck, IconTool } from "@tabler/icons-react";
+import { IconCheck } from "@tabler/icons-react";
 import { Reveal } from "./Reveal";
 import { handleCheckout } from "@/lib/checkout";
 
@@ -46,6 +46,9 @@ export default function Pricing() {
               <p className="text-sm font-bold uppercase tracking-widest text-accent mb-2">
                 one-time payment
               </p>
+              <p className="text-white/40 text-sm mb-2">
+                Less than one hour of a career coach. Yours to keep forever.
+              </p>
               <span className="font-sora text-8xl font-black text-white leading-none">
                 $49
               </span>
@@ -76,7 +79,7 @@ export default function Pricing() {
             {/* CTA */}
             <button
               onClick={handleCheckout}
-              className="w-full bg-accent text-white font-semibold py-5 rounded-xl transition-all duration-200 active:scale-[0.98] text-lg hover:bg-accent-hover hover:shadow-[0_0_32px_rgba(55,146,232,0.5)]"
+              className="w-full bg-accent text-white font-semibold py-4 rounded-xl transition-all duration-200 active:scale-[0.98] text-base hover:bg-accent-hover hover:shadow-[0_0_30px_rgba(55,146,232,0.4)]"
               aria-label="Get the CareerSwitchKit for $49"
             >
               Get the Kit — $49
@@ -86,16 +89,16 @@ export default function Pricing() {
           {/* Trust row */}
           <div className="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-gray-500">
             <span className="flex items-center gap-1.5">
-              <IconDownload size={14} strokeWidth={2} aria-hidden="true" />
+              <IconCheck size={13} strokeWidth={2.5} className="text-accent" aria-hidden="true" />
               Instant download
             </span>
             <span className="flex items-center gap-1.5">
-              <IconShieldCheck size={14} strokeWidth={2} aria-hidden="true" />
+              <IconCheck size={13} strokeWidth={2.5} className="text-accent" aria-hidden="true" />
               30-day money-back guarantee
             </span>
             <span className="flex items-center gap-1.5">
-              <IconTool size={14} strokeWidth={2} aria-hidden="true" />
-              Works with any AI tool
+              <IconCheck size={13} strokeWidth={2.5} className="text-accent" aria-hidden="true" />
+              Works with ChatGPT, Claude, Gemini
             </span>
           </div>
         </Reveal>

@@ -10,6 +10,8 @@ const steps = [
     title: "Pick a Template",
     description:
       "Choose the resume format that fits your target role and how you want to frame your experience.",
+    detail:
+      "One-page for under 8 years experience. Two-page for more. Hybrid if your job titles don't match your target role yet.",
   },
   {
     number: "02",
@@ -17,6 +19,8 @@ const steps = [
     title: "Paste Job Post + Run Prompts",
     description:
       "Copy the job description into your AI tool. The 50 prompts guide it to tailor every line to that specific role.",
+    detail:
+      "The prompts extract keywords, rewrite your bullets, and score your resume against the specific job — all in one session.",
   },
   {
     number: "03",
@@ -24,6 +28,8 @@ const steps = [
     title: "Check ATS Score + Apply",
     description:
       "Run the keyword checklist, fix any flags, and submit with confidence that your resume will clear automated filters.",
+    detail:
+      "Most applicants skip this step. The ones who don't are the ones who get through.",
   },
 ];
 
@@ -100,6 +106,9 @@ export default function HowItWorks() {
                   </h3>
                   <p className="relative z-10 text-white/55 text-[15px] leading-relaxed max-w-[30ch]">
                     {step.description}
+                  </p>
+                  <p className="relative z-10 mt-2 text-white/35 text-[13px] leading-relaxed max-w-[30ch]">
+                    {step.detail}
                   </p>
 
                   {/* Dashed connector to next step - desktop only */}

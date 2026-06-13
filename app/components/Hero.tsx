@@ -121,93 +121,102 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Right column: product placeholder */}
+          {/* Right column: resume document mockup */}
           <motion.div
             suppressHydrationWarning
             initial={reduce ? {} : { opacity: 0, x: 24 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.75, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="hidden lg:flex items-center justify-center"
-            aria-label="Product preview — real screenshots coming"
+            aria-label="Resume template preview"
           >
-            {/* Gradient border wrapper */}
-            <div
-              className="w-full max-w-lg rounded-2xl p-[1px]"
-              style={{
-                background:
-                  "linear-gradient(135deg, rgba(55,146,232,0.4), transparent 50%, rgba(55,146,232,0.2))",
-              }}
-            >
-              {/* Inner card */}
-              <div className="w-full aspect-[4/3] rounded-2xl bg-[#10102D] relative overflow-hidden flex flex-col p-6">
-                {/* Stacked document cards */}
-                <div className="relative flex-1 mb-6">
-                  {/* Back document — rotated 2deg */}
-                  <div
-                    className="absolute inset-0 rounded-lg bg-white/5 border border-white/10 p-5"
-                    style={{ transform: "rotate(2deg)" }}
-                  >
-                    <div className="flex flex-col gap-2.5 pt-1">
-                      <div className="h-2 bg-white/10 rounded-full w-2/3" />
-                      <div className="h-2 bg-white/10 rounded-full w-full" />
-                      <div className="h-2 bg-white/10 rounded-full w-5/6" />
-                      <div className="h-2 bg-white/10 rounded-full w-4/5" />
-                    </div>
-                  </div>
+            {/* Badge + card wrapper — relative without overflow-hidden so badge can overlap */}
+            <div className="relative max-w-sm w-full">
+              {/* ATS-Optimized badge — overlaps top-right corner */}
+              <div
+                className="absolute -top-3 -right-3 z-20 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold"
+                style={{
+                  background: "rgba(55,146,232,0.18)",
+                  border: "1px solid rgba(55,146,232,0.40)",
+                  color: "#3792E8",
+                  backdropFilter: "blur(8px)",
+                }}
+              >
+                <IconCheck size={11} strokeWidth={3} aria-hidden="true" />
+                ATS-Optimized
+              </div>
 
-                  {/* Middle document — straight */}
-                  <div className="absolute inset-0 rounded-lg bg-white/5 border border-white/10 p-5">
-                    <div className="flex flex-col gap-2.5 pt-1">
-                      <div className="h-2 bg-white/10 rounded-full w-1/2" />
-                      <div className="h-2 bg-white/10 rounded-full w-full" />
-                      <div className="h-2 bg-white/10 rounded-full w-5/6" />
-                      <div className="h-2 bg-white/10 rounded-full w-4/5" />
-                      <div className="h-2 bg-white/10 rounded-full w-3/4" />
-                    </div>
-                  </div>
+              {/* Resume card */}
+              <div
+                className="rounded-2xl p-6 relative overflow-hidden flex flex-col gap-4"
+                style={{
+                  background: "#10102D",
+                  border: "1px solid rgba(255,255,255,0.10)",
+                  boxShadow: "0 25px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(55,146,232,0.08)",
+                  aspectRatio: "3/4",
+                }}
+              >
+                {/* Ambient glow */}
+                <div
+                  className="absolute top-4 right-4 w-32 h-32 rounded-full pointer-events-none"
+                  style={{
+                    background: "rgba(55,146,232,0.20)",
+                    filter: "blur(48px)",
+                    animation: "pulse 3s ease-in-out infinite",
+                  }}
+                  aria-hidden="true"
+                />
 
-                  {/* Front document — rotated -2deg */}
-                  <div
-                    className="absolute inset-0 rounded-lg p-5"
-                    style={{
-                      transform: "rotate(-2deg)",
-                      background: "#0b0b22",
-                      border: "1px solid rgba(55,146,232,0.25)",
-                    }}
-                  >
-                    <div className="flex flex-col gap-2.5">
-                      <div
-                        className="h-2.5 rounded-sm w-2/5"
-                        style={{ background: "rgba(255,255,255,0.28)" }}
-                      />
-                      <div
-                        className="h-1.5 rounded-sm w-1/2"
-                        style={{ background: "rgba(255,255,255,0.12)" }}
-                      />
-                      <div
-                        className="mt-1 h-px w-full"
-                        style={{ background: "rgba(255,255,255,0.06)" }}
-                      />
-                      <div
-                        className="mt-1 h-1.5 rounded-full w-full"
-                        style={{ background: "rgba(55,146,232,0.20)" }}
-                      />
-                      <div
-                        className="h-1.5 rounded-full w-5/6"
-                        style={{ background: "rgba(255,255,255,0.10)" }}
-                      />
-                      <div
-                        className="h-1.5 rounded-full w-4/5"
-                        style={{ background: "rgba(255,255,255,0.10)" }}
-                      />
-                    </div>
-                  </div>
+                {/* Name block */}
+                <div className="flex flex-col gap-2 relative z-10">
+                  <div className="w-32 h-3 bg-white/80 rounded" />
+                  <div className="w-24 h-2 bg-white/30 rounded" />
+                  <div className="w-20 h-2 bg-white/30 rounded" />
                 </div>
 
-                {/* Bottom label */}
-                <p className="text-center text-white/30 text-xs tracking-wider flex-shrink-0">
-                  Product screenshots coming
-                </p>
+                {/* Accent divider */}
+                <div className="w-full h-px bg-accent/40 relative z-10" />
+
+                {/* Section 1 */}
+                <div className="flex flex-col gap-2 relative z-10">
+                  <div className="w-16 h-2 bg-accent/60 rounded" />
+                  <div className="w-full h-2 bg-white/20 rounded" />
+                  <div className="w-4/5 h-2 bg-white/20 rounded" />
+                  <div className="w-3/4 h-2 bg-white/20 rounded" />
+                </div>
+
+                {/* Section 2 */}
+                <div className="flex flex-col gap-2 relative z-10">
+                  <div className="w-16 h-2 bg-accent/60 rounded" />
+                  <div className="w-full h-2 bg-white/20 rounded" />
+                  <div className="w-4/5 h-2 bg-white/20 rounded" />
+                  <div className="w-3/4 h-2 bg-white/20 rounded" />
+                </div>
+
+                {/* Section 3 */}
+                <div className="flex flex-col gap-2 relative z-10">
+                  <div className="w-20 h-2 bg-accent/60 rounded" />
+                  <div className="w-full h-2 bg-white/20 rounded" />
+                  <div className="w-4/5 h-2 bg-white/20 rounded" />
+                  <div className="w-3/4 h-2 bg-white/20 rounded" />
+                </div>
+
+                {/* Skills pills */}
+                <div className="flex flex-wrap gap-2 relative z-10 mt-auto pt-2">
+                  {["ATS-Ready", "Keyword-Rich", "Career Switch"].map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-3 py-1 rounded-full text-xs font-medium"
+                      style={{
+                        background: "rgba(55,146,232,0.12)",
+                        border: "1px solid rgba(55,146,232,0.30)",
+                        color: "#3792E8",
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           </motion.div>

@@ -12,12 +12,12 @@ export default function Contact() {
             GET STARTED
           </p>
           <h2 className="font-sora text-5xl font-bold text-[#070719] tracking-tight leading-tight">
-            Ready to make
+            The job won&apos;t wait.
             <br />
-            the switch?
+            Neither should you.
           </h2>
           <p className="mt-5 text-gray-500 text-lg leading-relaxed max-w-[42ch] mx-auto">
-            Everything you need to apply with confidence — downloaded and ready in under an hour.
+            Get your ATS-ready resume, cover letter, and 50 AI prompts — downloaded and ready in under an hour. One payment, no subscription, yours to keep.
           </p>
           <div className="mt-10">
             <button

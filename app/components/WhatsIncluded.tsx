@@ -13,6 +13,7 @@ const items = [
   {
     icon: IconFileDescription,
     title: "Resume Templates",
+    lead: "Built for the career switcher's specific problem: looking credible in a field you don't have a title in yet.",
     bullets: [
       "3 formats: chronological, two-page, hybrid",
       "Formatted to pass ATS keyword scans",
@@ -23,6 +24,7 @@ const items = [
   {
     icon: IconMail,
     title: "Cover Letter Templates",
+    lead: "Three scenarios: standard application, no direct experience, and referral. Because your situation isn't standard.",
     bullets: [
       "3 opening-to-close templates",
       "Written to pass automated screening",
@@ -34,6 +36,7 @@ const items = [
     icon: IconBulb,
     title: "AI Prompt Pack",
     subtitle: "50 prompts",
+    lead: "The prompts that do the heavy lifting — keyword extraction, bullet rewrites, ATS scoring, cover letter drafting, and final review.",
     bullets: [
       "50 prompts for any major AI tool",
       "Tailors every line to a specific job post",
@@ -44,6 +47,7 @@ const items = [
   {
     icon: IconListCheck,
     title: "ATS Checklist",
+    lead: "The ten-minute check that's the difference between your resume being read and it never being seen.",
     bullets: [
       "Scored checklist before every submission",
       "Catches formatting that gets filtered out",
@@ -54,6 +58,7 @@ const items = [
   {
     icon: IconEye,
     title: "Completed Example",
+    lead: "Read this first. Before the templates, before the prompts. See what the finished product looks like.",
     bullets: [
       "Full career-switch resume + cover letter",
       "Real-world scenario, filled in completely",
@@ -128,6 +133,11 @@ export default function WhatsIncluded() {
                       {item.subtitle}
                     </span>
                   )}
+
+                  {/* Lead sentence */}
+                  <p className="relative z-10 mt-3 mb-1 text-sm text-white/60 italic leading-relaxed">
+                    {item.lead}
+                  </p>
 
                   {/* Bullets */}
                   <ul className="relative z-10 mt-4 flex flex-col gap-2">
