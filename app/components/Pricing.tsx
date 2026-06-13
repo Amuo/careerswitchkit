@@ -5,7 +5,7 @@ import { Reveal } from "./Reveal";
 import { handleCheckout } from "@/lib/checkout";
 
 const features = [
-  "3 ATS-friendly resume templates (chronological, functional, hybrid)",
+  "3 ATS-friendly resume templates (chronological, two-page, hybrid)",
   "3 cover letter templates, customizable for any role",
   "50 AI prompts for tailoring every application",
   "ATS keyword checklist + scoring sheet",

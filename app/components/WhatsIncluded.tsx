@@ -14,7 +14,7 @@ const items = [
     icon: IconFileDescription,
     title: "Resume Templates",
     bullets: [
-      "3 formats: chronological, functional, hybrid",
+      "3 formats: chronological, two-page, hybrid",
       "Formatted to pass ATS keyword scans",
       "Ready to fill in - no design tools needed",
     ],

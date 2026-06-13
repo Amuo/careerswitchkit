@@ -17,7 +17,7 @@ export default function Contact() {
             the switch?
           </h2>
           <p className="mt-5 text-gray-500 text-lg leading-relaxed max-w-[42ch] mx-auto">
-            Join career switchers who landed their first US interview with CareerSwitchKit.
+            Everything you need to apply with confidence — downloaded and ready in under an hour.
           </p>
           <div className="mt-10">
             <button
@@ -30,10 +30,10 @@ export default function Contact() {
           <p className="mt-6 text-gray-400 text-sm">
             Questions before you buy?{" "}
             <a
-              href="mailto:hello@careerswitchkit.org"
+              href="mailto:support@careerswitchkit.com"
               className="text-accent hover:text-accent-hover underline underline-offset-4 transition-colors"
             >
-              hello@careerswitchkit.org
+              support@careerswitchkit.com
             </a>
           </p>
         </Reveal>
