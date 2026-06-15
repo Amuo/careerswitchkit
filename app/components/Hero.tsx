@@ -11,13 +11,13 @@ const bullets = [
   "An ATS score above the filter line, before you submit",
 ];
 
-const EASE = [0.25, 0.1, 0.25, 1] as const;
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 export default function Hero() {
   const reduce = useReducedMotion();
 
   const fadeUp = (delay: number) => ({
-    initial: reduce ? {} : { opacity: 0, y: 24 },
+    initial: reduce ? {} : { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.6, delay, ease: EASE },
   });
@@ -37,36 +37,58 @@ export default function Hero() {
         aria-hidden="true"
       />
 
-      {/* Orb 1 — top-left, slow float */}
-      <div
+      {/* Orb 1 — top-left, 600×600, opacity 0.07 */}
+      <motion.div
+        aria-hidden="true"
         className="absolute pointer-events-none"
         style={{
           width: "600px",
           height: "600px",
-          background: "rgba(55,146,232,0.05)",
-          filter: "blur(100px)",
-          borderRadius: "9999px",
-          top: "-100px",
-          left: "-150px",
-          animation: "float 8s ease-in-out infinite",
-        }}
-        aria-hidden="true"
-      />
-
-      {/* Orb 2 — bottom-right, slower float reverse */}
-      <div
-        className="absolute pointer-events-none"
-        style={{
-          width: "400px",
-          height: "400px",
-          background: "rgba(55,146,232,0.08)",
+          background: "#3792E8",
+          opacity: 0.07,
           filter: "blur(80px)",
           borderRadius: "9999px",
-          bottom: "-50px",
-          right: "-80px",
-          animation: "float 10s ease-in-out infinite reverse",
+          top: "-200px",
+          left: "-150px",
         }}
+        animate={reduce ? {} : { x: [0, 40, 0], y: [0, -30, 0] }}
+        transition={{ duration: 10, ease: "easeInOut", repeat: Infinity }}
+      />
+
+      {/* Orb 2 — bottom center-right, 350×350, opacity 0.05 */}
+      <motion.div
         aria-hidden="true"
+        className="absolute pointer-events-none"
+        style={{
+          width: "350px",
+          height: "350px",
+          background: "#3792E8",
+          opacity: 0.05,
+          filter: "blur(80px)",
+          borderRadius: "9999px",
+          bottom: "-100px",
+          right: "25%",
+        }}
+        animate={reduce ? {} : { x: [-25, 0, -25], y: [20, 0, 20] }}
+        transition={{ duration: 13, ease: "easeInOut", repeat: Infinity }}
+      />
+
+      {/* Orb 3 — mid-right, 250×250, opacity 0.06 */}
+      <motion.div
+        aria-hidden="true"
+        className="absolute pointer-events-none"
+        style={{
+          width: "250px",
+          height: "250px",
+          background: "#1A5FA8",
+          opacity: 0.06,
+          filter: "blur(80px)",
+          borderRadius: "9999px",
+          top: "40%",
+          right: "8%",
+        }}
+        animate={reduce ? {} : { x: [15, 0, 15], y: [-35, 0, -35] }}
+        transition={{ duration: 16, ease: "easeInOut", repeat: Infinity }}
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-32 pb-16 lg:pt-40 lg:pb-20">
@@ -77,40 +99,56 @@ export default function Hero() {
             {/* Eyebrow */}
             <motion.p
               suppressHydrationWarning
-              {...fadeUp(0)}
+              {...fadeUp(0.1)}
               className="text-sm font-bold uppercase tracking-widest text-accent"
             >
               Career Switcher&apos;s Toolkit
             </motion.p>
 
-            {/* Headline */}
-            <motion.h1
-              suppressHydrationWarning
-              {...fadeUp(0.1)}
-              className="font-sora font-black leading-tight text-4xl text-white"
-            >
-              Your background isn&apos;t the problem.{" "}
-              <span className="text-[#3792E8]">
-                Your resume is.
-              </span>
-            </motion.h1>
+            {/* Headline + accent rule + subheadline — grouped so rule is tight between them */}
+            <div className="flex flex-col">
+              <motion.h1
+                suppressHydrationWarning
+                {...fadeUp(0.25)}
+                className="font-sora font-black leading-tight text-4xl text-white"
+              >
+                Your background isn&apos;t the problem.{" "}
+                <span className="text-[#3792E8]">Your resume is.</span>
+              </motion.h1>
 
-            {/* Subheadline */}
-            <motion.p
-              suppressHydrationWarning
-              {...fadeUp(0.3)}
-              className="text-xl text-white/70 leading-relaxed max-w-lg"
-            >
-              Stop explaining yourself. Start getting interviews.
-            </motion.p>
+              {/* Accent rule */}
+              <motion.div
+                suppressHydrationWarning
+                initial={reduce ? {} : { scaleX: 0, opacity: 0 }}
+                animate={{ scaleX: 1, opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.4, ease: EASE }}
+                style={{
+                  width: "48px",
+                  height: "3px",
+                  background: "#3792E8",
+                  borderRadius: "2px",
+                  margin: "14px 0 12px 0",
+                  transformOrigin: "left",
+                }}
+              />
 
-            {/* Bullets — each staggered from left */}
+              {/* Subheadline */}
+              <motion.p
+                suppressHydrationWarning
+                {...fadeUp(0.4)}
+                className="text-xl text-white/70 leading-relaxed max-w-lg"
+              >
+                Stop explaining yourself. Start getting interviews.
+              </motion.p>
+            </div>
+
+            {/* Bullets */}
             <ul className="flex flex-col gap-3" aria-label="Kit includes">
               {bullets.map((b, i) => (
                 <motion.li
                   key={b}
                   suppressHydrationWarning
-                  {...fadeLeft(0.4 + i * 0.1)}
+                  {...fadeLeft(0.55 + i * 0.1)}
                   className="flex items-center gap-3"
                 >
                   <span
@@ -148,14 +186,27 @@ export default function Hero() {
           {/* Right column: resume document mockup */}
           <motion.div
             suppressHydrationWarning
-            initial={reduce ? {} : { opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.75, delay: 0.3, ease: EASE }}
+            initial={reduce ? {} : { opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.75, delay: 0.5, ease: EASE }}
             className="hidden lg:flex items-center justify-center"
             aria-label="Resume template preview"
           >
-            {/* Badge + card wrapper */}
             <div className="relative max-w-sm w-full">
+              {/* Glow behind mockup */}
+              <div
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  inset: "-16px",
+                  background: "#3792E8",
+                  opacity: 0.06,
+                  borderRadius: "20px",
+                  filter: "blur(32px)",
+                  zIndex: 0,
+                }}
+              />
+
               {/* ATS-Optimized badge */}
               <div
                 className="absolute -top-3 -right-3 z-20 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold"
@@ -178,6 +229,7 @@ export default function Hero() {
                   border: "1px solid rgba(255,255,255,0.10)",
                   boxShadow: "0 25px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(55,146,232,0.08)",
                   aspectRatio: "3/4",
+                  zIndex: 1,
                 }}
               >
                 {/* Ambient glow */}
