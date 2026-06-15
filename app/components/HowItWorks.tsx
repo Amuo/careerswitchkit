@@ -1,95 +1,47 @@
 "use client";
 
 import { useRef } from "react";
-import { IconTemplate, IconBulb, IconSend } from "@tabler/icons-react";
-import { motion, useInView } from "motion/react";
+import { motion, useInView, useReducedMotion } from "motion/react";
 import { Reveal } from "./Reveal";
+
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 const steps = [
   {
     number: "01",
-    icon: IconTemplate,
     title: "Start With the Guide",
     description:
       "Open the START HERE doc first — always. It maps your background to the right format and tells you exactly what to build and in what order.",
-    detail:
+    insight:
       "Most people skip this. That's why their applications feel scattered.",
   },
   {
     number: "02",
-    icon: IconBulb,
     title: "Build and Optimize",
     description:
       "Fill your chosen CV template, write your cover letter, then run the AI prompts to tailor every line to the specific job post.",
-    detail:
+    insight:
       "The prompts do the translation work — turning your background into language hiring managers in your target field understand.",
   },
   {
     number: "03",
-    icon: IconSend,
     title: "Score, Then Submit",
     description:
       "Before every application, run the ATS checklist. Fix any flags. Then submit knowing your resume will clear automated filters and reach a human.",
-    detail:
+    insight:
       "Most applicants skip this step. The ones who don't are the ones who get through.",
   },
 ];
 
-const EASE = [0.25, 0.1, 0.25, 1] as const;
-
-function AnimatedConnector() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px 0px" });
-
-  return (
-    <div
-      ref={ref}
-      className="hidden md:block absolute top-14 -right-3 w-6 h-px z-20 overflow-hidden"
-      aria-hidden="true"
-    >
-      <motion.div
-        className="h-full"
-        style={{ background: "rgba(55,146,232,0.40)" }}
-        initial={{ scaleX: 0, originX: 0 }}
-        animate={inView ? { scaleX: 1 } : { scaleX: 0 }}
-        transition={{ duration: 0.6, delay: 0.5, ease: EASE }}
-      />
-    </div>
-  );
-}
-
-function PingIcon({ Icon, inView }: { Icon: React.ElementType; inView: boolean }) {
-  return (
-    <div className="relative z-10 w-12 h-12 flex items-center justify-center mb-6">
-      {/* Ping ring — triggers when in view */}
-      {inView && (
-        <div
-          className="absolute inset-0 rounded-xl"
-          style={{
-            border: "1px solid rgba(55,146,232,0.5)",
-            animation: "ping 1.2s ease-out forwards",
-          }}
-          aria-hidden="true"
-        />
-      )}
-      <div
-        className="w-12 h-12 rounded-xl flex items-center justify-center"
-        style={{ background: "rgba(55,146,232,0.10)" }}
-      >
-        <Icon size={22} strokeWidth={1.75} className="text-accent" />
-      </div>
-    </div>
-  );
-}
-
 export default function HowItWorks() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const sectionInView = useInView(sectionRef, { once: true, margin: "-80px 0px" });
+  const stepsRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(stepsRef, { once: true, amount: 0.2 });
+  const reduce = useReducedMotion();
 
   return (
     <section
       id="how-it-works"
-      className="relative bg-white py-16 lg:py-20 overflow-hidden"
+      className="relative bg-white py-24 lg:py-32 overflow-hidden"
     >
       {/* Noise texture */}
       <div
@@ -98,88 +50,107 @@ export default function HowItWorks() {
         aria-hidden="true"
       />
 
-      {/* Gradient fade from Stage 04 dark into this section */}
+      {/* Gradient fade from Stage 04 dark */}
       <div
-        className="absolute top-0 left-0 right-0 h-16 pointer-events-none"
+        className="absolute top-0 left-0 right-0 h-20 pointer-events-none"
         style={{ background: "linear-gradient(to bottom, #070719, transparent)" }}
         aria-hidden="true"
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Reveal className="mb-16">
-          <p className="text-sm font-bold uppercase tracking-widest text-accent mb-3">
-            THE PROCESS
-          </p>
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* Header */}
+        <Reveal className="mb-16 lg:mb-20">
           <h2 className="font-sora text-3xl md:text-4xl font-bold text-[#070719] tracking-tight">
-            How It Works
+            How it works.
           </h2>
-          <p className="mt-3 text-gray-500 text-lg max-w-[44ch]">
+          <p
+            className="mt-3 text-lg max-w-[44ch]"
+            style={{ color: "rgba(7,7,25,0.50)" }}
+          >
             Download once. Follow the sequence. Apply with confidence.
           </p>
         </Reveal>
 
-        <div ref={sectionRef} className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {steps.map((step, i) => {
-            const Icon = step.icon;
-            const isLast = i === steps.length - 1;
-            const stepDelay = i * 0.15;
-
-            return (
-              <Reveal key={step.number} delay={stepDelay} className="h-full">
+        {/* Steps */}
+        <div
+          ref={stepsRef}
+          className="grid grid-cols-1 md:grid-cols-3 gap-0"
+        >
+          {steps.map((step, i) => (
+            <div
+              key={step.number}
+              className="relative flex flex-col md:pr-10 lg:pr-16"
+            >
+              {/* Connecting rule between steps — desktop only */}
+              {i < steps.length - 1 && (
                 <div
-                  className="group relative h-full rounded-2xl p-8 border border-white/10 overflow-hidden transition-all duration-300 hover:border-accent"
+                  className="hidden md:block absolute right-0 top-[26px] w-px"
                   style={{
-                    background: "#10102D",
-                    minHeight: "280px",
+                    height: "40px",
+                    background:
+                      "linear-gradient(to bottom, rgba(55,146,232,0.30), transparent)",
                   }}
+                  aria-hidden="true"
+                />
+              )}
+
+              {/* Step number */}
+              <motion.p
+                suppressHydrationWarning
+                initial={reduce ? false : { opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: i * 0.12, ease: EASE }}
+                className="font-sora font-black leading-none tabular-nums mb-6"
+                style={{
+                  fontSize: "clamp(2.75rem, 5vw, 3.75rem)",
+                  color: "#3792E8",
+                }}
+                aria-hidden="true"
+              >
+                {step.number}
+              </motion.p>
+
+              {/* Content */}
+              <motion.div
+                suppressHydrationWarning
+                initial={reduce ? false : { opacity: 0, y: 14 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.55, delay: 0.1 + i * 0.12, ease: EASE }}
+                className="flex flex-col gap-3 flex-1"
+              >
+                <h3
+                  className="font-sora text-2xl font-bold tracking-tight"
+                  style={{ color: "#070719" }}
                 >
-                  {/* Accent top border */}
-                  <div
-                    className="absolute top-0 left-0 right-0 rounded-t-2xl"
-                    style={{ height: "3px", background: "#3792E8" }}
-                    aria-hidden="true"
-                  />
+                  {step.title}
+                </h3>
+                <p
+                  className="text-base leading-relaxed"
+                  style={{ color: "rgba(7,7,25,0.55)" }}
+                >
+                  {step.description}
+                </p>
+                <p
+                  className="text-sm font-semibold leading-relaxed"
+                  style={{ color: "#3792E8" }}
+                >
+                  {step.insight}
+                </p>
+              </motion.div>
 
-                  {/* Giant watermark number */}
-                  <span
-                    className="absolute top-0 right-4 font-sora font-black select-none leading-none pointer-events-none"
-                    style={{
-                      fontSize: "clamp(80px, 15vw, 140px)",
-                      color: "rgba(255,255,255,0.12)",
-                      lineHeight: "1",
-                    }}
-                    aria-hidden="true"
-                  >
-                    {step.number}
-                  </span>
-
-                  {/* Hover glow */}
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl"
-                    style={{ boxShadow: "0 0 30px rgba(55,146,232,0.10) inset" }}
-                    aria-hidden="true"
-                  />
-
-                  {/* Icon with ping ring */}
-                  <PingIcon Icon={Icon} inView={sectionInView} />
-
-                  <h3 className="relative z-10 font-sora text-xl font-bold text-white mb-3">
-                    {step.title}
-                  </h3>
-                  <p className="relative z-10 text-white/90 text-sm leading-relaxed max-w-[30ch]">
-                    {step.description}
-                  </p>
-                  <p className="relative z-10 mt-3 text-white/50 text-xs italic leading-relaxed max-w-[30ch]">
-                    {step.detail}
-                  </p>
-
-                  {/* Animated connector to next step */}
-                  {!isLast && <AnimatedConnector />}
-                </div>
-              </Reveal>
-            );
-          })}
+              {/* Mobile divider between steps */}
+              {i < steps.length - 1 && (
+                <div
+                  className="mt-12 mb-12 md:hidden h-px"
+                  style={{ background: "rgba(7,7,25,0.08)" }}
+                  aria-hidden="true"
+                />
+              )}
+            </div>
+          ))}
         </div>
+
       </div>
     </section>
   );
