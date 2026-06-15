@@ -57,43 +57,48 @@ export default function WhatsIncluded() {
           </p>
         </Reveal>
 
-        {/* Stage blocks */}
+        {/* Stage blocks — no stagger delay; vertical scroll timing sequences naturally */}
         <div>
           {stages.map((stage, i) => (
             <div key={stage.number}>
-              <Reveal delay={i * 0.1}>
-                <div className="relative py-10 lg:py-12">
-                  {/* Ghost watermark number */}
+              <Reveal delay={0}>
+                <div className="relative py-12 lg:py-16">
+
+                  {/* Ghost watermark number — dramatic scale, low opacity */}
                   <span
                     className="absolute right-0 top-1/2 -translate-y-1/2 font-sora font-black select-none pointer-events-none leading-none z-0"
-                    style={{ fontSize: "160px", color: "rgba(26,45,74,0.07)" }}
+                    style={{
+                      fontSize: "clamp(120px, 20vw, 240px)",
+                      color: "rgba(26,45,74,0.15)",
+                    }}
                     aria-hidden="true"
                   >
                     {stage.number}
                   </span>
 
                   {/* Content */}
-                  <div className="relative z-10">
+                  <div className={`relative z-10${i > 0 ? " mt-16" : ""}`}>
                     <p className="text-xs font-bold uppercase tracking-widest text-[#3792E8] mb-3">
                       STAGE {stage.number}
                     </p>
-                    <h3 className="font-sora text-2xl font-bold text-[#070719] mb-2">
+                    <h3 className="font-sora text-3xl font-bold text-[#070719] mb-3">
                       {stage.title}
                     </h3>
-                    <p className="text-sm text-[#070719]/60 mb-5 max-w-[52ch] leading-relaxed">
+                    <p className="text-sm text-[#070719]/60 mb-6 max-w-[52ch] leading-relaxed">
                       {stage.description}
                     </p>
                     <div className="flex flex-wrap gap-2">
                       {stage.files.map((file) => (
                         <span
                           key={file}
-                          className="rounded-full px-3 py-1 text-xs border border-[#3792E8]/30 bg-[#10102D] text-[#3792E8]"
+                          className="rounded-full px-4 py-1.5 text-xs border border-[#3792E8]/40 bg-[#10102D] text-[#3792E8] shadow-[0_0_8px_rgba(55,146,232,0.20)]"
                         >
                           {file}
                         </span>
                       ))}
                     </div>
                   </div>
+
                 </div>
               </Reveal>
 

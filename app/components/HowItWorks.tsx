@@ -135,8 +135,12 @@ export default function HowItWorks() {
 
                   {/* Giant watermark number */}
                   <span
-                    className="absolute top-0 right-4 font-sora font-black text-white/5 select-none leading-none pointer-events-none"
-                    style={{ fontSize: "120px", lineHeight: "1" }}
+                    className="absolute top-0 right-4 font-sora font-black select-none leading-none pointer-events-none"
+                    style={{
+                      fontSize: "clamp(80px, 15vw, 140px)",
+                      color: "rgba(255,255,255,0.12)",
+                      lineHeight: "1",
+                    }}
                     aria-hidden="true"
                   >
                     {step.number}
@@ -155,10 +159,10 @@ export default function HowItWorks() {
                   <h3 className="relative z-10 font-sora text-xl font-bold text-white mb-3">
                     {step.title}
                   </h3>
-                  <p className="relative z-10 text-white/55 text-[15px] leading-relaxed max-w-[30ch]">
+                  <p className="relative z-10 text-white/90 text-sm leading-relaxed max-w-[30ch]">
                     {step.description}
                   </p>
-                  <p className="relative z-10 mt-2 text-white/35 text-[13px] leading-relaxed max-w-[30ch]">
+                  <p className="relative z-10 mt-3 text-white/50 text-xs italic leading-relaxed max-w-[30ch]">
                     {step.detail}
                   </p>
 

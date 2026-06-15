@@ -6,9 +6,9 @@ import Link from "next/link";
 import { handleCheckout } from "@/lib/checkout";
 
 const bullets = [
-  "3 ATS-friendly resume templates",
-  "50 AI prompts to tailor every application",
-  "ATS keyword checklist + scoring sheet",
+  "A résumé that explains your switch — without you having to",
+  "Cover letters that make non-linear careers look intentional",
+  "An ATS score above the filter line, before you submit",
 ];
 
 const EASE = [0.25, 0.1, 0.25, 1] as const;
