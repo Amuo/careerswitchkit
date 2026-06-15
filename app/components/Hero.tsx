@@ -2,31 +2,18 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { IconCheck } from "@tabler/icons-react";
-import Link from "next/link";
 import { handleCheckout } from "@/lib/checkout";
 
+const EASE = [0.16, 1, 0.3, 1] as const;
+
 const bullets = [
-  "A résumé that explains your switch — without you having to",
+  "A résumé that explains your career switch — without you having to",
   "Cover letters that make non-linear careers look intentional",
   "An ATS score above the filter line, before you submit",
 ];
 
-const EASE = [0.16, 1, 0.3, 1] as const;
-
 export default function Hero() {
   const reduce = useReducedMotion();
-
-  const fadeUp = (delay: number) => ({
-    initial: reduce ? {} : { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6, delay, ease: EASE },
-  });
-
-  const fadeLeft = (delay: number) => ({
-    initial: reduce ? {} : { opacity: 0, x: -20 },
-    animate: { opacity: 1, x: 0 },
-    transition: { duration: 0.6, delay, ease: EASE },
-  });
 
   return (
     <section className="relative bg-[#070719] min-h-screen flex items-center overflow-hidden">
@@ -37,264 +24,312 @@ export default function Hero() {
         aria-hidden="true"
       />
 
-      {/* Orb 1 — top-left, 600×600, opacity 0.07 */}
+      {/* Single ambient glow — radial gradient, no blur filter needed */}
       <motion.div
         aria-hidden="true"
         className="absolute pointer-events-none"
         style={{
-          width: "600px",
+          width: "1000px",
+          height: "800px",
+          background:
+            "radial-gradient(ellipse at center, rgba(55,146,232,0.11) 0%, transparent 68%)",
+          top: "-280px",
+          left: "-320px",
+        }}
+        animate={reduce ? {} : { x: [0, 55, 0], y: [0, -35, 0] }}
+        transition={{ duration: 14, ease: "easeInOut", repeat: Infinity }}
+      />
+
+      {/* Subtle right-side glow to frame the visual */}
+      <motion.div
+        aria-hidden="true"
+        className="absolute pointer-events-none"
+        style={{
+          width: "500px",
           height: "600px",
-          background: "#3792E8",
-          opacity: 0.07,
-          filter: "blur(80px)",
-          borderRadius: "9999px",
-          top: "-200px",
-          left: "-150px",
+          background:
+            "radial-gradient(ellipse at center, rgba(55,146,232,0.06) 0%, transparent 70%)",
+          top: "10%",
+          right: "-120px",
         }}
-        animate={reduce ? {} : { x: [0, 40, 0], y: [0, -30, 0] }}
-        transition={{ duration: 10, ease: "easeInOut", repeat: Infinity }}
+        animate={reduce ? {} : { y: [0, -20, 0] }}
+        transition={{ duration: 18, ease: "easeInOut", repeat: Infinity }}
       />
 
-      {/* Orb 2 — bottom center-right, 350×350, opacity 0.05 */}
-      <motion.div
-        aria-hidden="true"
-        className="absolute pointer-events-none"
-        style={{
-          width: "350px",
-          height: "350px",
-          background: "#3792E8",
-          opacity: 0.05,
-          filter: "blur(80px)",
-          borderRadius: "9999px",
-          bottom: "-100px",
-          right: "25%",
-        }}
-        animate={reduce ? {} : { x: [-25, 0, -25], y: [20, 0, 20] }}
-        transition={{ duration: 13, ease: "easeInOut", repeat: Infinity }}
-      />
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-32 pb-20 lg:pt-40 lg:pb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-12 lg:gap-16 items-center">
 
-      {/* Orb 3 — mid-right, 250×250, opacity 0.06 */}
-      <motion.div
-        aria-hidden="true"
-        className="absolute pointer-events-none"
-        style={{
-          width: "250px",
-          height: "250px",
-          background: "#1A5FA8",
-          opacity: 0.06,
-          filter: "blur(80px)",
-          borderRadius: "9999px",
-          top: "40%",
-          right: "8%",
-        }}
-        animate={reduce ? {} : { x: [15, 0, 15], y: [-35, 0, -35] }}
-        transition={{ duration: 16, ease: "easeInOut", repeat: Infinity }}
-      />
+          {/* ── LEFT COLUMN ── */}
+          <div className="flex flex-col gap-7">
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-32 pb-16 lg:pt-40 lg:pb-20">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-12 lg:gap-16 items-center">
+            {/* HEADLINE — dominant, locked copy */}
+            <motion.h1
+              suppressHydrationWarning
+              initial={reduce ? false : { opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.72, delay: 0.08, ease: EASE }}
+              className="font-sora font-black text-5xl sm:text-6xl lg:text-7xl leading-[1.04] tracking-tight text-white text-balance"
+            >
+              Your background isn&apos;t the problem.{" "}
+              <span style={{ color: "#3792E8" }}>Your resume is.</span>
+            </motion.h1>
 
-          {/* Left column */}
-          <div className="flex flex-col gap-6">
-            {/* Eyebrow */}
+            {/* SUBHEADLINE */}
             <motion.p
               suppressHydrationWarning
-              {...fadeUp(0.1)}
-              className="text-sm font-bold uppercase tracking-widest text-accent"
+              initial={reduce ? false : { opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3, ease: EASE }}
+              className="text-xl md:text-2xl leading-relaxed max-w-lg"
+              style={{ color: "rgba(255,255,255,0.58)" }}
             >
-              The Career Switch System
+              Stop explaining yourself. Start getting interviews.
             </motion.p>
 
-            {/* Headline + accent rule + subheadline — grouped so rule is tight between them */}
-            <div className="flex flex-col">
-              <motion.h1
-                suppressHydrationWarning
-                {...fadeUp(0.25)}
-                className="font-sora font-black leading-tight text-4xl text-white"
-              >
-                Your background isn&apos;t the problem.{" "}
-                <span className="text-[#3792E8]">Your resume is.</span>
-              </motion.h1>
-
-              {/* Accent rule */}
-              <motion.div
-                suppressHydrationWarning
-                initial={reduce ? {} : { scaleX: 0, opacity: 0 }}
-                animate={{ scaleX: 1, opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.4, ease: EASE }}
-                style={{
-                  width: "48px",
-                  height: "3px",
-                  background: "#3792E8",
-                  borderRadius: "2px",
-                  margin: "14px 0 12px 0",
-                  transformOrigin: "left",
-                }}
-              />
-
-              {/* Subheadline */}
-              <motion.p
-                suppressHydrationWarning
-                {...fadeUp(0.4)}
-                className="text-xl text-white/70 leading-relaxed max-w-lg"
-              >
-                Stop explaining yourself. Start getting interviews.
-              </motion.p>
-            </div>
-
-            {/* Bullets */}
-            <ul className="flex flex-col gap-3" aria-label="What the system delivers">
+            {/* BULLETS */}
+            <ul
+              className="flex flex-col gap-3 mt-1"
+              aria-label="What the system delivers"
+            >
               {bullets.map((b, i) => (
                 <motion.li
                   key={b}
                   suppressHydrationWarning
-                  {...fadeLeft(0.55 + i * 0.1)}
-                  className="flex items-center gap-3"
+                  initial={reduce ? false : { opacity: 0, x: -16 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{
+                    duration: 0.5,
+                    delay: 0.48 + i * 0.09,
+                    ease: EASE,
+                  }}
+                  className="flex items-start gap-3"
                 >
                   <span
-                    className="flex-shrink-0 w-5 h-5 bg-[#3792E8] rounded-sm flex items-center justify-center"
+                    className="flex-shrink-0 w-5 h-5 rounded-sm flex items-center justify-center mt-0.5"
+                    style={{ background: "#3792E8" }}
                     aria-hidden="true"
                   >
-                    <IconCheck size={11} className="text-white" strokeWidth={3} />
+                    <IconCheck size={11} className="text-white" strokeWidth={3.5} />
                   </span>
-                  <span className="text-white/90 text-base font-medium">{b}</span>
+                  <span
+                    className="text-base leading-relaxed"
+                    style={{ color: "rgba(255,255,255,0.80)" }}
+                  >
+                    {b}
+                  </span>
                 </motion.li>
               ))}
             </ul>
 
-            {/* Buttons */}
+            {/* BUTTONS */}
             <motion.div
               suppressHydrationWarning
-              {...fadeUp(0.7)}
-              className="flex flex-wrap gap-3"
+              initial={reduce ? false : { opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.76, ease: EASE }}
+              className="flex flex-wrap gap-3 mt-2"
             >
-              <button
+              {/* Primary CTA */}
+              <motion.button
+                suppressHydrationWarning
                 onClick={handleCheckout}
-                className="bg-[#3792E8] hover:bg-[#6EB0EE] text-white font-bold px-8 py-4 rounded-xl text-base transition-all duration-200 active:scale-[0.98] shadow-[0_0_30px_rgba(55,146,232,0.4)] hover:shadow-[0_0_50px_rgba(55,146,232,0.6)]"
+                whileHover={
+                  reduce
+                    ? {}
+                    : {
+                        scale: 1.02,
+                        backgroundColor: "#6EB0EE",
+                        boxShadow: "0 0 64px rgba(55,146,232,0.65)",
+                      }
+                }
+                whileTap={reduce ? {} : { scale: 0.975 }}
+                transition={{
+                  scale: { duration: 0.18 },
+                  backgroundColor: { duration: 0.2 },
+                  boxShadow: { duration: 0.25 },
+                }}
+                className="text-white font-bold px-8 py-4 rounded-xl text-base"
+                style={{
+                  background: "#3792E8",
+                  boxShadow: "0 0 36px rgba(55,146,232,0.38)",
+                }}
+                aria-label="Get CareerSwitchKit for $19"
               >
-                Get the System — $19
-              </button>
-              <Link
-                href="/preview"
-                className="border border-white/20 text-white/80 hover:text-white hover:border-white/40 px-8 py-4 rounded-xl backdrop-blur-sm bg-white/5 text-base transition-all duration-200 font-medium"
+                Get the System for $19
+              </motion.button>
+
+              {/* Secondary CTA */}
+              <motion.a
+                suppressHydrationWarning
+                href="#included"
+                whileHover={
+                  reduce
+                    ? {}
+                    : {
+                        borderColor: "rgba(255,255,255,0.38)",
+                        color: "rgba(255,255,255,0.95)",
+                      }
+                }
+                transition={{ duration: 0.2 }}
+                className="flex items-center px-8 py-4 rounded-xl text-base font-medium"
+                style={{
+                  border: "1px solid rgba(255,255,255,0.18)",
+                  color: "rgba(255,255,255,0.65)",
+                  backdropFilter: "blur(8px)",
+                  background: "rgba(255,255,255,0.04)",
+                }}
               >
-                Preview what&apos;s inside
-              </Link>
+                See how it works
+              </motion.a>
             </motion.div>
           </div>
 
-          {/* Right column: resume document mockup */}
+          {/* ── RIGHT COLUMN: Translation card ── */}
           <motion.div
             suppressHydrationWarning
-            initial={reduce ? {} : { opacity: 0, y: 30 }}
+            initial={reduce ? false : { opacity: 0, y: 36 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.75, delay: 0.5, ease: EASE }}
-            className="hidden lg:flex items-center justify-center"
-            aria-label="Resume template preview"
+            transition={{ duration: 0.8, delay: 0.42, ease: EASE }}
+            className="hidden lg:block"
+            aria-label="What Stage 3 of the system produces"
           >
-            <div className="relative max-w-sm w-full">
-              {/* Glow behind mockup */}
+            {/* Subtle floating */}
+            <motion.div
+              suppressHydrationWarning
+              animate={reduce ? {} : { y: [0, -7, 0] }}
+              transition={{ duration: 6.5, ease: "easeInOut", repeat: Infinity }}
+            >
               <div
-                aria-hidden="true"
+                className="rounded-2xl p-6 flex flex-col gap-5"
                 style={{
-                  position: "absolute",
-                  inset: "-16px",
-                  background: "#3792E8",
-                  opacity: 0.06,
-                  borderRadius: "20px",
-                  filter: "blur(32px)",
-                  zIndex: 0,
-                }}
-              />
-
-              {/* ATS-Optimized badge */}
-              <div
-                className="absolute -top-3 -right-3 z-20 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold"
-                style={{
-                  background: "rgba(55,146,232,0.18)",
-                  border: "1px solid rgba(55,146,232,0.40)",
-                  color: "#3792E8",
-                  backdropFilter: "blur(8px)",
+                  background: "linear-gradient(150deg, #10102D 0%, #070719 100%)",
+                  border: "1.5px solid rgba(55,146,232,0.24)",
                 }}
               >
-                <IconCheck size={11} strokeWidth={3} aria-hidden="true" />
-                ATS-Optimized
-              </div>
+                {/* Card header */}
+                <div className="flex items-center justify-between gap-3">
+                  <p
+                    className="text-[10px] font-bold tracking-[0.2em] uppercase"
+                    style={{ color: "#3792E8" }}
+                  >
+                    Stage 3 · Optimize
+                  </p>
+                  <span
+                    className="text-[11px] font-semibold px-2.5 py-1 rounded-full whitespace-nowrap"
+                    style={{
+                      color: "#3792E8",
+                      background: "rgba(55,146,232,0.08)",
+                      border: "1px solid rgba(55,146,232,0.20)",
+                    }}
+                  >
+                    50 AI Prompts
+                  </span>
+                </div>
 
-              {/* Resume card */}
-              <div
-                className="rounded-2xl p-6 relative overflow-hidden flex flex-col gap-4"
-                style={{
-                  background: "#10102D",
-                  border: "1px solid rgba(255,255,255,0.10)",
-                  boxShadow: "0 25px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(55,146,232,0.08)",
-                  aspectRatio: "3/4",
-                  zIndex: 1,
-                }}
-              >
-                {/* Ambient glow */}
+                {/* Thin rule */}
                 <div
-                  className="absolute top-4 right-4 w-32 h-32 rounded-full pointer-events-none"
-                  style={{
-                    background: "rgba(55,146,232,0.20)",
-                    filter: "blur(48px)",
-                    animation: "pulse 3s ease-in-out infinite",
-                  }}
+                  style={{ height: "1px", background: "rgba(255,255,255,0.06)" }}
                   aria-hidden="true"
                 />
 
-                {/* Name block */}
-                <div className="flex flex-col gap-2 relative z-10">
-                  <div className="w-32 h-3 bg-white/80 rounded" />
-                  <div className="w-24 h-2 bg-white/30 rounded" />
-                  <div className="w-20 h-2 bg-white/30 rounded" />
+                {/* BEFORE block */}
+                <div>
+                  <p
+                    className="text-[10px] font-bold uppercase tracking-widest mb-2"
+                    style={{ color: "rgba(255,255,255,0.22)" }}
+                  >
+                    Before
+                  </p>
+                  <p
+                    className="font-mono text-[13px] leading-relaxed"
+                    style={{
+                      color: "rgba(255,255,255,0.28)",
+                      textDecoration: "line-through",
+                      textDecorationColor: "rgba(255,255,255,0.12)",
+                    }}
+                  >
+                    &ldquo;Managed customer service team at retail store.&rdquo;
+                  </p>
                 </div>
 
-                {/* Accent divider */}
-                <div className="w-full h-px bg-accent/40 relative z-10" />
-
-                {/* Section 1 */}
-                <div className="flex flex-col gap-2 relative z-10">
-                  <div className="w-16 h-2 bg-accent/60 rounded" />
-                  <div className="w-full h-2 bg-white/20 rounded" />
-                  <div className="w-4/5 h-2 bg-white/20 rounded" />
-                  <div className="w-3/4 h-2 bg-white/20 rounded" />
+                {/* Transform indicator */}
+                <div className="flex items-center gap-3">
+                  <div
+                    className="h-px flex-1"
+                    style={{ background: "rgba(255,255,255,0.07)" }}
+                    aria-hidden="true"
+                  />
+                  <span
+                    className="text-[11px] font-medium px-3 py-1 rounded-full whitespace-nowrap"
+                    style={{
+                      color: "rgba(55,146,232,0.80)",
+                      background: "rgba(55,146,232,0.07)",
+                      border: "1px solid rgba(55,146,232,0.16)",
+                    }}
+                    aria-hidden="true"
+                  >
+                    ↓ Prompt 12 applied
+                  </span>
+                  <div
+                    className="h-px flex-1"
+                    style={{ background: "rgba(255,255,255,0.07)" }}
+                    aria-hidden="true"
+                  />
                 </div>
 
-                {/* Section 2 */}
-                <div className="flex flex-col gap-2 relative z-10">
-                  <div className="w-16 h-2 bg-accent/60 rounded" />
-                  <div className="w-full h-2 bg-white/20 rounded" />
-                  <div className="w-4/5 h-2 bg-white/20 rounded" />
-                  <div className="w-3/4 h-2 bg-white/20 rounded" />
-                </div>
+                {/* AFTER block — fades in with delay to show the transformation */}
+                <motion.div
+                  suppressHydrationWarning
+                  initial={reduce ? false : { opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.7, delay: 1.2, ease: EASE }}
+                >
+                  <p
+                    className="text-[10px] font-bold uppercase tracking-widest mb-2"
+                    style={{ color: "#3792E8" }}
+                  >
+                    After
+                  </p>
+                  <p
+                    className="font-mono text-[13px] leading-relaxed"
+                    style={{ color: "rgba(255,255,255,0.82)" }}
+                  >
+                    &ldquo;Led 8-person team; reduced escalation rate 18% over two quarters.&rdquo;
+                  </p>
+                </motion.div>
 
-                {/* Section 3 */}
-                <div className="flex flex-col gap-2 relative z-10">
-                  <div className="w-20 h-2 bg-accent/60 rounded" />
-                  <div className="w-full h-2 bg-white/20 rounded" />
-                  <div className="w-4/5 h-2 bg-white/20 rounded" />
-                  <div className="w-3/4 h-2 bg-white/20 rounded" />
-                </div>
-
-                {/* Skills pills */}
-                <div className="flex flex-wrap gap-2 relative z-10 mt-auto pt-2">
-                  {["ATS-Ready", "Keyword-Rich", "Career Switch"].map((tag) => (
+                {/* ATS score — appears last */}
+                <motion.div
+                  suppressHydrationWarning
+                  initial={reduce ? false : { opacity: 0, scale: 0.92 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.45, delay: 1.55, ease: EASE }}
+                  className="flex items-center justify-between pt-4"
+                  style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}
+                >
+                  <span
+                    className="text-xs"
+                    style={{ color: "rgba(255,255,255,0.28)" }}
+                  >
+                    ATS score
+                  </span>
+                  <div className="flex items-baseline gap-1.5">
                     <span
-                      key={tag}
-                      className="px-3 py-1 rounded-full text-xs font-medium"
-                      style={{
-                        background: "rgba(55,146,232,0.12)",
-                        border: "1px solid rgba(55,146,232,0.30)",
-                        color: "#3792E8",
-                      }}
+                      className="font-sora font-black text-3xl leading-none"
+                      style={{ color: "#3792E8" }}
                     >
-                      {tag}
+                      87
                     </span>
-                  ))}
-                </div>
+                    <span
+                      className="text-xs"
+                      style={{ color: "rgba(255,255,255,0.28)" }}
+                    >
+                      / 100
+                    </span>
+                  </div>
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
 
         </div>
