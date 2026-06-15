@@ -157,7 +157,6 @@ export default function Pricing() {
           </div>
         </Reveal>
 
-        </div>
       </div>
     </section>
   );
