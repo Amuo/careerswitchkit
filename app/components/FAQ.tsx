@@ -41,6 +41,13 @@ export default function FAQ() {
         aria-hidden="true"
       />
 
+      {/* Gradient fade from white sections above into dark */}
+      <div
+        className="absolute top-0 left-0 right-0 h-16 pointer-events-none"
+        style={{ background: "linear-gradient(to bottom, #ffffff, transparent)" }}
+        aria-hidden="true"
+      />
+
       <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <Reveal className="mb-12">
           <p className="text-sm font-bold uppercase tracking-widest text-accent mb-3">

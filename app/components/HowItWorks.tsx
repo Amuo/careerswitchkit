@@ -98,6 +98,13 @@ export default function HowItWorks() {
         aria-hidden="true"
       />
 
+      {/* Gradient fade from Stage 04 dark into this section */}
+      <div
+        className="absolute top-0 left-0 right-0 h-16 pointer-events-none"
+        style={{ background: "linear-gradient(to bottom, #070719, transparent)" }}
+        aria-hidden="true"
+      />
+
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Reveal className="mb-16">
           <p className="text-sm font-bold uppercase tracking-widest text-accent mb-3">
