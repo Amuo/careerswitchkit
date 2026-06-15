@@ -17,14 +17,14 @@ export default function Contact() {
             Neither should you.
           </h2>
           <p className="mt-5 text-white/70 text-lg leading-relaxed max-w-[42ch] mx-auto">
-            Get your ATS-ready resume, cover letter, and 50 AI prompts — downloaded and ready in under an hour. One payment, no subscription, yours to keep.
+            Four stages. Eight files. One career switch. Download the system, follow the sequence, and submit applications that don&apos;t get filtered out before a human sees them.
           </p>
           <div className="mt-10">
             <button
               onClick={handleCheckout}
               className="bg-accent hover:bg-accent-hover text-white font-semibold px-12 py-5 rounded-xl transition-all duration-200 active:scale-[0.98] text-lg hover:shadow-[0_0_40px_rgba(55,146,232,0.35)]"
             >
-              Get the System — $19
+              Start the System — $19
             </button>
           </div>
           <p className="mt-6 text-white/60 text-sm">

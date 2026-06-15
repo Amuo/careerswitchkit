@@ -71,7 +71,7 @@ export default function Navbar() {
                 onClick={handleCheckout}
                 className="bg-accent hover:bg-accent-hover text-white text-sm font-semibold px-4 py-2 rounded-lg transition-all duration-200 active:scale-[0.98] hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(55,146,232,0.4)]"
               >
-                Get the Kit
+                Get the System
               </button>
             </div>
 

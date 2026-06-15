@@ -10,24 +10,24 @@ import { Reveal } from "./Reveal";
 
 const faqs = [
   {
-    question: "Will this kit get me a job?",
+    question: "Will this system get me a job?",
     answer:
-      "No — and we will not pretend otherwise. CareerSwitchKit gives you the tools to build a stronger application: ATS-optimized templates, 50 tailored AI prompts, and a keyword checklist. What you do with those tools, the roles you apply to, and the decisions hiring managers make are outside our control. What this kit does is make sure your application gets seen.",
+      "No system can guarantee that — and anyone who claims otherwise is lying to you. What CareerSwitchKit does is remove the most common reason career switchers get filtered out before a human ever sees their application: a resume and cover letter that doesn't translate their background correctly. The rest is on you.",
   },
   {
-    question: "Do I need experience in my new field?",
+    question: "Do I need experience in my target field?",
     answer:
-      "No. The kit is specifically built for people without direct experience in their target field. The AI prompts are designed to surface transferable skills from your existing background and frame them in language that resonates with hiring managers in your new field. The Hybrid CV template is built exactly for this situation.",
+      "No. The system is built specifically for people who don't have direct experience yet. That's the whole point. Stage 2 shows you how to frame what you've already done in language that maps to your target role — without lying, without padding, and without leaving it to the recruiter to figure out the connection.",
   },
   {
     question: "What is an ATS?",
     answer:
-      "ATS stands for Applicant Tracking System — the software most US companies use to screen resumes before a human reads them. It scans for keywords, checks formatting, and filters out applications that don't match. Our templates are built to pass ATS screening: single-column layout, standard headings, no tables or graphics, and plain-text contact information.",
+      "ATS stands for Applicant Tracking System — software that most companies use to filter applications before a recruiter sees them. It scans for keywords, checks formatting, and scores your resume against the job description. Most resumes get eliminated here. Stage 3 of the system — the AI Prompt Pack and ATS Checklist — exists specifically to make sure yours doesn't.",
   },
   {
     question: "What AI tool do I need?",
     answer:
-      "None in particular — the prompts work with any major AI tool. ChatGPT, Claude, Gemini, and Microsoft Copilot all work well. The free tier of any of these is sufficient for resume work. You do not need a paid subscription.",
+      "Any of the major ones — ChatGPT, Claude, Gemini, or Copilot. The prompts in Stage 3 are written to work with all of them. You don't need a paid plan, though a paid plan gives better results on the rewrite prompts. If you don't use AI tools yet, the START HERE guide walks you through exactly how to use them for this specific process.",
   },
 ];
 

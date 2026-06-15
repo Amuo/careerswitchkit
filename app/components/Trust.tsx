@@ -15,9 +15,9 @@ const stats = [
   },
   {
     number: "8 files",
-    label: "In one download",
+    label: "Across 4 stages",
     explanation:
-      "Everything in one ZIP. No accounts, no subscriptions, no drip-feeding content. You get it all immediately.",
+      "8 files across 4 stages. One sequence. Everything you need to go from scattered background to submitted application.",
   },
 ];
 
@@ -53,8 +53,7 @@ export default function Trust() {
 
         <Reveal delay={0.18}>
           <p className="mt-14 text-center font-sora text-lg font-semibold text-[#334155] leading-snug max-w-[44ch] mx-auto">
-            &ldquo;Built specifically for career switchers — not adapted from a
-            generic resume template pack.&rdquo;
+            &ldquo;Built as a system, not assembled as a file pack. Every stage exists for a reason.&rdquo;
           </p>
         </Reveal>
       </div>
