@@ -57,7 +57,7 @@ export default function Proof() {
   const reduce = useReducedMotion();
 
   return (
-    <section className="bg-[#F0F4FA] py-16 lg:py-20">
+    <section className="bg-[#F0F4FA] py-24 lg:py-32">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <Reveal className="mb-12">
           <p className="text-sm font-bold uppercase tracking-widest text-accent mb-3">
