@@ -120,13 +120,7 @@ export default function WhatsIncluded() {
         const s = stageStyles[i];
         return (
           <div key={stage.number}>
-            <motion.div
-              suppressHydrationWarning
-              initial={reduce ? {} : { opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.6, delay: STAGGER_DELAYS[i], ease: STAGE_EASE }}
-            >
+              {/* Background band is always visible — motion.div only wraps the content grid */}
               <div
                 className="group relative overflow-hidden px-4 sm:px-8 lg:px-16 py-12"
                 style={{ background: s.bg }}
@@ -150,8 +144,15 @@ export default function WhatsIncluded() {
                   {stage.number}
                 </span>
 
-                {/* 3-column grid */}
-                <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[120px_1fr_auto] gap-4 lg:gap-8 items-center">
+                {/* 3-column grid — this is what animates in */}
+                <motion.div
+                  suppressHydrationWarning
+                  initial={reduce ? {} : { opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.1 }}
+                  transition={{ duration: 0.6, delay: STAGGER_DELAYS[i], ease: STAGE_EASE }}
+                  className="relative z-10 grid grid-cols-1 lg:grid-cols-[120px_1fr_auto] gap-4 lg:gap-8 items-center"
+                >
 
                   {/* Left col: stage label */}
                   <div>
@@ -205,9 +206,8 @@ export default function WhatsIncluded() {
                     </span>
                   </div>
 
-                </div>
+                </motion.div>
               </div>
-            </motion.div>
 
           </div>
         );
