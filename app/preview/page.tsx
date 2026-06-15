@@ -3,6 +3,7 @@ import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
 import { Reveal } from "@/app/components/Reveal";
 import CheckoutButton from "./CheckoutButton";
+import PreviewList from "./PreviewList";
 
 export const metadata: Metadata = {
   title: "Preview the System | CareerSwitchKit",
@@ -10,11 +11,19 @@ export const metadata: Metadata = {
     "See exactly what is inside CareerSwitchKit: a 4-stage career switch system with ATS-ready templates, cover letters, 50 AI prompts, and a completed example.",
 };
 
+const stages = [
+  { number: "01", label: "Map" },
+  { number: "02", label: "Build" },
+  { number: "03", label: "Optimize" },
+  { number: "04", label: "Apply" },
+];
+
 const files = [
   {
     number: "00",
     name: "Start Here Guide",
     format: "DOCX",
+    tag: "Read first",
     description:
       "Your onboarding document. Read this first. It explains the full sequence, which template to choose, what each prompt category does, and the five mistakes that kill career-switcher applications before a human reads them.",
   },
@@ -22,6 +31,7 @@ const files = [
     number: "01",
     name: "One-Page CV Template",
     format: "DOCX",
+    tag: "Stage 2",
     description:
       "A clean, single-column ATS-optimized resume template. Standard headings, no tables or graphics, contact info as plain text. Built for applicants with under 8 years of experience.",
   },
@@ -29,13 +39,15 @@ const files = [
     number: "02",
     name: "Two-Page CV Template",
     format: "DOCX",
+    tag: "Stage 2",
     description:
-      "The same ATS-safe structure with room for more experience. Never pad it — only use this if you genuinely need the space.",
+      "The same ATS-safe structure with room for more experience. Never pad it. Only use this if you genuinely need the space.",
   },
   {
     number: "03",
     name: "Hybrid CV Template",
     format: "DOCX",
+    tag: "Stage 2",
     description:
       "Skills-forward layout that leads with a Core Competencies section before your work history. The right choice when your job titles don't match the role you're targeting.",
   },
@@ -43,20 +55,23 @@ const files = [
     number: "04",
     name: "Cover Letter Templates",
     format: "DOCX",
+    tag: "Stage 2",
     description:
-      "Three templates: Standard (most roles), No Direct Experience (major field changes), and Referral (when someone recommended you). Each is 250–350 words and written to complement the resume, not repeat it.",
+      "Three templates: Standard (most roles), No Direct Experience (major field changes), and Referral (when someone recommended you). Each is 250 to 350 words and written to complement the resume, not repeat it.",
   },
   {
     number: "05",
     name: "AI Prompt Pack",
     format: "DOCX",
+    tag: "Stage 3",
     description:
-      "50 prompts across 8 categories: Foundation, Resume Build, ATS Optimization, Cover Letter, LinkedIn, Interview Prep, Networking, and Final Review. Each prompt is a complete instruction — copy, fill the brackets, paste into any AI tool.",
+      "50 prompts across 8 categories: Foundation, Resume Build, ATS Optimization, Cover Letter, LinkedIn, Interview Prep, Networking, and Final Review. Each prompt is a complete instruction: copy, fill the brackets, paste into any AI tool.",
   },
   {
     number: "06",
     name: "ATS Keyword Checklist",
     format: "XLSX",
+    tag: "Stage 3",
     description:
       "A working spreadsheet. Paste keywords from any job description, mark where each appears in your resume, and track your match score. Built to be reused for every application.",
   },
@@ -64,8 +79,9 @@ const files = [
     number: "07",
     name: "Completed Example",
     format: "DOCX",
+    tag: "Stage 4",
     description:
-      "A full career-switch application — resume and cover letter — filled in completely for a real scenario. Read this before you start. It shows you what the finished product looks like.",
+      "A full career-switch application: resume and cover letter, filled in completely for a real scenario. Read this before you start. It shows you what the finished product looks like.",
   },
 ];
 
@@ -85,11 +101,10 @@ export default function PreviewPage() {
           <div
             className="absolute pointer-events-none"
             style={{
-              width: "700px",
+              width: "800px",
               height: "500px",
-              background: "rgba(55,146,232,0.07)",
-              filter: "blur(130px)",
-              borderRadius: "9999px",
+              background:
+                "radial-gradient(ellipse at center, rgba(55,146,232,0.09) 0%, transparent 68%)",
               top: "-80px",
               left: "50%",
               transform: "translateX(-50%)",
@@ -97,109 +112,90 @@ export default function PreviewPage() {
             aria-hidden="true"
           />
 
-          <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16 text-center">
+          <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-14">
             <Reveal>
-              <p
-                className="text-xs font-bold tracking-[0.2em] uppercase mb-5"
-                style={{ color: "#3792E8" }}
+              <h1
+                className="font-sora font-black text-5xl lg:text-6xl text-white tracking-tight leading-[1.05] text-balance"
               >
-                What&apos;s Inside
-              </p>
-              <h1 className="font-sora text-5xl lg:text-6xl xl:text-7xl font-black text-white leading-tight tracking-tight text-balance mb-6">
-                Everything in the system,<br />laid out.
+                What you&apos;re getting.
               </h1>
-              <p className="text-white/55 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto text-balance">
-                One complete system. Here is exactly what you are getting before you decide.
+              <p
+                className="mt-5 text-lg md:text-xl leading-relaxed max-w-[42ch]"
+                style={{ color: "rgba(255,255,255,0.50)" }}
+              >
+                Eight files. One complete sequence. Here is exactly what is in
+                the system before you decide.
               </p>
+            </Reveal>
+
+            {/* Stage flow */}
+            <Reveal delay={0.15}>
+              <div className="mt-8 flex flex-wrap items-center gap-2">
+                {stages.map(({ number, label }, i) => (
+                  <div key={number} className="flex items-center gap-2">
+                    <span
+                      className="text-[12px] font-medium px-3 py-1.5 rounded-md"
+                      style={{
+                        color: "rgba(255,255,255,0.55)",
+                        background: "rgba(255,255,255,0.05)",
+                        border: "1px solid rgba(255,255,255,0.08)",
+                      }}
+                    >
+                      <span
+                        className="font-mono mr-1.5"
+                        style={{ color: "#3792E8", fontSize: "11px" }}
+                      >
+                        {number}
+                      </span>
+                      {label}
+                    </span>
+                    {i < stages.length - 1 && (
+                      <span
+                        className="text-[10px]"
+                        style={{ color: "rgba(255,255,255,0.15)" }}
+                        aria-hidden="true"
+                      >
+                        →
+                      </span>
+                    )}
+                  </div>
+                ))}
+              </div>
             </Reveal>
           </div>
         </section>
 
-        {/* ── File Showcase — alternating bands for rhythm ── */}
-        {files.map((file, i) => {
-          const lighter = i % 2 === 1;
-          return (
-            <section
-              key={file.number}
-              className={
-                lighter
-                  ? "bg-[#10102D] border-t border-white/5"
-                  : "bg-[#070719]"
-              }
-            >
-              <Reveal>
-                <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-10 lg:gap-20 items-center">
+        {/* Top rule of the file list */}
+        <div
+          className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8"
+          aria-hidden="true"
+          style={{ height: "1px", background: "rgba(255,255,255,0.07)" }}
+        />
 
-                  {/* Left: file info */}
-                  <div>
-                    <div className="flex items-baseline gap-5 mb-5">
-                      <span
-                        className="font-sora text-6xl font-black leading-none flex-shrink-0 text-[#3792E8]/40"
-                        aria-hidden="true"
-                      >
-                        {file.number}
-                      </span>
-                      <div>
-                        <h2 className="font-sora text-2xl font-bold text-white leading-snug">
-                          {file.name}
-                        </h2>
-                        <span className="text-xs text-white/30 font-mono tracking-widest uppercase">
-                          {file.format}
-                        </span>
-                      </div>
-                    </div>
-                    <p className="text-white/60 text-base leading-relaxed max-w-md">
-                      {file.description}
-                    </p>
-                  </div>
-
-                  {/* Right: screenshot placeholder with inner glow */}
-                  <div className="relative w-full aspect-video rounded-xl flex items-center justify-center overflow-hidden bg-[#0D1528] border border-[#3792E8]/15">
-                    <div
-                      className="absolute inset-0 pointer-events-none"
-                      style={{
-                        background:
-                          "linear-gradient(135deg, rgba(55,146,232,0.03), transparent)",
-                      }}
-                      aria-hidden="true"
-                    />
-                    <span className="relative text-white/20 text-sm tracking-wide">
-                      Screenshot coming soon
-                    </span>
-                  </div>
-                </div>
-              </Reveal>
-            </section>
-          );
-        })}
-
-        {/* ── Pull Quote ── */}
-        <section className="bg-[#070719] border-t border-white/5 py-12">
-          <Reveal>
-            <blockquote
-              className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pl-8 text-xl italic text-white/80 leading-relaxed text-balance"
-              style={{ borderLeft: "3px solid #3792E8" }}
-            >
-              &ldquo;You are not buying templates. You are buying a system that
-              tells you exactly what to do, in what order, with what tools.&rdquo;
-            </blockquote>
-          </Reveal>
+        {/* ── File list ── */}
+        <section className="py-2">
+          <PreviewList files={files} />
         </section>
 
         {/* ── CTA ── */}
-        <section className="bg-[#070719] border-t border-white/5 py-20">
-          <Reveal>
-            <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-              <h2 className="font-sora text-4xl md:text-5xl font-black text-white tracking-tight mb-4 text-balance">
-                Ready to get started?
+        <section
+          className="py-24"
+          style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}
+        >
+          <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <Reveal>
+              <h2 className="font-sora text-4xl md:text-5xl font-bold text-white tracking-tight">
+                Everything above. $19.
               </h2>
-              <p className="text-white/60 text-lg mb-10 leading-relaxed">
-                Instant download. 30-day money-back guarantee. Works with any
-                AI tool.
+              <p
+                className="mt-4 text-lg mb-10"
+                style={{ color: "rgba(255,255,255,0.45)" }}
+              >
+                Instant download. 30-day money-back guarantee. No account needed.
               </p>
               <CheckoutButton />
-            </div>
-          </Reveal>
+            </Reveal>
+          </div>
         </section>
 
       </main>
