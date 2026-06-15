@@ -53,7 +53,7 @@ const stageStyles = [
     arrowColor: "#3792E8",
   },
   {
-    bg: "#EEF5FD",
+    bg: "#F0F4FA",
     labelColor: "#185FA5",
     titleColor: "#042C53",
     descColor: "rgba(4,44,83,0.55)",
@@ -209,10 +209,6 @@ export default function WhatsIncluded() {
               </div>
             </motion.div>
 
-            {/* Divider between stages */}
-            {s.divider && (
-              <div style={{ borderBottom: s.divider }} />
-            )}
           </div>
         );
       })}
