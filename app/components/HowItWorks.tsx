@@ -9,27 +9,27 @@ const steps = [
   {
     number: "01",
     icon: IconTemplate,
-    title: "Pick a Template",
+    title: "Start With the Guide",
     description:
-      "Choose the resume format that fits your target role and how you want to frame your experience.",
+      "Open the START HERE doc first — always. It maps your background to the right format and tells you exactly what to build and in what order.",
     detail:
-      "One-page for under 8 years experience. Two-page for more. Hybrid if your job titles don't match your target role yet.",
+      "Most people skip this. That's why their applications feel scattered.",
   },
   {
     number: "02",
     icon: IconBulb,
-    title: "Paste Job Post + Run Prompts",
+    title: "Build and Optimize",
     description:
-      "Copy the job description into your AI tool. The 50 prompts guide it to tailor every line to that specific role.",
+      "Fill your chosen CV template, write your cover letter, then run the AI prompts to tailor every line to the specific job post.",
     detail:
-      "The prompts extract keywords, rewrite your bullets, and score your resume against the specific job — all in one session.",
+      "The prompts do the translation work — turning your background into language hiring managers in your target field understand.",
   },
   {
     number: "03",
     icon: IconSend,
-    title: "Check ATS Score + Apply",
+    title: "Score, Then Submit",
     description:
-      "Run the keyword checklist, fix any flags, and submit with confidence that your resume will clear automated filters.",
+      "Before every application, run the ATS checklist. Fix any flags. Then submit knowing your resume will clear automated filters and reach a human.",
     detail:
       "Most applicants skip this step. The ones who don't are the ones who get through.",
   },
@@ -107,7 +107,7 @@ export default function HowItWorks() {
             How It Works
           </h2>
           <p className="mt-3 text-white/50 text-lg max-w-[44ch]">
-            Three steps from download to submitted application.
+            Download once. Follow the sequence. Apply with confidence.
           </p>
         </Reveal>
 
