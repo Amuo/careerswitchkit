@@ -3,86 +3,108 @@ import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
 import { Reveal } from "@/app/components/Reveal";
 import CheckoutButton from "./CheckoutButton";
-import PreviewList from "./PreviewList";
+import PreviewGallery, { type StageGroupData } from "./PreviewGallery";
 
 export const metadata: Metadata = {
   title: "Preview the System | CareerSwitchKit",
   description:
-    "See exactly what is inside CareerSwitchKit: a 4-stage career switch system with ATS-ready templates, cover letters, 50 AI prompts, and a completed example.",
+    "See exactly what is inside CareerSwitchKit before you buy. Every stage, every document, before you decide.",
 };
 
-const stages = [
-  { number: "01", label: "Map" },
-  { number: "02", label: "Build" },
-  { number: "03", label: "Optimize" },
-  { number: "04", label: "Apply" },
-];
-
-const files = [
-  {
-    number: "00",
-    name: "Start Here Guide",
-    format: "DOCX",
-    tag: "Read first",
-    description:
-      "Your onboarding document. Read this first. It explains the full sequence, which template to choose, what each prompt category does, and the five mistakes that kill career-switcher applications before a human reads them.",
-  },
+const stageGroups: StageGroupData[] = [
   {
     number: "01",
-    name: "One-Page CV Template",
-    format: "DOCX",
-    tag: "Stage 2",
-    description:
-      "A clean, single-column ATS-optimized resume template. Standard headings, no tables or graphics, contact info as plain text. Built for applicants with under 8 years of experience.",
+    name: "Map your transfer",
+    description: "Understand the full sequence before you write a single word.",
+    items: [
+      {
+        id: "start-here",
+        name: "Start Here Guide",
+        format: "DOCX",
+        description:
+          "Your entry point to the system. It explains the full sequence, which template to choose, what each prompt category does, and the five mistakes that kill career-switcher applications before a human reads them.",
+      },
+    ],
   },
   {
     number: "02",
-    name: "Two-Page CV Template",
-    format: "DOCX",
-    tag: "Stage 2",
+    name: "Build your materials",
     description:
-      "The same ATS-safe structure with room for more experience. Never pad it. Only use this if you genuinely need the space.",
+      "Write a resume and cover letter that translate your background into language the new field understands.",
+    items: [
+      {
+        id: "one-page-cv",
+        name: "One-Page CV Template",
+        format: "DOCX",
+        description:
+          "A clean, single-column ATS-optimized resume template. Standard headings, no tables or graphics, contact info as plain text. Built for applicants with under 8 years of experience.",
+      },
+      {
+        id: "two-page-cv",
+        name: "Two-Page CV Template",
+        format: "DOCX",
+        description:
+          "The same ATS-safe structure with room for more experience. Never pad it. Only use this if you genuinely need the space.",
+      },
+      {
+        id: "hybrid-cv",
+        name: "Hybrid CV Template",
+        format: "DOCX",
+        description:
+          "Skills-forward layout that leads with a Core Competencies section before your work history. The right choice when your job titles don't match the role you're targeting.",
+      },
+      {
+        id: "cover-letter",
+        name: "Cover Letter Templates",
+        format: "DOCX",
+        description:
+          "Three templates: Standard, No Direct Experience, and Referral. Each is 250 to 350 words and written to complement the resume, not repeat it.",
+      },
+    ],
   },
   {
     number: "03",
-    name: "Hybrid CV Template",
-    format: "DOCX",
-    tag: "Stage 2",
+    name: "Optimize and score",
     description:
-      "Skills-forward layout that leads with a Core Competencies section before your work history. The right choice when your job titles don't match the role you're targeting.",
+      "Get your application past automated filters before a human reads it.",
+    items: [
+      {
+        id: "ai-prompts",
+        name: "AI Prompt Pack",
+        format: "DOCX",
+        description:
+          "50 prompts across 8 categories: Foundation, Resume Build, ATS Optimization, Cover Letter, LinkedIn, Interview Prep, Networking, and Final Review. Copy, fill the brackets, paste into any AI tool.",
+      },
+      {
+        id: "ats-checklist",
+        name: "ATS Keyword Checklist",
+        format: "XLSX",
+        description:
+          "A working spreadsheet. Paste keywords from any job description, mark where each appears in your resume, and track your match score. Reuse it for every application.",
+      },
+    ],
   },
   {
     number: "04",
-    name: "Cover Letter Templates",
-    format: "DOCX",
-    tag: "Stage 2",
-    description:
-      "Three templates: Standard (most roles), No Direct Experience (major field changes), and Referral (when someone recommended you). Each is 250 to 350 words and written to complement the resume, not repeat it.",
+    name: "Apply with proof",
+    description: "See the finished product before you build yours.",
+    items: [
+      {
+        id: "example",
+        name: "Completed Example",
+        format: "DOCX",
+        description:
+          "A full career-switch application: resume and cover letter, filled in completely for a real scenario. Read this before you start. It shows you what the finished product looks like.",
+      },
+    ],
   },
-  {
-    number: "05",
-    name: "AI Prompt Pack",
-    format: "DOCX",
-    tag: "Stage 3",
-    description:
-      "50 prompts across 8 categories: Foundation, Resume Build, ATS Optimization, Cover Letter, LinkedIn, Interview Prep, Networking, and Final Review. Each prompt is a complete instruction: copy, fill the brackets, paste into any AI tool.",
-  },
-  {
-    number: "06",
-    name: "ATS Keyword Checklist",
-    format: "XLSX",
-    tag: "Stage 3",
-    description:
-      "A working spreadsheet. Paste keywords from any job description, mark where each appears in your resume, and track your match score. Built to be reused for every application.",
-  },
-  {
-    number: "07",
-    name: "Completed Example",
-    format: "DOCX",
-    tag: "Stage 4",
-    description:
-      "A full career-switch application: resume and cover letter, filled in completely for a real scenario. Read this before you start. It shows you what the finished product looks like.",
-  },
+];
+
+const stagePills = [
+  { n: "01", label: "Map" },
+  { n: "02", label: "Build" },
+  { n: "03", label: "Optimize" },
+  { n: "04", label: "Apply" },
 ];
 
 export default function PreviewPage() {
@@ -104,7 +126,7 @@ export default function PreviewPage() {
               width: "800px",
               height: "500px",
               background:
-                "radial-gradient(ellipse at center, rgba(55,146,232,0.09) 0%, transparent 68%)",
+                "radial-gradient(ellipse at center, rgba(55,146,232,0.08) 0%, transparent 68%)",
               top: "-80px",
               left: "50%",
               transform: "translateX(-50%)",
@@ -112,47 +134,52 @@ export default function PreviewPage() {
             aria-hidden="true"
           />
 
-          <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-14">
+          <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16">
             <Reveal>
-              <h1
-                className="font-sora font-black text-5xl lg:text-6xl text-white tracking-tight leading-[1.05] text-balance"
+              <p
+                className="font-mono text-[10px] tracking-[0.18em] uppercase mb-4"
+                style={{ color: "#3792E8" }}
               >
-                What you&apos;re getting.
+                Preview
+              </p>
+              <h1 className="font-sora font-black text-5xl lg:text-6xl text-white tracking-tight leading-[1.05] text-balance">
+                Inside the system.
               </h1>
               <p
-                className="mt-5 text-lg md:text-xl leading-relaxed max-w-[42ch]"
-                style={{ color: "rgba(255,255,255,0.50)" }}
+                className="mt-5 text-lg md:text-xl leading-relaxed"
+                style={{ color: "rgba(255,255,255,0.48)", maxWidth: "44ch" }}
               >
-                Eight files. One complete sequence. Here is exactly what is in
-                the system before you decide.
+                Every stage, every document, before you decide. Nothing hidden.
               </p>
             </Reveal>
 
-            {/* Stage flow */}
             <Reveal delay={0.15}>
-              <div className="mt-8 flex flex-wrap items-center gap-2">
-                {stages.map(({ number, label }, i) => (
-                  <div key={number} className="flex items-center gap-2">
-                    <span
-                      className="text-[12px] font-medium px-3 py-1.5 rounded-md"
+              <div className="mt-10 flex flex-wrap items-center gap-2.5">
+                {stagePills.map(({ n, label }, i) => (
+                  <div key={n} className="flex items-center gap-2.5">
+                    <a
+                      href={`#stage-${n}`}
+                      className="flex items-center gap-1.5 text-[12px] font-medium px-3 py-1.5 rounded-md"
                       style={{
                         color: "rgba(255,255,255,0.55)",
-                        background: "rgba(255,255,255,0.05)",
+                        background: "rgba(255,255,255,0.04)",
                         border: "1px solid rgba(255,255,255,0.08)",
+                        transition: "border-color 0.2s ease, color 0.2s ease",
+                        textDecoration: "none",
                       }}
                     >
                       <span
-                        className="font-mono mr-1.5"
-                        style={{ color: "#3792E8", fontSize: "11px" }}
+                        className="font-mono"
+                        style={{ color: "#3792E8", fontSize: "10px" }}
                       >
-                        {number}
+                        {n}
                       </span>
                       {label}
-                    </span>
-                    {i < stages.length - 1 && (
+                    </a>
+                    {i < stagePills.length - 1 && (
                       <span
                         className="text-[10px]"
-                        style={{ color: "rgba(255,255,255,0.15)" }}
+                        style={{ color: "rgba(255,255,255,0.14)" }}
                         aria-hidden="true"
                       >
                         →
@@ -165,17 +192,8 @@ export default function PreviewPage() {
           </div>
         </section>
 
-        {/* Top rule of the file list */}
-        <div
-          className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8"
-          aria-hidden="true"
-          style={{ height: "1px", background: "rgba(255,255,255,0.07)" }}
-        />
-
-        {/* ── File list ── */}
-        <section className="py-2">
-          <PreviewList files={files} />
-        </section>
+        {/* ── Gallery ── */}
+        <PreviewGallery stageGroups={stageGroups} />
 
         {/* ── CTA ── */}
         <section
@@ -185,7 +203,7 @@ export default function PreviewPage() {
           <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <Reveal>
               <h2 className="font-sora text-4xl md:text-5xl font-bold text-white tracking-tight">
-                Everything above. $19.
+                The complete system. $19.
               </h2>
               <p
                 className="mt-4 text-lg mb-10"
