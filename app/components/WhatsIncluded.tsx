@@ -42,6 +42,7 @@ const stages = [
 ];
 
 const stageStyles = [
+  // Stage 01 — white
   {
     bg: "#FFFFFF",
     labelColor: "#3792E8",
@@ -52,16 +53,7 @@ const stageStyles = [
     pillBorder: "rgba(55,146,232,0.2)",
     pillText: "#185FA5",
   },
-  {
-    bg: "#F0F4FA",
-    labelColor: "#185FA5",
-    titleColor: "#042C53",
-    descColor: "rgba(4,44,83,0.55)",
-    ghostColor: "rgba(24,95,165,0.075)",
-    pillBg: "rgba(24,95,165,0.1)",
-    pillBorder: "rgba(24,95,165,0.22)",
-    pillText: "#0C447C",
-  },
+  // Stage 02 — dark navy (was light; swapped for contrast)
   {
     bg: "#10102D",
     labelColor: "#3792E8",
@@ -72,6 +64,18 @@ const stageStyles = [
     pillBorder: "rgba(55,146,232,0.22)",
     pillText: "#3792E8",
   },
+  // Stage 03 — light grey-blue (was dark; swapped)
+  {
+    bg: "#F0F4FA",
+    labelColor: "#185FA5",
+    titleColor: "#042C53",
+    descColor: "rgba(4,44,83,0.55)",
+    ghostColor: "rgba(24,95,165,0.075)",
+    pillBg: "rgba(24,95,165,0.1)",
+    pillBorder: "rgba(24,95,165,0.22)",
+    pillText: "#0C447C",
+  },
+  // Stage 04 — darkest
   {
     bg: "#070719",
     labelColor: "#3792E8",
@@ -143,7 +147,7 @@ function Stage02Visual() {
     <div>
       <p
         className="text-xs font-bold tracking-[0.2em] uppercase mb-5"
-        style={{ color: "#185FA5" }}
+        style={{ color: "rgba(55,146,232,0.70)" }}
       >
         Choose your format
       </p>
@@ -152,13 +156,13 @@ function Stage02Visual() {
           <div key={name} className="flex flex-col gap-0.5">
             <span
               className="text-sm font-bold"
-              style={{ color: "#042C53" }}
+              style={{ color: "rgba(255,255,255,0.82)" }}
             >
               {name}
             </span>
             <span
               className="text-sm leading-snug"
-              style={{ color: "rgba(4,44,83,0.45)" }}
+              style={{ color: "rgba(255,255,255,0.40)" }}
             >
               {desc}
             </span>
@@ -184,7 +188,7 @@ function Stage03Visual() {
     <div>
       <p
         className="text-xs font-bold tracking-[0.2em] uppercase mb-4"
-        style={{ color: "#3792E8" }}
+        style={{ color: "#185FA5" }}
       >
         8 prompt categories
       </p>
@@ -194,9 +198,9 @@ function Stage03Visual() {
             key={cat}
             className="text-xs font-medium px-2.5 py-2 rounded-md text-center"
             style={{
-              color: "rgba(55,146,232,0.75)",
-              background: "rgba(55,146,232,0.07)",
-              border: "1px solid rgba(55,146,232,0.13)",
+              color: "#0C447C",
+              background: "rgba(24,95,165,0.08)",
+              border: "1px solid rgba(24,95,165,0.20)",
             }}
           >
             {cat}
@@ -268,15 +272,15 @@ export default function WhatsIncluded() {
     <section id="included">
 
       {/* ── Section header ── */}
-      <div className="bg-[#070719] pt-14 pb-12">
+      <div className="bg-[#F0F4FA] pt-14 pb-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal>
-            <h2 className="font-sora text-3xl md:text-4xl font-bold text-white tracking-tight">
+            <h2 className="font-sora text-3xl md:text-4xl font-bold text-[#070719] tracking-tight">
               Four stages. One career switch.
             </h2>
             <p
               className="mt-3 text-lg max-w-[52ch]"
-              style={{ color: "rgba(255,255,255,0.45)" }}
+              style={{ color: "rgba(7,7,25,0.50)" }}
             >
               Most career switchers fail because they don&apos;t have a process.
               This is the process.
@@ -291,8 +295,8 @@ export default function WhatsIncluded() {
                   <div
                     className="flex items-center gap-2.5 px-3.5 py-2 rounded-lg"
                     style={{
-                      background: "rgba(55,146,232,0.06)",
-                      border: "1px solid rgba(55,146,232,0.14)",
+                      background: "rgba(55,146,232,0.09)",
+                      border: "1px solid rgba(55,146,232,0.22)",
                     }}
                   >
                     <span
@@ -303,7 +307,7 @@ export default function WhatsIncluded() {
                     </span>
                     <span
                       className="text-sm font-medium"
-                      style={{ color: "rgba(255,255,255,0.55)" }}
+                      style={{ color: "rgba(7,7,25,0.60)" }}
                     >
                       {stage.title}
                     </span>
@@ -311,7 +315,7 @@ export default function WhatsIncluded() {
                   {i < stages.length - 1 && (
                     <div
                       className="w-5 h-px hidden md:block flex-shrink-0"
-                      style={{ background: "rgba(55,146,232,0.22)" }}
+                      style={{ background: "rgba(55,146,232,0.28)" }}
                       aria-hidden="true"
                     />
                   )}
