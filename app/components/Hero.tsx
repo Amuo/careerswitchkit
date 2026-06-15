@@ -73,7 +73,7 @@ export default function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
           {/* Left column */}
-          <div className="max-w-xl flex flex-col gap-6">
+          <div className="max-w-2xl flex flex-col gap-6">
             {/* Eyebrow */}
             <motion.p
               suppressHydrationWarning
@@ -87,11 +87,11 @@ export default function Hero() {
             <motion.h1
               suppressHydrationWarning
               {...fadeUp(0.1)}
-              className="font-sora font-black leading-tight text-5xl lg:text-6xl xl:text-7xl text-white max-w-2xl"
+              className="font-sora font-black leading-tight text-5xl text-white"
             >
-              Switch careers in the US,{" "}
-              <span className="text-[#3792E8] block sm:inline">
-                without starting from zero.
+              Your background isn&apos;t the problem.{" "}
+              <span className="text-[#3792E8]">
+                Your resume is.
               </span>
             </motion.h1>
 
@@ -101,7 +101,7 @@ export default function Hero() {
               {...fadeUp(0.3)}
               className="text-xl text-white/70 leading-relaxed max-w-lg"
             >
-              Get an ATS-friendly resume, cover letter, and 50 AI prompts — ready in 30–60 minutes.
+              Stop explaining yourself. Start getting interviews.
             </motion.p>
 
             {/* Bullets — each staggered from left */}
@@ -134,7 +134,7 @@ export default function Hero() {
                 onClick={handleCheckout}
                 className="bg-[#3792E8] hover:bg-[#6EB0EE] text-white font-bold px-8 py-4 rounded-xl text-base transition-all duration-200 active:scale-[0.98] shadow-[0_0_30px_rgba(55,146,232,0.4)] hover:shadow-[0_0_50px_rgba(55,146,232,0.6)]"
               >
-                Get the Kit — $49
+                Get the System — $19
               </button>
               <Link
                 href="/preview"

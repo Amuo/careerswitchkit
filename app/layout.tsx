@@ -16,14 +16,14 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "CareerSwitchKit - Land Your New Career Faster",
   description:
-    "Switching careers in the US? Get an ATS-ready resume, cover letters, and 50 AI prompts built specifically for career switchers. Instant download, $49, 30-day guarantee.",
+    "Switching careers in the US? Get an ATS-ready resume, cover letters, and 50 AI prompts built specifically for career switchers. Instant download, $19, 30-day guarantee.",
   icons: {
     icon: "/favicon.svg",
   },
   openGraph: {
     title: "CareerSwitchKit — Land Your New Career Faster",
     description:
-      "Switching careers in the US? Get an ATS-ready resume, cover letters, and 50 AI prompts built specifically for career switchers. Instant download, $49.",
+      "Switching careers in the US? Get an ATS-ready resume, cover letters, and 50 AI prompts built specifically for career switchers. Instant download, $19.",
     url: "https://careerswitchkit.org",
     siteName: "CareerSwitchKit",
     images: [
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "CareerSwitchKit — Land Your New Career Faster",
     description:
-      "Switching careers in the US? Get an ATS-ready resume, cover letters, and 50 AI prompts built for career switchers. $49, instant download.",
+      "Switching careers in the US? Get an ATS-ready resume, cover letters, and 50 AI prompts built for career switchers. $19, instant download.",
     images: ["https://careerswitchkit.org/og-image.png"],
   },
 };

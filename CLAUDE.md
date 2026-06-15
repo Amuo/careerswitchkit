@@ -7,14 +7,71 @@ Read it fully before doing any work, and follow it in every session.
 
 ## What we're building
 
-CareerSwitchKit is a digital product: a US-focused job-application toolkit for
-people changing careers. It includes ATS-friendly resume templates, cover letter
-templates, a 50-prompt AI pack, and an ATS keyword checklist.
+CareerSwitchKit is a digital product for US career switchers — people applying
+to a field they've never formally worked in. It sells at **$19** as an instant
+download.
+
+**Positioning (locked — never revert to old framing):**
+This is NOT a file pack, toolkit, or bundle. It is a **career switch system** —
+a structured, step-by-step process that takes someone with a non-traditional
+background and gives them the exact sequence to present themselves credibly to
+hiring managers in a new field.
+
+**Core insight:** Career switchers don't fail because they're unqualified. They
+fail because they don't know how to translate their existing experience into
+language hiring managers in a new field understand. The product solves that
+translation problem through a structured system.
 
 - Operator: Zorby&Co
 - Domain: careerswitchkit.org
-- The website's ONLY job is to sell the kit: explain it clearly, build trust,
+- The website's ONLY job is to sell the system: explain it clearly, build trust,
   and get the visitor to click buy. It is a marketing site, not an app.
+
+---
+
+## Headline & subheadline (locked — do not change)
+
+- Headline: **"Your background isn't the problem. Your resume is."**
+- Subheadline: **"Stop explaining yourself. Start getting interviews."**
+
+---
+
+## Emotional angle
+
+The buyer is experiencing **impostor syndrome** — they feel like a fraud applying
+for a role they don't have a traditional background in. The product's job is to
+reframe that: you're not unqualified, you're just not presenting yourself
+correctly yet. The system fixes that.
+
+**Buyer in one sentence:** Someone who has decided to switch careers, knows
+they're capable, but has no idea how to make a resume and cover letter that
+convincingly bridges their old field and their new target role — and is scared
+they'll look like an impostor on paper.
+
+---
+
+## The 4 stages (product structure — use this framing everywhere)
+
+- **Stage 1 — Map your transfer** (START HERE doc)
+- **Stage 2 — Build your materials** (CV templates + Cover letter templates)
+- **Stage 3 — Optimize and score** (ATS Checklist + AI Prompt Pack)
+- **Stage 4 — Apply with proof** (Completed Example)
+
+---
+
+## Language rules (critical — enforce on every piece of copy)
+
+**Use:**
+- "System" not "kit" or "bundle"
+- "Sequence" not "files" or "documents"
+- "Career switch framework" not "template pack"
+- "Stages" not "items" or "files"
+- Outcomes and transformation, not deliverables and features
+
+**Never use:**
+- "8 files", "bundle", "pack", "download and use"
+- Any copy that sounds like you're selling Word documents
+- Generic job search language not specific to career switchers
 
 ---
 
@@ -64,20 +121,19 @@ Design direction: sleek, minimal, premium, SaaS-like. Confident and trustworthy
 ## Page structure
 
 1. Home (the landing page)
-   - Hero: headline + 3 small product visuals + primary button "Get the Kit"
-     + secondary button "Preview what's inside"
-   - What's included: cards for resume templates, cover letters, AI prompt pack,
-     ATS checklist, and the completed example
-   - How it works: 3 steps (pick a template → run the prompts → check ATS + apply)
-   - Proof: a before/after bullet rewrite, using real screenshots
-   - Pricing: ONE plan, $49
+   - Hero: locked headline/subheadline + product visuals + primary CTA
+     + secondary button "See how it works"
+   - The 4 stages: walk through Stage 1–4 with outcomes, not file names
+   - How it works: the transformation sequence
+   - Proof: before/after showing the translation problem being solved
+   - Pricing: ONE plan, $19
    - FAQ
    - Contact
    - Footer: links to /terms and /preview, and "© 2026 CareerSwitchKit"
 
 2. Preview page (/preview)
    - A gallery of real product screenshots, square (1:1), with labels and a
-     repeated "Get the Kit" button
+     repeated CTA button
 
 3. Terms page (/terms)
    - Combined Terms + Refund + Privacy
@@ -88,19 +144,19 @@ Design direction: sleek, minimal, premium, SaaS-like. Confident and trustworthy
 
 - Use REAL product screenshots for product visuals. Never AI-generated art.
 - NO fake testimonials or reviews. Only real proof.
-- NO job or interview guarantees. We sell tools and templates only.
+- NO job or interview guarantees. We sell a system — outcomes depend on the user.
 - The AI Prompt Pack is exactly 50 prompts. Never claim "100+".
-- Audience: US career switchers. Tone: professional, clear, and empathetic to
-  someone nervously changing fields.
+- Audience: US career switchers. Tone: direct, confident, and empathetic to
+  someone nervously changing fields. Not cheerful. Not corporate.
 
 ---
 
 ## Payments
 
 - Processor: Polar (acts as Merchant of Record).
-- The "Get the Kit" button will trigger Polar's checkout (a hosted link or an
-  embedded overlay). I'll give you the Polar product details once approved.
-- For now, make the button a clearly-marked placeholder so the layout is ready
+- The primary CTA button will trigger Polar's checkout (a hosted link or an
+  embedded overlay). Polar product details to be provided once approved.
+- For now, keep the button a clearly-marked placeholder so the layout is ready
   to wire up later.
 
 ---

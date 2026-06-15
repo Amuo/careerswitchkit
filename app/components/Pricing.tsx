@@ -25,7 +25,7 @@ function PriceCounter() {
   useEffect(() => {
     if (!inView || started.current) return;
     started.current = true;
-    const target = 49;
+    const target = 19;
     const duration = 800;
     const startTime = performance.now();
 
@@ -110,9 +110,9 @@ export default function Pricing() {
             <button
               onClick={handleCheckout}
               className="w-full bg-accent text-white font-semibold py-4 rounded-xl transition-all duration-200 active:scale-[0.98] text-base hover:bg-accent-hover hover:shadow-[0_0_30px_rgba(55,146,232,0.4)]"
-              aria-label="Get the CareerSwitchKit for $49"
+              aria-label="Get the CareerSwitchKit for $19"
             >
-              Get the Kit — $49
+              Get the System — $19
             </button>
           </div>
 
