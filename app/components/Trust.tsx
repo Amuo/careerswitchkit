@@ -9,10 +9,10 @@ const stats = [
 export default function Trust() {
   return (
     <section className="relative bg-[#10102D] pt-28 pb-24">
-      {/* Gradient fade from WhatsIncluded Stage 04 (#070719) into this dark section */}
+      {/* Gradient fade from HowItWorks white into this dark section */}
       <div
-        className="absolute top-0 left-0 right-0 h-10 pointer-events-none"
-        style={{ background: "linear-gradient(to bottom, #070719, transparent)" }}
+        className="absolute top-0 left-0 right-0 h-16 pointer-events-none"
+        style={{ background: "linear-gradient(to bottom, #ffffff, rgba(16,16,45,0))" }}
         aria-hidden="true"
       />
 

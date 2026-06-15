@@ -39,11 +39,11 @@ const stage01Insight = (
     <div className="flex flex-col gap-2.5">
       {transferPairs.map(([from, to]) => (
         <div key={from} className="flex items-center gap-2.5 text-sm">
-          <span style={{ color: "rgba(255,255,255,0.22)", textDecoration: "line-through", textDecorationColor: "rgba(255,255,255,0.10)" }}>
+          <span style={{ color: "rgba(7,7,25,0.28)", textDecoration: "line-through", textDecorationColor: "rgba(7,7,25,0.12)" }}>
             {from}
           </span>
-          <span style={{ color: "rgba(55,146,232,0.45)" }} aria-hidden="true">→</span>
-          <span className="font-medium" style={{ color: "rgba(255,255,255,0.72)" }}>
+          <span style={{ color: "rgba(55,146,232,0.55)" }} aria-hidden="true">→</span>
+          <span className="font-medium" style={{ color: "rgba(7,7,25,0.82)" }}>
             {to}
           </span>
         </div>
