@@ -70,10 +70,10 @@ export default function Hero() {
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-32 pb-16 lg:pt-40 lg:pb-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-12 lg:gap-16 items-center">
 
           {/* Left column */}
-          <div className="max-w-2xl flex flex-col gap-6">
+          <div className="flex flex-col gap-6">
             {/* Eyebrow */}
             <motion.p
               suppressHydrationWarning
@@ -87,7 +87,7 @@ export default function Hero() {
             <motion.h1
               suppressHydrationWarning
               {...fadeUp(0.1)}
-              className="font-sora font-black leading-tight text-5xl text-white"
+              className="font-sora font-black leading-tight text-4xl text-white"
             >
               Your background isn&apos;t the problem.{" "}
               <span className="text-[#3792E8]">

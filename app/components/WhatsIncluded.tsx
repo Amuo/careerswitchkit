@@ -1,5 +1,6 @@
 "use client";
 
+import { motion, useReducedMotion } from "motion/react";
 import { Reveal } from "./Reveal";
 
 const stages = [
@@ -38,9 +39,14 @@ const stages = [
   },
 ];
 
+const STAGE_EASE = [0.16, 1, 0.3, 1] as const;
+const STAGGER_DELAYS = [0, 0.05, 0.1, 0.15] as const;
+
 export default function WhatsIncluded() {
+  const reduce = useReducedMotion();
+
   return (
-    <section id="included" className="bg-white pt-16 pb-28 lg:pt-20 lg:pb-36">
+    <section id="included" className="bg-white pt-16 pb-16 lg:pt-20 lg:pb-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
@@ -57,12 +63,18 @@ export default function WhatsIncluded() {
           </p>
         </Reveal>
 
-        {/* Stage blocks — no stagger delay; vertical scroll timing sequences naturally */}
+        {/* Stage blocks */}
         <div>
           {stages.map((stage, i) => (
             <div key={stage.number}>
-              <Reveal delay={0}>
-                <div className="relative py-12 lg:py-16">
+              <motion.div
+                suppressHydrationWarning
+                initial={reduce ? {} : { opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ duration: 0.6, delay: STAGGER_DELAYS[i], ease: STAGE_EASE }}
+              >
+                <div className="relative py-12 lg:py-16 overflow-hidden">
 
                   {/* Ghost watermark number — dramatic scale, low opacity */}
                   <span
@@ -100,7 +112,7 @@ export default function WhatsIncluded() {
                   </div>
 
                 </div>
-              </Reveal>
+              </motion.div>
 
               {i < stages.length - 1 ? (
                 <hr className="border-0 border-t border-[#E5E7EB]" />
