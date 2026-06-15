@@ -7,7 +7,7 @@ import { handleCheckout } from "@/lib/checkout";
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 const bullets = [
-  "A résumé that explains your career switch — without you having to",
+  "A résumé that explains your career switch, without you having to",
   "Cover letters that make non-linear careers look intentional",
   "An ATS score above the filter line, before you submit",
 ];

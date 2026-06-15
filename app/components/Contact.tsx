@@ -37,23 +37,12 @@ export default function Contact() {
       />
 
       <div className="relative z-10 max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <motion.p
-          suppressHydrationWarning
-          initial={reduce ? {} : { opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.5, delay: 0, ease: EASE }}
-          className="text-sm font-bold uppercase tracking-widest text-accent mb-3"
-        >
-          GET STARTED
-        </motion.p>
-
         <motion.h2
           suppressHydrationWarning
           initial={reduce ? {} : { opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.65, delay: 0.1, ease: EASE }}
+          transition={{ duration: 0.65, delay: 0, ease: EASE }}
           className="font-sora text-5xl font-bold text-white tracking-tight leading-tight"
         >
           The job won&apos;t wait.
@@ -84,7 +73,7 @@ export default function Contact() {
             onClick={handleCheckout}
             className="bg-accent hover:bg-accent-hover text-white font-semibold px-12 py-5 rounded-xl transition-all duration-200 active:scale-[0.98] text-lg hover:shadow-[0_0_40px_rgba(55,146,232,0.35)]"
           >
-            Start the System — $19
+            Start the System for $19
           </button>
         </motion.div>
 

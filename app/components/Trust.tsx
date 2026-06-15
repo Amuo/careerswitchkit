@@ -5,7 +5,7 @@ const stats = [
     number: "50",
     label: "AI Prompts",
     explanation:
-      "Organized across 8 categories — from keyword extraction to final review. Not a generic list. A complete system.",
+      "Organized across 8 categories, from keyword extraction to final review. Not a generic list. A complete system.",
   },
   {
     number: "30 days",
@@ -32,25 +32,26 @@ export default function Trust() {
       />
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Reveal className="text-center mb-14">
-          <p className="text-sm font-bold uppercase tracking-widest text-accent mb-0">
-            Why CareerSwitchKit
-          </p>
-        </Reveal>
-
-        <Reveal delay={0.08}>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16 text-center">
-            {stats.map((s) => (
-              <div key={s.label} className="flex flex-col items-center gap-2">
-                <span
-                  className="font-sora text-5xl md:text-6xl font-black leading-none text-[#3792E8] whitespace-nowrap"
-                >
+        <Reveal>
+          <div className="grid grid-cols-1 md:grid-cols-3 md:divide-x md:divide-white/[0.08] gap-10 md:gap-0">
+            {stats.map((s, i) => (
+              <div
+                key={s.label}
+                className={[
+                  "flex flex-col gap-2",
+                  i > 0 ? "md:pl-10 lg:pl-14" : "",
+                  i < stats.length - 1 ? "md:pr-10 lg:pr-14" : "",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+              >
+                <span className="font-sora text-3xl font-bold text-white leading-none">
                   {s.number}
                 </span>
-                <span className="font-sora text-base font-bold text-white mt-1">
+                <span className="text-[11px] font-bold uppercase tracking-widest text-[#3792E8]">
                   {s.label}
                 </span>
-                <p className="text-sm text-white/45 leading-relaxed max-w-[24ch] mx-auto">
+                <p className="text-sm text-white/40 leading-relaxed mt-0.5">
                   {s.explanation}
                 </p>
               </div>

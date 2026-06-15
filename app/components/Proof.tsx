@@ -68,7 +68,7 @@ export default function Proof() {
           </h2>
           <p className="mt-3 text-gray-500 text-lg max-w-[50ch]">
             One résumé bullet, rewritten using Stage 3. This is what the
-            translation problem looks like — solved.
+            translation problem. Solved.
           </p>
         </Reveal>
 
@@ -376,7 +376,7 @@ export default function Proof() {
               <strong className="text-gray-700 font-medium">Example only.</strong>{" "}
               This rewrite uses Prompt 12 from Stage 3. Results depend on your
               background, your target role, and how you work through the system.
-              The system gives you the process — you do the work.
+              The system gives you the process. You do the work.
             </p>
           </div>
         </Reveal>

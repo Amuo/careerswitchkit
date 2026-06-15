@@ -10,7 +10,7 @@ const stages = [
     number: "01",
     title: "Map Your Transfer",
     description:
-      "Most applicants go straight to the template. That's why they sound generic. Map your background against your target role first — then write.",
+      "Most applicants go straight to the template. That's why they sound generic. Map your background against your target role first, then write.",
     files: ["START HERE Guide"],
   },
   {
@@ -29,8 +29,8 @@ const stages = [
     number: "03",
     title: "Optimize and Score",
     description:
-      "Run every application through the system before you submit — so nothing gets filtered out.",
-    files: ["AI Prompt Pack — 50 prompts", "ATS Checklist"],
+      "Run every application through the system before you submit. Nothing gets filtered out.",
+    files: ["AI Prompt Pack (50 prompts)", "ATS Checklist"],
   },
   {
     number: "04",

@@ -28,19 +28,24 @@ function DocumentLines() {
       fill="none"
       aria-hidden="true"
     >
-      <rect x="28" y="36" width="144" height="2.5" rx="1.25" fill="rgba(55,146,232,0.10)" />
-      <rect x="28" y="46" width="96" height="2" rx="1" fill="rgba(55,146,232,0.06)" />
-      <rect x="28" y="60" width="144" height="0.75" rx="0.375" fill="rgba(255,255,255,0.06)" />
-      <rect x="28" y="72" width="144" height="1.5" rx="0.75" fill="rgba(255,255,255,0.045)" />
-      <rect x="28" y="82" width="118" height="1.5" rx="0.75" fill="rgba(255,255,255,0.045)" />
-      <rect x="28" y="92" width="136" height="1.5" rx="0.75" fill="rgba(255,255,255,0.045)" />
-      <rect x="28" y="102" width="88" height="1.5" rx="0.75" fill="rgba(255,255,255,0.045)" />
-      <rect x="28" y="116" width="144" height="1" rx="0.5" fill="rgba(255,255,255,0.030)" />
-      <rect x="28" y="126" width="110" height="1" rx="0.5" fill="rgba(255,255,255,0.030)" />
-      <rect x="28" y="136" width="130" height="1" rx="0.5" fill="rgba(255,255,255,0.030)" />
-      <rect x="28" y="146" width="76" height="1" rx="0.5" fill="rgba(255,255,255,0.030)" />
-      <rect x="28" y="160" width="144" height="0.75" rx="0.375" fill="rgba(255,255,255,0.018)" />
-      <rect x="28" y="168" width="100" height="0.75" rx="0.375" fill="rgba(255,255,255,0.018)" />
+      {/* Title line */}
+      <rect x="28" y="36" width="144" height="3" rx="1.5" fill="rgba(55,146,232,0.22)" />
+      <rect x="28" y="46" width="96" height="2" rx="1" fill="rgba(55,146,232,0.12)" />
+      {/* Section divider */}
+      <rect x="28" y="60" width="144" height="1" rx="0.5" fill="rgba(255,255,255,0.10)" />
+      {/* Body lines */}
+      <rect x="28" y="72" width="144" height="2" rx="1" fill="rgba(255,255,255,0.09)" />
+      <rect x="28" y="82" width="118" height="2" rx="1" fill="rgba(255,255,255,0.09)" />
+      <rect x="28" y="92" width="136" height="2" rx="1" fill="rgba(255,255,255,0.09)" />
+      <rect x="28" y="102" width="88" height="2" rx="1" fill="rgba(255,255,255,0.09)" />
+      {/* Second paragraph */}
+      <rect x="28" y="116" width="144" height="1.5" rx="0.75" fill="rgba(255,255,255,0.06)" />
+      <rect x="28" y="126" width="110" height="1.5" rx="0.75" fill="rgba(255,255,255,0.06)" />
+      <rect x="28" y="136" width="130" height="1.5" rx="0.75" fill="rgba(255,255,255,0.06)" />
+      <rect x="28" y="146" width="76" height="1.5" rx="0.75" fill="rgba(255,255,255,0.06)" />
+      {/* Faint third paragraph */}
+      <rect x="28" y="160" width="144" height="1" rx="0.5" fill="rgba(255,255,255,0.04)" />
+      <rect x="28" y="168" width="100" height="1" rx="0.5" fill="rgba(255,255,255,0.04)" />
     </svg>
   );
 }
@@ -51,8 +56,8 @@ function PlaceholderZone({ format }: { format: string }) {
       className="relative w-full overflow-hidden"
       style={{
         aspectRatio: "1 / 1",
-        background: "linear-gradient(145deg, #0d0d28 0%, #09091c 100%)",
-        borderBottom: "1px solid rgba(255,255,255,0.04)",
+        background: "linear-gradient(145deg, #111135 0%, #0c0c2a 100%)",
+        borderBottom: "1px solid rgba(255,255,255,0.06)",
       }}
     >
       <div
@@ -63,15 +68,33 @@ function PlaceholderZone({ format }: { format: string }) {
           width: "65%",
           height: "65%",
           background:
-            "radial-gradient(ellipse at top right, rgba(55,146,232,0.09), transparent 65%)",
+            "radial-gradient(ellipse at top right, rgba(55,146,232,0.11), transparent 65%)",
         }}
         aria-hidden="true"
       />
       <DocumentLines />
+
+      {/* Centered "screenshot coming" label */}
+      <div
+        className="absolute inset-0 flex items-center justify-center"
+        aria-hidden="true"
+      >
+        <span
+          className="font-mono text-[9px] tracking-[0.2em] uppercase px-3 py-1.5 rounded"
+          style={{
+            color: "rgba(55,146,232,0.45)",
+            background: "rgba(55,146,232,0.06)",
+            border: "1px solid rgba(55,146,232,0.12)",
+          }}
+        >
+          Screenshot coming
+        </span>
+      </div>
+
       <div className="absolute bottom-4 right-4">
         <span
           className="font-mono text-[10px] tracking-[0.18em] uppercase"
-          style={{ color: "rgba(55,146,232,0.28)" }}
+          style={{ color: "rgba(55,146,232,0.35)" }}
         >
           {format}
         </span>
