@@ -32,7 +32,7 @@ function ATSCounter({
       return;
     }
 
-    const duration = 1300;
+    const duration = 1600;
     const timeout = setTimeout(() => {
       const startTime = performance.now();
       const tick = (now: number) => {
@@ -148,7 +148,7 @@ export default function Proof() {
                   className="font-sora text-[42px] font-black text-red-500 leading-none tabular-nums"
                   style={{ minWidth: "3ch", textAlign: "right" }}
                 >
-                  <ATSCounter active={inView} target={23} startDelay={600} />
+                  <ATSCounter active={inView} target={23} startDelay={1000} />
                 </span>
                 <div className="flex flex-col gap-0.5">
                   <span className="text-xs font-bold text-red-500 uppercase tracking-wide">
@@ -325,7 +325,7 @@ export default function Proof() {
                   className="font-sora text-[42px] font-black text-[#3792E8] leading-none tabular-nums"
                   style={{ minWidth: "3ch", textAlign: "right" }}
                 >
-                  <ATSCounter active={inView} target={87} startDelay={680} />
+                  <ATSCounter active={inView} target={87} startDelay={1050} />
                 </span>
                 <div className="flex flex-col gap-0.5">
                   <span className="text-xs font-bold text-[#3792E8] uppercase tracking-wide">
