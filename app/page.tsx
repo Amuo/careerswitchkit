@@ -15,9 +15,9 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <WhatsIncluded />
-        <HowItWorks />
         <Proof />
+        <HowItWorks />
+        <WhatsIncluded />
         <Trust />
         <Pricing />
         <FAQ />

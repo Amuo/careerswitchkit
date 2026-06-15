@@ -57,8 +57,14 @@ export default function Proof() {
   const reduce = useReducedMotion();
 
   return (
-    <section className="bg-[#F0F4FA] py-24 lg:py-32">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative bg-[#F0F4FA] py-24 lg:py-32 overflow-hidden">
+      {/* Gradient fade from Hero (#070719) into this light section */}
+      <div
+        className="absolute top-0 left-0 right-0 h-20 pointer-events-none"
+        style={{ background: "linear-gradient(to bottom, #070719, transparent)" }}
+        aria-hidden="true"
+      />
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <Reveal className="mb-12">
           <p className="text-sm font-bold uppercase tracking-widest text-accent mb-3">
             SEE IT IN ACTION

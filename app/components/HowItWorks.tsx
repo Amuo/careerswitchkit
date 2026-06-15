@@ -573,10 +573,10 @@ export default function HowItWorks() {
         aria-hidden="true"
       />
 
-      {/* Gradient fade from Stage 04 dark */}
+      {/* Gradient fade from Proof (#F0F4FA) into white */}
       <div
-        className="absolute top-0 left-0 right-0 h-20 pointer-events-none"
-        style={{ background: "linear-gradient(to bottom, #070719, transparent)" }}
+        className="absolute top-0 left-0 right-0 h-16 pointer-events-none"
+        style={{ background: "linear-gradient(to bottom, #F0F4FA, transparent)" }}
         aria-hidden="true"
       />
 
