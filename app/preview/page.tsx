@@ -5,9 +5,9 @@ import { Reveal } from "@/app/components/Reveal";
 import CheckoutButton from "./CheckoutButton";
 
 export const metadata: Metadata = {
-  title: "Preview the Kit | CareerSwitchKit",
+  title: "Preview the System | CareerSwitchKit",
   description:
-    "See exactly what is inside CareerSwitchKit: 8 files, an 8-step system, ATS-friendly resume templates, cover letters, 50 AI prompts, and more.",
+    "See exactly what is inside CareerSwitchKit: a 4-stage career switch system with ATS-ready templates, cover letters, 50 AI prompts, and a completed example.",
 };
 
 const files = [
@@ -16,7 +16,7 @@ const files = [
     name: "Start Here Guide",
     format: "DOCX",
     description:
-      "Your onboarding doc. Read this first. It explains the 8-step process, which template to choose, what each prompt category does, and the five mistakes that kill career-switcher applications before a human reads them.",
+      "Your onboarding document. Read this first. It explains the full sequence, which template to choose, what each prompt category does, and the five mistakes that kill career-switcher applications before a human reads them.",
   },
   {
     number: "01",
@@ -106,11 +106,10 @@ export default function PreviewPage() {
                 What&apos;s Inside
               </p>
               <h1 className="font-sora text-5xl lg:text-6xl xl:text-7xl font-black text-white leading-tight tracking-tight text-balance mb-6">
-                Everything in the kit,<br />laid out.
+                Everything in the system,<br />laid out.
               </h1>
               <p className="text-white/55 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto text-balance">
-                Eight files. One clear system. Here is exactly what you are
-                getting before you decide.
+                One complete system. Here is exactly what you are getting before you decide.
               </p>
             </Reveal>
           </div>

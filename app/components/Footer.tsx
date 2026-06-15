@@ -11,7 +11,7 @@ export default function Footer() {
               Career<span className="text-accent">Switch</span>Kit
             </p>
             <p className="mt-1.5 text-sm text-white/35">
-              Tools for the US career switcher.
+              The career switch system.
             </p>
           </div>
 

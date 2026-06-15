@@ -102,7 +102,7 @@ export default function Hero() {
               {...fadeUp(0.1)}
               className="text-sm font-bold uppercase tracking-widest text-accent"
             >
-              Career Switcher&apos;s Toolkit
+              The Career Switch System
             </motion.p>
 
             {/* Headline + accent rule + subheadline — grouped so rule is tight between them */}
@@ -143,7 +143,7 @@ export default function Hero() {
             </div>
 
             {/* Bullets */}
-            <ul className="flex flex-col gap-3" aria-label="Kit includes">
+            <ul className="flex flex-col gap-3" aria-label="What the system delivers">
               {bullets.map((b, i) => (
                 <motion.li
                   key={b}

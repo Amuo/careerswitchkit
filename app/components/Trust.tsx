@@ -14,10 +14,10 @@ const stats = [
       "If CareerSwitchKit doesn't work for you, email us within 30 days for a full refund. No questions asked.",
   },
   {
-    number: "8 files",
-    label: "Across 4 stages",
+    number: "4 stages",
+    label: "One complete sequence",
     explanation:
-      "8 files across 4 stages. One sequence. Everything you need to go from scattered background to submitted application.",
+      "Every stage builds on the last. Skip one and the next won't land. Follow the sequence and you arrive with a submission-ready application.",
   },
 ];
 
@@ -60,7 +60,7 @@ export default function Trust() {
 
         <Reveal delay={0.18}>
           <p className="mt-14 text-center font-sora text-lg font-semibold text-white/60 leading-snug max-w-[44ch] mx-auto">
-            &ldquo;Built as a system, not assembled as a file pack. Every stage exists for a reason.&rdquo;
+            &ldquo;Designed in sequence, not assembled at random. Every stage follows from the one before it.&rdquo;
           </p>
         </Reveal>
       </div>

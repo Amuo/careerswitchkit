@@ -29,6 +29,11 @@ const faqs = [
     answer:
       "Any of the major ones — ChatGPT, Claude, Gemini, or Copilot. The prompts in Stage 3 are written to work with all of them. You don't need a paid plan, though a paid plan gives better results on the rewrite prompts. If you don't use AI tools yet, the START HERE guide walks you through exactly how to use them for this specific process.",
   },
+  {
+    question: "How is this different from a resume template I can find for free?",
+    answer:
+      "A template gives you a blank form. CareerSwitchKit gives you the logic behind filling it — specifically for someone switching into a field they haven't formally worked in. Stage 1 maps what actually transfers from your old career. Stage 2 shows you how to frame that experience in your target field's language. Stage 3 scores your resume before you submit. Stage 4 shows you a finished example from start to finish. A template can't do any of that. It can only give you the shape.",
+  },
 ];
 
 export default function FAQ() {

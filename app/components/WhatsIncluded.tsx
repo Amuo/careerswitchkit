@@ -8,7 +8,7 @@ const stages = [
     number: "01",
     title: "Map Your Transfer",
     description:
-      "Understand exactly how your background translates — before you write a single word.",
+      "Most applicants go straight to the template. That's why they sound generic. Map your background against your target role first — then write.",
     files: ["START HERE Guide"],
   },
   {
@@ -34,7 +34,7 @@ const stages = [
     number: "04",
     title: "Apply With Proof",
     description:
-      "See the full system applied to a real career switch, start to finish.",
+      "See every stage applied to a real career switch: Sara Mehić, retail floor manager to operations coordinator. Blank page to submitted application.",
     files: ["Completed Example: Sara Mehić, Retail → Operations"],
   },
 ];

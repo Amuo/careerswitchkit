@@ -148,7 +148,7 @@ export default function Pricing() {
             </span>
             <span className="flex items-center gap-1.5">
               <IconCheck size={13} strokeWidth={2.5} className="text-accent" aria-hidden="true" />
-              4 stages. 8 files. 1 career switch.
+              4 stages. 1 system. 1 career switch.
             </span>
             <span className="flex items-center gap-1.5">
               <IconCheck size={13} strokeWidth={2.5} className="text-accent" aria-hidden="true" />

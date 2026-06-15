@@ -109,7 +109,7 @@ export default function Navbar() {
               }}
               className="mt-1 bg-accent hover:bg-accent-hover text-white text-sm font-semibold px-4 py-3 rounded-lg transition-colors text-left"
             >
-              Get the Kit
+              Get the System
             </button>
           </div>
         )}
