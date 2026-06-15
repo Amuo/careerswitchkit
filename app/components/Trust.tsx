@@ -1,24 +1,9 @@
 import { Reveal } from "./Reveal";
 
 const stats = [
-  {
-    number: "50",
-    label: "AI Prompts",
-    explanation:
-      "Organized across 8 categories, from keyword extraction to final review. Not a generic list. A complete system.",
-  },
-  {
-    number: "30 days",
-    label: "Money-back guarantee",
-    explanation:
-      "If CareerSwitchKit doesn't work for you, email us within 30 days for a full refund. No questions asked.",
-  },
-  {
-    number: "4 stages",
-    label: "One complete sequence",
-    explanation:
-      "Every stage builds on the last. Skip one and the next won't land. Follow the sequence and you arrive with a submission-ready application.",
-  },
+  { number: "50", label: "AI Prompts" },
+  { number: "30 days", label: "Money-back guarantee" },
+  { number: "4 stages", label: "One complete sequence" },
 ];
 
 export default function Trust() {
@@ -38,30 +23,27 @@ export default function Trust() {
               <div
                 key={s.label}
                 className={[
-                  "flex flex-col gap-2",
+                  "flex flex-col gap-3",
                   i > 0 ? "md:pl-10 lg:pl-14" : "",
                   i < stats.length - 1 ? "md:pr-10 lg:pr-14" : "",
                 ]
                   .filter(Boolean)
                   .join(" ")}
               >
-                <span className="font-sora text-3xl font-bold text-white leading-none">
+                <span className="font-sora text-5xl lg:text-6xl font-bold text-white leading-none">
                   {s.number}
                 </span>
                 <span className="text-[11px] font-bold uppercase tracking-widest text-[#3792E8]">
                   {s.label}
                 </span>
-                <p className="text-sm text-white/40 leading-relaxed mt-0.5">
-                  {s.explanation}
-                </p>
               </div>
             ))}
           </div>
         </Reveal>
 
         <Reveal delay={0.18}>
-          <p className="mt-14 text-center font-sora text-lg font-semibold text-white/60 leading-snug max-w-[44ch] mx-auto">
-            &ldquo;Designed in sequence, not assembled at random. Every stage follows from the one before it.&rdquo;
+          <p className="mt-14 text-center font-sora text-xl font-bold text-white/70 leading-snug max-w-[30ch] mx-auto">
+            Not underqualified. Just untranslated.
           </p>
         </Reveal>
       </div>
