@@ -23,7 +23,7 @@ const stats = [
 
 export default function Trust() {
   return (
-    <section className="relative bg-[#10102D] pt-16 pb-24">
+    <section className="relative bg-[#10102D] pt-28 pb-24">
       {/* Gradient fade from Proof (#F0F4FA) into this dark section */}
       <div
         className="absolute top-0 left-0 right-0 h-16 pointer-events-none"
