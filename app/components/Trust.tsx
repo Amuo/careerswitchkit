@@ -8,7 +8,7 @@ const stats = [
 
 export default function Trust() {
   return (
-    <section className="relative bg-[#10102D] pt-28 pb-24">
+    <section className="relative bg-[#10102D] pt-24 pb-28">
       {/* Gradient fade from HowItWorks white into this dark section */}
       <div
         className="absolute top-0 left-0 right-0 h-16 pointer-events-none"
@@ -23,7 +23,7 @@ export default function Trust() {
               <div
                 key={s.label}
                 className={[
-                  "flex flex-col gap-3",
+                  "flex flex-col gap-3 items-center text-center",
                   i > 0 ? "md:pl-10 lg:pl-14" : "",
                   i < stats.length - 1 ? "md:pr-10 lg:pr-14" : "",
                 ]
@@ -33,7 +33,7 @@ export default function Trust() {
                 <span className="font-sora text-5xl lg:text-6xl font-bold text-white leading-none">
                   {s.number}
                 </span>
-                <span className="text-[11px] font-bold uppercase tracking-widest text-[#3792E8]">
+                <span className="text-xs font-semibold uppercase tracking-widest text-[#3792E8]">
                   {s.label}
                 </span>
               </div>
@@ -41,8 +41,14 @@ export default function Trust() {
           </div>
         </Reveal>
 
-        <Reveal delay={0.18}>
-          <p className="mt-14 text-center font-sora text-xl font-bold text-white/70 leading-snug max-w-[30ch] mx-auto">
+        <Reveal delay={0.14}>
+          <div className="mt-14 flex justify-center">
+            <div className="w-10 h-px bg-white/20" />
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.24}>
+          <p className="mt-10 text-center font-sora text-2xl sm:text-[1.75rem] font-semibold italic text-white leading-tight max-w-[26ch] mx-auto">
             Not underqualified. Just untranslated.
           </p>
         </Reveal>
