@@ -3,6 +3,8 @@
 import { motion, useReducedMotion } from "motion/react";
 import { Reveal } from "./Reveal";
 
+const EASE = [0.16, 1, 0.3, 1] as const;
+
 const stages = [
   {
     number: "01",
@@ -45,49 +47,219 @@ const stageStyles = [
     labelColor: "#3792E8",
     titleColor: "#070719",
     descColor: "rgba(7,7,25,0.5)",
-    ghostColor: "rgba(55,146,232,0.07)",
+    ghostColor: "rgba(55,146,232,0.06)",
     pillBg: "rgba(55,146,232,0.07)",
     pillBorder: "rgba(55,146,232,0.2)",
     pillText: "#185FA5",
-    arrowColor: "#3792E8",
   },
   {
     bg: "#F0F4FA",
     labelColor: "#185FA5",
     titleColor: "#042C53",
     descColor: "rgba(4,44,83,0.55)",
-    ghostColor: "rgba(24,95,165,0.09)",
+    ghostColor: "rgba(24,95,165,0.075)",
     pillBg: "rgba(24,95,165,0.1)",
     pillBorder: "rgba(24,95,165,0.22)",
     pillText: "#0C447C",
-    arrowColor: "#185FA5",
   },
   {
     bg: "#10102D",
     labelColor: "#3792E8",
     titleColor: "#FFFFFF",
     descColor: "rgba(255,255,255,0.45)",
-    ghostColor: "rgba(55,146,232,0.07)",
+    ghostColor: "rgba(55,146,232,0.065)",
     pillBg: "rgba(55,146,232,0.08)",
     pillBorder: "rgba(55,146,232,0.22)",
     pillText: "#3792E8",
-    arrowColor: "#3792E8",
   },
   {
     bg: "#070719",
     labelColor: "#3792E8",
     titleColor: "#FFFFFF",
     descColor: "rgba(255,255,255,0.4)",
-    ghostColor: "rgba(55,146,232,0.06)",
+    ghostColor: "rgba(55,146,232,0.05)",
     pillBg: "rgba(55,146,232,0.07)",
     pillBorder: "rgba(55,146,232,0.18)",
     pillText: "#3792E8",
-    arrowColor: "#3792E8",
   },
 ];
 
-const STAGE_EASE = [0.16, 1, 0.3, 1] as const;
-const STAGGER_DELAYS = [0, 0.08, 0.16, 0.24] as const;
+// ── Stage-specific right-column visuals ────────────────────────────────────
+
+function Stage01Visual() {
+  const pairs = [
+    ["Retail manager", "Operations coordinator"],
+    ["Customer escalation", "Process improvement"],
+    ["Team scheduling", "Resource planning"],
+  ];
+  return (
+    <div>
+      <p
+        className="text-[10px] font-bold tracking-[0.2em] uppercase mb-5"
+        style={{ color: "rgba(55,146,232,0.65)" }}
+      >
+        Transfer map
+      </p>
+      <div className="flex flex-col gap-4">
+        {pairs.map(([from, to], i) => (
+          <div key={i} className="flex flex-col gap-0.5">
+            <span
+              className="text-[13px]"
+              style={{
+                color: "rgba(7,7,25,0.30)",
+                textDecoration: "line-through",
+                textDecorationColor: "rgba(7,7,25,0.12)",
+              }}
+            >
+              {from}
+            </span>
+            <span
+              className="text-[11px] font-medium"
+              style={{ color: "#3792E8" }}
+              aria-hidden="true"
+            >
+              ↓
+            </span>
+            <span
+              className="text-[13px] font-semibold"
+              style={{ color: "#070719" }}
+            >
+              {to}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Stage02Visual() {
+  const formats = [
+    { name: "One-Page", desc: "Standard. Under 8 years." },
+    { name: "Two-Page", desc: "Extended. 8+ years." },
+    { name: "Hybrid", desc: "Skills-first. Non-linear career." },
+  ];
+  return (
+    <div>
+      <p
+        className="text-[10px] font-bold tracking-[0.2em] uppercase mb-5"
+        style={{ color: "#185FA5" }}
+      >
+        Choose your format
+      </p>
+      <div className="flex flex-col gap-4">
+        {formats.map(({ name, desc }) => (
+          <div key={name} className="flex flex-col gap-0.5">
+            <span
+              className="text-[13px] font-bold"
+              style={{ color: "#042C53" }}
+            >
+              {name}
+            </span>
+            <span
+              className="text-[12px] leading-snug"
+              style={{ color: "rgba(4,44,83,0.45)" }}
+            >
+              {desc}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Stage03Visual() {
+  const categories = [
+    "Foundation",
+    "Resume Build",
+    "ATS Scoring",
+    "Cover Letter",
+    "LinkedIn",
+    "Interview Prep",
+    "Networking",
+    "Final Review",
+  ];
+  return (
+    <div>
+      <p
+        className="text-[10px] font-bold tracking-[0.2em] uppercase mb-4"
+        style={{ color: "#3792E8" }}
+      >
+        8 prompt categories
+      </p>
+      <div className="grid grid-cols-2 gap-1.5">
+        {categories.map((cat) => (
+          <span
+            key={cat}
+            className="text-[11px] font-medium px-2.5 py-2 rounded-md text-center"
+            style={{
+              color: "rgba(55,146,232,0.75)",
+              background: "rgba(55,146,232,0.07)",
+              border: "1px solid rgba(55,146,232,0.13)",
+            }}
+          >
+            {cat}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Stage04Visual() {
+  return (
+    <div>
+      <p
+        className="text-[10px] font-bold tracking-[0.2em] uppercase mb-5"
+        style={{ color: "#3792E8" }}
+      >
+        Completed example
+      </p>
+      <div className="flex flex-col gap-1.5">
+        <span
+          className="text-sm font-semibold"
+          style={{ color: "rgba(255,255,255,0.50)" }}
+        >
+          Sara Mehić
+        </span>
+        <div className="flex flex-col gap-1.5 mt-2 font-mono text-[13px]">
+          <span
+            style={{
+              color: "rgba(255,255,255,0.25)",
+              textDecoration: "line-through",
+              textDecorationColor: "rgba(255,255,255,0.12)",
+            }}
+          >
+            Retail Floor Manager
+          </span>
+          <span
+            className="text-[11px] font-medium"
+            style={{ color: "rgba(55,146,232,0.65)" }}
+            aria-hidden="true"
+          >
+            ↓ complete application on file
+          </span>
+          <span
+            className="font-semibold"
+            style={{ color: "rgba(255,255,255,0.85)" }}
+          >
+            Operations Coordinator
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const stageVisuals = [
+  <Stage01Visual key="v1" />,
+  <Stage02Visual key="v2" />,
+  <Stage03Visual key="v3" />,
+  <Stage04Visual key="v4" />,
+];
+
+// ── Component ──────────────────────────────────────────────────────────────
 
 export default function WhatsIncluded() {
   const reduce = useReducedMotion();
@@ -95,76 +267,104 @@ export default function WhatsIncluded() {
   return (
     <section id="included">
 
-      {/* Section header — dark navy band, max-w-4xl to match stage content */}
+      {/* ── Section header ── */}
       <div className="bg-[#070719] pt-14 pb-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal>
-            <p className="text-sm font-bold uppercase tracking-widest text-[#3792E8] mb-3">
-              THE SYSTEM
-            </p>
             <h2 className="font-sora text-3xl md:text-4xl font-bold text-white tracking-tight">
               Four stages. One career switch.
             </h2>
-            <p className="mt-3 text-lg max-w-[52ch]" style={{ color: "rgba(255,255,255,0.45)" }}>
+            <p
+              className="mt-3 text-lg max-w-[52ch]"
+              style={{ color: "rgba(255,255,255,0.45)" }}
+            >
               Most career switchers fail because they don&apos;t have a process.
               This is the process.
             </p>
           </Reveal>
+
+          {/* Stage sequence indicator */}
+          <Reveal delay={0.14}>
+            <div className="mt-8 flex flex-wrap md:flex-nowrap items-center">
+              {stages.map((stage, i) => (
+                <div key={stage.number} className="flex items-center">
+                  <div
+                    className="flex items-center gap-2.5 px-3.5 py-2 rounded-lg"
+                    style={{
+                      background: "rgba(55,146,232,0.06)",
+                      border: "1px solid rgba(55,146,232,0.14)",
+                    }}
+                  >
+                    <span
+                      className="font-mono text-[10px] font-bold"
+                      style={{ color: "#3792E8" }}
+                    >
+                      {stage.number}
+                    </span>
+                    <span
+                      className="text-[12px] font-medium"
+                      style={{ color: "rgba(255,255,255,0.50)" }}
+                    >
+                      {stage.title}
+                    </span>
+                  </div>
+                  {i < stages.length - 1 && (
+                    <div
+                      className="w-5 h-px hidden md:block flex-shrink-0"
+                      style={{ background: "rgba(55,146,232,0.22)" }}
+                      aria-hidden="true"
+                    />
+                  )}
+                </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </div>
 
-      {/* Stage bands */}
+      {/* ── Stage bands ── */}
       {stages.map((stage, i) => {
         const s = stageStyles[i];
         return (
-          <div key={stage.number}>
-            <div
-              className="group relative overflow-hidden py-12"
-              style={{ background: s.bg }}
+          <div key={stage.number} className="relative overflow-hidden" style={{ background: s.bg }}>
+
+            {/* Ghost watermark — bleeds to viewport right edge */}
+            <span
+              className="absolute right-0 top-1/2 -translate-y-1/2 font-sora font-black select-none pointer-events-none leading-none"
+              style={{
+                fontSize: "clamp(120px, 20vw, 230px)",
+                color: s.ghostColor,
+              }}
+              aria-hidden="true"
             >
-              {/* Left hover accent bar */}
-              <div
-                className="absolute left-0 top-0 bottom-0 w-[3px] scale-y-0 opacity-0 group-hover:scale-y-100 group-hover:opacity-100 transition-all duration-300 origin-center"
-                style={{ background: "#3792E8" }}
-                aria-hidden="true"
-              />
+              {stage.number}
+            </span>
 
-              {/* Ghost watermark number — bleeds to viewport right edge */}
-              <span
-                className="absolute right-0 top-1/2 -translate-y-1/2 font-sora font-black select-none pointer-events-none leading-none"
-                style={{
-                  fontSize: "clamp(120px, 20vw, 240px)",
-                  color: s.ghostColor,
-                }}
-                aria-hidden="true"
-              >
-                {stage.number}
-              </span>
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-16">
+              <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1fr_260px] gap-8 lg:gap-16 items-start">
 
-              {/* Centered content — max-w-4xl matches section header */}
-              <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                {/* LEFT: Stage info */}
                 <motion.div
                   suppressHydrationWarning
-                  initial={reduce ? {} : { opacity: 0, y: 16 }}
+                  initial={reduce ? {} : { opacity: 0, y: 18 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.1 }}
-                  transition={{ duration: 0.6, delay: STAGGER_DELAYS[i], ease: STAGE_EASE }}
-                  className="relative z-10"
+                  viewport={{ once: true, amount: 0.12 }}
+                  transition={{ duration: 0.6, ease: EASE }}
                 >
                   <p
-                    className="text-xs font-bold uppercase tracking-widest mb-3"
+                    className="text-[10px] font-bold uppercase tracking-[0.18em] mb-4"
                     style={{ color: s.labelColor }}
                   >
-                    STAGE {stage.number}
+                    Stage {stage.number}
                   </p>
                   <h3
-                    className="font-sora text-2xl lg:text-3xl font-bold mb-3"
+                    className="font-sora text-2xl lg:text-3xl font-bold mb-3 tracking-tight"
                     style={{ color: s.titleColor }}
                   >
                     {stage.title}
                   </h3>
                   <p
-                    className="text-sm mb-6 max-w-[52ch] leading-relaxed"
+                    className="text-sm leading-relaxed max-w-[48ch] mb-6"
                     style={{ color: s.descColor }}
                   >
                     {stage.description}
@@ -185,6 +385,19 @@ export default function WhatsIncluded() {
                     ))}
                   </div>
                 </motion.div>
+
+                {/* RIGHT: Stage visual (desktop only) */}
+                <motion.div
+                  suppressHydrationWarning
+                  initial={reduce ? {} : { opacity: 0, x: 16 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.12 }}
+                  transition={{ duration: 0.55, delay: 0.18, ease: EASE }}
+                  className="hidden lg:block"
+                >
+                  {stageVisuals[i]}
+                </motion.div>
+
               </div>
             </div>
           </div>
