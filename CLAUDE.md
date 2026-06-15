@@ -5,6 +5,26 @@ Read it fully before doing any work, and follow it in every session.
 
 ---
 
+## MANDATORY: Activate skills before any task
+
+Before touching any code, file, or command, activate these skills in order.
+This is non-negotiable — do not write a single line of code before all
+relevant skills are loaded.
+
+1. `frontend-design` — all visual and aesthetic decisions
+2. `design-taste` (DESIGN_VARIANCE:7–8, MOTION_INTENSITY:4–6, VISUAL_DENSITY:2–3)
+   — push design quality beyond defaults. Note: the user may refer to this as
+   "taste-skill" — they are the same skill.
+3. `impeccable` — marketing-site craft and conversion copy quality
+4. `vercel-react-best-practices` — all React/Next.js code decisions
+5. `ui-animation` — motion design (activate when touching animations or transitions)
+
+Invoke each with the Skill tool before proceeding. Skills 1–4 apply to every
+task. Skill 5 applies whenever the task involves animation, transitions, or
+motion.
+
+---
+
 ## What we're building
 
 CareerSwitchKit is a digital product for US career switchers — people applying
