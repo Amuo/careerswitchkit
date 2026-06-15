@@ -95,7 +95,7 @@ function Stage01Visual() {
   return (
     <div>
       <p
-        className="text-[10px] font-bold tracking-[0.2em] uppercase mb-5"
+        className="text-xs font-bold tracking-[0.2em] uppercase mb-5"
         style={{ color: "rgba(55,146,232,0.65)" }}
       >
         Transfer map
@@ -104,7 +104,7 @@ function Stage01Visual() {
         {pairs.map(([from, to], i) => (
           <div key={i} className="flex flex-col gap-0.5">
             <span
-              className="text-[13px]"
+              className="text-sm"
               style={{
                 color: "rgba(7,7,25,0.30)",
                 textDecoration: "line-through",
@@ -114,14 +114,14 @@ function Stage01Visual() {
               {from}
             </span>
             <span
-              className="text-[11px] font-medium"
+              className="text-sm font-medium"
               style={{ color: "#3792E8" }}
               aria-hidden="true"
             >
               ↓
             </span>
             <span
-              className="text-[13px] font-semibold"
+              className="text-sm font-semibold"
               style={{ color: "#070719" }}
             >
               {to}
@@ -142,7 +142,7 @@ function Stage02Visual() {
   return (
     <div>
       <p
-        className="text-[10px] font-bold tracking-[0.2em] uppercase mb-5"
+        className="text-xs font-bold tracking-[0.2em] uppercase mb-5"
         style={{ color: "#185FA5" }}
       >
         Choose your format
@@ -151,13 +151,13 @@ function Stage02Visual() {
         {formats.map(({ name, desc }) => (
           <div key={name} className="flex flex-col gap-0.5">
             <span
-              className="text-[13px] font-bold"
+              className="text-sm font-bold"
               style={{ color: "#042C53" }}
             >
               {name}
             </span>
             <span
-              className="text-[12px] leading-snug"
+              className="text-sm leading-snug"
               style={{ color: "rgba(4,44,83,0.45)" }}
             >
               {desc}
@@ -183,7 +183,7 @@ function Stage03Visual() {
   return (
     <div>
       <p
-        className="text-[10px] font-bold tracking-[0.2em] uppercase mb-4"
+        className="text-xs font-bold tracking-[0.2em] uppercase mb-4"
         style={{ color: "#3792E8" }}
       >
         8 prompt categories
@@ -192,7 +192,7 @@ function Stage03Visual() {
         {categories.map((cat) => (
           <span
             key={cat}
-            className="text-[11px] font-medium px-2.5 py-2 rounded-md text-center"
+            className="text-xs font-medium px-2.5 py-2 rounded-md text-center"
             style={{
               color: "rgba(55,146,232,0.75)",
               background: "rgba(55,146,232,0.07)",
@@ -211,19 +211,19 @@ function Stage04Visual() {
   return (
     <div>
       <p
-        className="text-[10px] font-bold tracking-[0.2em] uppercase mb-5"
+        className="text-xs font-bold tracking-[0.2em] uppercase mb-5"
         style={{ color: "#3792E8" }}
       >
         Completed example
       </p>
       <div className="flex flex-col gap-1.5">
         <span
-          className="text-sm font-semibold"
+          className="text-base font-semibold"
           style={{ color: "rgba(255,255,255,0.50)" }}
         >
           Sara Mehić
         </span>
-        <div className="flex flex-col gap-1.5 mt-2 font-mono text-[13px]">
+        <div className="flex flex-col gap-1.5 mt-2 font-mono text-sm">
           <span
             style={{
               color: "rgba(255,255,255,0.25)",
@@ -234,7 +234,7 @@ function Stage04Visual() {
             Retail Floor Manager
           </span>
           <span
-            className="text-[11px] font-medium"
+            className="text-xs font-medium"
             style={{ color: "rgba(55,146,232,0.65)" }}
             aria-hidden="true"
           >
@@ -296,14 +296,14 @@ export default function WhatsIncluded() {
                     }}
                   >
                     <span
-                      className="font-mono text-[10px] font-bold"
+                      className="font-mono text-xs font-bold"
                       style={{ color: "#3792E8" }}
                     >
                       {stage.number}
                     </span>
                     <span
-                      className="text-[12px] font-medium"
-                      style={{ color: "rgba(255,255,255,0.50)" }}
+                      className="text-sm font-medium"
+                      style={{ color: "rgba(255,255,255,0.55)" }}
                     >
                       {stage.title}
                     </span>
@@ -352,19 +352,19 @@ export default function WhatsIncluded() {
                   transition={{ duration: 0.6, ease: EASE }}
                 >
                   <p
-                    className="text-[10px] font-bold uppercase tracking-[0.18em] mb-4"
+                    className="text-xs font-bold uppercase tracking-[0.18em] mb-4"
                     style={{ color: s.labelColor }}
                   >
                     Stage {stage.number}
                   </p>
                   <h3
-                    className="font-sora text-2xl lg:text-3xl font-bold mb-3 tracking-tight"
+                    className="font-sora text-3xl lg:text-4xl font-bold mb-4 tracking-tight"
                     style={{ color: s.titleColor }}
                   >
                     {stage.title}
                   </h3>
                   <p
-                    className="text-sm leading-relaxed max-w-[48ch] mb-6"
+                    className="text-base leading-relaxed max-w-[48ch] mb-7"
                     style={{ color: s.descColor }}
                   >
                     {stage.description}
@@ -373,7 +373,7 @@ export default function WhatsIncluded() {
                     {stage.files.map((file) => (
                       <span
                         key={file}
-                        className="rounded-full px-4 py-1.5 text-xs font-medium border"
+                        className="rounded-full px-5 py-2 text-sm font-medium border"
                         style={{
                           background: s.pillBg,
                           borderColor: s.pillBorder,
