@@ -24,7 +24,7 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { href: isHome ? "#included" : "/#included", label: "What's Included" },
+    { href: "/preview", label: "Preview" },
     { href: isHome ? "#how-it-works" : "/#how-it-works", label: "How It Works" },
     { href: isHome ? "#faq" : "/#faq", label: "FAQ" },
   ];

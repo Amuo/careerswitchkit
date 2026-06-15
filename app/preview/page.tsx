@@ -11,11 +11,80 @@ export const metadata: Metadata = {
     "See exactly what is inside CareerSwitchKit before you buy. Every stage, every document, before you decide.",
 };
 
+const transferPairs = [
+  ["Retail manager", "Operations coordinator"],
+  ["Customer support", "Project coordinator"],
+  ["Teaching", "Instructional design"],
+];
+
+const promptCategories = [
+  "Foundation",
+  "Resume Build",
+  "ATS Optimization",
+  "Cover Letter",
+  "LinkedIn",
+  "Interview Prep",
+  "Networking",
+  "Final Review",
+];
+
+const stage01Insight = (
+  <div>
+    <p
+      className="font-mono text-[10px] tracking-[0.18em] uppercase mb-3"
+      style={{ color: "rgba(55,146,232,0.50)" }}
+    >
+      Transfer map examples
+    </p>
+    <div className="flex flex-col gap-2.5">
+      {transferPairs.map(([from, to]) => (
+        <div key={from} className="flex items-center gap-2.5 text-sm">
+          <span style={{ color: "rgba(255,255,255,0.22)", textDecoration: "line-through", textDecorationColor: "rgba(255,255,255,0.10)" }}>
+            {from}
+          </span>
+          <span style={{ color: "rgba(55,146,232,0.45)" }} aria-hidden="true">→</span>
+          <span className="font-medium" style={{ color: "rgba(255,255,255,0.72)" }}>
+            {to}
+          </span>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const stage03Insight = (
+  <div>
+    <p
+      className="font-mono text-[10px] tracking-[0.18em] uppercase mb-3"
+      style={{ color: "rgba(55,146,232,0.50)" }}
+    >
+      8 categories
+    </p>
+    <div className="flex flex-wrap gap-1.5">
+      {promptCategories.map((cat) => (
+        <span
+          key={cat}
+          className="text-xs font-medium px-2.5 py-1.5 rounded-md"
+          style={{
+            color: "rgba(55,146,232,0.80)",
+            background: "rgba(55,146,232,0.07)",
+            border: "1px solid rgba(55,146,232,0.14)",
+          }}
+        >
+          {cat}
+        </span>
+      ))}
+    </div>
+  </div>
+);
+
 const stageGroups: StageGroupData[] = [
   {
     number: "01",
     name: "Map your transfer",
-    description: "Understand the full sequence before you write a single word.",
+    description:
+      "Most applicants go straight to the template. That's why they sound generic. Map your background against your target role first, then build.",
+    insight: stage01Insight,
     items: [
       {
         id: "start-here",
@@ -66,7 +135,8 @@ const stageGroups: StageGroupData[] = [
     number: "03",
     name: "Optimize and score",
     description:
-      "Get your application past automated filters before a human reads it.",
+      "Run every application through the system before you submit. Nothing gets filtered out.",
+    insight: stage03Insight,
     items: [
       {
         id: "ai-prompts",
@@ -87,7 +157,8 @@ const stageGroups: StageGroupData[] = [
   {
     number: "04",
     name: "Apply with proof",
-    description: "See the finished product before you build yours.",
+    description:
+      "See every stage applied to a real career switch: Sara Mehić, retail floor manager to operations coordinator. Blank page to submitted application.",
     items: [
       {
         id: "example",

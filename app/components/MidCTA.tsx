@@ -22,13 +22,6 @@ export default function MidCTA() {
         style={{ background: "linear-gradient(to bottom, #ffffff, rgba(7,7,25,0))" }}
         aria-hidden="true"
       />
-      {/* Gradient: fades from this section into WhatsIncluded white below */}
-      <div
-        className="absolute bottom-0 left-0 right-0 h-14 pointer-events-none"
-        style={{ background: "linear-gradient(to top, #ffffff, rgba(7,7,25,0))" }}
-        aria-hidden="true"
-      />
-
       {/* Ambient glow */}
       <div
         className="absolute pointer-events-none"

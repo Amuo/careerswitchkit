@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, type ReactNode } from "react";
 import { motion, useInView, useReducedMotion } from "motion/react";
 import CheckoutButton from "./CheckoutButton";
 
@@ -17,6 +17,7 @@ export type StageGroupData = {
   number: string;
   name: string;
   description: string;
+  insight?: ReactNode;
   items: ItemData[];
 };
 
@@ -202,6 +203,9 @@ function StageSection({ stage }: { stage: StageGroupData }) {
           >
             {stage.description}
           </p>
+        )}
+        {stage.insight && (
+          <div className="mt-6">{stage.insight}</div>
         )}
       </motion.div>
 

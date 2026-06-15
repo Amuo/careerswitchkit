@@ -1,6 +1,5 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import WhatsIncluded from "./components/WhatsIncluded";
 import HowItWorks from "./components/HowItWorks";
 import MidCTA from "./components/MidCTA";
 import Proof from "./components/Proof";
@@ -19,7 +18,6 @@ export default function Home() {
         <Proof />
         <HowItWorks />
         <MidCTA />
-        <WhatsIncluded />
         <Trust />
         <Pricing />
         <FAQ />
