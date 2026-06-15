@@ -89,7 +89,7 @@ export default function HowItWorks() {
   return (
     <section
       id="how-it-works"
-      className="relative bg-[#070719] py-16 lg:py-20 overflow-hidden"
+      className="relative bg-white py-16 lg:py-20 overflow-hidden"
     >
       {/* Noise texture */}
       <div
@@ -103,10 +103,10 @@ export default function HowItWorks() {
           <p className="text-sm font-bold uppercase tracking-widest text-accent mb-3">
             THE PROCESS
           </p>
-          <h2 className="font-sora text-3xl md:text-4xl font-bold text-white tracking-tight">
+          <h2 className="font-sora text-3xl md:text-4xl font-bold text-[#070719] tracking-tight">
             How It Works
           </h2>
-          <p className="mt-3 text-white/50 text-lg max-w-[44ch]">
+          <p className="mt-3 text-gray-500 text-lg max-w-[44ch]">
             Download once. Follow the sequence. Apply with confidence.
           </p>
         </Reveal>
@@ -122,7 +122,7 @@ export default function HowItWorks() {
                 <div
                   className="group relative h-full rounded-2xl p-8 border border-white/10 overflow-hidden transition-all duration-300 hover:border-accent"
                   style={{
-                    background: "rgba(255,255,255,0.04)",
+                    background: "#10102D",
                     minHeight: "280px",
                   }}
                 >

@@ -100,7 +100,8 @@ export default function WhatsIncluded() {
     <section id="included">
 
       {/* Section header — dark navy band */}
-      <div className="bg-[#070719] px-4 sm:px-8 lg:px-16 pt-14 pb-12">
+      <div className="bg-[#070719] pt-14 pb-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Reveal>
           <p className="text-sm font-bold uppercase tracking-widest text-[#3792E8] mb-3">
             THE SYSTEM
@@ -113,6 +114,7 @@ export default function WhatsIncluded() {
             This is the process.
           </p>
         </Reveal>
+        </div>
       </div>
 
       {/* Stage bands */}
@@ -122,7 +124,7 @@ export default function WhatsIncluded() {
           <div key={stage.number}>
               {/* Background band is always visible — motion.div only wraps the content grid */}
               <div
-                className="group relative overflow-hidden px-4 sm:px-8 lg:px-16 py-12"
+                className="group relative overflow-hidden py-12"
                 style={{ background: s.bg }}
               >
                 {/* Left hover accent bar */}
@@ -143,6 +145,9 @@ export default function WhatsIncluded() {
                 >
                   {stage.number}
                 </span>
+
+                {/* Centered content container */}
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* 3-column grid — this is what animates in */}
                 <motion.div
@@ -207,6 +212,7 @@ export default function WhatsIncluded() {
                   </div>
 
                 </motion.div>
+                </div>
               </div>
 
           </div>
