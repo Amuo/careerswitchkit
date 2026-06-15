@@ -8,7 +8,7 @@ const stats = [
 
 export default function Trust() {
   return (
-    <section className="relative bg-[#10102D] pt-24 pb-28">
+    <section className="relative bg-[#10102D] pt-36 pb-20">
       {/* Gradient fade from HowItWorks white into this dark section */}
       <div
         className="absolute top-0 left-0 right-0 h-16 pointer-events-none"
@@ -23,7 +23,7 @@ export default function Trust() {
               <div
                 key={s.label}
                 className={[
-                  "flex flex-col gap-3 items-center text-center",
+                  "flex flex-col gap-3 items-center justify-center text-center",
                   i > 0 ? "md:pl-10 lg:pl-14" : "",
                   i < stats.length - 1 ? "md:pr-10 lg:pr-14" : "",
                 ]
