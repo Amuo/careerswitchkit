@@ -10,7 +10,15 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 const beforeFlaws = ["No keywords", "No metrics", "Too vague"];
 const afterWins = ["Salesforce keyword", "18% metric", "Quantified impact"];
 
-function ATSCounter({ active }: { active: boolean }) {
+function ATSCounter({
+  active,
+  target,
+  startDelay,
+}: {
+  active: boolean;
+  target: number;
+  startDelay: number;
+}) {
   const reduce = useReducedMotion();
   const [count, setCount] = useState(0);
   const started = useRef(false);
@@ -20,11 +28,10 @@ function ATSCounter({ active }: { active: boolean }) {
     started.current = true;
 
     if (reduce) {
-      setCount(87);
+      setCount(target);
       return;
     }
 
-    const target = 87;
     const duration = 1300;
     const timeout = setTimeout(() => {
       const startTime = performance.now();
@@ -36,10 +43,10 @@ function ATSCounter({ active }: { active: boolean }) {
         if (progress < 1) requestAnimationFrame(tick);
       };
       requestAnimationFrame(tick);
-    }, 680);
+    }, startDelay);
 
     return () => clearTimeout(timeout);
-  }, [active, reduce]);
+  }, [active, target, startDelay, reduce]);
 
   return <>{count}</>;
 }
@@ -118,6 +125,34 @@ export default function Proof() {
                   ATS: likely filtered
                 </motion.span>
               </div>
+
+              {/* Live ATS score counter — red */}
+              <motion.div
+                suppressHydrationWarning
+                initial={reduce ? false : { opacity: 0 }}
+                animate={inView ? { opacity: 1 } : {}}
+                transition={{ duration: 0.4, delay: 0.58 }}
+                className="flex items-center gap-4 rounded-xl px-4 py-3"
+                style={{
+                  background: "rgba(239,68,68,0.05)",
+                  border: "1px solid rgba(239,68,68,0.14)",
+                }}
+              >
+                <span
+                  className="font-sora text-[42px] font-black text-red-500 leading-none tabular-nums"
+                  style={{ minWidth: "3ch", textAlign: "right" }}
+                >
+                  <ATSCounter active={inView} target={23} startDelay={600} />
+                </span>
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-xs font-bold text-red-500 uppercase tracking-wide">
+                    ATS Score
+                  </span>
+                  <span className="text-[11px] text-gray-400 leading-snug">
+                    Below the 65-point filter line
+                  </span>
+                </div>
+              </motion.div>
 
               {/* Quote */}
               <blockquote className="font-mono text-[13px] leading-relaxed text-gray-600 border-l-2 border-red-200 pl-4 flex-1">
@@ -284,7 +319,7 @@ export default function Proof() {
                   className="font-sora text-[42px] font-black text-[#3792E8] leading-none tabular-nums"
                   style={{ minWidth: "3ch", textAlign: "right" }}
                 >
-                  <ATSCounter active={inView} />
+                  <ATSCounter active={inView} target={87} startDelay={680} />
                 </span>
                 <div className="flex flex-col gap-0.5">
                   <span className="text-xs font-bold text-[#3792E8] uppercase tracking-wide">
