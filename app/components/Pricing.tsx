@@ -56,8 +56,15 @@ function PriceCounter() {
 
 export default function Pricing() {
   return (
-    <section id="pricing" className="bg-white py-24 lg:py-32">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="pricing" className="relative bg-white py-24 lg:py-32">
+      {/* Gradient fade from Trust dark into white */}
+      <div
+        className="absolute top-0 left-0 right-0 h-20 pointer-events-none"
+        style={{ background: "linear-gradient(to bottom, #10102D, transparent)" }}
+        aria-hidden="true"
+      />
+
+      <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <Reveal className="text-center mb-12">
           <p className="text-sm font-bold uppercase tracking-widest text-accent mb-4">
@@ -150,6 +157,7 @@ export default function Pricing() {
           </div>
         </Reveal>
 
+        </div>
       </div>
     </section>
   );

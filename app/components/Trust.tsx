@@ -23,8 +23,15 @@ const stats = [
 
 export default function Trust() {
   return (
-    <section className="bg-white pt-16 pb-24 border-t border-gray-100">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative bg-[#10102D] pt-16 pb-24">
+      {/* Gradient fade from Proof (#F0F4FA) into this dark section */}
+      <div
+        className="absolute top-0 left-0 right-0 h-16 pointer-events-none"
+        style={{ background: "linear-gradient(to bottom, #F0F4FA, transparent)" }}
+        aria-hidden="true"
+      />
+
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <Reveal className="text-center mb-14">
           <p className="text-sm font-bold uppercase tracking-widest text-accent mb-0">
             Why CareerSwitchKit
@@ -36,14 +43,14 @@ export default function Trust() {
             {stats.map((s) => (
               <div key={s.label} className="flex flex-col items-center gap-2">
                 <span
-                  className="font-sora text-5xl md:text-6xl font-black leading-none text-[#3792E8]/80 whitespace-nowrap"
+                  className="font-sora text-5xl md:text-6xl font-black leading-none text-[#3792E8] whitespace-nowrap"
                 >
                   {s.number}
                 </span>
-                <span className="font-sora text-base font-bold text-[#070719] mt-1">
+                <span className="font-sora text-base font-bold text-white mt-1">
                   {s.label}
                 </span>
-                <p className="text-sm text-gray-400 leading-relaxed max-w-[24ch] mx-auto">
+                <p className="text-sm text-white/45 leading-relaxed max-w-[24ch] mx-auto">
                   {s.explanation}
                 </p>
               </div>
@@ -52,7 +59,7 @@ export default function Trust() {
         </Reveal>
 
         <Reveal delay={0.18}>
-          <p className="mt-14 text-center font-sora text-lg font-semibold text-[#334155] leading-snug max-w-[44ch] mx-auto">
+          <p className="mt-14 text-center font-sora text-lg font-semibold text-white/60 leading-snug max-w-[44ch] mx-auto">
             &ldquo;Built as a system, not assembled as a file pack. Every stage exists for a reason.&rdquo;
           </p>
         </Reveal>
