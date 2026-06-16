@@ -12,10 +12,34 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: "why-career-switchers-get-rejected",
+    title: "Why Career Switchers Keep Getting Rejected Before the Interview",
+    description:
+      "If you're applying for jobs in a new field and hearing nothing back, the problem is almost never your qualifications. Here's what's actually happening — and what to fix first.",
+    date: "June 2026",
+    readTime: "6 min read",
+  },
+  {
     slug: "how-to-write-a-career-change-resume",
     title: "How to Write a Resume When Switching Careers",
     description:
       "Career switchers don't fail because they're unqualified. They fail because their resume doesn't translate their background into the language of the new field. Here's how to fix that.",
+    date: "June 2026",
+    readTime: "6 min read",
+  },
+  {
+    slug: "cover-letter-career-change",
+    title: "How to Write a Cover Letter When Switching Careers",
+    description:
+      "A cover letter for a career switcher isn't a formality. It's the one place you can directly address the gap between where you've been and where you're going. Most people waste it.",
+    date: "June 2026",
+    readTime: "7 min read",
+  },
+  {
+    slug: "transferable-skills-career-change",
+    title: "How to Identify Your Transferable Skills for a Career Change",
+    description:
+      "Most career switchers have more relevant experience than they think. The problem isn't the experience — it's that they can't see it the way a hiring manager in a new field would.",
     date: "June 2026",
     readTime: "6 min read",
   },
@@ -26,6 +50,14 @@ const posts = [
       "Most career switchers get filtered out by Applicant Tracking Systems before a human reads their resume. Here's what ATS actually is and the specific steps to pass it.",
     date: "June 2026",
     readTime: "5 min read",
+  },
+  {
+    slug: "why-are-you-changing-careers-interview",
+    title: "How to Answer \"Why Are You Changing Careers?\" in a Job Interview",
+    description:
+      "Every career switcher gets asked this question. Most give answers that are technically honest but strategically wrong. Here's the structure that turns a liability into a strength.",
+    date: "June 2026",
+    readTime: "7 min read",
   },
 ];
 

@@ -17,10 +17,13 @@ relevant skills are loaded.
    "taste-skill" — they are the same skill.
 3. `impeccable` — marketing-site craft and conversion copy quality
 4. `vercel-react-best-practices` — all React/Next.js code decisions
-5. `ui-animation` — motion design (activate when touching animations or transitions)
+5. `cro` — every layout and copy decision is a conversion decision on a
+   single-product $19 sales page; informs CTA placement, proof hierarchy,
+   section order, and friction reduction
+6. `ui-animation` — motion design (activate when touching animations or transitions)
 
-Invoke each with the Skill tool before proceeding. Skills 1–4 apply to every
-task. Skill 5 applies whenever the task involves animation, transitions, or
+Invoke each with the Skill tool before proceeding. Skills 1–5 apply to every
+task. Skill 6 applies whenever the task involves animation, transitions, or
 motion.
 
 ---
