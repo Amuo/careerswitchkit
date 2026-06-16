@@ -73,7 +73,7 @@ export default function Contact() {
             onClick={handleCheckout}
             className="bg-accent hover:bg-accent-hover text-white font-semibold px-12 py-5 rounded-xl transition-all duration-200 active:scale-[0.98] text-lg hover:shadow-[0_0_40px_rgba(55,146,232,0.35)]"
           >
-            Start the System for $19
+            Get the System for $19
           </button>
         </motion.div>
 

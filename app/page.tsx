@@ -5,6 +5,7 @@ import Proof from "./components/Proof";
 import Trust from "./components/Trust";
 import Pricing from "./components/Pricing";
 import FAQ from "./components/FAQ";
+import EmailCapture from "./components/EmailCapture";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 
@@ -98,6 +99,7 @@ export default function Home() {
         <Trust />
         <Pricing />
         <FAQ />
+        <EmailCapture />
         <Contact />
       </main>
       <Footer />

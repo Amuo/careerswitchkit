@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView, useReducedMotion } from "motion/react";
-import { IconCheck, IconArrowRight } from "@tabler/icons-react";
+import { IconCheck, IconArrowRight, IconShieldCheck, IconBolt, IconLock } from "@tabler/icons-react";
 import { Reveal } from "./Reveal";
 import { handleCheckout } from "@/lib/checkout";
 
@@ -252,22 +252,32 @@ export default function Pricing() {
                 </motion.button>
               </motion.div>
 
-              <motion.p
+              <motion.div
                 suppressHydrationWarning
                 initial={reduce ? false : { opacity: 0 }}
                 animate={inView ? { opacity: 1 } : {}}
                 transition={{ duration: 0.4, delay: 0.64, ease: EASE }}
-                className="mt-4 flex items-center justify-center gap-1.5 text-xs"
-                style={{ color: "rgba(255,255,255,0.32)" }}
+                className="mt-5 flex flex-wrap items-center justify-center gap-3"
               >
-                <IconCheck
-                  size={11}
-                  strokeWidth={2.5}
-                  className="text-accent flex-shrink-0"
-                  aria-hidden="true"
-                />
-                30-day money-back guarantee. Instant download. No account needed.
-              </motion.p>
+                {[
+                  { icon: <IconShieldCheck size={13} strokeWidth={2} aria-hidden="true" />, text: "30-day money-back guarantee" },
+                  { icon: <IconBolt size={13} strokeWidth={2} aria-hidden="true" />, text: "Instant download" },
+                  { icon: <IconLock size={13} strokeWidth={2} aria-hidden="true" />, text: "No account needed" },
+                ].map(({ icon, text }) => (
+                  <div
+                    key={text}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium"
+                    style={{
+                      color: "rgba(255,255,255,0.65)",
+                      background: "rgba(255,255,255,0.05)",
+                      border: "1px solid rgba(255,255,255,0.08)",
+                    }}
+                  >
+                    <span style={{ color: "#3792E8" }}>{icon}</span>
+                    {text}
+                  </div>
+                ))}
+              </motion.div>
             </div>
 
           </motion.div>

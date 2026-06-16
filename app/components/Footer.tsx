@@ -34,6 +34,12 @@ export default function Footer() {
               Contact
             </a>
             <Link
+              href="/blog"
+              className="text-sm text-white/55 hover:text-white transition-colors"
+            >
+              Blog
+            </Link>
+            <Link
               href="/terms"
               className="text-sm text-white/55 hover:text-white transition-colors"
             >
