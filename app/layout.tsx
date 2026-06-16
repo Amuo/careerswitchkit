@@ -61,13 +61,13 @@ export default function RootLayout({
       >
         {children}
         <GoogleAnalytics gaId="G-T395SJKKNW" />
-        {/* Microsoft Clarity — replace CLARITY_PROJECT_ID with your ID from clarity.microsoft.com */}
+        {/* Microsoft Clarity — replace x84g7j2y7p with your ID from clarity.microsoft.com */}
         <Script id="clarity" strategy="afterInteractive">
           {`(function(c,l,a,r,i,t,y){
             c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
             t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
             y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-          })(window,document,"clarity","script","CLARITY_PROJECT_ID");`}
+          })(window,document,"clarity","script","x84g7j2y7p");`}
         </Script>
         {/* Meta Pixel — replace META_PIXEL_ID with your ID from business.facebook.com/events/manager */}
         <Script id="meta-pixel" strategy="afterInteractive">
