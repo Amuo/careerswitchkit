@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import { IconCheck } from "@tabler/icons-react";
 import { handleCheckout } from "@/lib/checkout";
 
@@ -13,8 +13,6 @@ const bullets = [
 ];
 
 export default function Hero() {
-  const reduce = useReducedMotion();
-
   return (
     <section className="relative bg-[#070719] min-h-screen flex items-center overflow-hidden">
       {/* Noise texture */}
@@ -24,7 +22,7 @@ export default function Hero() {
         aria-hidden="true"
       />
 
-      {/* Single ambient glow — radial gradient, no blur filter needed */}
+      {/* Single ambient glow */}
       <motion.div
         aria-hidden="true"
         className="absolute pointer-events-none"
@@ -36,11 +34,11 @@ export default function Hero() {
           top: "-280px",
           left: "-320px",
         }}
-        animate={reduce ? {} : { x: [0, 55, 0], y: [0, -35, 0] }}
+        animate={{ x: [0, 55, 0], y: [0, -35, 0] }}
         transition={{ duration: 14, ease: "easeInOut", repeat: Infinity }}
       />
 
-      {/* Subtle right-side glow to frame the visual */}
+      {/* Subtle right-side glow */}
       <motion.div
         aria-hidden="true"
         className="absolute pointer-events-none"
@@ -52,7 +50,7 @@ export default function Hero() {
           top: "10%",
           right: "-120px",
         }}
-        animate={reduce ? {} : { y: [0, -20, 0] }}
+        animate={{ y: [0, -20, 0] }}
         transition={{ duration: 18, ease: "easeInOut", repeat: Infinity }}
       />
 
@@ -62,10 +60,10 @@ export default function Hero() {
           {/* ── LEFT COLUMN ── */}
           <div className="flex flex-col gap-7">
 
-            {/* HEADLINE — dominant, locked copy */}
+            {/* HEADLINE */}
             <motion.h1
               suppressHydrationWarning
-              initial={reduce ? false : { opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.72, delay: 0.08, ease: EASE }}
               className="font-sora font-black text-5xl sm:text-6xl lg:text-7xl leading-[1.04] tracking-tight text-white text-balance"
@@ -77,7 +75,7 @@ export default function Hero() {
             {/* SUBHEADLINE */}
             <motion.p
               suppressHydrationWarning
-              initial={reduce ? false : { opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3, ease: EASE }}
               className="text-xl md:text-2xl leading-relaxed max-w-lg"
@@ -95,7 +93,7 @@ export default function Hero() {
                 <motion.li
                   key={b}
                   suppressHydrationWarning
-                  initial={reduce ? false : { opacity: 0, x: -16 }}
+                  initial={{ opacity: 0, x: -16 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{
                     duration: 0.5,
@@ -124,7 +122,7 @@ export default function Hero() {
             {/* BUTTONS */}
             <motion.div
               suppressHydrationWarning
-              initial={reduce ? false : { opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.76, ease: EASE }}
               className="flex flex-wrap gap-3 mt-2"
@@ -133,16 +131,12 @@ export default function Hero() {
               <motion.button
                 suppressHydrationWarning
                 onClick={handleCheckout}
-                whileHover={
-                  reduce
-                    ? {}
-                    : {
-                        scale: 1.02,
-                        backgroundColor: "#6EB0EE",
-                        boxShadow: "0 0 64px rgba(55,146,232,0.65)",
-                      }
-                }
-                whileTap={reduce ? {} : { scale: 0.975 }}
+                whileHover={{
+                  scale: 1.02,
+                  backgroundColor: "#6EB0EE",
+                  boxShadow: "0 0 64px rgba(55,146,232,0.65)",
+                }}
+                whileTap={{ scale: 0.975 }}
                 transition={{
                   scale: { duration: 0.18 },
                   backgroundColor: { duration: 0.2 },
@@ -162,14 +156,10 @@ export default function Hero() {
               <motion.a
                 suppressHydrationWarning
                 href="#included"
-                whileHover={
-                  reduce
-                    ? {}
-                    : {
-                        borderColor: "rgba(255,255,255,0.38)",
-                        color: "rgba(255,255,255,0.95)",
-                      }
-                }
+                whileHover={{
+                  borderColor: "rgba(255,255,255,0.38)",
+                  color: "rgba(255,255,255,0.95)",
+                }}
                 transition={{ duration: 0.2 }}
                 className="flex items-center px-8 py-4 rounded-xl text-base font-medium"
                 style={{
@@ -187,7 +177,7 @@ export default function Hero() {
           {/* ── RIGHT COLUMN: Translation card ── */}
           <motion.div
             suppressHydrationWarning
-            initial={reduce ? false : { opacity: 0, y: 36 }}
+            initial={{ opacity: 0, y: 36 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.42, ease: EASE }}
             className="hidden lg:block"
@@ -196,7 +186,7 @@ export default function Hero() {
             {/* Subtle floating */}
             <motion.div
               suppressHydrationWarning
-              animate={reduce ? {} : { y: [0, -7, 0] }}
+              animate={{ y: [0, -7, 0] }}
               transition={{ duration: 6.5, ease: "easeInOut", repeat: Infinity }}
             >
               <div
@@ -277,10 +267,10 @@ export default function Hero() {
                   />
                 </div>
 
-                {/* AFTER block — fades in with delay to show the transformation */}
+                {/* AFTER block */}
                 <motion.div
                   suppressHydrationWarning
-                  initial={reduce ? false : { opacity: 0, y: 8 }}
+                  initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, delay: 1.2, ease: EASE }}
                 >
@@ -298,10 +288,10 @@ export default function Hero() {
                   </p>
                 </motion.div>
 
-                {/* ATS score — appears last */}
+                {/* ATS score */}
                 <motion.div
                   suppressHydrationWarning
-                  initial={reduce ? false : { opacity: 0, scale: 0.92 }}
+                  initial={{ opacity: 0, scale: 0.92 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.45, delay: 1.55, ease: EASE }}
                   className="flex items-center justify-between pt-4"

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Sora, DM_Sans } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import Script from "next/script";
+import MotionProvider from "@/app/components/MotionProvider";
 import "@/app/globals.css";
 
 const sora = Sora({
@@ -59,7 +60,7 @@ export default function RootLayout({
       <body
         className={`${sora.variable} ${dmSans.variable} font-sans antialiased`}
       >
-        {children}
+        <MotionProvider>{children}</MotionProvider>
         <GoogleAnalytics gaId="G-T395SJKKNW" />
         {/* Microsoft Clarity — replace x84g7j2y7p with your ID from clarity.microsoft.com */}
         <Script id="clarity" strategy="afterInteractive">

@@ -48,6 +48,12 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16">
             <Link
               href="/"
+              onClick={(e) => {
+                if (isHome) {
+                  e.preventDefault();
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }
+              }}
               className="font-sora font-bold text-[17px] text-white tracking-tight"
             >
               Career
