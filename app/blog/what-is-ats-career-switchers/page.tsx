@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { handleCheckout } from "@/lib/checkout";
+import BlogCTA from "@/app/blog/BlogCTA";
 
 export const metadata: Metadata = {
   title: "What Is ATS and Why Career Switchers Fail It | CareerSwitchKit",
@@ -237,39 +237,10 @@ export default function Post() {
           </p>
         </div>
 
-        {/* CTA */}
-        <div
-          className="mt-16 rounded-2xl p-8 text-center"
-          style={{
-            background: "linear-gradient(150deg, #10102D 0%, #070719 100%)",
-            border: "1.5px solid rgba(55,146,232,0.24)",
-          }}
-        >
-          <p
-            className="font-mono text-[10px] tracking-[0.18em] uppercase mb-3"
-            style={{ color: "#3792E8" }}
-          >
-            CareerSwitchKit
-          </p>
-          <h3 className="font-sora text-xl font-bold text-white tracking-tight mb-3">
-            Stage 3 is built specifically to clear ATS.
-          </h3>
-          <p className="text-sm mb-6" style={{ color: "rgba(255,255,255,0.45)" }}>
-            50 AI prompts for keyword extraction and rewriting, plus an ATS
-            Keyword Checklist spreadsheet you reuse for every application.
-            $19, instant download.
-          </p>
-          <button
-            onClick={handleCheckout}
-            className="inline-flex items-center gap-2 text-white font-bold px-7 py-3.5 rounded-xl text-sm transition-all duration-200 hover:scale-[1.02]"
-            style={{ background: "#3792E8", boxShadow: "0 0 28px rgba(55,146,232,0.35)" }}
-          >
-            Get the System for $19
-          </button>
-          <p className="mt-3 text-xs" style={{ color: "rgba(255,255,255,0.28)" }}>
-            30-day money-back guarantee
-          </p>
-        </div>
+        <BlogCTA
+          heading="Stage 3 is built specifically to clear ATS."
+          body="50 AI prompts for keyword extraction and rewriting, plus an ATS Keyword Checklist spreadsheet you reuse for every application. $19, instant download."
+        />
 
         {/* Related */}
         <div className="mt-12 pt-10" style={{ borderTop: "1px solid #E5E7EB" }}>
