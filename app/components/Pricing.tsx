@@ -247,7 +247,7 @@ export default function Pricing() {
                   style={{ background: "#3792E8" }}
                   aria-label="Download CareerSwitchKit for $19"
                 >
-                  Download the System for $19
+                  Get the System for $19
                   <IconArrowRight size={18} strokeWidth={2.5} aria-hidden="true" />
                 </motion.button>
               </motion.div>
