@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
+import TermsBackground from "@/app/components/TermsBackground";
 import {
   Scale,
   Building2,
@@ -27,33 +28,10 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <div className="relative min-h-screen text-white">
-      {/* Base dark background — must be below video */}
-      <div className="fixed inset-0 -z-30 bg-[#070719]" />
+      {/* Video + overlays portaled to document.body to escape motion.div stacking context */}
+      <TermsBackground />
 
-      {/* Fixed background video */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="fixed inset-0 w-full h-full object-cover -z-20 opacity-50 pointer-events-none"
-      >
-        <source
-          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_064122_c4750c0e-7476-4b44-94a2-a85a65c63bf2.mp4"
-          type="video/mp4"
-        />
-      </video>
-
-      {/* Radial vignette — darkens edges over the video */}
-      <div
-        className="fixed inset-0 -z-10 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(circle at 50% 50%, transparent 0%, #070719 80%)",
-        }}
-      />
-
-      {/* Noise overlay */}
+      {/* Noise overlay — inside page is fine, it's decorative only */}
       <div className="fixed inset-0 z-50 pointer-events-none noise-overlay" />
 
       <Navbar />
