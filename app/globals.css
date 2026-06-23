@@ -16,7 +16,6 @@
   body {
     @apply antialiased;
     font-family: 'DM Sans', sans-serif;
-    background-color: #070719;
     color: #e2e0fa;
   }
 }
@@ -36,6 +35,7 @@
 /* Smooth scroll + section offset for sticky nav */
 html {
   scroll-behavior: smooth;
+  background-color: #070719;
 }
 
 section[id] {
