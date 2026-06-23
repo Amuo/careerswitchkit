@@ -15,21 +15,6 @@ const bullets = [
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      <style>{`
-        @keyframes hero-sweep {
-          0%   { background-position-x: 200%; }
-          100% { background-position-x: 0%; }
-        }
-        .hero-sweep {
-          display: inline-block;
-          background-image: linear-gradient(to right, #3792E8 0%, #ffffff 35%, #3792E8 65%, #ffffff 100%);
-          background-size: 200% auto;
-          -webkit-background-clip: text;
-          background-clip: text;
-          -webkit-text-fill-color: transparent;
-          animation: hero-sweep 3s linear infinite;
-        }
-      `}</style>
       {/* Noise texture */}
       <div
         className="absolute inset-0 noise-texture pointer-events-none select-none"
@@ -101,7 +86,7 @@ export default function Hero() {
               className="font-sora font-black text-5xl sm:text-6xl lg:text-7xl leading-[1.04] tracking-tight text-white text-balance"
             >
               Your background isn&apos;t the problem.{" "}
-              <span className="hero-sweep">Your resume is.</span>
+              <span className="shiny-text">Your resume is.</span>
             </motion.h1>
 
             {/* SUBHEADLINE */}
