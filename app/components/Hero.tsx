@@ -1,7 +1,6 @@
 "use client";
 
-import { motion, useMotionValue, useTransform, animate } from "motion/react";
-import { useEffect } from "react";
+import { motion } from "motion/react";
 import { IconCheck } from "@tabler/icons-react";
 import { handleCheckout } from "@/lib/checkout";
 
@@ -14,15 +13,23 @@ const bullets = [
 ];
 
 export default function Hero() {
-  const bgX = useMotionValue(200);
-  const backgroundPositionX = useTransform(bgX, v => `${v}%`);
-  useEffect(() => {
-    const controls = animate(bgX, 0, { duration: 3, ease: "linear", repeat: Infinity });
-    return controls.stop;
-  }, [bgX]);
-
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
+      <style>{`
+        @keyframes hero-sweep {
+          0%   { background-position-x: 200%; }
+          100% { background-position-x: 0%; }
+        }
+        .hero-sweep {
+          display: inline-block;
+          background-image: linear-gradient(to right, #3792E8 0%, #ffffff 35%, #3792E8 65%, #ffffff 100%);
+          background-size: 200% auto;
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          animation: hero-sweep 3s linear infinite;
+        }
+      `}</style>
       {/* Noise texture */}
       <div
         className="absolute inset-0 noise-texture pointer-events-none select-none"
@@ -94,17 +101,7 @@ export default function Hero() {
               className="font-sora font-black text-5xl sm:text-6xl lg:text-7xl leading-[1.04] tracking-tight text-white text-balance"
             >
               Your background isn&apos;t the problem.{" "}
-              <motion.span
-                style={{
-                  display: "inline-block",
-                  backgroundImage: "linear-gradient(to right, #3792E8 0%, #ffffff 35%, #3792E8 65%, #ffffff 100%)",
-                  backgroundSize: "200% auto",
-                  backgroundPositionX,
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >Your resume is.</motion.span>
+              <span className="hero-sweep">Your resume is.</span>
             </motion.h1>
 
             {/* SUBHEADLINE */}
