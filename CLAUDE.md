@@ -20,11 +20,14 @@ relevant skills are loaded.
 5. `cro` — every layout and copy decision is a conversion decision on a
    single-product $19 sales page; informs CTA placement, proof hierarchy,
    section order, and friction reduction
-6. `ui-animation` — motion design (activate when touching animations or transitions)
+6. `ui-animation` — motion design; always activate for any task touching
+   animations, transitions, or interactive states
+7. `ui-ux-pro-max` — UI/UX quality control across accessibility, interaction,
+   layout, typography, animation, and forms; always activate for any visual
+   or design task
 
-Invoke each with the Skill tool before proceeding. Skills 1–5 apply to every
-task. Skill 6 applies whenever the task involves animation, transitions, or
-motion.
+Invoke each with the Skill tool before proceeding. Skills 1–7 apply to every
+design task. Never skip any of them.
 
 ---
 
