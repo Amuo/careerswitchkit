@@ -65,10 +65,12 @@ export default function RootLayout({
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" />
       </head>
       <body
-        className={`${sora.variable} ${dmSans.variable} font-sans antialiased stitch-anim-fade-in`}
+        className={`${sora.variable} ${dmSans.variable} font-sans antialiased`}
       >
         <LandingBackground />
-        <MotionProvider>{children}</MotionProvider>
+        <div className="stitch-anim-fade-in">
+          <MotionProvider>{children}</MotionProvider>
+        </div>
         <GoogleAnalytics gaId="G-T395SJKKNW" />
         {/* Microsoft Clarity — replace x84g7j2y7p with your ID from clarity.microsoft.com */}
         <Script id="clarity" strategy="afterInteractive">
