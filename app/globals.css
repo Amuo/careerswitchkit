@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=DM+Sans:wght@400;500;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -13,7 +14,11 @@
 
 @layer base {
   body {
-    @apply bg-white text-gray-900;
+    @apply antialiased;
+    font-family: 'DM Sans', sans-serif;
+    background-color: #070719;
+    color: #e2e0fa;
+    overflow-x: hidden;
   }
 }
 
@@ -103,36 +108,11 @@ section[id] {
 
 /* Liquid glass card */
 .liquid-glass {
-  position: relative;
-  background: rgba(15, 15, 41, 0.4);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-radius: 24px;
-  box-shadow:
-    inset 0 1px 1px rgba(255, 255, 255, 0.1),
-    inset 0 0 20px rgba(255, 255, 255, 0.02),
-    0 4px 24px rgba(0, 0, 0, 0.5);
-}
-
-.liquid-glass::before {
-  content: '';
-  position: absolute;
-  inset: -1.4px;
-  border-radius: inherit;
-  padding: 1.4px;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.15) 0%,
-    rgba(255, 255, 255, 0.02) 20%,
-    rgba(255, 255, 255, 0.0) 50%,
-    rgba(255, 255, 255, 0.02) 80%,
-    rgba(255, 255, 255, 0.08) 100%
-  );
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  z-index: -1;
-  pointer-events: none;
+  background: rgba(26, 26, 45, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
 }
 
 /* Section eyebrow pill */
@@ -255,3 +235,93 @@ section[id] {
 }
 .guide-left { left: calc(50% - 36rem); }
 .guide-right { right: calc(50% - 36rem); }
+
+/* Geist headings */
+h1, h2, h3, h4, .font-geist {
+  font-family: 'Geist', sans-serif;
+}
+
+/* Sidebar active state for SystemDashboard */
+.sidebar-item.active {
+  background: rgba(160, 201, 255, 0.15);
+  color: #ffffff;
+}
+.sidebar-item.active .material-symbols-outlined {
+  color: #a0c9ff;
+}
+
+/* File item active state */
+.file-item.active {
+  background: rgba(255, 255, 255, 0.05);
+}
+.file-item.active .file-indicator {
+  background-color: #a0c9ff;
+}
+.file-item.active .file-icon {
+  color: #a0c9ff;
+}
+.file-item.active .file-text {
+  color: #ffffff;
+}
+
+/* Tab content visibility */
+.tab-content {
+  display: none;
+}
+.tab-content.active {
+  display: flex;
+  animation: fadeIn 0.4s ease-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* FAQ accordion */
+.faq-item-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease-out;
+}
+.faq-item-content > div {
+  overflow: hidden;
+}
+.faq-item.active .faq-item-content {
+  grid-template-rows: 1fr;
+}
+.faq-item.active {
+  border-color: rgba(160, 201, 255, 0.3);
+  background: rgba(160, 201, 255, 0.05);
+}
+.faq-item.active h4 {
+  color: #a0c9ff;
+}
+.faq-icon {
+  transition: transform 0.3s ease-out;
+}
+.faq-item.active .faq-icon {
+  transform: rotate(180deg);
+}
+
+/* Fade-up scroll animation */
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Traffic lights */
+.traffic-light {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
