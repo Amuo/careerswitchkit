@@ -86,7 +86,15 @@ export default function Hero() {
               className="font-sora font-black text-5xl sm:text-6xl lg:text-7xl leading-[1.04] tracking-tight text-white text-balance"
             >
               Your background isn&apos;t the problem.{" "}
-              <span className="hero-gradient-text">Your resume is.</span>
+              <span style={{
+                display: "inline-block",
+                background: "linear-gradient(to right, #3792E8 0%, #ffffff 35%, #3792E8 65%, #ffffff 100%)",
+                backgroundSize: "200% auto",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                color: "transparent",
+                animation: "shine-rtl 3s linear infinite",
+              }}>Your resume is.</span>
             </motion.h1>
 
             {/* SUBHEADLINE */}
