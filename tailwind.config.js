@@ -15,6 +15,15 @@ module.exports = {
         "accent-hover": "#6EB0EE",
         "dark-base": "#070719",
         "dark-secondary": "#10102D",
+        "brand-bg": "#070719",
+        "brand-surface": "#111124",
+        "brand-primary": "#a0c9ff",
+        "brand-on-primary": "#003259",
+        "brand-accent": "#3792E8",
+        "brand-surface-variant": "#333347",
+        "brand-on-surface": "#e2e0fa",
+        "brand-on-surface-variant": "#c0c7d3",
+        "brand-container-low": "#1a1a2d",
       },
       keyframes: {
         "accordion-down": {
