@@ -17,6 +17,7 @@
     @apply antialiased;
     font-family: 'DM Sans', sans-serif;
     color: #e2e0fa;
+    position: relative;
   }
 }
 
