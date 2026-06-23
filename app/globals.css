@@ -116,15 +116,15 @@ section[id] {
   pointer-events: none;
   -webkit-mask-image: linear-gradient(
     to right,
-    transparent calc(var(--sweep) - 30%),
+    transparent calc(var(--sweep) - 55%),
     black var(--sweep),
-    transparent calc(var(--sweep) + 30%)
+    transparent calc(var(--sweep) + 55%)
   );
   mask-image: linear-gradient(
     to right,
-    transparent calc(var(--sweep) - 30%),
+    transparent calc(var(--sweep) - 55%),
     black var(--sweep),
-    transparent calc(var(--sweep) + 30%)
+    transparent calc(var(--sweep) + 55%)
   );
   animation: text-sweep 3s linear infinite;
 }
