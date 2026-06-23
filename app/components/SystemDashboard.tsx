@@ -38,10 +38,10 @@ const STAGES: StageConfig[] = [
     icon: "construction",
     label: "Stage 2 — Build your materials",
     status: "Constructing Narrative",
-    defaultFile: "CV Template Library",
+    defaultFile: "One Page CV Template",
     defaultView: "one-page",
     files: [
-      { name: "CV Template Library",   description: "ATS-optimized high-impact layout.", icon: "article",      view: "one-page" },
+      { name: "One Page CV Template",   description: "ATS-optimized high-impact layout.", icon: "article",      view: "one-page" },
       { name: "Hybrid CV Template",    description: "For unconventional pivots.",        icon: "history_edu",  view: "hybrid"   },
       { name: "Two-Page CV Template",  description: "For extensive experience.",         icon: "description",  view: "two-page" },
     ],
@@ -159,7 +159,9 @@ function Stage02Content({ view }: { view: string }) {
       {view === "one-page" && (
         <div className="flex-1 flex items-center justify-center p-8 bg-[#0a0a16] rounded-2xl border border-white/10 relative overflow-hidden">
           <div className="absolute inset-0" style={GRID_BG} />
-          <div className="cv-wireframe w-[340px] h-[480px] rounded-lg p-6 flex flex-col gap-4 relative z-10 bg-black/40 backdrop-blur-sm">
+          {/* Wrapper centers wireframe+tooltip as a unit */}
+          <div className="relative flex items-center z-10">
+          <div className="cv-wireframe w-[340px] h-[480px] rounded-lg p-6 flex flex-col gap-4 bg-black/40 backdrop-blur-sm">
             <div className="flex flex-col items-center gap-2 border-b border-white/10 pb-4">
               <div className="w-32 h-4 bg-primary/40 rounded-full" />
               <div className="w-48 h-2 bg-white/20 rounded-full" />
@@ -191,14 +193,15 @@ function Stage02Content({ view }: { view: string }) {
               </div>
             </div>
           </div>
-          {/* Floating tooltip */}
-          <div className="absolute right-12 top-1/2 -translate-y-1/2 w-48 p-4 liquid-glass rounded-xl border border-primary/20 shadow-2xl z-20">
+          {/* Floating tooltip — inline sibling, not absolute, so both center together */}
+          <div className="ml-4 w-48 p-4 liquid-glass rounded-xl border border-primary/20 shadow-2xl shrink-0">
             <div className="flex items-center gap-2 mb-2" style={{ color: "#a0c9ff" }}>
               <span className="material-symbols-outlined text-sm">view_agenda</span>
               <span className="text-xs font-bold uppercase tracking-widest">One-Page Focus</span>
             </div>
             <p className="text-[11px] text-white/70 leading-relaxed">Aggressive curation. Highlights only the most relevant transferrable skills for rapid ATS scanning.</p>
           </div>
+          </div>{/* end wrapper */}
         </div>
       )}
 
@@ -206,7 +209,8 @@ function Stage02Content({ view }: { view: string }) {
       {view === "hybrid" && (
         <div className="flex-1 flex items-center justify-center p-8 bg-[#0a0a16] rounded-2xl border border-white/10 relative overflow-hidden">
           <div className="absolute inset-0" style={GRID_BG} />
-          <div className="cv-wireframe w-[400px] h-[480px] rounded-lg p-6 grid gap-6 relative z-10 bg-black/40 backdrop-blur-sm" style={{ gridTemplateColumns: "1fr 2fr" }}>
+          <div className="relative flex items-center z-10">
+          <div className="cv-wireframe w-[400px] h-[480px] rounded-lg p-6 grid gap-6 bg-black/40 backdrop-blur-sm" style={{ gridTemplateColumns: "1fr 2fr" }}>
             {/* Sidebar column */}
             <div className="flex flex-col gap-4 border-r border-white/10 pr-4">
               <div className="w-16 h-16 rounded-full bg-white/10 mx-auto mb-2" />
@@ -238,14 +242,14 @@ function Stage02Content({ view }: { view: string }) {
               </div>
             </div>
           </div>
-          {/* Floating tooltip */}
-          <div className="absolute right-12 top-1/2 -translate-y-1/2 w-48 p-4 liquid-glass rounded-xl border border-primary/20 shadow-2xl z-20">
+          <div className="ml-4 w-48 p-4 liquid-glass rounded-xl border border-primary/20 shadow-2xl shrink-0">
             <div className="flex items-center gap-2 mb-2" style={{ color: "#a0c9ff" }}>
               <span className="material-symbols-outlined text-sm">dashboard</span>
               <span className="text-xs font-bold uppercase tracking-widest">Hybrid Layout</span>
             </div>
             <p className="text-[11px] text-white/70 leading-relaxed">Balances skills-first sidebar with chronological narrative. Best for major career shifts.</p>
           </div>
+          </div>{/* end wrapper */}
         </div>
       )}
 
@@ -514,14 +518,14 @@ export default function SystemDashboard() {
                 <button
                   key={stage.id}
                   onClick={() => switchStage(stage.id)}
-                  className={`sidebar-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all ${
+                  className={`sidebar-item w-full flex items-center gap-3 px-3 py-3 rounded-lg transition-all ${
                     isActive ? "active" : "text-white/60 hover:text-white hover:bg-white/5"
                   }`}
                 >
-                  <span className="material-symbols-outlined" style={{ fontSize: 18, fontVariationSettings: isActive ? "'FILL' 1" : "'FILL' 0", color: isActive ? "#a0c9ff" : undefined }}>
+                  <span className="material-symbols-outlined" style={{ fontSize: 20, fontVariationSettings: isActive ? "'FILL' 1" : "'FILL' 0", color: isActive ? "#a0c9ff" : undefined }}>
                     {stage.icon}
                   </span>
-                  <span className="text-[12px] font-medium leading-tight">{stage.label}</span>
+                  <span className="text-sm font-semibold leading-tight">{stage.label}</span>
                 </button>
               );
             })}
