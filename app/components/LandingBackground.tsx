@@ -9,27 +9,15 @@ const FADE_DURATION = 0.8;
 export default function LandingBackground() {
   const [mounted, setMounted] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const scrollYRef = useRef(0);
 
   useEffect(() => { setMounted(true); }, []);
 
-  // Track scroll position without triggering re-renders
-  useEffect(() => {
-    if (!mounted) return;
-    const onScroll = () => { scrollYRef.current = window.scrollY; };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [mounted]);
-
-  // Single rAF loop: handles opacity fade AND parallax objectPosition
+  // Smooth opacity fade at loop boundary (keeps the nice seamless loop)
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-
     let raf: number;
-
     const tick = () => {
-      // Opacity: fade out near loop boundary
       if (video.duration) {
         const remaining = video.duration - video.currentTime;
         let opacity = VIDEO_OPACITY;
@@ -40,36 +28,30 @@ export default function LandingBackground() {
         }
         video.style.opacity = String(opacity);
       }
-
-      // Parallax: pan objectPosition from top (0%) to bottom (100%) as page scrolls
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      if (maxScroll > 0) {
-        const progress = Math.min(scrollYRef.current / maxScroll, 1);
-        video.style.objectPosition = `center ${progress * 100}%`;
-      }
-
       raf = requestAnimationFrame(tick);
     };
-
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, [mounted]);
 
   if (!mounted) return null;
 
+  // Matches Stitch exactly: fixed wrapper with overflow:hidden, video absolute inside
   return createPortal(
-    <>
-      <div style={{
-        position: "fixed", inset: 0, zIndex: -30,
-        backgroundColor: "#070719", pointerEvents: "none",
-      }} />
+    <div style={{
+      position: "fixed", inset: 0, zIndex: -1,
+      overflow: "hidden", pointerEvents: "none",
+    }}>
       <video
         ref={videoRef}
         autoPlay muted loop playsInline
         style={{
-          position: "fixed", inset: 0, width: "100%", height: "100%",
-          objectFit: "cover", objectPosition: "center 0%",
-          zIndex: -20, opacity: 0, pointerEvents: "none",
+          position: "absolute",
+          top: 0, left: 0,
+          minWidth: "100%", minHeight: "100%",
+          objectFit: "cover",
+          opacity: 0,
+          pointerEvents: "none",
         }}
       >
         <source
@@ -77,11 +59,7 @@ export default function LandingBackground() {
           type="video/mp4"
         />
       </video>
-      <div style={{
-        position: "fixed", inset: 0, zIndex: -10, pointerEvents: "none",
-        background: "linear-gradient(to bottom, rgba(7,7,25,0.9) 0%, transparent 50%, rgba(7,7,25,1) 100%)",
-      }} />
-    </>,
+    </div>,
     document.body
   );
 }
