@@ -130,12 +130,18 @@ section[id] {
 }
 
 .shiny-text {
-  background: linear-gradient(120deg, #3792E8 0%, #ffffff 50%, #3792E8 100%);
+  background: linear-gradient(to right, #3792E8 0%, #ffffff 40%, #3792E8 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
+  animation: shine-rtl 3s linear infinite;
+}
+
+@keyframes shine-rtl {
+  from { background-position: 200% center; }
+  to   { background-position: 0% center; }
 }
 
 /* Liquid glass card */
