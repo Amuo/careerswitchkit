@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 const VIDEO_OPACITY = 0.5;
-const FADE_DURATION = 1.5; // seconds to fade out before loop / fade in after
+const FADE_DURATION = 0.8; // seconds to fade out before loop / fade in after
 
 export default function TermsBackground() {
   const [mounted, setMounted] = useState(false);
@@ -16,24 +16,24 @@ export default function TermsBackground() {
     const video = videoRef.current;
     if (!video) return;
 
-    const handleTimeUpdate = () => {
-      if (!video.duration) return;
-      const remaining = video.duration - video.currentTime;
+    let raf: number;
 
-      let opacity = VIDEO_OPACITY;
-      if (remaining < FADE_DURATION) {
-        // Fading out toward end
-        opacity = (remaining / FADE_DURATION) * VIDEO_OPACITY;
-      } else if (video.currentTime < FADE_DURATION) {
-        // Fading in from start
-        opacity = (video.currentTime / FADE_DURATION) * VIDEO_OPACITY;
+    const tick = () => {
+      if (video.duration) {
+        const remaining = video.duration - video.currentTime;
+        let opacity = VIDEO_OPACITY;
+        if (remaining < FADE_DURATION) {
+          opacity = (remaining / FADE_DURATION) * VIDEO_OPACITY;
+        } else if (video.currentTime < FADE_DURATION) {
+          opacity = (video.currentTime / FADE_DURATION) * VIDEO_OPACITY;
+        }
+        video.style.opacity = String(opacity);
       }
-
-      video.style.opacity = String(opacity);
+      raf = requestAnimationFrame(tick);
     };
 
-    video.addEventListener("timeupdate", handleTimeUpdate);
-    return () => video.removeEventListener("timeupdate", handleTimeUpdate);
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
   }, [mounted]);
 
   if (!mounted) return null;
