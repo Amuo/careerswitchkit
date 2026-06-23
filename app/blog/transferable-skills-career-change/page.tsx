@@ -255,7 +255,7 @@ export default function Post() {
 
         <BlogCTA
           heading="Stage 1 of the system does this mapping for you."
-          body="The START HERE document walks you through a structured process to identify, translate, and position your existing experience for a new field. $19, instant download."
+          body="The START HERE document walks you through a structured process to identify, translate, and position your existing experience for a new field. $37, instant download."
         />
 
         {/* Related */}

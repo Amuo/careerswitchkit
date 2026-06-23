@@ -239,7 +239,7 @@ export default function Post() {
 
         <BlogCTA
           heading="Stage 3 is built specifically to clear ATS."
-          body="50 AI prompts for keyword extraction and rewriting, plus an ATS Keyword Checklist spreadsheet you reuse for every application. $19, instant download."
+          body="50 AI prompts for keyword extraction and rewriting, plus an ATS Keyword Checklist spreadsheet you reuse for every application. $37, instant download."
         />
 
         {/* Related */}

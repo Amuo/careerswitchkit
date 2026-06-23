@@ -223,7 +223,7 @@ export default function Post() {
 
         <BlogCTA
           heading="The 4-stage system that does the translation work for you."
-          body="Stage 1 maps your background. Stage 2 gives you the templates. Stage 3 scores your resume before you submit. $19, instant download."
+          body="Stage 1 maps your background. Stage 2 gives you the templates. Stage 3 scores your resume before you submit. $37, instant download."
         />
 
         {/* Related */}

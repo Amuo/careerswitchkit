@@ -118,7 +118,7 @@ export default function FinalCTA() {
                   "linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)",
               }}
             />
-            <span className="relative z-10">Claim Lifetime Access — $19</span>
+            <span className="relative z-10">Claim Lifetime Access — $37</span>
           </button>
 
           {/* Reassurance strip */}

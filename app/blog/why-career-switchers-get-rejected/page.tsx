@@ -216,7 +216,7 @@ export default function Post() {
 
         <BlogCTA
           heading="The system that fixes all four problems at once."
-          body="The CareerSwitchKit walks you through the translation work, gives you the right resume format for career switchers, and scores your application before you submit. $19, instant download."
+          body="The CareerSwitchKit walks you through the translation work, gives you the right resume format for career switchers, and scores your application before you submit. $37, instant download."
         />
 
         {/* Related */}

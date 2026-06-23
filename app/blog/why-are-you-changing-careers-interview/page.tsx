@@ -268,7 +268,7 @@ export default function Post() {
 
         <BlogCTA
           heading="The system that prepares you for this question — on paper first."
-          body="Before you get to the interview, your resume and cover letter have to make the case. Stage 2 and Stage 4 of the system give you the materials and the proof to back it up. $19, instant download."
+          body="Before you get to the interview, your resume and cover letter have to make the case. Stage 2 and Stage 4 of the system give you the materials and the proof to back it up. $37, instant download."
         />
 
         {/* Related */}

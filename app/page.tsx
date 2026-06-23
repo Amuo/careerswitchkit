@@ -9,7 +9,7 @@ import FinalCTA from "./components/FinalCTA";
 export const metadata: Metadata = {
   title: "Resume System for Career Switchers | CareerSwitchKit",
   description:
-    "Most career switchers get filtered out before a human reads their resume. CareerSwitchKit is the 4-stage system that fixes that — ATS-ready templates, 50 AI prompts, and a cover letter guide. $19, instant download.",
+    "Most career switchers get filtered out before a human reads their resume. CareerSwitchKit is the 4-stage system that fixes that — ATS-ready templates, 50 AI prompts, and a cover letter guide. $37, instant download.",
 };
 
 const faqSchema = {
@@ -27,10 +27,10 @@ const productSchema = {
   "@context": "https://schema.org",
   "@type": "Product",
   name: "CareerSwitchKit",
-  description: "A 4-stage career switch system built for US career switchers. $19, instant download.",
+  description: "A 4-stage career switch system built for US career switchers. $37, instant download.",
   url: "https://careerswitchkit.org",
   brand: { "@type": "Brand", name: "CareerSwitchKit" },
-  offers: { "@type": "Offer", price: "19.00", priceCurrency: "USD", availability: "https://schema.org/InStock", priceValidUntil: "2027-12-31", seller: { "@type": "Organization", name: "Zorby&Co" } },
+  offers: { "@type": "Offer", price: "37.00", priceCurrency: "USD", availability: "https://schema.org/InStock", priceValidUntil: "2027-12-31", seller: { "@type": "Organization", name: "Zorby&Co" } },
 };
 
 export default function Home() {
@@ -124,7 +124,7 @@ export default function Home() {
                 <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_ease-in-out]"
                   style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)" }} />
                 <span className="relative z-10 flex items-center gap-2">
-                  Claim Lifetime Access — <strong>$19</strong>
+                  Claim Lifetime Access — <strong>$37</strong>
                 </span>
               </a>
               {/* Secondary — liquid glass */}
@@ -236,14 +236,11 @@ export default function Home() {
 
                   <div className="mb-10 relative z-10">
                     <div className="flex items-baseline gap-1">
-                      <span className="font-geist font-black tracking-tighter" style={{ fontSize: "clamp(48px,5vw,72px)" }}>$19</span>
+                      <span className="font-geist font-black tracking-tighter" style={{ fontSize: "clamp(48px,5vw,72px)" }}>$37</span>
                     </div>
-                    <div
-                      className="absolute -top-4 -right-2 text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest animate-pulse"
-                      style={{ background: "#a0c9ff", color: "#003259", boxShadow: "0 0 20px rgba(160,201,255,0.4)" }}
-                    >
-                      99% Less Expensive
-                    </div>
+                    <p className="text-xs mt-1.5" style={{ color: "rgba(255,255,255,0.4)" }}>
+                      Less than one hour with a career coach.
+                    </p>
                   </div>
 
                   <div className="grid grid-cols-2 gap-3 mb-10 relative z-10">
@@ -286,7 +283,7 @@ export default function Home() {
                     className="group/btn w-full py-5 rounded-2xl bg-white font-black hover:scale-[1.02] transition-all shadow-xl text-lg uppercase tracking-tighter flex items-center justify-center gap-2 relative overflow-hidden z-10"
                     style={{ color: "#000" }}
                   >
-                    <span className="relative z-10">Claim Lifetime Access — $19</span>
+                    <span className="relative z-10">Claim Lifetime Access — $37</span>
                     <span className="material-symbols-outlined relative z-10 transition-transform group-hover/btn:translate-x-1">arrow_forward</span>
                   </a>
                 </div>

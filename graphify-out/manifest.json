@@ -1,0 +1,177 @@
+{
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\api\\subscribe\\route.ts": {
+    "mtime": 1781639191.6263208,
+    "ast_hash": "aef915ab8e77181525cfafc7c3589e11",
+    "semantic_hash": "aef915ab8e77181525cfafc7c3589e11"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\blog\\BlogCTA.tsx": {
+    "mtime": 1781639498.1929085,
+    "ast_hash": "594793d46f8171c9422201d8bc615360",
+    "semantic_hash": "594793d46f8171c9422201d8bc615360"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\blog\\cover-letter-career-change\\page.tsx": {
+    "mtime": 1781652159.9857588,
+    "ast_hash": "56411813137064631adc9876de6d47f8",
+    "semantic_hash": "56411813137064631adc9876de6d47f8"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\blog\\how-to-write-a-career-change-resume\\page.tsx": {
+    "mtime": 1781639517.0818312,
+    "ast_hash": "7d9b47c7d93c6255da4e86eaeb07a756",
+    "semantic_hash": "7d9b47c7d93c6255da4e86eaeb07a756"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\blog\\layout.tsx": {
+    "mtime": 1781639204.7701526,
+    "ast_hash": "9570d69cd73cf7457d89a24508586a2e",
+    "semantic_hash": "9570d69cd73cf7457d89a24508586a2e"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\blog\\page.tsx": {
+    "mtime": 1781652323.784683,
+    "ast_hash": "0da1853de1b6a7a68c51b19bfa7ff2cd",
+    "semantic_hash": "0da1853de1b6a7a68c51b19bfa7ff2cd"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\blog\\transferable-skills-career-change\\page.tsx": {
+    "mtime": 1781652209.6443899,
+    "ast_hash": "f9367a79bc618db42f05f3fe4da85e19",
+    "semantic_hash": "f9367a79bc618db42f05f3fe4da85e19"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\blog\\what-is-ats-career-switchers\\page.tsx": {
+    "mtime": 1781639527.9342937,
+    "ast_hash": "68e0cdd51726eb87b132558cd0bafcae",
+    "semantic_hash": "68e0cdd51726eb87b132558cd0bafcae"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\blog\\why-are-you-changing-careers-interview\\page.tsx": {
+    "mtime": 1781652307.9078948,
+    "ast_hash": "4ba89d2452b8c325506099a66a4b416b",
+    "semantic_hash": "4ba89d2452b8c325506099a66a4b416b"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\blog\\why-career-switchers-get-rejected\\page.tsx": {
+    "mtime": 1781652256.7384927,
+    "ast_hash": "0a5fe004a9d1988e6a294560a7f0d05d",
+    "semantic_hash": "0a5fe004a9d1988e6a294560a7f0d05d"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\components\\Contact.tsx": {
+    "mtime": 1781639130.650131,
+    "ast_hash": "22c3615fd4637c55d261aee234232273",
+    "semantic_hash": "22c3615fd4637c55d261aee234232273"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\components\\EmailCapture.tsx": {
+    "mtime": 1781639183.7538006,
+    "ast_hash": "21fc61fa54ec72a87c145b7454742f0a",
+    "semantic_hash": "21fc61fa54ec72a87c145b7454742f0a"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\components\\FAQ.tsx": {
+    "mtime": 1781549572.1936536,
+    "ast_hash": "08645056fc253fb6dfd8c2b8c4171bd0",
+    "semantic_hash": "08645056fc253fb6dfd8c2b8c4171bd0"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\components\\Footer.tsx": {
+    "mtime": 1781639334.7927494,
+    "ast_hash": "5237d2637f5546dd6ba0f11e02831c21",
+    "semantic_hash": "5237d2637f5546dd6ba0f11e02831c21"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\components\\Hero.tsx": {
+    "mtime": 1781646976.3258111,
+    "ast_hash": "3e3b3da09f19e7762dc1a003d1c7ee07",
+    "semantic_hash": "3e3b3da09f19e7762dc1a003d1c7ee07"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\components\\HowItWorks.tsx": {
+    "mtime": 1781557983.1532478,
+    "ast_hash": "a0a0c0d6f866e24680b6cbdd578f19b2",
+    "semantic_hash": "a0a0c0d6f866e24680b6cbdd578f19b2"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\components\\MidCTA.tsx": {
+    "mtime": 1781560884.0171242,
+    "ast_hash": "46868a9f12b1dd5981d8e077ee576ffd",
+    "semantic_hash": "46868a9f12b1dd5981d8e077ee576ffd"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\components\\MotionProvider.tsx": {
+    "mtime": 1781646926.8859873,
+    "ast_hash": "ebb7592bd4379bda89bb84d6a7d53e53",
+    "semantic_hash": "ebb7592bd4379bda89bb84d6a7d53e53"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\components\\Navbar.tsx": {
+    "mtime": 1781646981.4818609,
+    "ast_hash": "bdb66d773e752a64c327aaae51c2e4d3",
+    "semantic_hash": "bdb66d773e752a64c327aaae51c2e4d3"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\components\\PageTransition.tsx": {
+    "mtime": 1781390449.8760028,
+    "ast_hash": "2846d44d2b52c6996b4cfd16badaaba9",
+    "semantic_hash": "2846d44d2b52c6996b4cfd16badaaba9"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\components\\Pricing.tsx": {
+    "mtime": 1781639150.7317686,
+    "ast_hash": "5d29a628d97fa3e81f76a003de64d74c",
+    "semantic_hash": "5d29a628d97fa3e81f76a003de64d74c"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\components\\Proof.tsx": {
+    "mtime": 1781563411.284823,
+    "ast_hash": "c856a8171fa60ceab6b2f3b0603c75de",
+    "semantic_hash": "c856a8171fa60ceab6b2f3b0603c75de"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\components\\Reveal.tsx": {
+    "mtime": 1781392356.7960331,
+    "ast_hash": "4919e2a63baf920167aba78d160ee6fe",
+    "semantic_hash": "4919e2a63baf920167aba78d160ee6fe"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\components\\Trust.tsx": {
+    "mtime": 1781562550.7856426,
+    "ast_hash": "83ffc74315c5e81855a5fa197cf28fc7",
+    "semantic_hash": "83ffc74315c5e81855a5fa197cf28fc7"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\components\\WhatsIncluded.tsx": {
+    "mtime": 1781549537.3564181,
+    "ast_hash": "55405a6111c1e03489dc2e02a4c2b2f1",
+    "semantic_hash": "55405a6111c1e03489dc2e02a4c2b2f1"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\layout.tsx": {
+    "mtime": 1781646934.9839828,
+    "ast_hash": "82c226993d6c2008f8d10283ca64870f",
+    "semantic_hash": "82c226993d6c2008f8d10283ca64870f"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\not-found.tsx": {
+    "mtime": 1781293918.5306146,
+    "ast_hash": "7d231c7f3e7f6f85b4d9ff1b0214a39c",
+    "semantic_hash": "7d231c7f3e7f6f85b4d9ff1b0214a39c"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\page.tsx": {
+    "mtime": 1781639199.5174742,
+    "ast_hash": "a0655933408641f5df39c848cfd2d5ec",
+    "semantic_hash": "a0655933408641f5df39c848cfd2d5ec"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\preview\\CheckoutButton.tsx": {
+    "mtime": 1781546308.370139,
+    "ast_hash": "66e69354065a11921371bc42198c58cc",
+    "semantic_hash": "66e69354065a11921371bc42198c58cc"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\preview\\PreviewGallery.tsx": {
+    "mtime": 1781561419.8541613,
+    "ast_hash": "78b23c7efc63084b7f7bde7dd5252bc1",
+    "semantic_hash": "78b23c7efc63084b7f7bde7dd5252bc1"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\preview\\PreviewList.tsx": {
+    "mtime": 1781546269.3991878,
+    "ast_hash": "c5289e3128d867790f98d32e8d78aeb2",
+    "semantic_hash": "c5289e3128d867790f98d32e8d78aeb2"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\preview\\page.tsx": {
+    "mtime": 1781561431.590791,
+    "ast_hash": "6dce846bd1160c73ef88be600f4d5cf6",
+    "semantic_hash": "6dce846bd1160c73ef88be600f4d5cf6"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\robots.ts": {
+    "mtime": 1781638501.8540032,
+    "ast_hash": "10dc795b5652188f50346a82272b2b6c",
+    "semantic_hash": "10dc795b5652188f50346a82272b2b6c"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\sitemap.ts": {
+    "mtime": 1781652332.629244,
+    "ast_hash": "432b2133dd62f4366967f02b38f9d663",
+    "semantic_hash": "432b2133dd62f4366967f02b38f9d663"
+  },
+  "C:\\Users\\amuom\\Desktop\\careerswitchkit\\app\\terms\\page.tsx": {
+    "mtime": 1781393003.925358,
+    "ast_hash": "1dcc5bd6a304fd58fdc6683d9e7a9db7",
+    "semantic_hash": "1dcc5bd6a304fd58fdc6683d9e7a9db7"
+  }
+}

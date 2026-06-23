@@ -28,7 +28,7 @@ export default function BlogCTA({ heading, body }: { heading: string; body: stri
         className="inline-flex items-center gap-2 text-white font-bold px-7 py-3.5 rounded-xl text-sm transition-all duration-200 hover:scale-[1.02]"
         style={{ background: "#3792E8", boxShadow: "0 0 28px rgba(55,146,232,0.35)" }}
       >
-        Get the System for $19
+        Get the System for $37
       </button>
       <p className="mt-3 text-xs" style={{ color: "rgba(255,255,255,0.28)" }}>
         30-day money-back guarantee

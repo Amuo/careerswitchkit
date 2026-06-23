@@ -234,7 +234,7 @@ export default function Post() {
 
         <BlogCTA
           heading="The cover letter template built for career switchers."
-          body="Stage 2 of the system includes cover letter templates designed specifically for non-traditional backgrounds — with the translation work already structured in. $19, instant download."
+          body="Stage 2 of the system includes cover letter templates designed specifically for non-traditional backgrounds — with the translation work already structured in. $37, instant download."
         />
 
         {/* Related */}

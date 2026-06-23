@@ -95,7 +95,7 @@ ctx.fillRect(lp, 432, 580, 1);
 // Value line
 ctx.font = 'bold 18px Arial';
 ctx.fillStyle = 'rgba(55,146,232,0.80)';
-ctx.fillText('$19  ·  Instant download  ·  30-day guarantee', lp, 472);
+ctx.fillText('$37  ·  Instant download  ·  30-day guarantee', lp, 472);
 
 // Domain
 ctx.font = '16px Arial';
