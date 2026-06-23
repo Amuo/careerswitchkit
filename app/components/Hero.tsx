@@ -86,7 +86,23 @@ export default function Hero() {
               className="font-sora font-black text-5xl sm:text-6xl lg:text-7xl leading-[1.04] tracking-tight text-white text-balance"
             >
               Your background isn&apos;t the problem.{" "}
-              <span className="hero-headline-gradient" data-text="Your resume is.">Your resume is.</span>
+              <span aria-label="Your resume is.">
+                {"Your resume is.".split("").map((char, i, arr) => (
+                  <motion.span
+                    key={i}
+                    style={{ display: "inline" }}
+                    animate={{ color: ["#3792E8", "#ffffff", "#3792E8"] }}
+                    transition={{
+                      duration: 2.4,
+                      delay: (arr.length - i) * 0.07,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    {char === " " ? " " : char}
+                  </motion.span>
+                ))}
+              </span>
             </motion.h1>
 
             {/* SUBHEADLINE */}
