@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import { useEffect, useRef } from "react";
 import { IconCheck } from "@tabler/icons-react";
 import { handleCheckout } from "@/lib/checkout";
 
@@ -12,7 +13,30 @@ const bullets = [
   "An ATS score above the filter line, before you submit",
 ];
 
+const SWEEP_TEXT = "Your resume is.";
+
 export default function Hero() {
+  const sweepRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const container = sweepRef.current;
+    if (!container) return;
+    const spans = Array.from(container.querySelectorAll<HTMLSpanElement>("[data-l]"));
+    const anims = spans.map((span, i) =>
+      span.animate(
+        [{ color: "#3792E8" }, { color: "#ffffff" }, { color: "#3792E8" }],
+        {
+          duration: 2400,
+          delay: (spans.length - i) * 70,
+          iterations: Infinity,
+          easing: "ease-in-out",
+          fill: "both",
+        }
+      )
+    );
+    return () => anims.forEach((a) => a.cancel());
+  }, []);
+
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
       {/* Noise texture */}
@@ -86,21 +110,11 @@ export default function Hero() {
               className="font-sora font-black text-5xl sm:text-6xl lg:text-7xl leading-[1.04] tracking-tight text-white text-balance"
             >
               Your background isn&apos;t the problem.{" "}
-              <span aria-label="Your resume is.">
-                {"Your resume is.".split("").map((char, i, arr) => (
-                  <motion.span
-                    key={i}
-                    style={{ display: "inline" }}
-                    animate={{ color: ["#3792E8", "#ffffff", "#3792E8"] }}
-                    transition={{
-                      duration: 2.4,
-                      delay: (arr.length - i) * 0.07,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  >
+              <span ref={sweepRef} aria-label={SWEEP_TEXT}>
+                {SWEEP_TEXT.split("").map((char, i) => (
+                  <span key={i} data-l="" style={{ display: "inline" }}>
                     {char === " " ? " " : char}
-                  </motion.span>
+                  </span>
                 ))}
               </span>
             </motion.h1>
