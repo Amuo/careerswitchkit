@@ -240,6 +240,14 @@ section[id] {
   animation: pulse-glow 3s infinite alternate;
 }
 
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: none; }
+}
+.hero-h1-enter {
+  animation: fadeSlideUp 0.72s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both;
+}
+
 /* Hero reveal animations */
 @keyframes revealUp {
   0% { transform: translateY(30px); opacity: 0; filter: blur(10px); }

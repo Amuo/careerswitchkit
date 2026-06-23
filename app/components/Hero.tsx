@@ -102,13 +102,7 @@ export default function Hero() {
           <div className="flex flex-col gap-7">
 
             {/* HEADLINE */}
-            <motion.h1
-              suppressHydrationWarning
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.72, delay: 0.08, ease: EASE }}
-              className="font-sora font-black text-5xl sm:text-6xl lg:text-7xl leading-[1.04] tracking-tight text-white text-balance"
-            >
+            <h1 className="hero-h1-enter font-sora font-black text-5xl sm:text-6xl lg:text-7xl leading-[1.04] tracking-tight text-white text-balance">
               Your background isn&apos;t the problem.{" "}
               <span ref={sweepRef} aria-label={SWEEP_TEXT}>
                 {SWEEP_TEXT.split("").map((char, i) => (
@@ -117,7 +111,7 @@ export default function Hero() {
                   </span>
                 ))}
               </span>
-            </motion.h1>
+            </h1>
 
             {/* SUBHEADLINE */}
             <motion.p
