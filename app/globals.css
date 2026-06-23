@@ -89,25 +89,44 @@ section[id] {
   to { background-position: 200% center; }
 }
 
-/* Hero headline sweep — white to blue, right to left */
-@keyframes shine-rtl {
-  from { background-position: 200% center; }
-  to   { background-position: 0% center; }
+@property --sweep {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 150%;
 }
 
-.hero-gradient-text {
-  background: linear-gradient(
+@keyframes text-sweep {
+  to { --sweep: -50%; }
+}
+
+.hero-headline-gradient {
+  position: relative;
+  display: inline-block;
+  color: #3792E8;
+}
+
+.hero-headline-gradient::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  color: white;
+  white-space: nowrap;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(
     to right,
-    #3792E8 0%,
-    #ffffff 35%,
-    #3792E8 65%,
-    #ffffff 100%
+    transparent calc(var(--sweep) - 30%),
+    black var(--sweep),
+    transparent calc(var(--sweep) + 30%)
   );
-  background-size: 200% auto;
-  color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  animation: shine-rtl 3s linear infinite;
+  mask-image: linear-gradient(
+    to right,
+    transparent calc(var(--sweep) - 30%),
+    black var(--sweep),
+    transparent calc(var(--sweep) + 30%)
+  );
+  animation: text-sweep 3s linear infinite;
 }
 
 .shiny-text {

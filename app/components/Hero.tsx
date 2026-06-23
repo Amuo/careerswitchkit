@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "motion/react";
-import { useEffect, useRef } from "react";
 import { IconCheck } from "@tabler/icons-react";
 import { handleCheckout } from "@/lib/checkout";
 
@@ -14,26 +13,6 @@ const bullets = [
 ];
 
 export default function Hero() {
-  const shinyRef = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    let rafId: number;
-    let start: number | null = null;
-    const DURATION = 6000;
-
-    const tick = (ts: number) => {
-      if (start === null) start = ts;
-      const pos = (((ts - start) % DURATION) / DURATION) * 200;
-      if (shinyRef.current) {
-        shinyRef.current.style.backgroundPosition = `${pos}% center`;
-      }
-      rafId = requestAnimationFrame(tick);
-    };
-
-    rafId = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafId);
-  }, []);
-
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
       {/* Noise texture */}
@@ -107,7 +86,7 @@ export default function Hero() {
               className="font-sora font-black text-5xl sm:text-6xl lg:text-7xl leading-[1.04] tracking-tight text-white text-balance"
             >
               Your background isn&apos;t the problem.{" "}
-              <span ref={shinyRef} className="shiny-text">Your resume is.</span>
+              <span className="hero-headline-gradient" data-text="Your resume is.">Your resume is.</span>
             </motion.h1>
 
             {/* SUBHEADLINE */}
