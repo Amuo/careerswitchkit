@@ -86,7 +86,7 @@ export default function Hero() {
               className="font-sora font-black text-5xl sm:text-6xl lg:text-7xl leading-[1.04] tracking-tight text-white text-balance"
             >
               Your background isn&apos;t the problem.{" "}
-              <span style={{ color: "#3792E8" }}>Your resume is.</span>
+              <span className="hero-gradient-text">Your resume is.</span>
             </motion.h1>
 
             {/* SUBHEADLINE */}
