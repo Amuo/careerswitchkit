@@ -234,13 +234,25 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="mb-10 relative z-10">
-                    <div className="flex items-baseline gap-1">
+                  <div className="mb-10 relative z-10 flex items-center gap-5">
+                    {/* Our price */}
+                    <div>
                       <span className="font-geist font-black tracking-tighter" style={{ fontSize: "clamp(48px,5vw,72px)" }}>$37</span>
+                      <div className="text-[10px] font-bold uppercase tracking-widest mt-0.5" style={{ color: "#a0c9ff" }}>CareerSwitchKit</div>
                     </div>
-                    <p className="text-xs mt-1.5" style={{ color: "rgba(255,255,255,0.4)" }}>
-                      Less than one hour with a career coach.
-                    </p>
+
+                    {/* vs divider */}
+                    <div className="flex flex-col items-center self-stretch justify-center gap-1.5 py-1">
+                      <div className="flex-1 w-px" style={{ background: "rgba(255,255,255,0.08)" }} />
+                      <span className="text-[10px] font-black uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.25)" }}>vs</span>
+                      <div className="flex-1 w-px" style={{ background: "rgba(255,255,255,0.08)" }} />
+                    </div>
+
+                    {/* Coach price */}
+                    <div>
+                      <span className="font-geist font-black tracking-tighter" style={{ fontSize: "clamp(28px,3vw,40px)", color: "rgba(255,255,255,0.2)" }}>$150–$300</span>
+                      <div className="text-[10px] font-bold uppercase tracking-widest mt-0.5" style={{ color: "rgba(255,255,255,0.25)" }}>1hr career coach</div>
+                    </div>
                   </div>
 
                   <div className="grid grid-cols-2 gap-3 mb-10 relative z-10">
