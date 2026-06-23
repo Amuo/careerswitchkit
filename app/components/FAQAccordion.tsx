@@ -4,16 +4,16 @@ import { useState } from "react";
 
 const FAQS = [
   {
+    q: "What exactly do I get? Is this an app?",
+    a: "CareerSwitchKit is not an app or software — it's a structured document system you download instantly after purchase. You get a Start Here Guide (PDF), three CV templates (Google Docs), three cover letter templates (Google Docs), an ATS Checklist, an AI Prompt Pack with 50 copy-paste prompts, and a completed example. No login, no subscription, no account required. You get the files, you follow the sequence, you apply.",
+  },
+  {
     q: "Is this just for tech jobs?",
     a: "No. While we include tech examples, the system is built on universal semantic transfer. We've seen success in Healthcare, Finance, Operations, and Marketing. The framework works for any field where your past experience needs to be reframed, not discarded.",
   },
   {
     q: "Do I need a ChatGPT subscription?",
     a: "The prompts work with the free version of ChatGPT, Claude, and Gemini. However, GPT-4 or Claude 3.5 Sonnet will provide higher quality structural rewrites. Either way, the framework around the prompts is what does most of the work.",
-  },
-  {
-    q: "What exactly do I get after paying?",
-    a: "Instant digital access to our member portal containing the PDF guides, Google Doc templates, and the AI prompt copy-paste library. Everything is available immediately after checkout — no waiting, no shipping.",
   },
   {
     q: "How is this different from a resume template I can find for free?",

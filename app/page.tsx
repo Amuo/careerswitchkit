@@ -153,6 +153,9 @@ export default function Home() {
                 aria-hidden="true"
               />
               <SystemDashboard />
+              <p className="text-center text-xs mt-4" style={{ color: "rgba(255,255,255,0.3)" }}>
+                Visual overview only &mdash; CareerSwitchKit is an instant-download document suite, not an app or subscription.
+              </p>
             </div>
           </section>
 
