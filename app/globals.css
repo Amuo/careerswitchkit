@@ -85,14 +85,8 @@ section[id] {
 }
 
 /* Shiny text gradient — terms page hero */
-@property --shine-pos {
-  syntax: '<percentage>';
-  inherits: false;
-  initial-value: 0%;
-}
-
 @keyframes shine {
-  to { --shine-pos: 200%; }
+  to { background-position: 200% center; }
 }
 
 /* Hero headline sweep — white to blue, right to left */
@@ -119,12 +113,10 @@ section[id] {
 .shiny-text {
   background: linear-gradient(120deg, #3792E8 0%, #ffffff 50%, #3792E8 100%);
   background-size: 200% auto;
-  background-position: var(--shine-pos) center;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  animation: shine 6s linear infinite;
 }
 
 /* Liquid glass card */
