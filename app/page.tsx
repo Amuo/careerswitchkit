@@ -4,6 +4,7 @@ import Footer from "./components/Footer";
 import SystemDashboard from "./components/SystemDashboard";
 import FAQAccordion from "./components/FAQAccordion";
 import FadeUpObserver from "./components/FadeUpObserver";
+import FinalCTA from "./components/FinalCTA";
 
 export const metadata: Metadata = {
   title: "Resume System for Career Switchers | CareerSwitchKit",
@@ -299,45 +300,7 @@ export default function Home() {
           </section>
 
           {/* ── Final CTA ────────────────────────────────────────────────── */}
-          <section className="max-w-7xl mx-auto px-6 py-40 text-center relative overflow-hidden rounded-[3rem] fade-up visible">
-            {/* Aurora fill */}
-            <div className="absolute inset-0 pointer-events-none" style={{ background: "rgba(160,201,255,0.08)" }} />
-            {/* Radial glow from top */}
-            <div
-              className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-64 blur-3xl pointer-events-none"
-              style={{ background: "radial-gradient(50% 100% at 50% 0%, rgba(160,201,255,0.2) 0%, transparent 100%)" }}
-              aria-hidden="true"
-            />
-            {/* Noise */}
-            <div className="absolute inset-0 pointer-events-none opacity-20" style={{ filter: "url(#c3-noise)" }} aria-hidden="true" />
-
-            <div className="relative z-10">
-              <h2
-                className="font-geist font-black mb-8 leading-none"
-                style={{ fontSize: "clamp(48px, 8vw, 96px)" }}
-              >
-                Stop wishing. <br />Start applying.
-              </h2>
-              <p className="text-xl max-w-xl mx-auto mb-12" style={{ color: "#c0c7d3" }}>
-                Join other career switchers who took the shortcut to their next chapter.
-              </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a
-                  href="#pricing"
-                  className="group relative w-full sm:w-auto px-12 py-6 bg-white font-bold rounded-2xl hover:scale-105 transition-transform text-xl overflow-hidden inline-flex items-center justify-center gap-2"
-                  style={{ color: "#000" }}
-                >
-                  {/* Shimmer */}
-                  <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_ease-in-out] pointer-events-none"
-                    style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)" }} />
-                  <span className="relative z-10">Claim Lifetime Access — $19</span>
-                </a>
-              </div>
-              <div className="mt-12 text-sm font-medium" style={{ color: "rgba(255,255,255,0.3)" }}>
-                Instant Access. Risk-Free Guarantee.
-              </div>
-            </div>
-          </section>
+          <FinalCTA />
 
         </main>
 
