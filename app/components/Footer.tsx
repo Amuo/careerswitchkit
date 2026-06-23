@@ -45,12 +45,6 @@ export default function Footer() {
             >
               Terms &amp; Privacy
             </Link>
-            <Link
-              href="/preview"
-              className="text-sm text-white/55 hover:text-white transition-colors"
-            >
-              Preview
-            </Link>
           </nav>
         </div>
       </div>
