@@ -151,10 +151,20 @@ section[id] {
   to   { background-position: 0% center; }
 }
 
+/* When both classes are on the same element: reveal first, then sweep */
+.reveal-line-2.shiny-text {
+  animation:
+    revealUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards,
+    shine-rtl 2.8s linear 1.3s infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .shiny-text {
+  .shiny-text,
+  .reveal-line-2.shiny-text {
     animation: none;
-    -webkit-text-fill-color: transparent;
+    opacity: 1;
+    transform: none;
+    filter: none;
     background-position: 0% center;
   }
 }
