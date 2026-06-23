@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion, useMotionValue, useTransform, animate } from "motion/react";
+import { useEffect } from "react";
 import { IconCheck } from "@tabler/icons-react";
 import { handleCheckout } from "@/lib/checkout";
 
@@ -13,6 +14,13 @@ const bullets = [
 ];
 
 export default function Hero() {
+  const bgX = useMotionValue(200);
+  const backgroundPositionX = useTransform(bgX, v => `${v}%`);
+  useEffect(() => {
+    const controls = animate(bgX, 0, { duration: 3, ease: "linear", repeat: Infinity });
+    return controls.stop;
+  }, [bgX]);
+
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
       {/* Noise texture */}
@@ -87,18 +95,15 @@ export default function Hero() {
             >
               Your background isn&apos;t the problem.{" "}
               <motion.span
-                suppressHydrationWarning
                 style={{
                   display: "inline-block",
                   backgroundImage: "linear-gradient(to right, #3792E8 0%, #ffffff 35%, #3792E8 65%, #ffffff 100%)",
                   backgroundSize: "200% auto",
+                  backgroundPositionX,
                   WebkitBackgroundClip: "text",
                   backgroundClip: "text",
                   WebkitTextFillColor: "transparent",
-                  color: "transparent",
                 }}
-                animate={{ backgroundPosition: ["200% center", "0% center"] }}
-                transition={{ duration: 3, ease: "linear", repeat: Infinity }}
               >Your resume is.</motion.span>
             </motion.h1>
 
