@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import LandingBackground from "./components/LandingBackground";
 import SystemDashboard from "./components/SystemDashboard";
 import FAQAccordion from "./components/FAQAccordion";
 import FadeUpObserver from "./components/FadeUpObserver";
@@ -52,7 +51,6 @@ export default function Home() {
       <div className="fixed inset-0 pointer-events-none opacity-50" style={{ zIndex: 1, filter: "url(#c3-noise)" }} aria-hidden="true" />
 
       <div className="relative min-h-screen" style={{ color: "#e2e0fa", overflowX: "clip" }}>
-        <LandingBackground />
         <FadeUpObserver />
 
         <div className="vertical-guide guide-left hidden lg:block" aria-hidden="true" />
