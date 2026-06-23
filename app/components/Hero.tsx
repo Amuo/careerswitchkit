@@ -81,8 +81,6 @@ export default function Hero() {
             <h1 className="hero-h1-enter font-sora font-black text-5xl sm:text-6xl lg:text-7xl leading-[1.04] tracking-tight text-white text-balance">
               Your background isn&apos;t the problem.{" "}
               <span className="shiny-text">Your resume is.</span>
-                ))}
-              </span>
             </h1>
 
             {/* SUBHEADLINE */}
