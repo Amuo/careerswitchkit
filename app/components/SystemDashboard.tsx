@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 
 type StageId = "stage01" | "stage02" | "stage03" | "stage04";
 
@@ -70,6 +71,9 @@ const STAGES: StageConfig[] = [
     ],
   },
 ];
+
+const SPRING = { type: "spring", stiffness: 380, damping: 30 } as const;
+const EASE   = [0.22, 1, 0.36, 1] as const;
 
 // ─── Stage 01: Transfer Map ───────────────────────────────────────────────────
 
@@ -159,7 +163,6 @@ function Stage02Content({ view }: { view: string }) {
       {view === "one-page" && (
         <div className="flex-1 flex items-center justify-center p-8 bg-[#0a0a16] rounded-2xl border border-white/10 relative overflow-hidden">
           <div className="absolute inset-0" style={GRID_BG} />
-          {/* Wrapper centers wireframe+tooltip as a unit */}
           <div className="relative flex items-center z-10">
           <div className="cv-wireframe w-[340px] h-[480px] rounded-lg p-6 flex flex-col gap-4 bg-black/40 backdrop-blur-sm">
             <div className="flex flex-col items-center gap-2 border-b border-white/10 pb-4">
@@ -193,7 +196,6 @@ function Stage02Content({ view }: { view: string }) {
               </div>
             </div>
           </div>
-          {/* Floating tooltip — inline sibling, not absolute, so both center together */}
           <div className="ml-4 w-48 p-4 liquid-glass rounded-xl border border-primary/20 shadow-2xl shrink-0">
             <div className="flex items-center gap-2 mb-2" style={{ color: "#a0c9ff" }}>
               <span className="material-symbols-outlined text-sm">view_agenda</span>
@@ -201,7 +203,7 @@ function Stage02Content({ view }: { view: string }) {
             </div>
             <p className="text-[11px] text-white/70 leading-relaxed">Aggressive curation. Highlights only the most relevant transferrable skills for rapid ATS scanning.</p>
           </div>
-          </div>{/* end wrapper */}
+          </div>
         </div>
       )}
 
@@ -211,7 +213,6 @@ function Stage02Content({ view }: { view: string }) {
           <div className="absolute inset-0" style={GRID_BG} />
           <div className="relative flex items-center z-10">
           <div className="cv-wireframe w-[400px] h-[480px] rounded-lg p-6 grid gap-6 bg-black/40 backdrop-blur-sm" style={{ gridTemplateColumns: "1fr 2fr" }}>
-            {/* Sidebar column */}
             <div className="flex flex-col gap-4 border-r border-white/10 pr-4">
               <div className="w-16 h-16 rounded-full bg-white/10 mx-auto mb-2" />
               <div className="w-full h-3 bg-primary/40 rounded-full mb-1" />
@@ -224,7 +225,6 @@ function Stage02Content({ view }: { view: string }) {
               <div className="w-full h-1.5 bg-white/10 rounded-full mb-1" />
               <div className="w-full h-1.5 bg-white/10 rounded-full" />
             </div>
-            {/* Main column */}
             <div className="flex flex-col gap-4">
               <div className="wire-block p-3">
                 <div className="w-24 h-3 bg-white/30 rounded-full mb-3" />
@@ -249,7 +249,7 @@ function Stage02Content({ view }: { view: string }) {
             </div>
             <p className="text-[11px] text-white/70 leading-relaxed">Balances skills-first sidebar with chronological narrative. Best for major career shifts.</p>
           </div>
-          </div>{/* end wrapper */}
+          </div>
         </div>
       )}
 
@@ -258,7 +258,6 @@ function Stage02Content({ view }: { view: string }) {
         <div className="flex-1 flex items-center justify-center p-8 bg-[#0a0a16] rounded-2xl border border-white/10 relative overflow-hidden">
           <div className="absolute inset-0" style={GRID_BG} />
           <div className="flex gap-4 relative z-10">
-            {/* Page 1 */}
             <div className="cv-wireframe w-[260px] h-[360px] rounded-lg p-5 flex flex-col gap-3 bg-black/40 backdrop-blur-sm -rotate-2 origin-bottom-right transition-transform hover:rotate-0">
               <div className="w-24 h-3 bg-primary/40 rounded-full mx-auto mb-2" />
               <div className="w-32 h-1.5 bg-white/20 rounded-full mx-auto mb-4" />
@@ -267,7 +266,6 @@ function Stage02Content({ view }: { view: string }) {
               <div className="wire-block p-2"><div className="w-24 h-2 bg-white/40 rounded-full mb-2" /><div className="wire-text w-full" /><div className="wire-text w-full" /></div>
               <div className="wire-block p-2"><div className="w-20 h-2 bg-white/40 rounded-full mb-2" /><div className="wire-text w-full" /></div>
             </div>
-            {/* Page 2 */}
             <div className="cv-wireframe w-[260px] h-[360px] rounded-lg p-5 flex flex-col gap-3 bg-black/40 backdrop-blur-sm rotate-2 origin-bottom-left transition-transform hover:rotate-0 translate-y-4">
               <div className="flex justify-between items-center mb-4 border-b border-white/10 pb-2">
                 <div className="w-16 h-1.5 bg-white/20 rounded-full" /><div className="w-8 h-1.5 bg-white/10 rounded-full" />
@@ -295,7 +293,6 @@ function Stage03PromptContent() {
     <div className="flex flex-col h-full">
       <h3 className="text-white/60 font-bold text-xs uppercase tracking-widest mb-6">AI Architecture: Prompt Vault</h3>
       <div className="flex-1 rounded-2xl border border-white/10 bg-[#0a0a16] p-6 flex gap-6 overflow-hidden">
-        {/* Left: prompt menu */}
         <div className="w-1/3 flex flex-col gap-2 border-r border-white/10 pr-6 overflow-y-auto">
           <div className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-2">System Prompts</div>
           <div className="px-3 py-2.5 rounded-lg cursor-pointer flex items-center justify-between" style={{ background: "rgba(160,201,255,0.1)", border: "1px solid rgba(160,201,255,0.2)" }}>
@@ -308,7 +305,6 @@ function Stage03PromptContent() {
             </div>
           ))}
         </div>
-        {/* Right: code editor */}
         <div className="w-2/3 flex flex-col h-full relative">
           <div className="flex items-center justify-between mb-4 pb-4 border-b border-white/10">
             <div className="flex items-center gap-3">
@@ -345,7 +341,6 @@ function Stage03ATSContent() {
     <div className="flex flex-col h-full">
       <h3 className="text-white/60 font-bold text-xs uppercase tracking-widest mb-6">ATS Compatibility Engine</h3>
       <div className="grid grid-cols-2 gap-6 mb-8">
-        {/* Before */}
         <div className="p-5 rounded-2xl" style={{ background: "rgba(248,113,113,0.05)", border: "1px solid rgba(248,113,113,0.2)" }}>
           <div className="flex items-center justify-between mb-4">
             <span className="text-[10px] font-bold text-red-400 uppercase tracking-widest">Initial Scan</span>
@@ -362,7 +357,6 @@ function Stage03ATSContent() {
             </div>
           </div>
         </div>
-        {/* After */}
         <div className="p-5 rounded-2xl" style={{ background: "rgba(74,222,128,0.05)", border: "1px solid rgba(74,222,128,0.2)", boxShadow: "0 0 30px rgba(74,222,128,0.1)" }}>
           <div className="flex items-center justify-between mb-4">
             <span className="text-[10px] font-bold text-green-400 uppercase tracking-widest">Kit Optimized</span>
@@ -406,13 +400,11 @@ function Stage04Content() {
       <h3 className="text-white/60 font-bold text-xs uppercase tracking-widest mb-6">System Status: Deployment</h3>
       <div className="flex-1 rounded-2xl overflow-hidden relative flex flex-col items-center justify-center p-8 text-center"
         style={{ border: "1px solid rgba(160,201,255,0.2)", background: "rgba(160,201,255,0.05)", boxShadow: "inset 0 0 100px rgba(160,201,255,0.05)" }}>
-        {/* Radar rings */}
         <div className="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none">
           <div className="w-[400px] h-[400px] rounded-full border border-primary/30 absolute" />
           <div className="w-[300px] h-[300px] rounded-full border border-primary/40 absolute" />
           <div className="w-[200px] h-[200px] rounded-full border border-primary/50 absolute animate-[spin_10s_linear_infinite] border-t-transparent" />
         </div>
-        {/* Verified badge */}
         <div className="relative z-10 mb-8">
           <div className="w-28 h-28 mx-auto rounded-full flex items-center justify-center border-2 animate-pulse"
             style={{ background: "rgba(160,201,255,0.2)", backdropFilter: "blur(12px)", borderColor: "rgba(160,201,255,0.5)", boxShadow: "0 0 40px rgba(160,201,255,0.3)" }}>
@@ -453,6 +445,7 @@ export default function SystemDashboard() {
   const [currentFilename, setCurrentFilename] = useState<string>("ATS_Engine_Logic.json");
   const [systemStatus, setSystemStatus] = useState<string>("Optimizing for Scanners");
 
+  const reduce = useReducedMotion();
   const currentStage = STAGES.find((s) => s.id === activeStage)!;
 
   function switchStage(stageId: StageId) {
@@ -482,10 +475,9 @@ export default function SystemDashboard() {
 
   return (
     <div className="w-full">
-      {/* ── Title bar: traffic lights LEFT of System Dashboard ── */}
+      {/* ── Title bar ── */}
       <div className="bg-white/10 backdrop-blur-md border border-white/10 rounded-t-xl px-4 py-2 flex items-center justify-between text-[13px] font-medium text-white/90 shadow-2xl">
         <div className="flex items-center gap-4">
-          {/* Traffic lights — user requested: left of System Dashboard */}
           <div className="flex gap-1.5">
             <div className="traffic-light" style={{ backgroundColor: "#FF5F56" }} />
             <div className="traffic-light" style={{ backgroundColor: "#FFBD2E" }} />
@@ -499,7 +491,17 @@ export default function SystemDashboard() {
         </div>
         <div className="flex items-center gap-3">
           <span className="material-symbols-outlined" style={{ fontSize: 16 }}>cloud_done</span>
-          <span className="opacity-90 text-xs font-mono truncate max-w-[180px]">{currentFilename}</span>
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={currentFilename}
+              className="opacity-90 text-xs font-mono truncate max-w-[180px]"
+              initial={reduce ? {} : { opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0, transition: { duration: 0.2, ease: EASE } }}
+              exit={{ opacity: 0, y: 4, transition: { duration: 0.1 } }}
+            >
+              {currentFilename}
+            </motion.span>
+          </AnimatePresence>
         </div>
       </div>
 
@@ -518,26 +520,65 @@ export default function SystemDashboard() {
                 <button
                   key={stage.id}
                   onClick={() => switchStage(stage.id)}
-                  className={`sidebar-item w-full flex items-center gap-3 px-3 py-3 rounded-lg transition-all ${
-                    isActive ? "active" : "text-white/60 hover:text-white hover:bg-white/5"
-                  }`}
+                  className="relative w-full flex items-center gap-3 px-3 py-3 rounded-lg"
                 >
-                  <span className="material-symbols-outlined" style={{ fontSize: 20, fontVariationSettings: isActive ? "'FILL' 1" : "'FILL' 0", color: isActive ? "#a0c9ff" : undefined }}>
+                  {/* Sliding active pill */}
+                  {isActive && (
+                    <motion.div
+                      layoutId="stage-pill"
+                      className="absolute inset-0 rounded-lg"
+                      style={{ background: "rgba(160,201,255,0.15)" }}
+                      initial={false}
+                      transition={reduce ? { duration: 0 } : SPRING}
+                    />
+                  )}
+                  {/* Hover layer for inactive */}
+                  {!isActive && (
+                    <div className="absolute inset-0 rounded-lg hover:bg-white/5 transition-colors" />
+                  )}
+                  <span
+                    className="material-symbols-outlined relative z-10"
+                    style={{
+                      fontSize: 20,
+                      fontVariationSettings: isActive ? "'FILL' 1" : "'FILL' 0",
+                      color: isActive ? "#a0c9ff" : "rgba(255,255,255,0.5)",
+                      transition: "color 0.2s, font-variation-settings 0.2s",
+                    }}
+                  >
                     {stage.icon}
                   </span>
-                  <span className="text-sm font-semibold leading-tight">{stage.label}</span>
+                  <span
+                    className="text-sm font-semibold leading-tight relative z-10"
+                    style={{
+                      color: isActive ? "#ffffff" : "rgba(255,255,255,0.5)",
+                      transition: "color 0.2s",
+                    }}
+                  >
+                    {stage.label}
+                  </span>
                 </button>
               );
             })}
           </nav>
 
           {/* Status widget */}
-          <nav className="mt-auto">
+          <div className="mt-auto">
             <div className="rounded-xl p-4" style={{ background: "rgba(160,201,255,0.05)", border: "1px solid rgba(160,201,255,0.2)" }}>
               <div className="text-[10px] font-bold uppercase tracking-widest mb-1" style={{ color: "#a0c9ff" }}>Status</div>
-              <div className="text-xs" style={{ color: "#e2e0fa" }}>{systemStatus}</div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={systemStatus}
+                  className="text-xs"
+                  style={{ color: "#e2e0fa" }}
+                  initial={reduce ? {} : { opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0, transition: { duration: 0.2, ease: EASE } }}
+                  exit={{ opacity: 0, y: -5, transition: { duration: 0.1 } }}
+                >
+                  {systemStatus}
+                </motion.div>
+              </AnimatePresence>
             </div>
-          </nav>
+          </div>
         </aside>
 
         {/* Panel 2: File list */}
@@ -546,31 +587,87 @@ export default function SystemDashboard() {
             <h2 className="font-bold text-sm uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.6)" }}>Stage Files</h2>
             <span className="material-symbols-outlined" style={{ color: "rgba(255,255,255,0.4)", fontSize: 18 }}>folder_open</span>
           </div>
-          <div className="flex flex-col flex-1 overflow-y-auto">
-            {currentStage.files.map((file) => {
-              const isActive = activeFile === file.name;
-              return (
-                <div
-                  key={file.name}
-                  onClick={() => switchFile(file)}
-                  className="p-4 cursor-pointer relative transition-colors hover:bg-white/5"
-                  style={{ borderBottom: "1px solid rgba(255,255,255,0.05)", background: isActive ? "rgba(255,255,255,0.05)" : undefined }}
-                >
-                  <div className="absolute left-0 top-0 bottom-0 w-1 rounded-r" style={{ backgroundColor: isActive ? "#a0c9ff" : "transparent" }} />
-                  <div className="flex items-center gap-3 mb-1">
-                    <span className="material-symbols-outlined" style={{ fontSize: 16, color: isActive ? "#a0c9ff" : "rgba(255,255,255,0.4)" }}>{file.icon}</span>
-                    <span className="font-bold text-sm" style={{ color: isActive ? "#fff" : "rgba(255,255,255,0.6)" }}>{file.name}</span>
-                  </div>
-                  <div className="text-xs pl-7" style={{ color: "rgba(255,255,255,0.4)" }}>{file.description}</div>
-                </div>
-              );
-            })}
-          </div>
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeStage}
+              className="flex flex-col flex-1 overflow-y-auto"
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              variants={{
+                hidden: {},
+                visible: { transition: { staggerChildren: reduce ? 0 : 0.05 } },
+              }}
+            >
+              {currentStage.files.map((file) => {
+                const isActive = activeFile === file.name;
+                return (
+                  <motion.div
+                    key={file.name}
+                    variants={{
+                      hidden: reduce ? {} : { opacity: 0, x: -10 },
+                      visible: { opacity: 1, x: 0, transition: { duration: 0.22, ease: EASE } },
+                    }}
+                    onClick={() => switchFile(file)}
+                    className="p-4 cursor-pointer relative transition-colors hover:bg-white/5"
+                    style={{
+                      borderBottom: "1px solid rgba(255,255,255,0.05)",
+                      background: isActive ? "rgba(255,255,255,0.05)" : undefined,
+                    }}
+                  >
+                    {/* Sliding active bar */}
+                    {isActive && (
+                      <motion.div
+                        layoutId="file-bar"
+                        className="absolute left-0 top-0 bottom-0 w-1 rounded-r"
+                        style={{ backgroundColor: "#a0c9ff" }}
+                        initial={false}
+                        transition={reduce ? { duration: 0 } : SPRING}
+                      />
+                    )}
+                    <div className="flex items-center gap-3 mb-1">
+                      <span
+                        className="material-symbols-outlined"
+                        style={{
+                          fontSize: 16,
+                          color: isActive ? "#a0c9ff" : "rgba(255,255,255,0.4)",
+                          transition: "color 0.2s",
+                        }}
+                      >
+                        {file.icon}
+                      </span>
+                      <span
+                        className="font-bold text-sm"
+                        style={{
+                          color: isActive ? "#fff" : "rgba(255,255,255,0.6)",
+                          transition: "color 0.2s",
+                        }}
+                      >
+                        {file.name}
+                      </span>
+                    </div>
+                    <div className="text-xs pl-7" style={{ color: "rgba(255,255,255,0.4)" }}>{file.description}</div>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+          </AnimatePresence>
         </div>
 
         {/* Panel 3: Main content */}
         <div className="flex flex-col p-8 overflow-y-auto" style={{ background: "#111124" }}>
-          {renderContent()}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeView}
+              className="flex flex-col flex-1 min-h-0"
+              initial={reduce ? {} : { opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0, transition: { duration: 0.25, ease: EASE } }}
+              exit={{ opacity: 0, y: -8, transition: { duration: 0.12, ease: "easeIn" } }}
+            >
+              {renderContent()}
+            </motion.div>
+          </AnimatePresence>
         </div>
 
       </div>
