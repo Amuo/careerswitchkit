@@ -14,15 +14,15 @@ const bullets = [
 
 export default function Hero() {
   return (
-    <section className="relative bg-[#070719] min-h-screen flex items-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center overflow-hidden">
       {/* Noise texture */}
       <div
         className="absolute inset-0 noise-texture pointer-events-none select-none"
-        style={{ opacity: 0.025 }}
+        style={{ opacity: 0.04 }}
         aria-hidden="true"
       />
 
-      {/* Single ambient glow */}
+      {/* Left ambient glow */}
       <motion.div
         aria-hidden="true"
         className="absolute pointer-events-none"
@@ -30,7 +30,7 @@ export default function Hero() {
           width: "1000px",
           height: "800px",
           background:
-            "radial-gradient(ellipse at center, rgba(55,146,232,0.11) 0%, transparent 68%)",
+            "radial-gradient(ellipse at center, rgba(55,146,232,0.18) 0%, transparent 68%)",
           top: "-280px",
           left: "-320px",
         }}
@@ -38,20 +38,37 @@ export default function Hero() {
         transition={{ duration: 14, ease: "easeInOut", repeat: Infinity }}
       />
 
-      {/* Subtle right-side glow */}
+      {/* Right-side glow */}
       <motion.div
         aria-hidden="true"
         className="absolute pointer-events-none"
         style={{
-          width: "500px",
-          height: "600px",
+          width: "600px",
+          height: "700px",
           background:
-            "radial-gradient(ellipse at center, rgba(55,146,232,0.06) 0%, transparent 70%)",
+            "radial-gradient(ellipse at center, rgba(55,146,232,0.12) 0%, transparent 70%)",
           top: "10%",
           right: "-120px",
         }}
         animate={{ y: [0, -20, 0] }}
         transition={{ duration: 18, ease: "easeInOut", repeat: Infinity }}
+      />
+
+      {/* Center-bottom glow — anchors the hero visually */}
+      <motion.div
+        aria-hidden="true"
+        className="absolute pointer-events-none"
+        style={{
+          width: "800px",
+          height: "500px",
+          background:
+            "radial-gradient(ellipse at center, rgba(55,146,232,0.08) 0%, transparent 70%)",
+          bottom: "-100px",
+          left: "50%",
+          transform: "translateX(-50%)",
+        }}
+        animate={{ opacity: [0.6, 1, 0.6] }}
+        transition={{ duration: 8, ease: "easeInOut", repeat: Infinity }}
       />
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-32 pb-20 lg:pt-40 lg:pb-24">
