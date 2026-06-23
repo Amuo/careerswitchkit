@@ -51,7 +51,7 @@ export default function Home() {
       {/* Noise texture overlay */}
       <div className="fixed inset-0 pointer-events-none opacity-50" style={{ zIndex: 1, filter: "url(#c3-noise)" }} aria-hidden="true" />
 
-      <div className="relative min-h-screen overflow-x-hidden" style={{ color: "#e2e0fa" }}>
+      <div className="relative min-h-screen" style={{ color: "#e2e0fa", overflowX: "clip" }}>
         <LandingBackground />
         <FadeUpObserver />
 
@@ -137,6 +137,7 @@ export default function Home() {
                 See The System
               </a>
             </div>
+
           </section>
 
           {/* ── System Dashboard ─────────────────────────────────────────── */}
