@@ -100,120 +100,154 @@ function AnimatedNumber({ to, duration = 1.4, delay = 0 }: { to: number; duratio
   return <>{value}</>;
 }
 
-// ─── Stage 01: Transfer Map ───────────────────────────────────────────────────
+// ─── Stage 01: Translation Engine ────────────────────────────────────────────
+
+const BEFORE_ITEMS = [
+  { text: "Helped customers find products and answered their daily questions.", flag: "Helped customers" },
+  { text: "Worked with the team to meet our quarterly sales targets.", flag: "Worked with the team" },
+  { text: "Managed back of house and kept shelves stocked.", flag: "Managed back of house" },
+  { text: "Assisted manager with staff scheduling and shift coverage.", flag: "Assisted manager" },
+];
+
+const AFTER_ITEMS = [
+  { text: "Drove customer acquisition through consultative selling and needs analysis.", highlight: "consultative selling" },
+  { text: "Collaborated cross-functionally to exceed quarterly KPIs by 18%.", highlight: "exceed quarterly KPIs" },
+  { text: "Oversaw inventory logistics for a high-volume retail environment.", highlight: "inventory logistics" },
+  { text: "Coordinated workforce planning across 3 departments, reducing overtime 22%.", highlight: "workforce planning" },
+];
+
+function InlineFlag({ text, phrase }: { text: string; phrase: string }) {
+  const i = text.indexOf(phrase);
+  if (i === -1) return <>{text}</>;
+  return (
+    <>
+      {text.slice(0, i)}
+      <span className="rounded px-0.5" style={{ background: "rgba(239,68,68,0.18)", color: "#fca5a5", textDecoration: "underline", textDecorationStyle: "wavy", textDecorationColor: "rgba(239,68,68,0.6)" }}>
+        {phrase}
+      </span>
+      {text.slice(i + phrase.length)}
+    </>
+  );
+}
+
+function InlineHighlight({ text, phrase }: { text: string; phrase: string }) {
+  const i = text.indexOf(phrase);
+  if (i === -1) return <>{text}</>;
+  return (
+    <>
+      {text.slice(0, i)}
+      <span className="rounded px-0.5 font-semibold" style={{ background: "rgba(160,201,255,0.18)", color: "#a0c9ff" }}>
+        {phrase}
+      </span>
+      {text.slice(i + phrase.length)}
+    </>
+  );
+}
 
 function Stage01Content() {
   const reduce = useReducedMotion();
-  const fadeScale = (delay: number) => ({
-    initial: reduce ? {} : { opacity: 0, scale: 0.78 },
-    animate: { opacity: 1, scale: 1, transition: { delay, duration: 0.45, ease: EASE } },
-  });
 
   return (
     <div className="flex flex-col h-full">
-      <h3 className="text-white/60 font-bold text-xs uppercase tracking-widest mb-6">System Blueprint: Transfer Map</h3>
-      <div className="flex-1 rounded-2xl border border-white/10 bg-[#0a0a16] overflow-hidden relative node-map-bg flex items-center justify-center">
-        <div className="relative w-full h-full flex items-center justify-center p-8">
+      <h3 className="text-white/60 font-bold text-xs uppercase tracking-widest mb-4">Translation Engine: Start Here Guide</h3>
 
-          {/* SVG lines — draw in via pathLength */}
-          <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
-            {[
-              "M 200 250 C 300 250, 400 150, 500 150",
-              "M 200 250 C 300 250, 400 350, 500 350",
-              "M 500 150 C 600 150, 700 250, 800 250",
-              "M 500 350 C 600 350, 700 250, 800 250",
-            ].map((d, i) => (
-              <motion.path
-                key={d}
-                d={d}
-                fill="none"
-                stroke="rgba(160,201,255,0.3)"
-                strokeDasharray="4,4"
-                strokeWidth="2"
-                initial={reduce ? {} : { pathLength: 0, opacity: 0 }}
-                animate={{ pathLength: 1, opacity: 1, transition: { delay: 0.05 + i * 0.08, duration: 0.6, ease: EASE } }}
-                className="animate-[dash_20s_linear_infinite]"
-              />
+      {/* ── Three-column layout: before | transform | after ── */}
+      <div className="flex-1 grid gap-3 min-h-0" style={{ gridTemplateColumns: "1fr 44px 1fr" }}>
+
+        {/* LEFT — Before */}
+        <motion.div
+          className="flex flex-col rounded-2xl overflow-hidden"
+          style={{ background: "rgba(239,68,68,0.04)", border: "1px solid rgba(239,68,68,0.2)" }}
+          initial={reduce ? {} : { opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0, transition: { duration: 0.35, ease: EASE } }}
+        >
+          <div className="flex items-center gap-2 px-4 py-3" style={{ borderBottom: "1px solid rgba(239,68,68,0.12)" }}>
+            <span className="material-symbols-outlined text-red-400" style={{ fontSize: 14 }}>warning</span>
+            <span className="text-[10px] font-bold uppercase tracking-widest text-red-400">Before — Generic Language</span>
+          </div>
+          <div className="flex-1 p-4 flex flex-col gap-3 overflow-y-auto">
+            {BEFORE_ITEMS.map(({ text, flag }, i) => (
+              <motion.div
+                key={flag}
+                className="flex gap-2.5"
+                initial={reduce ? {} : { opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0, transition: { delay: 0.2 + i * 0.07, duration: 0.25, ease: EASE } }}
+              >
+                <span className="material-symbols-outlined text-red-500/60 shrink-0 mt-0.5" style={{ fontSize: 14 }}>cancel</span>
+                <p className="text-[12px] leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>
+                  <InlineFlag text={text} phrase={flag} />
+                </p>
+              </motion.div>
             ))}
-            {[{ cx: 200, cy: 250 }, { cx: 500, cy: 150 }, { cx: 500, cy: 350 }, { cx: 800, cy: 250 }].map(({ cx, cy }, i) => (
-              <motion.circle
-                key={`${cx}-${cy}`}
-                cx={cx} cy={cy} r="4" fill="#a0c9ff"
-                initial={reduce ? {} : { scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1, transition: { delay: 0.1 + i * 0.08, duration: 0.3, ease: EASE } }}
-                style={{ transformOrigin: `${cx}px ${cy}px` }}
-              />
-            ))}
-          </svg>
+          </div>
+        </motion.div>
 
-          {/* Node: Past Experience */}
+        {/* CENTER — Transform column */}
+        <div className="flex flex-col items-center justify-center gap-3">
           <motion.div
-            className="absolute z-10 w-48 p-4 rounded-xl border border-white/10 bg-black/60 backdrop-blur-md shadow-xl text-center glow-pulse"
-            style={{ left: "10%", top: "45%" }}
-            {...fadeScale(0)}
+            className="flex flex-col items-center gap-2"
+            initial={reduce ? {} : { opacity: 0, scale: 0.7 }}
+            animate={{ opacity: 1, scale: 1, transition: { delay: 0.15, duration: 0.35, ease: EASE } }}
           >
-            <div className="w-10 h-10 mx-auto bg-white/5 rounded-full flex items-center justify-center mb-2 border border-white/10">
-              <span className="material-symbols-outlined text-white/60 text-sm">history</span>
-            </div>
-            <div className="text-xs font-bold text-white mb-1 uppercase tracking-wider">Past Experience</div>
-            <div className="text-[10px] text-white/40">Raw unstructured data</div>
-          </motion.div>
-
-          {/* Node: Skill Extraction */}
-          <motion.div
-            className="absolute z-10 w-48 p-4 rounded-xl text-center"
-            style={{ left: "45%", top: "20%", border: "1px solid rgba(160,201,255,0.3)", background: "rgba(160,201,255,0.1)", backdropFilter: "blur(12px)", boxShadow: "0 0 30px rgba(160,201,255,0.15)" }}
-            {...fadeScale(0.1)}
-          >
-            <div className="w-10 h-10 mx-auto rounded-full flex items-center justify-center mb-2" style={{ background: "rgba(160,201,255,0.2)", border: "1px solid rgba(160,201,255,0.3)" }}>
-              <span className="material-symbols-outlined text-sm" style={{ color: "#a0c9ff" }}>transform</span>
-            </div>
-            <div className="text-xs font-bold mb-1 uppercase tracking-wider" style={{ color: "#a0c9ff" }}>Skill Extraction</div>
-            <div className="text-[10px]" style={{ color: "rgba(160,201,255,0.7)" }}>Semantic mapping applied</div>
-          </motion.div>
-
-          {/* Node: Impact Metrics */}
-          <motion.div
-            className="absolute z-10 w-48 p-4 rounded-xl border border-white/10 bg-black/60 backdrop-blur-md shadow-xl text-center"
-            style={{ left: "45%", top: "70%" }}
-            {...fadeScale(0.15)}
-          >
-            <div className="w-10 h-10 mx-auto bg-white/5 rounded-full flex items-center justify-center mb-2 border border-white/10">
-              <span className="material-symbols-outlined text-white/60 text-sm">trending_up</span>
-            </div>
-            <div className="text-xs font-bold text-white mb-1 uppercase tracking-wider">Impact Metrics</div>
-            <div className="text-[10px] text-white/40">Quantifiable outcomes</div>
-          </motion.div>
-
-          {/* Node: Target Role Narrative */}
-          <motion.div
-            className="absolute z-10 w-48 p-4 rounded-xl text-center"
-            style={{ right: "10%", top: "45%", border: "1px solid rgba(74,222,128,0.3)", background: "rgba(74,222,128,0.1)", backdropFilter: "blur(12px)", boxShadow: "0 0 30px rgba(74,222,128,0.15)" }}
-            {...fadeScale(0.22)}
-          >
-            <div className="w-10 h-10 mx-auto rounded-full flex items-center justify-center mb-2" style={{ background: "rgba(74,222,128,0.2)", border: "1px solid rgba(74,222,128,0.3)" }}>
-              <span className="material-symbols-outlined text-sm" style={{ color: "#4ade80" }}>check_circle</span>
-            </div>
-            <div className="text-xs font-bold mb-1 uppercase tracking-wider" style={{ color: "#4ade80" }}>Target Role Narrative</div>
-            <div className="text-[10px]" style={{ color: "rgba(74,222,128,0.7)" }}>Aligned to JD requirements</div>
+            {/* Dashed connector line top */}
+            <div className="flex-1 w-px" style={{ background: "linear-gradient(to bottom, transparent, rgba(160,201,255,0.3))", height: 80 }} />
+            {/* Icon */}
+            <motion.div
+              className="w-9 h-9 rounded-full flex items-center justify-center shrink-0"
+              style={{ background: "rgba(160,201,255,0.12)", border: "1px solid rgba(160,201,255,0.35)", boxShadow: "0 0 18px rgba(160,201,255,0.2)" }}
+              animate={reduce ? {} : { boxShadow: ["0 0 14px rgba(160,201,255,0.15)", "0 0 28px rgba(160,201,255,0.35)", "0 0 14px rgba(160,201,255,0.15)"] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <span className="material-symbols-outlined" style={{ fontSize: 18, color: "#a0c9ff" }}>arrow_forward</span>
+            </motion.div>
+            {/* Dashed connector line bottom */}
+            <div className="flex-1 w-px" style={{ background: "linear-gradient(to top, transparent, rgba(160,201,255,0.3))", height: 80 }} />
           </motion.div>
         </div>
 
-        {/* Bottom overlay card */}
+        {/* RIGHT — After */}
         <motion.div
-          className="absolute bottom-6 left-6 right-6 p-6 liquid-glass rounded-xl border border-white/10 z-20"
-          initial={reduce ? {} : { opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0, transition: { delay: 0.35, duration: 0.4, ease: EASE } }}
+          className="flex flex-col rounded-2xl overflow-hidden"
+          style={{ background: "rgba(160,201,255,0.04)", border: "1px solid rgba(160,201,255,0.2)" }}
+          initial={reduce ? {} : { opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0, transition: { duration: 0.35, ease: EASE } }}
         >
-          <div className="flex items-center justify-between">
-            <div className="space-y-1">
-              <div className="text-xs font-bold uppercase tracking-widest" style={{ color: "#a0c9ff" }}>Active Process</div>
-              <div className="text-lg font-bold text-white">Semantic Transfer Mapping</div>
-            </div>
-            <span className="material-symbols-outlined" style={{ color: "#a0c9ff" }}>account_tree</span>
+          <div className="flex items-center gap-2 px-4 py-3" style={{ borderBottom: "1px solid rgba(160,201,255,0.12)" }}>
+            <span className="material-symbols-outlined" style={{ fontSize: 14, color: "#a0c9ff" }}>check_circle</span>
+            <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color: "#a0c9ff" }}>After — Career Switch Narrative</span>
+          </div>
+          <div className="flex-1 p-4 flex flex-col gap-3 overflow-y-auto">
+            {AFTER_ITEMS.map(({ text, highlight }, i) => (
+              <motion.div
+                key={highlight}
+                className="flex gap-2.5"
+                initial={reduce ? {} : { opacity: 0, x: 10 }}
+                animate={{ opacity: 1, x: 0, transition: { delay: 0.25 + i * 0.07, duration: 0.25, ease: EASE } }}
+              >
+                <span className="material-symbols-outlined shrink-0 mt-0.5" style={{ fontSize: 14, color: "rgba(160,201,255,0.5)" }}>check</span>
+                <p className="text-[12px] leading-relaxed" style={{ color: "rgba(255,255,255,0.7)" }}>
+                  <InlineHighlight text={text} phrase={highlight} />
+                </p>
+              </motion.div>
+            ))}
           </div>
         </motion.div>
       </div>
+
+      {/* ── Bottom strip ── */}
+      <motion.div
+        className="mt-3 px-4 py-3 rounded-xl flex items-center justify-between"
+        style={{ background: "rgba(160,201,255,0.05)", border: "1px solid rgba(160,201,255,0.12)" }}
+        initial={reduce ? {} : { opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0, transition: { delay: 0.6, duration: 0.3, ease: EASE } }}
+      >
+        <div className="flex items-center gap-2">
+          <span className="material-symbols-outlined" style={{ fontSize: 15, color: "#a0c9ff" }}>description</span>
+          <span className="text-xs font-semibold" style={{ color: "#a0c9ff" }}>Start Here Guide</span>
+          <span className="text-xs" style={{ color: "rgba(255,255,255,0.35)" }}>— walks you through this translation for your exact career switch</span>
+        </div>
+        <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.3)" }}>Stage 1 of 4</span>
+      </motion.div>
     </div>
   );
 }
