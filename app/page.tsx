@@ -94,8 +94,8 @@ export default function Home() {
             >
               <span className="reveal-line-1 block mb-2">Your background isn&apos;t the problem.</span>
               <span
-                className="reveal-line-2 shiny-text"
-                style={{ filter: "drop-shadow(0 0 20px rgba(55,146,232,0.5))" }}
+                className="reveal-line-2 hero-headline-gradient"
+                data-text="Your resume is."
               >
                 Your resume is.
               </span>
