@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 
 type StageId = "stage01" | "stage02" | "stage03" | "stage04";
@@ -75,65 +75,136 @@ const STAGES: StageConfig[] = [
 const SPRING = { type: "spring", stiffness: 380, damping: 30 } as const;
 const EASE   = [0.22, 1, 0.36, 1] as const;
 
+// Counts from 0 to `to` on mount
+function AnimatedNumber({ to, duration = 1.4, delay = 0 }: { to: number; duration?: number; delay?: number }) {
+  const [value, setValue] = useState(0);
+  const reduce = useReducedMotion();
+
+  useEffect(() => {
+    if (reduce) { setValue(to); return; }
+    let raf: number;
+    const timer = setTimeout(() => {
+      const start = performance.now();
+      const tick = (now: number) => {
+        const t = Math.min((now - start) / (duration * 1000), 1);
+        const eased = 1 - Math.pow(1 - t, 3);
+        setValue(Math.round(eased * to));
+        if (t < 1) raf = requestAnimationFrame(tick);
+        else setValue(to);
+      };
+      raf = requestAnimationFrame(tick);
+    }, delay * 1000);
+    return () => { clearTimeout(timer); cancelAnimationFrame(raf); };
+  }, [to, duration, delay, reduce]);
+
+  return <>{value}</>;
+}
+
 // ─── Stage 01: Transfer Map ───────────────────────────────────────────────────
 
 function Stage01Content() {
+  const reduce = useReducedMotion();
+  const fadeScale = (delay: number) => ({
+    initial: reduce ? {} : { opacity: 0, scale: 0.78 },
+    animate: { opacity: 1, scale: 1, transition: { delay, duration: 0.45, ease: EASE } },
+  });
+
   return (
     <div className="flex flex-col h-full">
       <h3 className="text-white/60 font-bold text-xs uppercase tracking-widest mb-6">System Blueprint: Transfer Map</h3>
       <div className="flex-1 rounded-2xl border border-white/10 bg-[#0a0a16] overflow-hidden relative node-map-bg flex items-center justify-center">
         <div className="relative w-full h-full flex items-center justify-center p-8">
-          {/* Animated SVG connecting lines */}
+
+          {/* SVG lines — draw in via pathLength */}
           <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
-            <path className="animate-[dash_20s_linear_infinite]" d="M 200 250 C 300 250, 400 150, 500 150" fill="none" stroke="rgba(160,201,255,0.3)" strokeDasharray="4,4" strokeWidth="2" />
-            <path className="animate-[dash_20s_linear_infinite]" d="M 200 250 C 300 250, 400 350, 500 350" fill="none" stroke="rgba(160,201,255,0.3)" strokeDasharray="4,4" strokeWidth="2" />
-            <path className="animate-[dash_20s_linear_infinite]" d="M 500 150 C 600 150, 700 250, 800 250" fill="none" stroke="rgba(160,201,255,0.3)" strokeDasharray="4,4" strokeWidth="2" />
-            <path className="animate-[dash_20s_linear_infinite]" d="M 500 350 C 600 350, 700 250, 800 250" fill="none" stroke="rgba(160,201,255,0.3)" strokeDasharray="4,4" strokeWidth="2" />
-            <circle cx="200" cy="250" r="4" fill="#a0c9ff" />
-            <circle cx="500" cy="150" r="4" fill="#a0c9ff" />
-            <circle cx="500" cy="350" r="4" fill="#a0c9ff" />
-            <circle cx="800" cy="250" r="4" fill="#a0c9ff" />
+            {[
+              "M 200 250 C 300 250, 400 150, 500 150",
+              "M 200 250 C 300 250, 400 350, 500 350",
+              "M 500 150 C 600 150, 700 250, 800 250",
+              "M 500 350 C 600 350, 700 250, 800 250",
+            ].map((d, i) => (
+              <motion.path
+                key={d}
+                d={d}
+                fill="none"
+                stroke="rgba(160,201,255,0.3)"
+                strokeDasharray="4,4"
+                strokeWidth="2"
+                initial={reduce ? {} : { pathLength: 0, opacity: 0 }}
+                animate={{ pathLength: 1, opacity: 1, transition: { delay: 0.05 + i * 0.08, duration: 0.6, ease: EASE } }}
+                className="animate-[dash_20s_linear_infinite]"
+              />
+            ))}
+            {[{ cx: 200, cy: 250 }, { cx: 500, cy: 150 }, { cx: 500, cy: 350 }, { cx: 800, cy: 250 }].map(({ cx, cy }, i) => (
+              <motion.circle
+                key={`${cx}-${cy}`}
+                cx={cx} cy={cy} r="4" fill="#a0c9ff"
+                initial={reduce ? {} : { scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1, transition: { delay: 0.1 + i * 0.08, duration: 0.3, ease: EASE } }}
+                style={{ transformOrigin: `${cx}px ${cy}px` }}
+              />
+            ))}
           </svg>
 
           {/* Node: Past Experience */}
-          <div className="absolute z-10 w-48 p-4 rounded-xl border border-white/10 bg-black/60 backdrop-blur-md shadow-xl text-center glow-pulse" style={{ left: "10%", top: "45%" }}>
+          <motion.div
+            className="absolute z-10 w-48 p-4 rounded-xl border border-white/10 bg-black/60 backdrop-blur-md shadow-xl text-center glow-pulse"
+            style={{ left: "10%", top: "45%" }}
+            {...fadeScale(0)}
+          >
             <div className="w-10 h-10 mx-auto bg-white/5 rounded-full flex items-center justify-center mb-2 border border-white/10">
               <span className="material-symbols-outlined text-white/60 text-sm">history</span>
             </div>
             <div className="text-xs font-bold text-white mb-1 uppercase tracking-wider">Past Experience</div>
             <div className="text-[10px] text-white/40">Raw unstructured data</div>
-          </div>
+          </motion.div>
 
-          {/* Node: Skill Extraction (primary / glowing) */}
-          <div className="absolute z-10 w-48 p-4 rounded-xl text-center" style={{ left: "45%", top: "20%", border: "1px solid rgba(160,201,255,0.3)", background: "rgba(160,201,255,0.1)", backdropFilter: "blur(12px)", boxShadow: "0 0 30px rgba(160,201,255,0.15)" }}>
+          {/* Node: Skill Extraction */}
+          <motion.div
+            className="absolute z-10 w-48 p-4 rounded-xl text-center"
+            style={{ left: "45%", top: "20%", border: "1px solid rgba(160,201,255,0.3)", background: "rgba(160,201,255,0.1)", backdropFilter: "blur(12px)", boxShadow: "0 0 30px rgba(160,201,255,0.15)" }}
+            {...fadeScale(0.1)}
+          >
             <div className="w-10 h-10 mx-auto rounded-full flex items-center justify-center mb-2" style={{ background: "rgba(160,201,255,0.2)", border: "1px solid rgba(160,201,255,0.3)" }}>
               <span className="material-symbols-outlined text-sm" style={{ color: "#a0c9ff" }}>transform</span>
             </div>
             <div className="text-xs font-bold mb-1 uppercase tracking-wider" style={{ color: "#a0c9ff" }}>Skill Extraction</div>
             <div className="text-[10px]" style={{ color: "rgba(160,201,255,0.7)" }}>Semantic mapping applied</div>
-          </div>
+          </motion.div>
 
           {/* Node: Impact Metrics */}
-          <div className="absolute z-10 w-48 p-4 rounded-xl border border-white/10 bg-black/60 backdrop-blur-md shadow-xl text-center" style={{ left: "45%", top: "70%" }}>
+          <motion.div
+            className="absolute z-10 w-48 p-4 rounded-xl border border-white/10 bg-black/60 backdrop-blur-md shadow-xl text-center"
+            style={{ left: "45%", top: "70%" }}
+            {...fadeScale(0.15)}
+          >
             <div className="w-10 h-10 mx-auto bg-white/5 rounded-full flex items-center justify-center mb-2 border border-white/10">
               <span className="material-symbols-outlined text-white/60 text-sm">trending_up</span>
             </div>
             <div className="text-xs font-bold text-white mb-1 uppercase tracking-wider">Impact Metrics</div>
             <div className="text-[10px] text-white/40">Quantifiable outcomes</div>
-          </div>
+          </motion.div>
 
-          {/* Node: Target Role Narrative (green) */}
-          <div className="absolute z-10 w-48 p-4 rounded-xl text-center" style={{ right: "10%", top: "45%", border: "1px solid rgba(74,222,128,0.3)", background: "rgba(74,222,128,0.1)", backdropFilter: "blur(12px)", boxShadow: "0 0 30px rgba(74,222,128,0.15)" }}>
+          {/* Node: Target Role Narrative */}
+          <motion.div
+            className="absolute z-10 w-48 p-4 rounded-xl text-center"
+            style={{ right: "10%", top: "45%", border: "1px solid rgba(74,222,128,0.3)", background: "rgba(74,222,128,0.1)", backdropFilter: "blur(12px)", boxShadow: "0 0 30px rgba(74,222,128,0.15)" }}
+            {...fadeScale(0.22)}
+          >
             <div className="w-10 h-10 mx-auto rounded-full flex items-center justify-center mb-2" style={{ background: "rgba(74,222,128,0.2)", border: "1px solid rgba(74,222,128,0.3)" }}>
               <span className="material-symbols-outlined text-sm" style={{ color: "#4ade80" }}>check_circle</span>
             </div>
             <div className="text-xs font-bold mb-1 uppercase tracking-wider" style={{ color: "#4ade80" }}>Target Role Narrative</div>
             <div className="text-[10px]" style={{ color: "rgba(74,222,128,0.7)" }}>Aligned to JD requirements</div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Bottom overlay card */}
-        <div className="absolute bottom-6 left-6 right-6 p-6 liquid-glass rounded-xl border border-white/10 z-20">
+        <motion.div
+          className="absolute bottom-6 left-6 right-6 p-6 liquid-glass rounded-xl border border-white/10 z-20"
+          initial={reduce ? {} : { opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0, transition: { delay: 0.35, duration: 0.4, ease: EASE } }}
+        >
           <div className="flex items-center justify-between">
             <div className="space-y-1">
               <div className="text-xs font-bold uppercase tracking-widest" style={{ color: "#a0c9ff" }}>Active Process</div>
@@ -141,7 +212,7 @@ function Stage01Content() {
             </div>
             <span className="material-symbols-outlined" style={{ color: "#a0c9ff" }}>account_tree</span>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
@@ -155,6 +226,8 @@ const GRID_BG: React.CSSProperties = {
 };
 
 function Stage02Content({ view }: { view: string }) {
+  const reduce = useReducedMotion();
+
   return (
     <div className="flex flex-col h-full">
       <h3 className="text-white/60 font-bold text-xs uppercase tracking-widest mb-6">Glassmorphic Blueprint: Architecture</h3>
@@ -164,45 +237,53 @@ function Stage02Content({ view }: { view: string }) {
         <div className="flex-1 flex items-center justify-center p-8 bg-[#0a0a16] rounded-2xl border border-white/10 relative overflow-hidden">
           <div className="absolute inset-0" style={GRID_BG} />
           <div className="relative flex items-center z-10">
-          <div className="cv-wireframe w-[340px] h-[480px] rounded-lg p-6 flex flex-col gap-4 bg-black/40 backdrop-blur-sm">
-            <div className="flex flex-col items-center gap-2 border-b border-white/10 pb-4">
-              <div className="w-32 h-4 bg-primary/40 rounded-full" />
-              <div className="w-48 h-2 bg-white/20 rounded-full" />
-              <div className="flex gap-2 mt-1">
-                <div className="w-12 h-2 bg-white/10 rounded-full" />
-                <div className="w-12 h-2 bg-white/10 rounded-full" />
-                <div className="w-12 h-2 bg-white/10 rounded-full" />
+            <motion.div
+              className="cv-wireframe w-[340px] h-[480px] rounded-lg p-6 flex flex-col gap-4 bg-black/40 backdrop-blur-sm"
+              initial={reduce ? {} : { opacity: 0, x: -24 }}
+              animate={{ opacity: 1, x: 0, transition: { duration: 0.4, ease: EASE } }}
+            >
+              <div className="flex flex-col items-center gap-2 border-b border-white/10 pb-4">
+                <div className="w-32 h-4 bg-primary/40 rounded-full" />
+                <div className="w-48 h-2 bg-white/20 rounded-full" />
+                <div className="flex gap-2 mt-1">
+                  <div className="w-12 h-2 bg-white/10 rounded-full" />
+                  <div className="w-12 h-2 bg-white/10 rounded-full" />
+                  <div className="w-12 h-2 bg-white/10 rounded-full" />
+                </div>
               </div>
-            </div>
-            <div className="wire-block p-3">
-              <div className="w-20 h-3 bg-white/20 rounded-full mb-3" />
-              <div className="wire-text w-full" /><div className="wire-text w-[90%]" /><div className="wire-text w-[80%]" />
-            </div>
-            <div className="flex-1 flex flex-col gap-3">
-              <div className="w-24 h-3 bg-primary/40 rounded-full mb-1" />
               <div className="wire-block p-3">
-                <div className="flex justify-between mb-2">
-                  <div className="w-32 h-3 bg-white/30 rounded-full" /><div className="w-16 h-2 bg-white/10 rounded-full" />
-                </div>
-                <div className="w-24 h-2 bg-white/20 rounded-full mb-3" />
-                <div className="flex items-start gap-2 mb-2"><div className="w-1 h-1 rounded-full bg-primary/50 mt-1" /><div className="wire-text flex-1" /></div>
-                <div className="flex items-start gap-2 mb-2"><div className="w-1 h-1 rounded-full bg-primary/50 mt-1" /><div className="wire-text flex-1 w-[85%]" /></div>
+                <div className="w-20 h-3 bg-white/20 rounded-full mb-3" />
+                <div className="wire-text w-full" /><div className="wire-text w-[90%]" /><div className="wire-text w-[80%]" />
               </div>
-              <div className="wire-block p-3 opacity-60">
-                <div className="flex justify-between mb-2">
-                  <div className="w-28 h-3 bg-white/30 rounded-full" /><div className="w-16 h-2 bg-white/10 rounded-full" />
+              <div className="flex-1 flex flex-col gap-3">
+                <div className="w-24 h-3 bg-primary/40 rounded-full mb-1" />
+                <div className="wire-block p-3">
+                  <div className="flex justify-between mb-2">
+                    <div className="w-32 h-3 bg-white/30 rounded-full" /><div className="w-16 h-2 bg-white/10 rounded-full" />
+                  </div>
+                  <div className="w-24 h-2 bg-white/20 rounded-full mb-3" />
+                  <div className="flex items-start gap-2 mb-2"><div className="w-1 h-1 rounded-full bg-primary/50 mt-1" /><div className="wire-text flex-1" /></div>
+                  <div className="flex items-start gap-2 mb-2"><div className="w-1 h-1 rounded-full bg-primary/50 mt-1" /><div className="wire-text flex-1 w-[85%]" /></div>
                 </div>
-                <div className="flex items-start gap-2 mb-2"><div className="w-1 h-1 rounded-full bg-white/30 mt-1" /><div className="wire-text flex-1" /></div>
+                <div className="wire-block p-3 opacity-60">
+                  <div className="flex justify-between mb-2">
+                    <div className="w-28 h-3 bg-white/30 rounded-full" /><div className="w-16 h-2 bg-white/10 rounded-full" />
+                  </div>
+                  <div className="flex items-start gap-2 mb-2"><div className="w-1 h-1 rounded-full bg-white/30 mt-1" /><div className="wire-text flex-1" /></div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div className="ml-4 w-48 p-4 liquid-glass rounded-xl border border-primary/20 shadow-2xl shrink-0">
-            <div className="flex items-center gap-2 mb-2" style={{ color: "#a0c9ff" }}>
-              <span className="material-symbols-outlined text-sm">view_agenda</span>
-              <span className="text-xs font-bold uppercase tracking-widest">One-Page Focus</span>
-            </div>
-            <p className="text-[11px] text-white/70 leading-relaxed">Aggressive curation. Highlights only the most relevant transferrable skills for rapid ATS scanning.</p>
-          </div>
+            </motion.div>
+            <motion.div
+              className="ml-4 w-48 p-4 liquid-glass rounded-xl border border-primary/20 shadow-2xl shrink-0"
+              initial={reduce ? {} : { opacity: 0, x: 24 }}
+              animate={{ opacity: 1, x: 0, transition: { delay: 0.1, duration: 0.4, ease: EASE } }}
+            >
+              <div className="flex items-center gap-2 mb-2" style={{ color: "#a0c9ff" }}>
+                <span className="material-symbols-outlined text-sm">view_agenda</span>
+                <span className="text-xs font-bold uppercase tracking-widest">One-Page Focus</span>
+              </div>
+              <p className="text-[11px] text-white/70 leading-relaxed">Aggressive curation. Highlights only the most relevant transferrable skills for rapid ATS scanning.</p>
+            </motion.div>
           </div>
         </div>
       )}
@@ -212,43 +293,52 @@ function Stage02Content({ view }: { view: string }) {
         <div className="flex-1 flex items-center justify-center p-8 bg-[#0a0a16] rounded-2xl border border-white/10 relative overflow-hidden">
           <div className="absolute inset-0" style={GRID_BG} />
           <div className="relative flex items-center z-10">
-          <div className="cv-wireframe w-[400px] h-[480px] rounded-lg p-6 grid gap-6 bg-black/40 backdrop-blur-sm" style={{ gridTemplateColumns: "1fr 2fr" }}>
-            <div className="flex flex-col gap-4 border-r border-white/10 pr-4">
-              <div className="w-16 h-16 rounded-full bg-white/10 mx-auto mb-2" />
-              <div className="w-full h-3 bg-primary/40 rounded-full mb-1" />
-              <div className="w-3/4 h-2 bg-white/20 rounded-full mx-auto mb-4" />
-              <div className="w-16 h-2 bg-white/30 rounded-full mb-2" />
-              <div className="wire-block p-2 mb-1"><div className="w-full h-1.5 bg-white/20 rounded-full" /></div>
-              <div className="wire-block p-2 mb-1"><div className="w-5/6 h-1.5 bg-white/20 rounded-full" /></div>
-              <div className="wire-block p-2 mb-4"><div className="w-4/5 h-1.5 bg-white/20 rounded-full" /></div>
-              <div className="w-16 h-2 bg-white/30 rounded-full mb-2 mt-auto" />
-              <div className="w-full h-1.5 bg-white/10 rounded-full mb-1" />
-              <div className="w-full h-1.5 bg-white/10 rounded-full" />
-            </div>
-            <div className="flex flex-col gap-4">
-              <div className="wire-block p-3">
-                <div className="w-24 h-3 bg-white/30 rounded-full mb-3" />
-                <div className="wire-text w-full" /><div className="wire-text w-full" /><div className="wire-text w-[70%]" />
+            <motion.div
+              className="cv-wireframe w-[400px] h-[480px] rounded-lg p-6 grid gap-6 bg-black/40 backdrop-blur-sm"
+              style={{ gridTemplateColumns: "1fr 2fr" }}
+              initial={reduce ? {} : { opacity: 0, x: -24 }}
+              animate={{ opacity: 1, x: 0, transition: { duration: 0.4, ease: EASE } }}
+            >
+              <div className="flex flex-col gap-4 border-r border-white/10 pr-4">
+                <div className="w-16 h-16 rounded-full bg-white/10 mx-auto mb-2" />
+                <div className="w-full h-3 bg-primary/40 rounded-full mb-1" />
+                <div className="w-3/4 h-2 bg-white/20 rounded-full mx-auto mb-4" />
+                <div className="w-16 h-2 bg-white/30 rounded-full mb-2" />
+                <div className="wire-block p-2 mb-1"><div className="w-full h-1.5 bg-white/20 rounded-full" /></div>
+                <div className="wire-block p-2 mb-1"><div className="w-5/6 h-1.5 bg-white/20 rounded-full" /></div>
+                <div className="wire-block p-2 mb-4"><div className="w-4/5 h-1.5 bg-white/20 rounded-full" /></div>
+                <div className="w-16 h-2 bg-white/30 rounded-full mb-2 mt-auto" />
+                <div className="w-full h-1.5 bg-white/10 rounded-full mb-1" />
+                <div className="w-full h-1.5 bg-white/10 rounded-full" />
               </div>
-              <div className="w-32 h-3 bg-primary/40 rounded-full mt-2" />
-              <div className="wire-block p-3 border-l-2 border-primary/50 rounded-l-none bg-primary/5">
-                <div className="w-40 h-3 bg-white/40 rounded-full mb-2" />
-                <div className="flex items-start gap-2 mb-2"><div className="w-1.5 h-1.5 rounded-sm bg-primary mt-1" /><div className="wire-text flex-1" /></div>
-                <div className="flex items-start gap-2 mb-2"><div className="w-1.5 h-1.5 rounded-sm bg-primary mt-1" /><div className="wire-text flex-1" /></div>
+              <div className="flex flex-col gap-4">
+                <div className="wire-block p-3">
+                  <div className="w-24 h-3 bg-white/30 rounded-full mb-3" />
+                  <div className="wire-text w-full" /><div className="wire-text w-full" /><div className="wire-text w-[70%]" />
+                </div>
+                <div className="w-32 h-3 bg-primary/40 rounded-full mt-2" />
+                <div className="wire-block p-3 border-l-2 border-primary/50 rounded-l-none bg-primary/5">
+                  <div className="w-40 h-3 bg-white/40 rounded-full mb-2" />
+                  <div className="flex items-start gap-2 mb-2"><div className="w-1.5 h-1.5 rounded-sm bg-primary mt-1" /><div className="wire-text flex-1" /></div>
+                  <div className="flex items-start gap-2 mb-2"><div className="w-1.5 h-1.5 rounded-sm bg-primary mt-1" /><div className="wire-text flex-1" /></div>
+                </div>
+                <div className="wire-block p-3">
+                  <div className="w-32 h-3 bg-white/30 rounded-full mb-2" />
+                  <div className="flex items-start gap-2 mb-2"><div className="w-1 h-1 rounded-full bg-white/30 mt-1" /><div className="wire-text flex-1" /></div>
+                </div>
               </div>
-              <div className="wire-block p-3">
-                <div className="w-32 h-3 bg-white/30 rounded-full mb-2" />
-                <div className="flex items-start gap-2 mb-2"><div className="w-1 h-1 rounded-full bg-white/30 mt-1" /><div className="wire-text flex-1" /></div>
+            </motion.div>
+            <motion.div
+              className="ml-4 w-48 p-4 liquid-glass rounded-xl border border-primary/20 shadow-2xl shrink-0"
+              initial={reduce ? {} : { opacity: 0, x: 24 }}
+              animate={{ opacity: 1, x: 0, transition: { delay: 0.1, duration: 0.4, ease: EASE } }}
+            >
+              <div className="flex items-center gap-2 mb-2" style={{ color: "#a0c9ff" }}>
+                <span className="material-symbols-outlined text-sm">dashboard</span>
+                <span className="text-xs font-bold uppercase tracking-widest">Hybrid Layout</span>
               </div>
-            </div>
-          </div>
-          <div className="ml-4 w-48 p-4 liquid-glass rounded-xl border border-primary/20 shadow-2xl shrink-0">
-            <div className="flex items-center gap-2 mb-2" style={{ color: "#a0c9ff" }}>
-              <span className="material-symbols-outlined text-sm">dashboard</span>
-              <span className="text-xs font-bold uppercase tracking-widest">Hybrid Layout</span>
-            </div>
-            <p className="text-[11px] text-white/70 leading-relaxed">Balances skills-first sidebar with chronological narrative. Best for major career shifts.</p>
-          </div>
+              <p className="text-[11px] text-white/70 leading-relaxed">Balances skills-first sidebar with chronological narrative. Best for major career shifts.</p>
+            </motion.div>
           </div>
         </div>
       )}
@@ -258,15 +348,25 @@ function Stage02Content({ view }: { view: string }) {
         <div className="flex-1 flex items-center justify-center p-8 bg-[#0a0a16] rounded-2xl border border-white/10 relative overflow-hidden">
           <div className="absolute inset-0" style={GRID_BG} />
           <div className="flex gap-4 relative z-10">
-            <div className="cv-wireframe w-[260px] h-[360px] rounded-lg p-5 flex flex-col gap-3 bg-black/40 backdrop-blur-sm -rotate-2 origin-bottom-right transition-transform hover:rotate-0">
+            <motion.div
+              className="cv-wireframe w-[260px] h-[360px] rounded-lg p-5 flex flex-col gap-3 bg-black/40 backdrop-blur-sm origin-bottom-right"
+              initial={reduce ? { rotate: -2 } : { opacity: 0, x: -28, rotate: -6 }}
+              animate={{ opacity: 1, x: 0, rotate: -2, transition: { duration: 0.45, ease: EASE } }}
+              whileHover={{ rotate: 0, transition: { duration: 0.25 } }}
+            >
               <div className="w-24 h-3 bg-primary/40 rounded-full mx-auto mb-2" />
               <div className="w-32 h-1.5 bg-white/20 rounded-full mx-auto mb-4" />
               <div className="wire-block p-2"><div className="wire-text w-full" /><div className="wire-text w-[90%]" /></div>
               <div className="w-20 h-2 bg-white/30 rounded-full mt-2" />
               <div className="wire-block p-2"><div className="w-24 h-2 bg-white/40 rounded-full mb-2" /><div className="wire-text w-full" /><div className="wire-text w-full" /></div>
               <div className="wire-block p-2"><div className="w-20 h-2 bg-white/40 rounded-full mb-2" /><div className="wire-text w-full" /></div>
-            </div>
-            <div className="cv-wireframe w-[260px] h-[360px] rounded-lg p-5 flex flex-col gap-3 bg-black/40 backdrop-blur-sm rotate-2 origin-bottom-left transition-transform hover:rotate-0 translate-y-4">
+            </motion.div>
+            <motion.div
+              className="cv-wireframe w-[260px] h-[360px] rounded-lg p-5 flex flex-col gap-3 bg-black/40 backdrop-blur-sm origin-bottom-left translate-y-4"
+              initial={reduce ? { rotate: 2 } : { opacity: 0, x: 28, rotate: 6 }}
+              animate={{ opacity: 1, x: 0, rotate: 2, transition: { delay: 0.08, duration: 0.45, ease: EASE } }}
+              whileHover={{ rotate: 0, transition: { duration: 0.25 } }}
+            >
               <div className="flex justify-between items-center mb-4 border-b border-white/10 pb-2">
                 <div className="w-16 h-1.5 bg-white/20 rounded-full" /><div className="w-8 h-1.5 bg-white/10 rounded-full" />
               </div>
@@ -278,7 +378,7 @@ function Stage02Content({ view }: { view: string }) {
                 <div className="w-10 h-8 rounded bg-white/5" />
                 <div className="w-10 h-8 rounded bg-white/5" />
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       )}
@@ -288,24 +388,46 @@ function Stage02Content({ view }: { view: string }) {
 
 // ─── Stage 03: Prompt Vault ───────────────────────────────────────────────────
 
+const PROMPT_ITEMS = ["Achievement Quantifier", "Bullet Point Condenser", "JD Alignment Scanner", "Cover Letter Generator"];
+
 function Stage03PromptContent() {
+  const reduce = useReducedMotion();
+
   return (
     <div className="flex flex-col h-full">
       <h3 className="text-white/60 font-bold text-xs uppercase tracking-widest mb-6">AI Architecture: Prompt Vault</h3>
       <div className="flex-1 rounded-2xl border border-white/10 bg-[#0a0a16] p-6 flex gap-6 overflow-hidden">
+        {/* Left: prompt menu */}
         <div className="w-1/3 flex flex-col gap-2 border-r border-white/10 pr-6 overflow-y-auto">
           <div className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-2">System Prompts</div>
-          <div className="px-3 py-2.5 rounded-lg cursor-pointer flex items-center justify-between" style={{ background: "rgba(160,201,255,0.1)", border: "1px solid rgba(160,201,255,0.2)" }}>
+          {/* Active item */}
+          <motion.div
+            className="px-3 py-2.5 rounded-lg cursor-pointer flex items-center justify-between"
+            style={{ background: "rgba(160,201,255,0.1)", border: "1px solid rgba(160,201,255,0.2)" }}
+            initial={reduce ? {} : { opacity: 0, x: -12 }}
+            animate={{ opacity: 1, x: 0, transition: { duration: 0.3, ease: EASE } }}
+          >
             <span className="text-xs font-bold" style={{ color: "#a0c9ff" }}>Semantic Rewrite Engine</span>
             <span className="material-symbols-outlined text-[14px]" style={{ color: "#a0c9ff", fontSize: 14 }}>arrow_forward_ios</span>
-          </div>
-          {["Achievement Quantifier", "Bullet Point Condenser", "JD Alignment Scanner", "Cover Letter Generator"].map((p) => (
-            <div key={p} className="px-3 py-2.5 rounded-lg hover:bg-white/5 cursor-pointer flex items-center justify-between transition-colors">
+          </motion.div>
+          {/* Other items stagger in */}
+          {PROMPT_ITEMS.map((p, i) => (
+            <motion.div
+              key={p}
+              className="px-3 py-2.5 rounded-lg hover:bg-white/5 cursor-pointer flex items-center justify-between transition-colors"
+              initial={reduce ? {} : { opacity: 0, x: -12 }}
+              animate={{ opacity: 1, x: 0, transition: { delay: 0.06 + i * 0.05, duration: 0.28, ease: EASE } }}
+            >
               <span className="text-xs font-medium text-white/60">{p}</span>
-            </div>
+            </motion.div>
           ))}
         </div>
-        <div className="w-2/3 flex flex-col h-full relative">
+        {/* Right: code editor */}
+        <motion.div
+          className="w-2/3 flex flex-col h-full relative"
+          initial={reduce ? {} : { opacity: 0 }}
+          animate={{ opacity: 1, transition: { delay: 0.2, duration: 0.4 } }}
+        >
           <div className="flex items-center justify-between mb-4 pb-4 border-b border-white/10">
             <div className="flex items-center gap-3">
               <span className="material-symbols-outlined" style={{ color: "#a0c9ff" }}>terminal</span>
@@ -328,7 +450,7 @@ function Stage03PromptContent() {
             <span className="text-white/40">// Input Data:</span><br />
             [PASTE_RAW_BULLETS_HERE]
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
@@ -337,56 +459,115 @@ function Stage03PromptContent() {
 // ─── Stage 03: ATS Engine ─────────────────────────────────────────────────────
 
 function Stage03ATSContent() {
+  const reduce = useReducedMotion();
+
   return (
     <div className="flex flex-col h-full">
       <h3 className="text-white/60 font-bold text-xs uppercase tracking-widest mb-6">ATS Compatibility Engine</h3>
       <div className="grid grid-cols-2 gap-6 mb-8">
-        <div className="p-5 rounded-2xl" style={{ background: "rgba(248,113,113,0.05)", border: "1px solid rgba(248,113,113,0.2)" }}>
+        {/* Before */}
+        <motion.div
+          className="p-5 rounded-2xl"
+          style={{ background: "rgba(248,113,113,0.05)", border: "1px solid rgba(248,113,113,0.2)" }}
+          initial={reduce ? {} : { opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0, transition: { duration: 0.35, ease: EASE } }}
+        >
           <div className="flex items-center justify-between mb-4">
             <span className="text-[10px] font-bold text-red-400 uppercase tracking-widest">Initial Scan</span>
-            <div className="text-2xl font-black text-red-400 font-geist">23<span className="text-[10px] font-normal opacity-60">/100</span></div>
+            <div className="text-2xl font-black text-red-400 font-geist">
+              <AnimatedNumber to={23} duration={1.2} delay={0.2} />
+              <span className="text-[10px] font-normal opacity-60">/100</span>
+            </div>
           </div>
           <div className="space-y-2">
-            <div className="flex items-center gap-2 px-2 py-1.5 rounded-md bg-red-400/10">
+            <motion.div
+              className="flex items-center gap-2 px-2 py-1.5 rounded-md bg-red-400/10"
+              initial={reduce ? {} : { opacity: 0, x: -8 }}
+              animate={{ opacity: 1, x: 0, transition: { delay: 0.3, duration: 0.25, ease: EASE } }}
+            >
               <span className="material-symbols-outlined text-red-400 text-sm">cancel</span>
               <span className="text-[11px] font-medium text-red-200">No keywords</span>
-            </div>
-            <div className="flex items-center gap-2 px-2 py-1.5 rounded-md bg-red-400/10">
+            </motion.div>
+            <motion.div
+              className="flex items-center gap-2 px-2 py-1.5 rounded-md bg-red-400/10"
+              initial={reduce ? {} : { opacity: 0, x: -8 }}
+              animate={{ opacity: 1, x: 0, transition: { delay: 0.38, duration: 0.25, ease: EASE } }}
+            >
               <span className="material-symbols-outlined text-red-400 text-sm">cancel</span>
               <span className="text-[11px] font-medium text-red-200">No metrics</span>
-            </div>
+            </motion.div>
           </div>
-        </div>
-        <div className="p-5 rounded-2xl" style={{ background: "rgba(74,222,128,0.05)", border: "1px solid rgba(74,222,128,0.2)", boxShadow: "0 0 30px rgba(74,222,128,0.1)" }}>
+        </motion.div>
+
+        {/* After */}
+        <motion.div
+          className="p-5 rounded-2xl"
+          style={{ background: "rgba(74,222,128,0.05)", border: "1px solid rgba(74,222,128,0.2)", boxShadow: "0 0 30px rgba(74,222,128,0.1)" }}
+          initial={reduce ? {} : { opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0, transition: { delay: 0.08, duration: 0.35, ease: EASE } }}
+        >
           <div className="flex items-center justify-between mb-4">
             <span className="text-[10px] font-bold text-green-400 uppercase tracking-widest">Kit Optimized</span>
-            <div className="text-2xl font-black text-green-400 font-geist">87<span className="text-[10px] font-normal opacity-60">/100</span></div>
+            <div className="text-2xl font-black text-green-400 font-geist">
+              <AnimatedNumber to={87} duration={1.4} delay={0.25} />
+              <span className="text-[10px] font-normal opacity-60">/100</span>
+            </div>
           </div>
           <div className="space-y-2">
-            <div className="flex items-center gap-2 px-2 py-1.5 rounded-md bg-green-400/10">
+            <motion.div
+              className="flex items-center gap-2 px-2 py-1.5 rounded-md bg-green-400/10"
+              initial={reduce ? {} : { opacity: 0, x: 8 }}
+              animate={{ opacity: 1, x: 0, transition: { delay: 0.35, duration: 0.25, ease: EASE } }}
+            >
               <span className="material-symbols-outlined text-green-400 text-sm">check_circle</span>
               <span className="text-[11px] font-medium text-green-200">Keyword Match</span>
-            </div>
-            <div className="flex items-center gap-2 px-2 py-1.5 rounded-md bg-green-400/10">
+            </motion.div>
+            <motion.div
+              className="flex items-center gap-2 px-2 py-1.5 rounded-md bg-green-400/10"
+              initial={reduce ? {} : { opacity: 0, x: 8 }}
+              animate={{ opacity: 1, x: 0, transition: { delay: 0.43, duration: 0.25, ease: EASE } }}
+            >
               <span className="material-symbols-outlined text-green-400 text-sm">check_circle</span>
               <span className="text-[11px] font-medium text-green-200">Impact Metrics</span>
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
+
+      {/* Transformation block */}
       <div className="flex-1 rounded-2xl border border-white/10 bg-black/20 p-6 font-mono text-[13px] leading-relaxed overflow-hidden flex flex-col justify-center" style={{ color: "#c0c7d3" }}>
-        <div className="text-white/40 mb-4">// System Output: Semantic Transformation</div>
-        <div className="p-4 rounded-lg mb-4" style={{ background: "rgba(127,29,29,0.1)", border: "1px solid rgba(239,68,68,0.2)" }}>
+        <motion.div
+          className="text-white/40 mb-4"
+          initial={reduce ? {} : { opacity: 0 }}
+          animate={{ opacity: 1, transition: { delay: 0.5, duration: 0.3 } }}
+        >
+          // System Output: Semantic Transformation
+        </motion.div>
+        <motion.div
+          className="p-4 rounded-lg mb-4"
+          style={{ background: "rgba(127,29,29,0.1)", border: "1px solid rgba(239,68,68,0.2)" }}
+          initial={reduce ? {} : { opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0, transition: { delay: 0.55, duration: 0.3, ease: EASE } }}
+        >
           <span className="text-red-400 block mb-1 text-xs font-bold uppercase tracking-wider">Previous:</span>
           <span className="opacity-80">&ldquo;Helped customers find products and managed the back stock room.&rdquo;</span>
-        </div>
-        <div className="flex justify-center mb-4">
+        </motion.div>
+        <motion.div
+          className="flex justify-center mb-4"
+          initial={reduce ? {} : { opacity: 0, y: -6 }}
+          animate={{ opacity: 1, y: 0, transition: { delay: 0.65, duration: 0.25, ease: EASE } }}
+        >
           <span className="material-symbols-outlined text-white/30">arrow_downward</span>
-        </div>
-        <div className="p-4 rounded-lg" style={{ background: "rgba(20,83,45,0.1)", border: "1px solid rgba(34,197,94,0.2)" }}>
+        </motion.div>
+        <motion.div
+          className="p-4 rounded-lg"
+          style={{ background: "rgba(20,83,45,0.1)", border: "1px solid rgba(34,197,94,0.2)" }}
+          initial={reduce ? {} : { opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0, transition: { delay: 0.72, duration: 0.35, ease: EASE } }}
+        >
           <span className="text-green-400 block mb-1 text-xs font-bold uppercase tracking-wider">Optimized Outcome:</span>
           <span className="opacity-90">&ldquo;Managed inventory lifecycle for high-volume retail operations, implementing a new restocking sequence that improved retrieval efficiency by 30%.&rdquo;</span>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
@@ -395,42 +576,94 @@ function Stage03ATSContent() {
 // ─── Stage 04: Deployment Ready ───────────────────────────────────────────────
 
 function Stage04Content() {
+  const reduce = useReducedMotion();
+
   return (
     <div className="flex flex-col h-full">
       <h3 className="text-white/60 font-bold text-xs uppercase tracking-widest mb-6">System Status: Deployment</h3>
-      <div className="flex-1 rounded-2xl overflow-hidden relative flex flex-col items-center justify-center p-8 text-center"
-        style={{ border: "1px solid rgba(160,201,255,0.2)", background: "rgba(160,201,255,0.05)", boxShadow: "inset 0 0 100px rgba(160,201,255,0.05)" }}>
+      <div
+        className="flex-1 rounded-2xl overflow-hidden relative flex flex-col items-center justify-center p-8 text-center"
+        style={{ border: "1px solid rgba(160,201,255,0.2)", background: "rgba(160,201,255,0.05)", boxShadow: "inset 0 0 100px rgba(160,201,255,0.05)" }}
+      >
+        {/* Radar rings scale in */}
         <div className="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none">
-          <div className="w-[400px] h-[400px] rounded-full border border-primary/30 absolute" />
-          <div className="w-[300px] h-[300px] rounded-full border border-primary/40 absolute" />
-          <div className="w-[200px] h-[200px] rounded-full border border-primary/50 absolute animate-[spin_10s_linear_infinite] border-t-transparent" />
+          {[
+            { size: 400, border: "border-primary/30", delay: 0 },
+            { size: 300, border: "border-primary/40", delay: 0.1 },
+            { size: 200, border: "border-primary/50", delay: 0.18, spin: true },
+          ].map(({ size, border, delay, spin }) => (
+            <motion.div
+              key={size}
+              className={`rounded-full border absolute ${border} ${spin ? "animate-[spin_10s_linear_infinite] border-t-transparent" : ""}`}
+              style={{ width: size, height: size }}
+              initial={reduce ? {} : { scale: 0.1, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1, transition: { delay, duration: 0.7, ease: EASE } }}
+            />
+          ))}
         </div>
+
+        {/* Verified badge */}
         <div className="relative z-10 mb-8">
-          <div className="w-28 h-28 mx-auto rounded-full flex items-center justify-center border-2 animate-pulse"
-            style={{ background: "rgba(160,201,255,0.2)", backdropFilter: "blur(12px)", borderColor: "rgba(160,201,255,0.5)", boxShadow: "0 0 40px rgba(160,201,255,0.3)" }}>
+          <motion.div
+            className="w-28 h-28 mx-auto rounded-full flex items-center justify-center border-2 animate-pulse"
+            style={{ background: "rgba(160,201,255,0.2)", backdropFilter: "blur(12px)", borderColor: "rgba(160,201,255,0.5)", boxShadow: "0 0 40px rgba(160,201,255,0.3)" }}
+            initial={reduce ? {} : { scale: 0.4, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1, transition: { type: "spring", stiffness: 260, damping: 18, delay: 0.2 } }}
+          >
             <span className="material-symbols-outlined" style={{ fontSize: 60, color: "#a0c9ff", fontVariationSettings: "'FILL' 1" }}>verified</span>
-          </div>
-          <div className="absolute -right-4 -bottom-2 bg-green-500 text-black text-xs font-bold px-3 py-1 rounded-full border-2 shadow-lg flex items-center gap-1" style={{ borderColor: "#111124" }}>
+          </motion.div>
+          <motion.div
+            className="absolute -right-4 -bottom-2 bg-green-500 text-black text-xs font-bold px-3 py-1 rounded-full border-2 shadow-lg flex items-center gap-1"
+            style={{ borderColor: "#111124" }}
+            initial={reduce ? {} : { scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1, transition: { type: "spring", stiffness: 360, damping: 20, delay: 0.55 } }}
+          >
             <span className="material-symbols-outlined" style={{ fontSize: 12 }}>done_all</span> 87/100 ATS Match
-          </div>
+          </motion.div>
         </div>
-        <h4 className="text-4xl font-black font-geist text-white mb-3 tracking-tight">Deployment Ready</h4>
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-green-400 text-sm font-medium mb-6" style={{ background: "rgba(34,197,94,0.1)", border: "1px solid rgba(34,197,94,0.3)" }}>
+
+        <motion.h4
+          className="text-4xl font-black font-geist text-white mb-3 tracking-tight"
+          initial={reduce ? {} : { opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0, transition: { delay: 0.48, duration: 0.35, ease: EASE } }}
+        >
+          Deployment Ready
+        </motion.h4>
+
+        <motion.div
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-green-400 text-sm font-medium mb-6"
+          style={{ background: "rgba(34,197,94,0.1)", border: "1px solid rgba(34,197,94,0.3)" }}
+          initial={reduce ? {} : { opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0, transition: { delay: 0.58, duration: 0.3, ease: EASE } }}
+        >
           <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
           System Complete &amp; Cleared for Submission
-        </div>
-        <p className="max-w-md text-sm leading-relaxed mb-8" style={{ color: "#c0c7d3" }}>
+        </motion.div>
+
+        <motion.p
+          className="max-w-md text-sm leading-relaxed mb-8"
+          style={{ color: "#c0c7d3" }}
+          initial={reduce ? {} : { opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0, transition: { delay: 0.66, duration: 0.3, ease: EASE } }}
+        >
           Your background has been semantically remapped. The narrative is constructed, quantified, and optimized to bypass automated gatekeepers.
-        </p>
-        <div className="flex gap-4 w-full max-w-sm">
-          <button className="flex-1 py-3 px-4 rounded-xl font-bold text-sm hover:scale-105 transition-transform flex items-center justify-center gap-2"
-            style={{ background: "#a0c9ff", color: "#003259", boxShadow: "0 0 20px rgba(160,201,255,0.2)" }}>
+        </motion.p>
+
+        <motion.div
+          className="flex gap-4 w-full max-w-sm"
+          initial={reduce ? {} : { opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0, transition: { delay: 0.74, duration: 0.3, ease: EASE } }}
+        >
+          <button
+            className="flex-1 py-3 px-4 rounded-xl font-bold text-sm hover:scale-105 transition-transform flex items-center justify-center gap-2"
+            style={{ background: "#a0c9ff", color: "#003259", boxShadow: "0 0 20px rgba(160,201,255,0.2)" }}
+          >
             <span className="material-symbols-outlined text-sm">download</span> Final Export
           </button>
           <button className="py-3 px-4 rounded-xl bg-white/10 text-white font-bold text-sm hover:bg-white/20 transition-colors border border-white/10 flex items-center justify-center">
             Review PDF
           </button>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
@@ -522,7 +755,6 @@ export default function SystemDashboard() {
                   onClick={() => switchStage(stage.id)}
                   className="relative w-full flex items-center gap-3 px-3 py-3 rounded-lg"
                 >
-                  {/* Sliding active pill */}
                   {isActive && (
                     <motion.div
                       layoutId="stage-pill"
@@ -532,7 +764,6 @@ export default function SystemDashboard() {
                       transition={reduce ? { duration: 0 } : SPRING}
                     />
                   )}
-                  {/* Hover layer for inactive */}
                   {!isActive && (
                     <div className="absolute inset-0 rounded-lg hover:bg-white/5 transition-colors" />
                   )}
@@ -616,7 +847,6 @@ export default function SystemDashboard() {
                       background: isActive ? "rgba(255,255,255,0.05)" : undefined,
                     }}
                   >
-                    {/* Sliding active bar */}
                     {isActive && (
                       <motion.div
                         layoutId="file-bar"
