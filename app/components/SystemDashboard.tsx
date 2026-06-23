@@ -466,50 +466,53 @@ export default function SystemDashboard() {
   }
 
   return (
-    <div
-      className="w-full rounded-2xl overflow-hidden border border-white/10 h-[720px] flex flex-col"
-      style={{
-        background: "rgba(10,10,28,0.8)",
-        backdropFilter: "blur(16px)",
-        boxShadow: "0 32px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06)",
-      }}
-    >
-      {/* macOS title bar */}
-      <div
-        className="flex items-center gap-2 px-5 py-3.5 border-b border-white/[0.06] shrink-0"
-        style={{ background: "rgba(255,255,255,0.025)" }}
-      >
-        <div className="traffic-light bg-red-500/70" />
-        <div className="traffic-light bg-yellow-500/70" />
-        <div className="traffic-light bg-green-500/70" />
-        <span className="ml-4 text-[11px] text-white/30 font-mono tracking-tight flex-1">
-          CareerSwitchKit — {currentFilename}
-        </span>
-        <span className="text-[10px] text-on-surface-variant/50 font-mono">{systemStatus}</span>
+    <div className="w-full">
+      {/* ── Title bar — matches Stitch: bg-white/10 backdrop-blur-md, app tabs, cloud icon ── */}
+      <div className="bg-white/10 backdrop-blur-md border border-white/10 rounded-t-xl px-4 py-2 flex items-center justify-between text-[13px] font-medium text-white/90 shadow-2xl">
+        <div className="flex items-center gap-4">
+          <span className="material-symbols-outlined leading-none" style={{ fontSize: 16 }}>grid_view</span>
+          <span className="font-bold">System Dashboard</span>
+          <span className="opacity-60 hidden sm:inline">Sequence</span>
+          <span className="opacity-60 hidden sm:inline">Output</span>
+          <span className="opacity-60 hidden sm:inline">Materials</span>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="material-symbols-outlined" style={{ fontSize: 16 }}>cloud_done</span>
+          <span className="opacity-90 text-xs font-mono truncate max-w-[160px]">{currentFilename}</span>
+        </div>
       </div>
 
-      {/* 3-panel grid */}
-      <div className="flex flex-1 overflow-hidden" style={{ display: "grid", gridTemplateColumns: "260px 320px 1fr" }}>
-
-        {/* Panel 1: Sidebar — stage navigation */}
-        <aside className="border-r border-white/5 flex flex-col overflow-y-auto" style={{ background: "rgba(0,0,0,0.2)" }}>
-          <div className="px-5 pt-5 pb-3">
-            <p className="text-[9px] text-primary/35 uppercase tracking-widest font-medium">Lifecycle Stages</p>
+      {/* ── Main panel — liquid-glass, shadow-2xl, rounded-b-xl ── */}
+      <div
+        className="liquid-glass rounded-b-xl overflow-hidden shadow-2xl"
+        style={{ display: "grid", gridTemplateColumns: "260px 320px 1fr", height: 720 }}
+      >
+        {/* Panel 1: Sidebar — traffic lights at TOP, status widget at BOTTOM */}
+        <aside className="border-r border-white/5 p-6 flex flex-col gap-8" style={{ background: "rgba(0,0,0,0.2)" }}>
+          {/* Traffic lights — Stitch puts these inside the sidebar */}
+          <div className="flex gap-2">
+            <div className="traffic-light" style={{ backgroundColor: "#FF5F56" }} />
+            <div className="traffic-light" style={{ backgroundColor: "#FFBD2E" }} />
+            <div className="traffic-light" style={{ backgroundColor: "#27C93F" }} />
           </div>
 
-          <div className="flex flex-col gap-1 px-3 flex-1">
+          {/* Stage nav */}
+          <nav className="space-y-1 flex-1">
+            <div className="text-[11px] font-bold uppercase tracking-widest mb-4 px-3" style={{ color: "rgba(255,255,255,0.4)" }}>
+              Lifecycle Stages
+            </div>
             {STAGES.map((stage) => {
               const isActive = activeStage === stage.id;
               return (
                 <button
                   key={stage.id}
                   onClick={() => switchStage(stage.id)}
-                  className={`sidebar-item flex items-center gap-3 w-full text-left px-3 py-3 rounded-xl transition-all duration-200 ${
-                    isActive ? "active" : "text-on-surface-variant/60 hover:text-on-surface hover:bg-white/[0.04]"
+                  className={`sidebar-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all ${
+                    isActive ? "active" : "text-on-surface-variant/60 hover:text-white hover:bg-white/5"
                   }`}
                 >
                   <span
-                    className="material-symbols-outlined shrink-0"
+                    className="material-symbols-outlined"
                     style={{
                       fontSize: 18,
                       fontVariationSettings: isActive ? "'FILL' 1" : "'FILL' 0",
@@ -522,57 +525,58 @@ export default function SystemDashboard() {
                 </button>
               );
             })}
-          </div>
+          </nav>
 
-          {/* Status widget */}
-          <div className="p-4 mt-auto">
-            <div className="bg-white/[0.03] border border-white/5 rounded-xl p-3">
-              <div className="flex items-center gap-2 mb-1.5">
-                <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" style={{ animation: "ping 2s ease-in-out infinite" }} />
-                <span className="text-[10px] text-emerald-400/70 font-medium">System Active</span>
-              </div>
-              <p className="text-[11px] text-on-surface-variant/60 leading-snug">{systemStatus}</p>
+          {/* Status widget — Stitch: bg-primary/5 border border-primary/20 */}
+          <nav className="mt-auto">
+            <div className="rounded-xl p-4" style={{ background: "rgba(160,201,255,0.05)", border: "1px solid rgba(160,201,255,0.2)" }}>
+              <div className="text-[10px] font-bold uppercase tracking-widest mb-1" style={{ color: "#a0c9ff" }}>Status</div>
+              <div className="text-xs" style={{ color: "#e2e0fa" }}>{systemStatus}</div>
             </div>
-          </div>
+          </nav>
         </aside>
 
-        {/* Panel 2: File list */}
-        <div className="border-r border-white/5 flex flex-col overflow-y-auto" style={{ background: "rgba(0,0,0,0.1)" }}>
-          <div className="px-5 pt-5 pb-3">
-            <p className="text-[9px] text-primary/35 uppercase tracking-widest font-medium">Stage Files</p>
+        {/* Panel 2: File list — header with folder_open icon, left-border file items */}
+        <div className="flex flex-col" style={{ background: "rgba(0,0,0,0.1)", borderRight: "1px solid rgba(255,255,255,0.05)" }}>
+          <div className="p-4 flex items-center justify-between" style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+            <h2 className="font-bold text-sm uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.6)" }}>Stage Files</h2>
+            <span className="material-symbols-outlined text-sm" style={{ color: "rgba(255,255,255,0.4)", fontSize: 18 }}>folder_open</span>
           </div>
 
-          <div className="flex flex-col gap-1 px-3">
+          <div className="flex flex-col flex-1 overflow-y-auto">
             {currentStage.files.map((file) => {
               const isActive = activeFile === file.name;
               return (
-                <button
+                <div
                   key={file.name}
                   onClick={() => switchFile(file)}
-                  className={`file-item flex items-start gap-3 w-full text-left px-3 py-3 rounded-xl transition-all duration-200 ${
-                    isActive ? "active" : "hover:bg-white/[0.03]"
-                  }`}
+                  className="p-4 cursor-pointer relative transition-colors hover:bg-white/5"
+                  style={{
+                    borderBottom: "1px solid rgba(255,255,255,0.05)",
+                    background: isActive ? "rgba(255,255,255,0.05)" : undefined,
+                  }}
                 >
                   {/* Left indicator bar */}
                   <div
-                    className={`file-indicator w-0.5 h-full self-stretch rounded-full shrink-0 mt-1 ${
-                      isActive ? "bg-primary" : "bg-white/10"
-                    }`}
-                    style={{ minHeight: 32 }}
+                    className="absolute left-0 top-0 bottom-0 w-1 rounded-r"
+                    style={{ backgroundColor: isActive ? "#a0c9ff" : "transparent" }}
                   />
-                  <span
-                    className={`material-symbols-outlined shrink-0 file-icon ${isActive ? "text-primary" : "text-on-surface-variant/40"}`}
-                    style={{ fontSize: 18, fontVariationSettings: isActive ? "'FILL' 1" : "'FILL' 0" }}
-                  >
-                    {file.icon}
-                  </span>
-                  <div className="min-w-0">
-                    <p className={`file-text text-[12px] font-medium leading-tight mb-0.5 ${isActive ? "text-white" : "text-on-surface-variant/70"}`}>
+                  <div className="flex items-center gap-3 mb-1">
+                    <span
+                      className="material-symbols-outlined"
+                      style={{ fontSize: 16, color: isActive ? "#a0c9ff" : "rgba(255,255,255,0.4)" }}
+                    >
+                      {file.icon}
+                    </span>
+                    <span
+                      className="font-bold text-sm"
+                      style={{ color: isActive ? "#fff" : "rgba(255,255,255,0.6)" }}
+                    >
                       {file.name}
-                    </p>
-                    <p className="text-[11px] text-on-surface-variant/40 leading-tight">{file.description}</p>
+                    </span>
                   </div>
-                </button>
+                  <div className="text-xs pl-7" style={{ color: "rgba(255,255,255,0.4)" }}>{file.description}</div>
+                </div>
               );
             })}
           </div>
