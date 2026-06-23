@@ -37,7 +37,7 @@ export default function TermsPage() {
       <Navbar />
 
       <main className="pt-40 pb-32 px-6 relative z-10">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-5xl mx-auto">
 
           {/* Page header */}
           <div className="text-center mb-16">
@@ -45,7 +45,7 @@ export default function TermsPage() {
               <Scale className="w-3 h-3 mr-2 text-[#3792E8]" aria-hidden />
               Legal Overview
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tighter">
+            <h1 className="text-6xl md:text-8xl font-bold mb-6 tracking-tighter">
               <span className="shiny-text">Terms &amp; Privacy</span>
             </h1>
             <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
@@ -55,7 +55,7 @@ export default function TermsPage() {
           </div>
 
           {/* Content card */}
-          <div className="liquid-glass p-8 md:p-12" style={{ lineHeight: 1.8 }}>
+          <div className="liquid-glass p-10 md:p-16" style={{ lineHeight: 1.8 }}>
 
             {/* 1 — About */}
             <section className="space-y-4">
@@ -63,7 +63,7 @@ export default function TermsPage() {
                 <Building2 className="w-6 h-6 text-[#3792E8] shrink-0" aria-hidden />
                 1. About CareerSwitchKit
               </h2>
-              <div className="space-y-4 text-white/90 text-base">
+              <div className="space-y-4 text-white/90 text-lg">
                 <p className="leading-relaxed">
                   CareerSwitchKit is operated by Zorby&amp;Co. By purchasing
                   and downloading this kit, you agree to these terms.
@@ -89,7 +89,7 @@ export default function TermsPage() {
                 <Package className="w-6 h-6 text-[#3792E8] shrink-0" aria-hidden />
                 2. What You&apos;re Buying
               </h2>
-              <div className="space-y-4 text-white/90 text-base">
+              <div className="space-y-4 text-white/90 text-lg">
                 <p className="leading-relaxed">
                   CareerSwitchKit is a digital product providing frameworks for
                   career transitions. The purchase includes:
@@ -126,7 +126,7 @@ export default function TermsPage() {
                   <CreditCard className="w-5 h-5 text-[#3792E8] shrink-0" aria-hidden />
                   3. Payments
                 </h2>
-                <p className="text-white/90 text-sm leading-relaxed">
+                <p className="text-white/90 text-base leading-relaxed">
                   We use{" "}
                   <strong className="text-white">Polar.sh</strong> as our
                   Merchant of Record. They handle all payment processing
@@ -138,7 +138,7 @@ export default function TermsPage() {
                   <RotateCcw className="w-5 h-5 text-[#3792E8] shrink-0" aria-hidden />
                   4. Refund Policy
                 </h2>
-                <p className="text-white/90 text-sm leading-relaxed">
+                <p className="text-white/90 text-base leading-relaxed">
                   We offer a strict 30-day money-back guarantee. If the system
                   doesn&apos;t meet your expectations, email{" "}
                   <a
@@ -160,7 +160,7 @@ export default function TermsPage() {
                 <ShieldAlert className="w-6 h-6 text-[#3792E8] shrink-0" aria-hidden />
                 5. Disclaimers &amp; IP
               </h2>
-              <div className="space-y-6 text-white/90 text-base">
+              <div className="space-y-6 text-white/90 text-lg">
                 <div>
                   <h3 className="text-white font-semibold mb-2">
                     No Employment Guarantee
@@ -205,7 +205,7 @@ export default function TermsPage() {
                 <ShieldCheck className="w-6 h-6 text-[#3792E8] shrink-0" aria-hidden />
                 6. Privacy Policy
               </h2>
-              <div className="space-y-4 text-white/90 text-base">
+              <div className="space-y-4 text-white/90 text-lg">
                 <p className="leading-relaxed">
                   We collect only the data necessary for order fulfillment
                   (email address). Payment details are handled entirely by
@@ -233,7 +233,7 @@ export default function TermsPage() {
                   <Landmark className="w-5 h-5 text-[#3792E8] shrink-0" aria-hidden />
                   7. Governing Law
                 </h2>
-                <p className="text-white/90 text-sm leading-relaxed">
+                <p className="text-white/90 text-base leading-relaxed">
                   These terms are governed by the laws of Bosnia and
                   Herzegovina.
                 </p>
@@ -243,7 +243,7 @@ export default function TermsPage() {
                   <History className="w-5 h-5 text-[#3792E8] shrink-0" aria-hidden />
                   8. Modifications
                 </h2>
-                <p className="text-white/90 text-sm leading-relaxed">
+                <p className="text-white/90 text-base leading-relaxed">
                   We reserve the right to modify these terms at any time.
                   Continued use of the product constitutes acceptance of
                   updated terms.
