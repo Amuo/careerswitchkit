@@ -4,24 +4,28 @@ import { useState } from "react";
 
 const FAQS = [
   {
-    q: "What exactly do I get? Is this an app?",
-    a: "CareerSwitchKit is an instant download, not an app or subscription. You get a Start Here Guide (PDF), three CV templates (Google Docs), three cover letter templates (Google Docs), an ATS Checklist, an AI Prompt Pack with 50 copy-paste prompts, and a completed example. No login, no account required. You work through the sequence and apply.",
+    q: "What's in the system?",
+    a: "CareerSwitchKit is an instant download: a Start Here Guide (PDF), three CV templates (Google Docs), three cover letter templates (Google Docs), an ATS Checklist, an AI Prompt Pack with 50 copy-paste prompts, and a completed example showing the full switch in action. No app, no login, no subscription. You work through the four stages in order and apply.",
+  },
+  {
+    q: "How long does it take to complete?",
+    a: "Most people finish the core sequence in a weekend. Stage 1 takes an hour or two — it's the thinking work, mapping what you've done to what the new field values. Stages 2 and 3 are faster once that's done. By the end you have a tailored resume, a cover letter, and a checklist confirming it's ATS-ready.",
+  },
+  {
+    q: "I've been applying for months and getting nothing. Will this help?",
+    a: "Probably yes — and this is exactly who the system is built for. If you're getting no responses, the most likely cause is that your resume isn't translating your background into language the new field recognises. The system is specifically designed to fix that translation gap, not to give you a prettier version of what you already have.",
   },
   {
     q: "Is this just for tech jobs?",
     a: "No. The system is built on how experience translates across fields, not on any one industry. It works in Healthcare, Finance, Operations, Marketing, and others. Your past experience is the raw material. The system shows you how to reframe it for the new field.",
   },
   {
-    q: "Do I need a ChatGPT subscription?",
-    a: "The prompts work with the free version of ChatGPT, Claude, and Gemini. However, GPT-4 or Claude 3.5 Sonnet will produce higher quality rewrites. Either way, the structure around the prompts is what does most of the work.",
-  },
-  {
     q: "How is this different from a resume template I can find for free?",
-    a: "Free templates give you blank boxes. CareerSwitchKit tells you what to put in them. The AI prompts and semantic mapping are specifically designed to translate your past experience into the language hiring managers in your new field actually use.",
+    a: "Free templates give you blank boxes. CareerSwitchKit tells you what to put in them. The AI prompts and language guides are specifically designed to translate your past experience into the terms hiring managers in your new field actually use.",
   },
   {
-    q: "Will this system get me a job?",
-    a: "No system can promise that. What CareerSwitchKit does is remove the most common reason career switchers get filtered out before a human ever reads their application: a resume that doesn't translate their background into the language of the new field.",
+    q: "What if it doesn't help me land interviews?",
+    a: "Full refund within 30 days, no questions asked. Email support@careerswitchkit.org and it's done. We'd rather give you your money back than have you sitting on something that isn't working.",
   },
 ];
 

@@ -16,10 +16,11 @@ const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   mainEntity: [
-    { "@type": "Question", name: "Is this just for tech jobs?", acceptedAnswer: { "@type": "Answer", text: "No. While we include tech examples, the system is built on universal semantic transfer. We've seen success in Healthcare, Finance, Operations, and Marketing." } },
-    { "@type": "Question", name: "Do I need a ChatGPT subscription?", acceptedAnswer: { "@type": "Answer", text: "The prompts work with the free version of ChatGPT, Claude, and Gemini. However, GPT-4 or Claude 3.5 Sonnet will provide higher quality structural rewrites." } },
-    { "@type": "Question", name: "What exactly do I get after paying?", acceptedAnswer: { "@type": "Answer", text: "Instant digital access to our member portal containing the PDF guides, Google Doc templates, and the AI prompt copy-paste library." } },
-    { "@type": "Question", name: "How is this different from a resume template I can find for free?", acceptedAnswer: { "@type": "Answer", text: "Free templates give you a blank structure. CareerSwitchKit gives you the specific language rewrites and AI prompts to translate your past experience into the language of your new target field." } },
+    { "@type": "Question", name: "What's in the system?", acceptedAnswer: { "@type": "Answer", text: "CareerSwitchKit is an instant download: a Start Here Guide, three CV templates, three cover letter templates, an ATS Checklist, 50 AI prompts, and a completed example. No app, no subscription." } },
+    { "@type": "Question", name: "How long does it take to complete?", acceptedAnswer: { "@type": "Answer", text: "Most people finish the core sequence in a weekend. Stage 1 takes an hour or two. By the end you have a tailored resume, cover letter, and an ATS-ready checklist." } },
+    { "@type": "Question", name: "Is this just for tech jobs?", acceptedAnswer: { "@type": "Answer", text: "No. The system works across Healthcare, Finance, Operations, Marketing, and other fields. Your past experience is the raw material. The system shows you how to reframe it for the new field." } },
+    { "@type": "Question", name: "How is this different from a resume template I can find for free?", acceptedAnswer: { "@type": "Answer", text: "Free templates give you blank boxes. CareerSwitchKit tells you what to put in them. The AI prompts and language guides translate your past experience into terms hiring managers in your new field actually use." } },
+    { "@type": "Question", name: "What if it doesn't help me land interviews?", acceptedAnswer: { "@type": "Answer", text: "Full refund within 30 days, no questions asked. Email support@careerswitchkit.org and it's done." } },
   ],
 };
 
