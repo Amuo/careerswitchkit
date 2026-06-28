@@ -29,7 +29,7 @@ const STAGES: StageConfig[] = [
   {
     id: "stage01",
     icon: "map",
-    label: "Stage 1 — Map your transfer",
+    label: "Stage 1: Map your transfer",
     status: "Mapping Transferable Skills",
     defaultFile: "Start Here Guide.pdf",
     defaultView: "stage01",
@@ -40,7 +40,7 @@ const STAGES: StageConfig[] = [
   {
     id: "stage02",
     icon: "construction",
-    label: "Stage 2 — Build your materials",
+    label: "Stage 2: Build your materials",
     status: "Constructing Narrative",
     defaultFile: "One Page CV Template",
     defaultView: "one-page",
@@ -53,7 +53,7 @@ const STAGES: StageConfig[] = [
   {
     id: "stage03",
     icon: "analytics",
-    label: "Stage 3 — Optimize and score",
+    label: "Stage 3: Optimize and score",
     status: "Optimizing for Scanners",
     defaultFile: "ATS Compatibility Engine",
     defaultView: "ats",
@@ -65,7 +65,7 @@ const STAGES: StageConfig[] = [
   {
     id: "stage04",
     icon: "rocket_launch",
-    label: "Stage 4 — Apply with proof",
+    label: "Stage 4: Apply with proof",
     status: "Ready for Deployment",
     defaultFile: "Verified Success",
     defaultView: "stage04",
@@ -338,7 +338,7 @@ function Stage02Content({ view }: { view: string }) {
 
   return (
     <div className="flex flex-col h-full">
-      <h3 className="text-white/60 font-bold text-xs uppercase tracking-widest mb-6">Glassmorphic Blueprint: Architecture</h3>
+      <h3 className="text-white/60 font-bold text-xs uppercase tracking-widest mb-6">CV Template: Layout Preview</h3>
 
       {/* ── One Page ── */}
       {view === "one-page" && (
@@ -629,7 +629,7 @@ function Stage03ATSContent({ autoKey }: { autoKey: number }) {
           animate={{ opacity: 1, x: 0, transition: { delay: 0.1, duration: 0.6, ease: EASE } }}
         >
           <div className="flex items-center justify-between mb-4">
-            <span className="text-[10px] font-bold text-green-400 uppercase tracking-widest">Kit Optimized</span>
+            <span className="text-[10px] font-bold text-green-400 uppercase tracking-widest">System Optimized</span>
             <div className="text-2xl font-black text-green-400 font-geist">
               <AnimatedNumber key={`ats-after-${autoKey}`} to={87} duration={1.8} delay={0.4} />
               <span className="text-[10px] font-normal opacity-60">/100</span>
@@ -707,19 +707,35 @@ function Stage04Content() {
         className="flex-1 rounded-2xl overflow-hidden relative flex flex-col items-center justify-center p-8 text-center"
         style={{ border: "1px solid rgba(160,201,255,0.2)", background: "rgba(160,201,255,0.05)", boxShadow: "inset 0 0 100px rgba(160,201,255,0.05)" }}
       >
-        {/* Radar rings scale in */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none">
+        {/* Radar rings — pulsing signal, not spinning decoration */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           {[
-            { size: 400, border: "border-primary/30", delay: 0 },
-            { size: 300, border: "border-primary/40", delay: 0.1 },
-            { size: 200, border: "border-primary/50", delay: 0.18, spin: true },
-          ].map(({ size, border, delay, spin }) => (
+            { size: 420, delay: 0,    opacity: 0.12 },
+            { size: 300, delay: 0.65, opacity: 0.18 },
+            { size: 190, delay: 1.3,  opacity: 0.25 },
+          ].map(({ size, delay, opacity }) => (
             <motion.div
               key={size}
-              className={`rounded-full border absolute ${border} ${spin ? "animate-[spin_10s_linear_infinite] border-t-transparent" : ""}`}
+              className="rounded-full border border-primary/40 absolute"
               style={{ width: size, height: size }}
-              initial={reduce ? {} : { scale: 0.1, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1, transition: { delay, duration: 0.7, ease: EASE } }}
+              initial={reduce ? {} : { scale: 0.5, opacity: 0 }}
+              animate={{
+                scale: [null, 1, 1.06, 1],
+                opacity: [0, opacity * 2, opacity * 0.4, opacity],
+              }}
+              transition={{
+                duration: reduce ? 0 : 0.9,
+                delay,
+                ease: EASE,
+                times: [0, 0.5, 0.75, 1],
+                opacity: {
+                  repeat: Infinity,
+                  repeatType: "mirror",
+                  duration: 2.8,
+                  delay: delay + 0.9,
+                  ease: "easeInOut",
+                },
+              }}
             />
           ))}
         </div>
@@ -759,7 +775,7 @@ function Stage04Content() {
           animate={{ opacity: 1, y: 0, transition: { delay: 0.58, duration: 0.3, ease: EASE } }}
         >
           <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-          System Complete &amp; Cleared for Submission
+          Ready to Apply
         </motion.div>
 
         <motion.p
@@ -768,7 +784,7 @@ function Stage04Content() {
           initial={reduce ? {} : { opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0, transition: { delay: 0.66, duration: 0.3, ease: EASE } }}
         >
-          Your background has been semantically remapped. The narrative is constructed, quantified, and optimized to bypass automated gatekeepers.
+          Your experience is reframed for the new field. Your resume reads the way hiring managers expect: specific, credible, and built for the role.
         </motion.p>
 
         <motion.div

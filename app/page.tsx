@@ -9,7 +9,7 @@ import FinalCTA from "./components/FinalCTA";
 export const metadata: Metadata = {
   title: "Resume System for Career Switchers | CareerSwitchKit",
   description:
-    "Most career switchers get filtered out before a human reads their resume. CareerSwitchKit is the 4-stage system that fixes that — ATS-ready templates, 50 AI prompts, and a cover letter guide. $37, instant download.",
+    "Most career switchers get filtered out before a human reads their resume. CareerSwitchKit is the 4-stage system that fixes that: the language rewrites, ATS checklist, and 50 AI prompts you need to translate your background credibly. $37, instant download.",
 };
 
 const faqSchema = {
@@ -19,7 +19,7 @@ const faqSchema = {
     { "@type": "Question", name: "Is this just for tech jobs?", acceptedAnswer: { "@type": "Answer", text: "No. While we include tech examples, the system is built on universal semantic transfer. We've seen success in Healthcare, Finance, Operations, and Marketing." } },
     { "@type": "Question", name: "Do I need a ChatGPT subscription?", acceptedAnswer: { "@type": "Answer", text: "The prompts work with the free version of ChatGPT, Claude, and Gemini. However, GPT-4 or Claude 3.5 Sonnet will provide higher quality structural rewrites." } },
     { "@type": "Question", name: "What exactly do I get after paying?", acceptedAnswer: { "@type": "Answer", text: "Instant digital access to our member portal containing the PDF guides, Google Doc templates, and the AI prompt copy-paste library." } },
-    { "@type": "Question", name: "How is this different from a resume template I can find for free?", acceptedAnswer: { "@type": "Answer", text: "Free templates are static shells. CareerSwitchKit is a transition protocol. We provide the specific semantic mapping and AI prompts needed to translate your past experience into the language of your new target field." } },
+    { "@type": "Question", name: "How is this different from a resume template I can find for free?", acceptedAnswer: { "@type": "Answer", text: "Free templates give you a blank structure. CareerSwitchKit gives you the specific language rewrites and AI prompts to translate your past experience into the language of your new target field." } },
   ],
 };
 
@@ -106,7 +106,7 @@ export default function Home() {
               className="text-xl md:text-2xl max-w-2xl mx-auto mb-10 leading-relaxed"
               style={{ color: "#c0c7d3" }}
             >
-              Stop explaining yourself. Start getting interviews. The ultimate kit to transition your career without starting over.
+              Stop explaining yourself. Start getting interviews.
             </p>
 
             {/* CTAs */}
@@ -130,10 +130,10 @@ export default function Home() {
               {/* Secondary — liquid glass */}
               <a
                 href="#system"
-                className="liquid-glass w-full sm:w-auto px-10 py-4 font-bold rounded-xl transition-all text-center hover:bg-white/5"
+                className="w-full sm:w-auto px-10 py-4 font-bold rounded-xl transition-all text-center border border-white/10 hover:border-white/20 hover:bg-white/5"
                 style={{ color: "#e2e0fa" }}
               >
-                See The System
+                Walk Through the 4 Stages
               </a>
             </div>
 
@@ -144,19 +144,13 @@ export default function Home() {
             <div className="text-center mb-12">
               <h2 className="text-4xl font-black font-geist mb-4">Walk through the system yourself.</h2>
               <p style={{ color: "#c0c7d3", maxWidth: "38ch", margin: "0 auto" }}>
-                Start with Stage 01. That is where every switch begins. Click through all four stages in order.
+                Start with Stage 01 and click through the four stages in order.
               </p>
             </div>
-            {/* Aurora behind the window */}
             <div className="relative">
-              <div
-                className="absolute -inset-x-20 -top-20 h-40 pointer-events-none blur-3xl -z-10"
-                style={{ background: "radial-gradient(50% 100% at 50% 0%, rgba(160,201,255,0.1) 0%, transparent 100%)" }}
-                aria-hidden="true"
-              />
               <SystemDashboardLoader />
               <p className="text-center text-xs mt-4" style={{ color: "rgba(255,255,255,0.3)" }}>
-                Visual overview only &mdash; CareerSwitchKit is an instant-download document suite, not an app or subscription.
+                Visual overview only. CareerSwitchKit is an instant download, not an app or subscription.
               </p>
             </div>
           </section>
@@ -230,24 +224,24 @@ export default function Home() {
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden" aria-hidden="true">
               <span className="watermark-text text-white select-none">Lifetime Access.</span>
             </div>
-            {/* Aurora top glow */}
+            {/* Top edge light */}
             <div
-              className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-64 blur-3xl pointer-events-none -z-10"
-              style={{ background: "radial-gradient(50% 100% at 50% 0%, rgba(160,201,255,0.1) 0%, transparent 100%)" }}
+              className="absolute top-0 inset-x-0 h-px pointer-events-none"
+              style={{ background: "linear-gradient(90deg, transparent 0%, rgba(160,201,255,0.25) 50%, transparent 100%)" }}
               aria-hidden="true"
             />
 
             <div className="relative max-w-7xl mx-auto px-6">
               <div className="text-center mb-20">
                 <h2 className="text-5xl font-black mb-6 font-geist">
-                  Simple pricing for <span style={{ color: "#a0c9ff" }}>maximum ROI.</span>
+                  One payment. <span style={{ color: "#a0c9ff" }}>No coach required.</span>
                 </h2>
                 <p style={{ color: "#c0c7d3" }} className="max-w-xl mx-auto">
                   One payment. Lifetime updates. No monthly subscriptions or hidden fees.
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch max-w-5xl mx-auto rounded-[2.5rem] overflow-hidden border border-white/10">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch max-w-5xl mx-auto rounded-2xl overflow-hidden border border-white/10">
                 {/* Bad card */}
                 <div className="p-12 flex flex-col" style={{ border: "1px solid rgba(239,68,68,0.2)" }}>
                   <div className="mb-8">
@@ -255,16 +249,16 @@ export default function Home() {
                     <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)" }}>Career Coaching</p>
                   </div>
                   <div className="mb-10">
-                    <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#f87171", marginBottom: 8 }}>FINANCIAL SINKHOLE</div>
+                    <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#f87171", marginBottom: 8 }}>CAREER COACHING</div>
                     <div className="font-geist font-black tracking-tighter" style={{ fontSize: "clamp(48px,5vw,72px)", color: "#f87171" }}>
                       $2,500<span style={{ fontSize: "1.5rem", opacity: 0.6 }}>+</span>
                     </div>
                   </div>
                   <ul className="space-y-6 mb-12 flex-1">
                     {[
-                      { icon: "dangerous",     label: "Blind Investment:",      text: "$2,500+ with zero guarantee of interview callbacks." },
-                      { icon: "timer_off",     label: "Operational Friction:",  text: "4–6 months of scheduled calls and manual revisions." },
-                      { icon: "broken_image",  label: "Fragile & Manual:",      text: "A one-off service that leaves you without a sustainable framework." },
+                      { icon: "dangerous",     label: "$2,500+",          text: "for sessions that may or may not lead to interviews." },
+                      { icon: "timer_off",     label: "4–6 months",       text: "of scheduled calls and back-and-forth revisions." },
+                      { icon: "broken_image",  label: "One-off service.", text: "When it ends, you're on your own." },
                     ].map(({ icon, label, text }) => (
                       <li key={icon} className="flex items-start gap-3">
                         <span className="material-symbols-outlined text-xl" style={{ color: "#f87171" }}>{icon}</span>
@@ -275,14 +269,14 @@ export default function Home() {
                     ))}
                   </ul>
                   <div className="text-xs text-center italic" style={{ color: "rgba(255,255,255,0.3)" }}>
-                    Recruiter Reality: Most high-cost coaching fails to solve the semantic translation problem.
+                    Most coaches never show you how to translate your background into language the new field understands.
                   </div>
                 </div>
 
                 {/* Good card */}
                 <div
-                  className="relative p-10 flex flex-col liquid-glass rounded-[2.5rem] overflow-hidden group"
-                  style={{ border: "1px solid rgba(160,201,255,0.4)", boxShadow: "0 0 80px rgba(160,201,255,0.25)" }}
+                  className="relative p-10 flex flex-col liquid-glass rounded-2xl overflow-hidden group"
+                  style={{ border: "1px solid rgba(160,201,255,0.35)", boxShadow: "0 0 40px rgba(160,201,255,0.12)" }}
                 >
                   <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(135deg, rgba(160,201,255,0.1) 0%, transparent 60%)" }} />
                   <div className="absolute top-0 right-0 p-6 pointer-events-none" style={{ opacity: 0.1 }}>
@@ -292,7 +286,7 @@ export default function Home() {
                   <div className="mb-8 relative z-10">
                     <h3 className="text-2xl font-black mb-1 font-geist tracking-tight">The CareerSwitchKit System</h3>
                     <div className="flex items-center gap-2">
-                      <span style={{ fontSize: 10, letterSpacing: "0.2em", fontWeight: 700, textTransform: "uppercase", color: "#a0c9ff" }}>The Complete Kit</span>
+                      <span style={{ fontSize: 10, letterSpacing: "0.2em", fontWeight: 700, textTransform: "uppercase", color: "#a0c9ff" }}>One-time payment</span>
                       <span className="h-px w-8" style={{ backgroundColor: "rgba(160,201,255,0.3)" }} />
                     </div>
                   </div>
@@ -332,7 +326,7 @@ export default function Home() {
                     <div>
                       <div className="text-[10px] font-bold uppercase tracking-widest mb-3" style={{ color: "rgba(255,255,255,0.4)" }}>Core System</div>
                       <ul className="space-y-3">
-                        {["Complete end-to-end career pivot system", "ATS-Safe professional template library"].map(t => (
+                        {["The full 4-stage career switch system", "ATS-safe professional template library"].map(t => (
                           <li key={t} className="flex items-start gap-3">
                             <span className="material-symbols-outlined text-lg" style={{ color: "#a0c9ff" }}>check_circle</span>
                             <div className="text-sm font-medium" style={{ color: "rgba(255,255,255,0.9)" }}>{t}</div>
@@ -341,7 +335,7 @@ export default function Home() {
                       </ul>
                     </div>
                     <div>
-                      <div className="text-[10px] font-bold uppercase tracking-widest mb-3" style={{ color: "#a0c9ff" }}>Premium Bonuses</div>
+                      <div className="text-[10px] font-bold uppercase tracking-widest mb-3" style={{ color: "#a0c9ff" }}>Also included</div>
                       <ul className="space-y-3">
                         {["High-impact AI prompt vault (50 prompts)", "Lifetime updates for 2026 hiring"].map(t => (
                           <li key={t} className="flex items-start gap-3">
@@ -355,7 +349,7 @@ export default function Home() {
 
                   <a
                     href="https://buy.polar.sh/polar_cl_yp2D8rcrj84BMejvasXb4zDwa36czvOw21K2q4XtbWG"
-                    className="group/btn w-full py-5 rounded-2xl bg-white font-black hover:scale-[1.02] transition-all shadow-xl text-lg uppercase tracking-tighter flex items-center justify-center gap-2 relative overflow-hidden z-10"
+                    className="group/btn w-full py-5 rounded-2xl bg-white font-black hover:scale-[1.02] transition-all shadow-xl text-lg flex items-center justify-center gap-2 relative overflow-hidden z-10"
                     style={{ color: "#000" }}
                   >
                     <span className="relative z-10">Claim Lifetime Access — $37</span>
@@ -369,7 +363,7 @@ export default function Home() {
           {/* ── FAQ ──────────────────────────────────────────────────────── */}
           <section id="faq" className="max-w-4xl mx-auto px-6 mb-40 fade-up visible">
             <h2 className="text-4xl font-black text-center mb-16 font-geist">
-              Before you <span style={{ color: "#a0c9ff" }}>buy.</span>
+              Common <span style={{ color: "#a0c9ff" }}>questions.</span>
             </h2>
             <FAQAccordion />
           </section>

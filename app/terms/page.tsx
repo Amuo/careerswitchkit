@@ -71,10 +71,10 @@ export default function TermsPage() {
                 <p className="leading-relaxed">
                   For support or inquiries, contact us at:{" "}
                   <a
-                    href="mailto:support@careerswitchkit.com"
+                    href="mailto:support@careerswitchkit.org"
                     className="text-[#3792E8] hover:text-[#6EB0EE] underline decoration-[#3792E8]/30 underline-offset-4 transition-colors"
                   >
-                    support@careerswitchkit.com
+                    support@careerswitchkit.org
                   </a>
                   .
                 </p>
@@ -142,10 +142,10 @@ export default function TermsPage() {
                   We offer a strict 30-day money-back guarantee. If the system
                   doesn&apos;t meet your expectations, email{" "}
                   <a
-                    href="mailto:support@careerswitchkit.com"
+                    href="mailto:support@careerswitchkit.org"
                     className="text-[#3792E8] hover:underline decoration-[#3792E8]/30"
                   >
-                    support@careerswitchkit.com
+                    support@careerswitchkit.org
                   </a>{" "}
                   within 30 days of purchase for a full refund.
                 </p>

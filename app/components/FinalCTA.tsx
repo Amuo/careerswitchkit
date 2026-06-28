@@ -16,7 +16,7 @@ export default function FinalCTA() {
   const reduce = useReducedMotion();
 
   return (
-    <section className="max-w-7xl mx-auto px-6 py-40 text-center relative overflow-hidden rounded-[3rem]">
+    <section className="max-w-7xl mx-auto px-6 py-40 text-center relative overflow-hidden rounded-3xl">
       {/* Aurora fill */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -24,12 +24,12 @@ export default function FinalCTA() {
         aria-hidden="true"
       />
 
-      {/* Radial glow — top centre */}
+      {/* Radial glow — top centre, kept subtle */}
       <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-80 blur-3xl pointer-events-none"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-56 blur-2xl pointer-events-none"
         style={{
           background:
-            "radial-gradient(50% 100% at 50% 0%, rgba(160,201,255,0.28) 0%, transparent 100%)",
+            "radial-gradient(50% 100% at 50% 0%, rgba(160,201,255,0.14) 0%, transparent 100%)",
         }}
         aria-hidden="true"
       />
@@ -92,8 +92,7 @@ export default function FinalCTA() {
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.65, delay: 0.15, ease: EASE }}
         >
-          Join other career switchers who took the shortcut to their next
-          chapter.
+          Your resume is the only thing between you and the role. Fix it today.
         </motion.p>
 
         {/* CTA group */}

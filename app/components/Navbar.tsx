@@ -200,7 +200,7 @@ export default function Navbar() {
                 transition={{ duration: 0.2, ease: EASE }}
               >
                 <span className="nav-cta-shimmer" aria-hidden="true" />
-                Get the System
+                Claim Access — $37
                 <motion.span variants={arrowVariants} transition={{ duration: 0.2, ease: EASE }} className="material-symbols-outlined" style={{ fontSize: 13 }}>
                   arrow_forward
                 </motion.span>
@@ -306,7 +306,7 @@ export default function Navbar() {
                     transition={{ duration: 0.18 }}
                   >
                     <span className="nav-cta-shimmer" aria-hidden="true" />
-                    Get the System — $37
+                    Claim Access — $37
                     <span className="material-symbols-outlined" style={{ fontSize: 15 }}>arrow_forward</span>
                   </motion.button>
                 </div>

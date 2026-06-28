@@ -36,7 +36,7 @@ export default function Footer() {
             className="flex gap-6 md:justify-end"
           >
             <a
-              href="mailto:support@careerswitchkit.com"
+              href="mailto:support@careerswitchkit.org"
               className="text-sm text-white/55 hover:text-white transition-colors"
             >
               Contact
