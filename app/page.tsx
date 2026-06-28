@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import SystemDashboard from "./components/SystemDashboard";
+import SystemDashboardLoader from "./components/SystemDashboardLoader";
 import FAQAccordion from "./components/FAQAccordion";
 import FadeUpObserver from "./components/FadeUpObserver";
 import FinalCTA from "./components/FinalCTA";
@@ -142,8 +142,10 @@ export default function Home() {
           {/* ── System Dashboard ─────────────────────────────────────────── */}
           <section id="system" className="max-w-7xl mx-auto px-6 mb-40 fade-up visible">
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-black font-geist mb-4">The CareerSwitchKit System Overview</h2>
-              <p style={{ color: "#c0c7d3" }}>Click through the 4 stages to see the system in action.</p>
+              <h2 className="text-4xl font-black font-geist mb-4">Walk through the system yourself.</h2>
+              <p style={{ color: "#c0c7d3", maxWidth: "38ch", margin: "0 auto" }}>
+                Start with Stage 01. That is where every switch begins. Click through all four stages in order.
+              </p>
             </div>
             {/* Aurora behind the window */}
             <div className="relative">
@@ -152,10 +154,71 @@ export default function Home() {
                 style={{ background: "radial-gradient(50% 100% at 50% 0%, rgba(160,201,255,0.1) 0%, transparent 100%)" }}
                 aria-hidden="true"
               />
-              <SystemDashboard />
+              <SystemDashboardLoader />
               <p className="text-center text-xs mt-4" style={{ color: "rgba(255,255,255,0.3)" }}>
                 Visual overview only &mdash; CareerSwitchKit is an instant-download document suite, not an app or subscription.
               </p>
+            </div>
+          </section>
+
+          {/* ── Trust strip ──────────────────────────────────────────────── */}
+          <section className="relative px-6 max-w-4xl mx-auto mb-16 fade-up">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {[
+                {
+                  icon: "verified_user",
+                  title: "30-Day Guarantee",
+                  desc: "Doesn't help you land interviews? Full refund. No questions asked.",
+                  accent: "#3792E8",
+                },
+                {
+                  icon: "bolt",
+                  title: "Instant Download",
+                  desc: "Pay once, access immediately. Files in your inbox within minutes.",
+                  accent: "#a0c9ff",
+                },
+                {
+                  icon: "all_inclusive",
+                  title: "No Subscription",
+                  desc: "$37 once. You own it forever. No renewals, no locked content.",
+                  accent: "#3792E8",
+                },
+              ].map(({ icon, title, desc, accent }) => (
+                <div
+                  key={title}
+                  className="relative flex flex-col items-center text-center px-7 py-8 rounded-2xl overflow-hidden"
+                  style={{
+                    background: "rgba(16,16,45,0.6)",
+                    border: "1px solid rgba(55,146,232,0.15)",
+                    boxShadow: "inset 0 1px 0 rgba(255,255,255,0.06)",
+                  }}
+                >
+                  {/* Top accent line */}
+                  <div className="absolute top-0 left-8 right-8 h-px" style={{ background: `linear-gradient(to right, transparent, ${accent}66, transparent)` }} />
+                  {/* Icon with glow container */}
+                  <div
+                    className="flex items-center justify-center w-12 h-12 rounded-xl mb-4"
+                    style={{
+                      background: "rgba(55,146,232,0.1)",
+                      border: "1px solid rgba(55,146,232,0.2)",
+                      boxShadow: "0 0 20px rgba(55,146,232,0.12)",
+                    }}
+                  >
+                    <span className="material-symbols-outlined" style={{ fontSize: 22, color: accent }}>
+                      {icon}
+                    </span>
+                  </div>
+                  <h4
+                    className="font-geist font-bold text-white mb-2"
+                    style={{ fontSize: "1rem", letterSpacing: "-0.01em" }}
+                  >
+                    {title}
+                  </h4>
+                  <p style={{ fontSize: "0.8rem", lineHeight: 1.7, color: "rgba(255,255,255,0.45)", maxWidth: "20ch" }}>
+                    {desc}
+                  </p>
+                </div>
+              ))}
             </div>
           </section>
 

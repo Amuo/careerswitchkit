@@ -1,5 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
-  <rect width="32" height="32" rx="5" fill="#070719"/>
-  <path d="M3,3 L29,3 L29,8 L16,15 L3,8 Z" fill="#3792E8"/>
-  <path d="M3,18 L29,18 L29,23 L16,30 L3,23 Z" fill="#3792E8"/>
+  <rect width="32" height="32" rx="6" fill="#070719"/>
+  <!-- Hexagon mark scaled to fit 32x32 with padding -->
+  <g transform="translate(5.5, 2) scale(0.35)">
+    <path d="M 30,4 L 54,18 L 54,46 L 30,60 L 6,46 L 6,18 Z" fill="rgba(55,146,232,0.15)" stroke="#3792E8" stroke-width="3"/>
+    <path d="M 12,30 C 18,17 42,23 43.8,21.8" fill="none" stroke="#3792E8" stroke-width="4" stroke-linecap="round"/>
+    <polygon points="48,19 45.2,23.9 42.4,19.7" fill="#3792E8"/>
+    <path d="M 48,34 C 42,47 18,41 16.2,42.2" fill="none" stroke="#3792E8" stroke-width="4" stroke-linecap="round"/>
+    <polygon points="12,45 14.8,40.1 17.6,44.3" fill="#3792E8"/>
+  </g>
 </svg>

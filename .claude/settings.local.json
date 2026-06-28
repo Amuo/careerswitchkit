@@ -72,7 +72,15 @@
       "Bash(Remove-Item *)",
       "Bash(python .claude/skills/ui-ux-pro-max/scripts/search.py \"career job seeker landing page CTA conversion dark premium\" --design-system -f markdown)",
       "Bash(python \".claude/skills/ui-ux-pro-max/scripts/search.py\" \"career landing page CTA dark premium conversion\" --domain landing)",
-      "Bash(grep -r \"\\\\$19\" app/ scripts/ DESIGN.md --include=\"*.tsx\" --include=\"*.ts\" --include=\"*.js\" --include=\"*.md\")"
+      "Bash(grep -r \"\\\\$19\" app/ scripts/ DESIGN.md --include=\"*.tsx\" --include=\"*.ts\" --include=\"*.js\" --include=\"*.md\")",
+      "PowerShell(npm install -g agent-browser 2>&1)",
+      "PowerShell(agent-browser install 2>&1)",
+      "Bash(node graphify-out/query.js \"layout video background fonts color system\")",
+      "Skill(claude-in-chrome)",
+      "mcp__claude-design__get_project",
+      "mcp__claude-design__list_files",
+      "mcp__claude-design__read_file",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)"
     ]
   }
 }

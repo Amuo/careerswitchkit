@@ -1,7 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "motion/react";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "motion/react";
+
+// Always play animations — this is a marketing demo, motion is intentional
+const useReducedMotion = () => false;
 
 type StageId = "stage01" | "stage02" | "stage03" | "stage04";
 
@@ -55,8 +58,8 @@ const STAGES: StageConfig[] = [
     defaultFile: "ATS Compatibility Engine",
     defaultView: "ats",
     files: [
-      { name: "AI Prompt Pack",          description: "ChatGPT/Claude templates.",   icon: "auto_awesome", view: "prompt" },
       { name: "ATS Compatibility Engine", description: "Final compatibility engine.", icon: "checklist",    view: "ats"    },
+      { name: "AI Prompt Pack",          description: "ChatGPT/Claude templates.",   icon: "auto_awesome", view: "prompt" },
     ],
   },
   {
@@ -100,20 +103,61 @@ function AnimatedNumber({ to, duration = 1.4, delay = 0 }: { to: number; duratio
   return <>{value}</>;
 }
 
+// ─── Typewriter ──────────────────────────────────────────────────────────────
+
+function TypewriterText({ text, speed = 15, onComplete }: { text: string; speed?: number; onComplete?: () => void }) {
+  const [count, setCount] = useState(0);
+  const reduce = useReducedMotion();
+  const firedRef = useRef(false);
+  const onCompleteRef = useRef(onComplete);
+  onCompleteRef.current = onComplete;
+
+  useEffect(() => {
+    firedRef.current = false;
+    setCount(0);
+    if (reduce) {
+      setCount(text.length);
+      onCompleteRef.current?.();
+      return;
+    }
+    let i = 0;
+    const iv = setInterval(() => {
+      i++;
+      setCount(i);
+      if (i >= text.length && !firedRef.current) {
+        firedRef.current = true;
+        clearInterval(iv);
+        onCompleteRef.current?.();
+      }
+    }, speed);
+    return () => clearInterval(iv);
+  }, [text, speed, reduce]);
+
+  return (
+    <>
+      {text.slice(0, count)}
+      {count < text.length && (
+        <span
+          className="inline-block animate-pulse"
+          style={{ width: 2, height: "0.85em", background: "#a0c9ff", opacity: 0.8, marginLeft: 2, verticalAlign: "middle" }}
+        />
+      )}
+    </>
+  );
+}
+
 // ─── Stage 01: Translation Engine ────────────────────────────────────────────
 
 const BEFORE_ITEMS = [
-  { text: "Helped customers find products and answered their daily questions.", flag: "Helped customers" },
-  { text: "Worked with the team to meet our quarterly sales targets.", flag: "Worked with the team" },
-  { text: "Managed back of house and kept shelves stocked.", flag: "Managed back of house" },
-  { text: "Assisted manager with staff scheduling and shift coverage.", flag: "Assisted manager" },
+  { text: "Managed front desk team of 8 and handled daily check-in and check-out operations.", flag: "Managed front desk team" },
+  { text: "Resolved customer complaints and escalated issues to management when needed.", flag: "escalated issues to management" },
+  { text: "Managed room inventory and used booking software to optimise occupancy rates.", flag: "used booking software" },
 ];
 
 const AFTER_ITEMS = [
-  { text: "Drove customer acquisition through consultative selling and needs analysis.", highlight: "consultative selling" },
-  { text: "Collaborated cross-functionally to exceed quarterly KPIs by 18%.", highlight: "exceed quarterly KPIs" },
-  { text: "Oversaw inventory logistics for a high-volume retail environment.", highlight: "inventory logistics" },
-  { text: "Coordinated workforce planning across 3 departments, reducing overtime 22%.", highlight: "workforce planning" },
+  { text: "Directed 8-person guest operations team, coordinating cross-functional workflows across facilities, housekeeping, and scheduling to maintain daily service SLAs.", highlight: "cross-functional workflows" },
+  { text: "Owned stakeholder escalation protocols under time-critical conditions, consistently resolving issues within SLA windows.", highlight: "stakeholder escalation protocols" },
+  { text: "Managed dynamic capacity planning across 200+ daily reservations using live inventory systems, building direct competency in resource allocation and operational forecasting.", highlight: "dynamic capacity planning" },
 ];
 
 function InlineFlag({ text, phrase }: { text: string; phrase: string }) {
@@ -144,22 +188,38 @@ function InlineHighlight({ text, phrase }: { text: string; phrase: string }) {
   );
 }
 
-function Stage01Content() {
+function Stage01Content({ autoKey }: { autoKey: number }) {
   const reduce = useReducedMotion();
+  const [activeBullet, setActiveBullet] = useState(-1);
+
+  useEffect(() => {
+    setActiveBullet(-1);
+    const t = setTimeout(() => setActiveBullet(0), reduce ? 0 : 900);
+    return () => clearTimeout(t);
+  }, [autoKey, reduce]);
 
   return (
     <div className="flex flex-col h-full">
-      <h3 className="text-white/60 font-bold text-xs uppercase tracking-widest mb-4">Translation Engine: Start Here Guide</h3>
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-white/60 font-bold text-xs uppercase tracking-widest">Translation Engine</h3>
+        <motion.span
+          className="text-[10px] font-medium px-2.5 py-1 rounded-full"
+          style={{ background: "rgba(160,201,255,0.1)", color: "#a0c9ff", border: "1px solid rgba(160,201,255,0.2)" }}
+          initial={{ opacity: 0, scale: reduce ? 1 : 0.85 }}
+          animate={{ opacity: 1, scale: 1, transition: { delay: 0.2, duration: 0.4, ease: EASE } }}
+        >
+          Hospitality Supervisor → Operations Coordinator
+        </motion.span>
+      </div>
 
-      {/* ── Three-column layout: before | transform | after ── */}
       <div className="flex-1 grid gap-3 min-h-0" style={{ gridTemplateColumns: "1fr 44px 1fr" }}>
 
         {/* LEFT — Before */}
         <motion.div
           className="flex flex-col rounded-2xl overflow-hidden"
           style={{ background: "rgba(239,68,68,0.04)", border: "1px solid rgba(239,68,68,0.2)" }}
-          initial={reduce ? {} : { opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0, transition: { duration: 0.35, ease: EASE } }}
+          initial={{ opacity: 0, x: reduce ? 0 : -80 }}
+          animate={{ opacity: 1, x: 0, transition: { duration: 0.6, ease: EASE } }}
         >
           <div className="flex items-center gap-2 px-4 py-3" style={{ borderBottom: "1px solid rgba(239,68,68,0.12)" }}>
             <span className="material-symbols-outlined text-red-400" style={{ fontSize: 14 }}>warning</span>
@@ -170,11 +230,11 @@ function Stage01Content() {
               <motion.div
                 key={flag}
                 className="flex gap-2.5"
-                initial={reduce ? {} : { opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0, transition: { delay: 0.2 + i * 0.07, duration: 0.25, ease: EASE } }}
+                initial={{ opacity: 0, x: reduce ? 0 : -20 }}
+                animate={{ opacity: 1, x: 0, transition: { delay: 0.15 + i * 0.09, duration: 0.4, ease: EASE } }}
               >
                 <span className="material-symbols-outlined text-red-500/60 shrink-0 mt-0.5" style={{ fontSize: 14 }}>cancel</span>
-                <p className="text-[12px] leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>
+                <p className="text-[12px] leading-relaxed" style={{ color: "rgba(255,255,255,0.45)" }}>
                   <InlineFlag text={text} phrase={flag} />
                 </p>
               </motion.div>
@@ -182,72 +242,86 @@ function Stage01Content() {
           </div>
         </motion.div>
 
-        {/* CENTER — Transform column */}
-        <div className="flex flex-col items-center justify-center gap-3">
+        {/* CENTER — Transform arrow */}
+        <div className="flex flex-col items-center justify-center">
           <motion.div
             className="flex flex-col items-center gap-2"
-            initial={reduce ? {} : { opacity: 0, scale: 0.7 }}
-            animate={{ opacity: 1, scale: 1, transition: { delay: 0.15, duration: 0.35, ease: EASE } }}
+            initial={{ opacity: 0, scale: reduce ? 1 : 0.3 }}
+            animate={{ opacity: 1, scale: 1, transition: { delay: 0.55, duration: 0.55, type: "spring", stiffness: 220, damping: 16 } }}
           >
-            {/* Dashed connector line top */}
-            <div className="flex-1 w-px" style={{ background: "linear-gradient(to bottom, transparent, rgba(160,201,255,0.3))", height: 80 }} />
-            {/* Icon */}
+            <div style={{ background: "linear-gradient(to bottom, transparent, rgba(160,201,255,0.35))", width: 1, height: 80 }} />
             <motion.div
-              className="w-9 h-9 rounded-full flex items-center justify-center shrink-0"
-              style={{ background: "rgba(160,201,255,0.12)", border: "1px solid rgba(160,201,255,0.35)", boxShadow: "0 0 18px rgba(160,201,255,0.2)" }}
-              animate={reduce ? {} : { boxShadow: ["0 0 14px rgba(160,201,255,0.15)", "0 0 28px rgba(160,201,255,0.35)", "0 0 14px rgba(160,201,255,0.15)"] }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+              className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
+              style={{ background: "rgba(160,201,255,0.14)", border: "1px solid rgba(160,201,255,0.45)" }}
+              animate={reduce ? {} : {
+                boxShadow: [
+                  "0 0 12px rgba(160,201,255,0.2), 0 0 0px rgba(160,201,255,0)",
+                  "0 0 32px rgba(160,201,255,0.7), 0 0 60px rgba(55,146,232,0.3)",
+                  "0 0 18px rgba(160,201,255,0.35), 0 0 8px rgba(160,201,255,0.1)",
+                  "0 0 32px rgba(160,201,255,0.7), 0 0 60px rgba(55,146,232,0.3)",
+                  "0 0 12px rgba(160,201,255,0.2), 0 0 0px rgba(160,201,255,0)",
+                ],
+              }}
+              transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
             >
-              <span className="material-symbols-outlined" style={{ fontSize: 18, color: "#a0c9ff" }}>arrow_forward</span>
+              <motion.span
+                className="material-symbols-outlined"
+                style={{ fontSize: 20, color: "#a0c9ff" }}
+                animate={reduce ? {} : { scale: [1, 1.2, 1] }}
+                transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+              >
+                arrow_forward
+              </motion.span>
             </motion.div>
-            {/* Dashed connector line bottom */}
-            <div className="flex-1 w-px" style={{ background: "linear-gradient(to top, transparent, rgba(160,201,255,0.3))", height: 80 }} />
+            <div style={{ background: "linear-gradient(to top, transparent, rgba(160,201,255,0.35))", width: 1, height: 80 }} />
           </motion.div>
         </div>
 
-        {/* RIGHT — After */}
+        {/* RIGHT — After (typewriter) */}
         <motion.div
           className="flex flex-col rounded-2xl overflow-hidden"
           style={{ background: "rgba(160,201,255,0.04)", border: "1px solid rgba(160,201,255,0.2)" }}
-          initial={reduce ? {} : { opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0, transition: { duration: 0.35, ease: EASE } }}
+          initial={{ opacity: 0, x: reduce ? 0 : 80 }}
+          animate={{ opacity: 1, x: 0, transition: { duration: 0.6, ease: EASE, delay: 0.1 } }}
         >
           <div className="flex items-center gap-2 px-4 py-3" style={{ borderBottom: "1px solid rgba(160,201,255,0.12)" }}>
-            <span className="material-symbols-outlined" style={{ fontSize: 14, color: "#a0c9ff" }}>check_circle</span>
+            <motion.span
+              className="material-symbols-outlined"
+              style={{ fontSize: 14, color: "#a0c9ff" }}
+              animate={reduce ? {} : { scale: activeBullet >= 0 ? [1, 1.4, 1] : 1 }}
+              transition={{ duration: 0.4, ease: EASE }}
+            >
+              check_circle
+            </motion.span>
             <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color: "#a0c9ff" }}>After — Career Switch Narrative</span>
           </div>
           <div className="flex-1 p-4 flex flex-col gap-3 overflow-y-auto">
             {AFTER_ITEMS.map(({ text, highlight }, i) => (
-              <motion.div
-                key={highlight}
-                className="flex gap-2.5"
-                initial={reduce ? {} : { opacity: 0, x: 10 }}
-                animate={{ opacity: 1, x: 0, transition: { delay: 0.25 + i * 0.07, duration: 0.25, ease: EASE } }}
-              >
-                <span className="material-symbols-outlined shrink-0 mt-0.5" style={{ fontSize: 14, color: "rgba(160,201,255,0.5)" }}>check</span>
-                <p className="text-[12px] leading-relaxed" style={{ color: "rgba(255,255,255,0.7)" }}>
-                  <InlineHighlight text={text} phrase={highlight} />
+              <div key={highlight} className="flex gap-2.5" style={{ minHeight: "2.8rem" }}>
+                <motion.span
+                  className="material-symbols-outlined shrink-0 mt-0.5"
+                  style={{ fontSize: 14, color: activeBullet > i ? "#a0c9ff" : "rgba(160,201,255,0.3)" }}
+                  animate={{ color: activeBullet > i ? "#a0c9ff" : "rgba(160,201,255,0.3)" }}
+                  transition={{ duration: 0.3 }}
+                >
+                  check
+                </motion.span>
+                <p className="text-[12px] leading-relaxed" style={{ color: "rgba(255,255,255,0.75)" }}>
+                  {activeBullet > i ? (
+                    <InlineHighlight text={text} phrase={highlight} />
+                  ) : activeBullet === i ? (
+                    <TypewriterText
+                      text={text}
+                      speed={14}
+                      onComplete={() => setActiveBullet(i + 1)}
+                    />
+                  ) : null}
                 </p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </motion.div>
       </div>
-
-      {/* ── Bottom strip ── */}
-      <motion.div
-        className="mt-3 px-4 py-3 rounded-xl flex items-center justify-between"
-        style={{ background: "rgba(160,201,255,0.05)", border: "1px solid rgba(160,201,255,0.12)" }}
-        initial={reduce ? {} : { opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0, transition: { delay: 0.6, duration: 0.3, ease: EASE } }}
-      >
-        <div className="flex items-center gap-2">
-          <span className="material-symbols-outlined" style={{ fontSize: 15, color: "#a0c9ff" }}>description</span>
-          <span className="text-xs font-semibold" style={{ color: "#a0c9ff" }}>Start Here Guide</span>
-          <span className="text-xs" style={{ color: "rgba(255,255,255,0.35)" }}>— walks you through this translation for your exact career switch</span>
-        </div>
-        <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.3)" }}>Stage 1 of 4</span>
-      </motion.div>
     </div>
   );
 }
@@ -384,7 +458,7 @@ function Stage02Content({ view }: { view: string }) {
           <div className="flex gap-4 relative z-10">
             <motion.div
               className="cv-wireframe w-[260px] h-[360px] rounded-lg p-5 flex flex-col gap-3 bg-black/40 backdrop-blur-sm origin-bottom-right"
-              initial={reduce ? { rotate: -2 } : { opacity: 0, x: -28, rotate: -6 }}
+              initial={{ opacity: 0, x: -28, rotate: -6 }}
               animate={{ opacity: 1, x: 0, rotate: -2, transition: { duration: 0.45, ease: EASE } }}
               whileHover={{ rotate: 0, transition: { duration: 0.25 } }}
             >
@@ -397,7 +471,7 @@ function Stage02Content({ view }: { view: string }) {
             </motion.div>
             <motion.div
               className="cv-wireframe w-[260px] h-[360px] rounded-lg p-5 flex flex-col gap-3 bg-black/40 backdrop-blur-sm origin-bottom-left translate-y-4"
-              initial={reduce ? { rotate: 2 } : { opacity: 0, x: 28, rotate: 6 }}
+              initial={{ opacity: 0, x: 28, rotate: 6 }}
               animate={{ opacity: 1, x: 0, rotate: 2, transition: { delay: 0.08, duration: 0.45, ease: EASE } }}
               whileHover={{ rotate: 0, transition: { duration: 0.25 } }}
             >
@@ -412,6 +486,20 @@ function Stage02Content({ view }: { view: string }) {
                 <div className="w-10 h-8 rounded bg-white/5" />
                 <div className="w-10 h-8 rounded bg-white/5" />
               </div>
+            </motion.div>
+
+            {/* Info patch — floats centered over the two papers */}
+            <motion.div
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-44 p-4 rounded-xl border border-primary/20 shadow-2xl z-20"
+              style={{ background: "rgba(10,10,22,0.85)", backdropFilter: "blur(16px)" }}
+              initial={{ opacity: 0, scale: 0.88 }}
+              animate={{ opacity: 1, scale: 1, transition: { delay: 0.2, duration: 0.4, ease: EASE } }}
+            >
+              <div className="flex items-center gap-2 mb-2" style={{ color: "#a0c9ff" }}>
+                <span className="material-symbols-outlined text-sm">layers</span>
+                <span className="text-xs font-bold uppercase tracking-widest">Two-Page Depth</span>
+              </div>
+              <p className="text-[11px] text-white/70 leading-relaxed">For candidates with 10+ years. Both pages work together to tell your full transfer story without sacrificing depth.</p>
             </motion.div>
           </div>
         </div>
@@ -492,7 +580,7 @@ function Stage03PromptContent() {
 
 // ─── Stage 03: ATS Engine ─────────────────────────────────────────────────────
 
-function Stage03ATSContent() {
+function Stage03ATSContent({ autoKey }: { autoKey: number }) {
   const reduce = useReducedMotion();
 
   return (
@@ -503,13 +591,13 @@ function Stage03ATSContent() {
         <motion.div
           className="p-5 rounded-2xl"
           style={{ background: "rgba(248,113,113,0.05)", border: "1px solid rgba(248,113,113,0.2)" }}
-          initial={reduce ? {} : { opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0, transition: { duration: 0.35, ease: EASE } }}
+          initial={{ opacity: 0, x: reduce ? 0 : -60 }}
+          animate={{ opacity: 1, x: 0, transition: { duration: 0.6, ease: EASE } }}
         >
           <div className="flex items-center justify-between mb-4">
             <span className="text-[10px] font-bold text-red-400 uppercase tracking-widest">Initial Scan</span>
             <div className="text-2xl font-black text-red-400 font-geist">
-              <AnimatedNumber to={23} duration={1.2} delay={0.2} />
+              <AnimatedNumber key={`ats-before-${autoKey}`} to={23} duration={1.4} delay={0.3} />
               <span className="text-[10px] font-normal opacity-60">/100</span>
             </div>
           </div>
@@ -536,14 +624,14 @@ function Stage03ATSContent() {
         {/* After */}
         <motion.div
           className="p-5 rounded-2xl"
-          style={{ background: "rgba(74,222,128,0.05)", border: "1px solid rgba(74,222,128,0.2)", boxShadow: "0 0 30px rgba(74,222,128,0.1)" }}
-          initial={reduce ? {} : { opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0, transition: { delay: 0.08, duration: 0.35, ease: EASE } }}
+          style={{ background: "rgba(74,222,128,0.05)", border: "1px solid rgba(74,222,128,0.2)", boxShadow: "0 0 40px rgba(74,222,128,0.15)" }}
+          initial={{ opacity: 0, x: reduce ? 0 : 60 }}
+          animate={{ opacity: 1, x: 0, transition: { delay: 0.1, duration: 0.6, ease: EASE } }}
         >
           <div className="flex items-center justify-between mb-4">
             <span className="text-[10px] font-bold text-green-400 uppercase tracking-widest">Kit Optimized</span>
             <div className="text-2xl font-black text-green-400 font-geist">
-              <AnimatedNumber to={87} duration={1.4} delay={0.25} />
+              <AnimatedNumber key={`ats-after-${autoKey}`} to={87} duration={1.8} delay={0.4} />
               <span className="text-[10px] font-normal opacity-60">/100</span>
             </div>
           </div>
@@ -703,17 +791,58 @@ function Stage04Content() {
   );
 }
 
+const STAGE_ORDER: StageId[] = ["stage01", "stage02", "stage03", "stage04"];
+
+const STAGE_DURATIONS: Record<StageId, number> = {
+  stage01: 10000,
+  stage02: 7500,
+  stage03: 9000,
+  stage04: 6000,
+};
+
 // ─── Main component ───────────────────────────────────────────────────────────
 
 export default function SystemDashboard() {
-  const [activeStage, setActiveStage] = useState<StageId>("stage03");
-  const [activeFile, setActiveFile] = useState<string>("ATS Compatibility Engine");
-  const [activeView, setActiveView] = useState<string>("ats");
-  const [currentFilename, setCurrentFilename] = useState<string>("ATS_Engine_Logic.json");
-  const [systemStatus, setSystemStatus] = useState<string>("Optimizing for Scanners");
+  const [activeStage, setActiveStage] = useState<StageId>("stage01");
+  const [activeFile, setActiveFile] = useState<string>("Start Here Guide.pdf");
+  const [activeView, setActiveView] = useState<string>("stage01");
+  const [currentFilename, setCurrentFilename] = useState<string>("Start_Here_Guide.pdf");
+  const [systemStatus, setSystemStatus] = useState<string>("Mapping Transferable Skills");
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [autoKey, setAutoKey] = useState(0);
 
   const reduce = useReducedMotion();
   const currentStage = STAGES.find((s) => s.id === activeStage)!;
+
+  // Auto-advance timer (loops)
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+    const idx = STAGE_ORDER.indexOf(activeStage);
+    const nextId = STAGE_ORDER[(idx + 1) % STAGE_ORDER.length];
+    const t = setTimeout(() => {
+      setAutoKey((k) => k + 1);
+      switchStage(nextId);
+    }, STAGE_DURATIONS[activeStage]);
+    return () => clearTimeout(t);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeStage, isAutoPlaying]);
+
+  // Within-stage file cycling during auto-play
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+    const stage = STAGES.find((s) => s.id === activeStage)!;
+    if (stage.files.length <= 1) return;
+    const timePerFile = STAGE_DURATIONS[activeStage] / stage.files.length;
+    const timers = stage.files.slice(1).map((file, i) =>
+      setTimeout(() => {
+        setActiveFile(file.name);
+        setActiveView(file.view);
+        setCurrentFilename(file.name.replace(/\s+/g, "_"));
+      }, timePerFile * (i + 1))
+    );
+    return () => timers.forEach(clearTimeout);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeStage, isAutoPlaying]);
 
   function switchStage(stageId: StageId) {
     const stage = STAGES.find((s) => s.id === stageId)!;
@@ -724,18 +853,25 @@ export default function SystemDashboard() {
     setCurrentFilename(stage.defaultFile.replace(/\s+/g, "_"));
   }
 
+  function handleManualStage(stageId: StageId) {
+    setIsAutoPlaying(false);
+    setAutoKey((k) => k + 1);
+    switchStage(stageId);
+  }
+
   function switchFile(file: FileItem) {
+    setIsAutoPlaying(false);
     setActiveFile(file.name);
     setActiveView(file.view);
     setCurrentFilename(file.name.replace(/\s+/g, "_"));
   }
 
   function renderContent() {
-    if (activeStage === "stage01") return <Stage01Content />;
+    if (activeStage === "stage01") return <Stage01Content autoKey={autoKey} />;
     if (activeStage === "stage02") return <Stage02Content view={activeView} />;
     if (activeStage === "stage03") {
       if (activeView === "prompt") return <Stage03PromptContent />;
-      return <Stage03ATSContent />;
+      return <Stage03ATSContent autoKey={autoKey} />;
     }
     return <Stage04Content />;
   }
@@ -786,8 +922,13 @@ export default function SystemDashboard() {
               return (
                 <button
                   key={stage.id}
-                  onClick={() => switchStage(stage.id)}
+                  onClick={() => handleManualStage(stage.id)}
                   className="relative w-full flex items-center gap-3 px-3 py-3 rounded-lg"
+                  style={stage.id === "stage01" ? {
+                    boxShadow: isActive
+                      ? "0 0 0 1px rgba(55,146,232,0.45), 0 0 18px rgba(55,146,232,0.18)"
+                      : "0 0 0 1px rgba(55,146,232,0.2), 0 0 10px rgba(55,146,232,0.08)",
+                  } : undefined}
                 >
                   {isActive && (
                     <motion.div
@@ -920,18 +1061,73 @@ export default function SystemDashboard() {
         </div>
 
         {/* Panel 3: Main content */}
-        <div className="flex flex-col p-8 overflow-y-auto" style={{ background: "#111124" }}>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeView}
-              className="flex flex-col flex-1 min-h-0"
-              initial={reduce ? {} : { opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0, transition: { duration: 0.25, ease: EASE } }}
-              exit={{ opacity: 0, y: -8, transition: { duration: 0.12, ease: "easeIn" } }}
-            >
-              {renderContent()}
-            </motion.div>
+        <div className="flex flex-col overflow-hidden relative" style={{ background: "#111124" }}>
+          {/* Progress bar */}
+          <AnimatePresence>
+            {isAutoPlaying && (
+              <motion.div
+                key={`progress-${activeStage}-${autoKey}`}
+                className="absolute top-0 left-0 right-0 h-[2px] origin-left z-20"
+                style={{ background: "linear-gradient(to right, #3792E8, #a0c9ff)" }}
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: STAGE_DURATIONS[activeStage] / 1000, ease: "linear" }}
+              />
+            )}
           </AnimatePresence>
+
+          <div className="flex-1 p-8 overflow-y-auto">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`${activeView}-${autoKey}`}
+                className="flex flex-col flex-1 min-h-0"
+                initial={{ opacity: 0, y: reduce ? 0 : 70, scale: reduce ? 1 : 0.96 }}
+                animate={{ opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: EASE } }}
+                exit={{ opacity: 0, y: reduce ? 0 : -50, scale: reduce ? 1 : 0.97, transition: { duration: 0.22, ease: "easeIn" } }}
+              >
+                {renderContent()}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Next-stage navigation */}
+          {(() => {
+            const idx = STAGE_ORDER.indexOf(activeStage);
+            const nextId = idx < STAGE_ORDER.length - 1 ? STAGE_ORDER[idx + 1] : null;
+            const nextStage = nextId ? STAGES.find((s) => s.id === nextId) : null;
+            if (!nextStage) return null;
+            return (
+              <div
+                className="shrink-0 flex items-center justify-between px-6 py-3"
+                style={{
+                  borderTop: "1px solid rgba(55,146,232,0.15)",
+                  background: "rgba(55,146,232,0.05)",
+                }}
+              >
+                <span style={{ fontSize: "0.7rem", color: "rgba(160,201,255,0.45)", letterSpacing: "0.06em" }}>
+                  Stage {idx + 1} of 4
+                </span>
+                <button
+                  onClick={() => switchStage(nextId!)}
+                  className="flex items-center gap-2 group"
+                >
+                  <span
+                    className="text-xs font-semibold transition-colors group-hover:text-white"
+                    style={{ color: "#a0c9ff" }}
+                  >
+                    Continue: {nextStage.label.replace(/Stage \d — /, "")}
+                  </span>
+                  <span
+                    className="material-symbols-outlined group-hover:translate-x-0.5 transition-transform"
+                    style={{ fontSize: 16, color: "#3792E8" }}
+                  >
+                    arrow_forward
+                  </span>
+                </button>
+              </div>
+            );
+          })()}
         </div>
 
       </div>

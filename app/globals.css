@@ -322,6 +322,26 @@ body.stitch-anim-fade-in {
   100% { transform: translateX(200%); }
 }
 
+/* Navbar CTA shimmer */
+.nav-cta-shimmer {
+  position: absolute;
+  inset: 0;
+  left: -80%;
+  width: 50%;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.18), transparent);
+  transform: skewX(-12deg);
+  animation: nav-cta-shine 4.5s ease-in-out infinite 1.8s;
+  pointer-events: none;
+}
+
+@keyframes nav-cta-shine {
+  0%   { left: -80%; opacity: 0; }
+  6%   { opacity: 1; }
+  46%  { left: 140%; opacity: 1; }
+  50%  { left: 140%; opacity: 0; }
+  100% { left: -80%; opacity: 0; }
+}
+
 /* Geist headings */
 h1, h2, h3, h4, .font-geist {
   font-family: 'Geist', sans-serif;

@@ -4,6 +4,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import Script from "next/script";
 import MotionProvider from "@/app/components/MotionProvider";
 import LandingBackground from "@/app/components/LandingBackground";
+import SmoothScroll from "@/app/components/SmoothScroll";
 import "@/app/globals.css";
 
 const sora = Sora({
@@ -68,6 +69,7 @@ export default function RootLayout({
         className={`${sora.variable} ${dmSans.variable} font-sans antialiased`}
       >
         <LandingBackground />
+        <SmoothScroll />
         <div className="stitch-anim-fade-in">
           <MotionProvider>{children}</MotionProvider>
         </div>
