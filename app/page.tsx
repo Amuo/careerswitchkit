@@ -113,7 +113,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               {/* Primary — white with shimmer on hover */}
               <a
-                href="#pricing"
+                href="https://buy.polar.sh/polar_cl_yp2D8rcrj84BMejvasXb4zDwa36czvOw21K2q4XtbWG"
                 className="group relative w-full sm:w-auto px-10 py-4 bg-white font-semibold rounded-xl transition-all duration-500 active:scale-95 overflow-hidden font-geist tracking-[0.02em] flex items-center justify-center hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(160,201,255,0.4)]"
                 style={{ color: "#000", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.4), 0 4px 24px rgba(0,0,0,0.3)" }}
               >
@@ -291,7 +291,7 @@ export default function Home() {
                   </div>
 
                   <a
-                    href="#pricing"
+                    href="https://buy.polar.sh/polar_cl_yp2D8rcrj84BMejvasXb4zDwa36czvOw21K2q4XtbWG"
                     className="group/btn w-full py-5 rounded-2xl bg-white font-black hover:scale-[1.02] transition-all shadow-xl text-lg uppercase tracking-tighter flex items-center justify-center gap-2 relative overflow-hidden z-10"
                     style={{ color: "#000" }}
                   >
