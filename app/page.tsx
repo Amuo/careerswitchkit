@@ -9,14 +9,14 @@ import FinalCTA from "./components/FinalCTA";
 export const metadata: Metadata = {
   title: "Resume System for Career Switchers | CareerSwitchKit",
   description:
-    "Most career switchers get filtered out before a human reads their resume. CareerSwitchKit is the 4-stage system that fixes that: the language rewrites, ATS checklist, and 50 AI prompts you need to translate your background credibly. $37, instant download.",
+    "Most career switchers get filtered out before a human reads their resume. CareerSwitchKit is the 4-stage system that fixes that: the language rewrites, interactive ATS Checker, and 50 AI prompts you need to translate your background credibly. $37, instant download.",
 };
 
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   mainEntity: [
-    { "@type": "Question", name: "What's in the system?", acceptedAnswer: { "@type": "Answer", text: "CareerSwitchKit is an instant download: a Start Here Guide, three CV templates, three cover letter templates, an ATS Checklist, 50 AI prompts, and a completed example. No app, no subscription." } },
+    { "@type": "Question", name: "What's in the system?", acceptedAnswer: { "@type": "Answer", text: "CareerSwitchKit is an instant download: a Start Here Guide (PDF), three CV templates (.docx), three cover letter templates (.docx), an interactive ATS Checker (standalone HTML app), an AI Prompt Pack (PDF, 50 prompts), and a completed example. No login, no subscription." } },
     { "@type": "Question", name: "How long does it take to complete?", acceptedAnswer: { "@type": "Answer", text: "Most people finish the core sequence in a weekend. Stage 1 takes an hour or two. By the end you have a tailored resume, cover letter, and an ATS-ready checklist." } },
     { "@type": "Question", name: "Is this just for tech jobs?", acceptedAnswer: { "@type": "Answer", text: "No. The system works across Healthcare, Finance, Operations, Marketing, and other fields. Your past experience is the raw material. The system shows you how to reframe it for the new field." } },
     { "@type": "Question", name: "How is this different from a resume template I can find for free?", acceptedAnswer: { "@type": "Answer", text: "Free templates give you blank boxes. CareerSwitchKit tells you what to put in them. The AI prompts and language guides translate your past experience into terms hiring managers in your new field actually use." } },
@@ -327,7 +327,7 @@ export default function Home() {
                     <div>
                       <div className="text-[10px] font-bold uppercase tracking-widest mb-3" style={{ color: "rgba(255,255,255,0.4)" }}>Core System</div>
                       <ul className="space-y-3">
-                        {["The full 4-stage career switch system", "ATS-safe professional template library"].map(t => (
+                        {["The full 4-stage career switch system", "3 CV templates + 3 cover letter templates (.docx)"].map(t => (
                           <li key={t} className="flex items-start gap-3">
                             <span className="material-symbols-outlined text-lg" style={{ color: "#a0c9ff" }}>check_circle</span>
                             <div className="text-sm font-medium" style={{ color: "rgba(255,255,255,0.9)" }}>{t}</div>
@@ -338,7 +338,7 @@ export default function Home() {
                     <div>
                       <div className="text-[10px] font-bold uppercase tracking-widest mb-3" style={{ color: "#a0c9ff" }}>Also included</div>
                       <ul className="space-y-3">
-                        {["High-impact AI prompt vault (50 prompts)", "Lifetime updates for 2026 hiring"].map(t => (
+                        {["AI Prompt Pack — 50 prompts (PDF)", "Lifetime updates for 2026 hiring"].map(t => (
                           <li key={t} className="flex items-start gap-3">
                             <span className="material-symbols-outlined text-lg" style={{ color: "#a0c9ff" }}>add_moderator</span>
                             <div className="text-sm font-medium" style={{ color: "rgba(255,255,255,0.9)" }}>{t}</div>

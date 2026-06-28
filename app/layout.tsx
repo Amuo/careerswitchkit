@@ -20,7 +20,7 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "Resume System for Career Switchers | CareerSwitchKit",
   description:
-    "Most career switchers get filtered out before a human reads their resume. CareerSwitchKit is the 4-stage system that fixes that — ATS-ready templates, 50 AI prompts, and a cover letter guide. $37, instant download, 30-day guarantee.",
+    "Most career switchers get filtered out before a human reads their resume. CareerSwitchKit is the 4-stage system that fixes that: CV templates, cover letter templates, an interactive ATS Checker, and 50 AI prompts. $37, instant download, 30-day guarantee.",
   icons: {
     icon: "/favicon.svg",
   },
@@ -33,22 +33,13 @@ export const metadata: Metadata = {
       "Most career switchers get filtered out before a human reads their resume. CareerSwitchKit is the 4-stage system that fixes that. $37, instant download.",
     url: "https://careerswitchkit.org",
     siteName: "CareerSwitchKit",
-    images: [
-      {
-        url: "https://careerswitchkit.org/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "CareerSwitchKit — Resume System for Career Switchers",
-      },
-    ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Resume System for Career Switchers | CareerSwitchKit",
     description:
-      "Most career switchers get filtered out before a human reads their resume. CareerSwitchKit fixes that — 4 stages, $37, instant download.",
-    images: ["https://careerswitchkit.org/og-image.png"],
+      "Most career switchers get filtered out before a human reads their resume. CareerSwitchKit fixes that: 4 stages, $37, instant download.",
   },
 };
 
