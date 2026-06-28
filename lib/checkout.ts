@@ -1,24 +1,23 @@
 declare function gtag(...args: unknown[]): void;
 
-// TODO: Replace console.log with Polar hosted checkout link or embedded overlay
+const POLAR_CHECKOUT_URL =
+  "https://buy.polar.sh/polar_cl_yp2D8rcrj84BMejvasXb4zDwa36czvOw21K2q4XtbWG";
+
 export function handleCheckout() {
-  // Fire GA4 conversion event so we can measure CTA click rate
   if (typeof gtag !== "undefined") {
     gtag("event", "begin_checkout", {
       currency: "USD",
-      value: 19,
+      value: 37,
       items: [
         {
           item_id: "careerswitchkit",
           item_name: "CareerSwitchKit",
-          price: 19,
+          price: 37,
           quantity: 1,
         },
       ],
     });
   }
 
-  console.log(
-    "[Checkout] Polar checkout not yet wired — replace this stub with the Polar product URL"
-  );
+  window.location.href = POLAR_CHECKOUT_URL;
 }
