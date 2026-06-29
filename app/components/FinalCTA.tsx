@@ -92,8 +92,8 @@ export default function FinalCTA() {
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.65, delay: 0.15, ease: EASE }}
         >
-          Your resume is the only thing between you and the role.{" "}
-          <span style={{ whiteSpace: "nowrap" }}>Fix it today.</span>
+          Your resume is the only thing between you and the role.
+          <br />Fix it today.
         </motion.p>
 
         {/* CTA group */}
