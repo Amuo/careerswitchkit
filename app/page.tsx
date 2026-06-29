@@ -18,6 +18,7 @@ const faqSchema = {
   mainEntity: [
     { "@type": "Question", name: "What's in the system?", acceptedAnswer: { "@type": "Answer", text: "CareerSwitchKit is an instant download: a Start Here Guide (PDF), three CV templates (.docx), three cover letter templates (.docx), an interactive ATS Checker (standalone HTML app), an AI Prompt Pack (PDF, 50 prompts), and a completed example. No login, no subscription." } },
     { "@type": "Question", name: "How long does it take to complete?", acceptedAnswer: { "@type": "Answer", text: "Most people finish the core sequence in a weekend. Stage 1 takes an hour or two. By the end you have a tailored resume, cover letter, and an ATS-ready checklist." } },
+    { "@type": "Question", name: "I've been applying for months and getting nothing. Will this help?", acceptedAnswer: { "@type": "Answer", text: "Probably yes — and this is exactly who the system is built for. If you're getting no responses, the most likely cause is that your resume isn't translating your background into language the new field recognises. The system is specifically designed to fix that translation gap, not to give you a prettier version of what you already have." } },
     { "@type": "Question", name: "Is this just for tech jobs?", acceptedAnswer: { "@type": "Answer", text: "No. The system works across Healthcare, Finance, Operations, Marketing, and other fields. Your past experience is the raw material. The system shows you how to reframe it for the new field." } },
     { "@type": "Question", name: "How is this different from a resume template I can find for free?", acceptedAnswer: { "@type": "Answer", text: "Free templates give you blank boxes. CareerSwitchKit tells you what to put in them. The AI prompts and language guides translate your past experience into terms hiring managers in your new field actually use." } },
     { "@type": "Question", name: "What if it doesn't help me land interviews?", acceptedAnswer: { "@type": "Answer", text: "Full refund within 30 days, no questions asked. Email support@careerswitchkit.org and it's done." } },
@@ -60,7 +61,7 @@ export default function Home() {
 
         <Navbar />
 
-        <main className="relative pt-32 pb-64" style={{ position: "relative", zIndex: 2 }}>
+        <main className="relative pt-32" style={{ position: "relative", zIndex: 2 }}>
 
           {/* ── Hero ─────────────────────────────────────────────────────── */}
           <section className="max-w-5xl mx-auto text-center px-6 mb-32 fade-up visible relative">

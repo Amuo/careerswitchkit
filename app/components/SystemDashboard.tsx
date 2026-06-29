@@ -58,8 +58,8 @@ const STAGES: StageConfig[] = [
     defaultFile: "ATS Compatibility Engine",
     defaultView: "ats",
     files: [
-      { name: "ATS Compatibility Engine", description: "Final compatibility engine.", icon: "checklist",    view: "ats"    },
-      { name: "AI Prompt Pack",          description: "ChatGPT/Claude templates.",   icon: "auto_awesome", view: "prompt" },
+      { name: "ATS Checker",    description: "Interactive standalone HTML app.", icon: "checklist",    view: "ats"    },
+      { name: "AI Prompt Pack", description: "50 prompts — PDF.",                 icon: "auto_awesome", view: "prompt" },
     ],
   },
   {
@@ -1132,7 +1132,7 @@ export default function SystemDashboard() {
                     className="text-xs font-semibold transition-colors group-hover:text-white"
                     style={{ color: "#a0c9ff" }}
                   >
-                    Continue: {nextStage.label.replace(/Stage \d — /, "")}
+                    Continue: {nextStage.label.replace(/Stage \d: /, "")}
                   </span>
                   <span
                     className="material-symbols-outlined group-hover:translate-x-0.5 transition-transform"

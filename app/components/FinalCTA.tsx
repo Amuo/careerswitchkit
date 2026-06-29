@@ -85,7 +85,7 @@ export default function FinalCTA() {
         {/* Body */}
         <motion.p
           suppressHydrationWarning
-          className="text-xl max-w-xl mx-auto mb-12"
+          className="text-xl max-w-xl mx-auto mb-12 text-pretty"
           style={{ color: "#c0c7d3" }}
           initial={reduce ? {} : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

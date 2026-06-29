@@ -5,7 +5,7 @@ import { useState } from "react";
 const FAQS = [
   {
     q: "What's in the system?",
-    a: "CareerSwitchKit is an instant download: a Start Here Guide (PDF), three CV templates (Google Docs), three cover letter templates (Google Docs), an ATS Checklist, an AI Prompt Pack with 50 copy-paste prompts, and a completed example showing the full switch in action. No app, no login, no subscription. You work through the four stages in order and apply.",
+    a: "CareerSwitchKit is an instant download: a Start Here Guide (PDF), three CV templates (.docx), three cover letter templates (.docx), an interactive ATS Checker (standalone HTML app), an AI Prompt Pack (PDF, 50 prompts), and a completed example showing the full switch in action. No login, no subscription. You work through the four stages in order and apply.",
   },
   {
     q: "How long does it take to complete?",
@@ -40,7 +40,7 @@ export default function FAQAccordion() {
     <div className="w-full space-y-3">
       {FAQS.map((faq, i) => (
         <div
-          key={i}
+          key={faq.q}
           className={`faq-item rounded-2xl border cursor-pointer hover:bg-white/5 transition-all duration-200 group ${openIndex === i ? "active" : ""}`}
           style={{ background: "rgba(8,8,20,0.75)", borderColor: openIndex === i ? "rgba(55,146,232,0.2)" : "rgba(255,255,255,0.06)" }}
         >
