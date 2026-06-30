@@ -128,7 +128,7 @@ export default function Image() {
                   background: '#34d399',
                 }}
               />
-              <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.45)' }}>30-day guarantee</span>
+              <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.45)' }}>7-day guarantee</span>
             </div>
           </div>
           <div style={{ fontSize: 15, color: 'rgba(255,255,255,0.22)', letterSpacing: '0.04em' }}>

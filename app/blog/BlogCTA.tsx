@@ -31,7 +31,7 @@ export default function BlogCTA({ heading, body }: { heading: string; body: stri
         Get the System for $37
       </button>
       <p className="mt-3 text-xs" style={{ color: "rgba(255,255,255,0.28)" }}>
-        30-day money-back guarantee
+        7-day money-back guarantee
       </p>
     </div>
   );

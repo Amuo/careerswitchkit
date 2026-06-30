@@ -315,7 +315,7 @@ export default function Home() {
                   </div>
 
                   <div className="grid grid-cols-2 gap-3 mb-10 relative z-10">
-                    {[{ icon: "verified_user", text: "30-Day\nGuarantee" }, { icon: "bolt", text: "Instant\nDownload" }].map(({ icon, text }) => (
+                    {[{ icon: "verified_user", text: "7-Day\nGuarantee" }, { icon: "bolt", text: "Instant\nDownload" }].map(({ icon, text }) => (
                       <div key={icon} className="flex items-center gap-2 px-3 py-2.5 rounded-xl"
                         style={{ background: "rgba(26,26,45,1)", border: "1px solid rgba(160,201,255,0.15)" }}>
                         <span className="material-symbols-outlined text-lg" style={{ color: "#a0c9ff" }}>{icon}</span>
