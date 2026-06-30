@@ -21,7 +21,7 @@ const faqSchema = {
     { "@type": "Question", name: "I've been applying for months and getting nothing. Will this help?", acceptedAnswer: { "@type": "Answer", text: "Probably yes — and this is exactly who the system is built for. If you're getting no responses, the most likely cause is that your resume isn't translating your background into language the new field recognises. The system is specifically designed to fix that translation gap, not to give you a prettier version of what you already have." } },
     { "@type": "Question", name: "Is this just for tech jobs?", acceptedAnswer: { "@type": "Answer", text: "No. The system works across Healthcare, Finance, Operations, Marketing, and other fields. Your past experience is the raw material. The system shows you how to reframe it for the new field." } },
     { "@type": "Question", name: "How is this different from a resume template I can find for free?", acceptedAnswer: { "@type": "Answer", text: "Free templates give you blank boxes. CareerSwitchKit tells you what to put in them. The AI prompts and language guides translate your past experience into terms hiring managers in your new field actually use." } },
-    { "@type": "Question", name: "What if it doesn't help me land interviews?", acceptedAnswer: { "@type": "Answer", text: "Full refund within 30 days, no questions asked. Email support@careerswitchkit.org and it's done." } },
+    { "@type": "Question", name: "What if it doesn't help me land interviews?", acceptedAnswer: { "@type": "Answer", text: "If it doesn't work for your situation, email support@careerswitchkit.org within 7 days and we'll refund you." } },
   ],
 };
 
@@ -163,8 +163,8 @@ export default function Home() {
               {[
                 {
                   icon: "verified_user",
-                  title: "30-Day Guarantee",
-                  desc: "Doesn't help you land interviews? Full refund. No questions asked.",
+                  title: "7-Day Guarantee",
+                  desc: "Doesn't work for your situation? Email us within 7 days for a full refund.",
                   accent: "#3792E8",
                 },
                 {

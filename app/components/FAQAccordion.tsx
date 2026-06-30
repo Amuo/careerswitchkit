@@ -25,7 +25,7 @@ const FAQS = [
   },
   {
     q: "What if it doesn't help me land interviews?",
-    a: "Full refund within 30 days, no questions asked. Email support@careerswitchkit.org and it's done. We'd rather give you your money back than have you sitting on something that isn't working.",
+    a: "If it doesn't work for your situation, email support@careerswitchkit.org within 7 days and we'll refund you. We'd rather give you your money back than have you sitting on something that isn't working.",
   },
 ];
 

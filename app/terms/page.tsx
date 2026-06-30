@@ -96,12 +96,12 @@ export default function TermsPage() {
                 </p>
                 <ul className="pl-2 space-y-5">
                   {[
-                    { icon: FileText, text: "3 ATS-Optimized Resume Templates" },
-                    { icon: Mail, text: "3 Cover Letter Frameworks" },
-                    { icon: Bot, text: "AI Prompt Pack — 50 prompts for material generation" },
-                    { icon: CheckSquare, text: "Keyword Optimization Checklist" },
-                    { icon: FileSearch, text: "1 Complete Example Resume" },
-                    { icon: FileText, text: "START HERE Guide & Career Transfer Map" },
+                    { icon: FileText, text: "Start Here Guide (.pdf)" },
+                    { icon: FileText, text: "3 CV Templates (.docx)" },
+                    { icon: Mail, text: "3 Cover Letter Templates (.docx)" },
+                    { icon: Bot, text: "AI Prompt Pack — 50 prompts (.pdf)" },
+                    { icon: CheckSquare, text: "ATS Checker — interactive standalone HTML app" },
+                    { icon: FileSearch, text: "1 Completed Example" },
                   ].map(({ icon: Icon, text }) => (
                     <li key={text} className="flex items-start gap-3 leading-relaxed">
                       <Icon className="w-5 h-5 text-[#3792E8] mt-0.5 shrink-0" aria-hidden />
@@ -139,15 +139,15 @@ export default function TermsPage() {
                   4. Refund Policy
                 </h2>
                 <p className="text-white/90 text-base leading-relaxed">
-                  We offer a strict 30-day money-back guarantee. If the system
-                  doesn&apos;t meet your expectations, email{" "}
+                  We offer a 7-day satisfaction guarantee. If the system
+                  doesn&apos;t work for your situation, email{" "}
                   <a
                     href="mailto:support@careerswitchkit.org"
                     className="text-[#3792E8] hover:underline decoration-[#3792E8]/30"
                   >
                     support@careerswitchkit.org
                   </a>{" "}
-                  within 30 days of purchase for a full refund.
+                  within 7 days of purchase for a full refund.
                 </p>
               </section>
             </div>
