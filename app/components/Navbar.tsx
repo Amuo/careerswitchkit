@@ -177,7 +177,7 @@ export default function Navbar() {
                   }}
                 >
                   <span className="material-symbols-outlined" style={{ fontSize: 11, color: "rgba(255,255,255,0.5)" }}>verified</span>
-                  <span className="text-[11px] font-medium" style={{ color: "rgba(255,255,255,0.55)" }}>30-day guarantee</span>
+                  <span className="text-[11px] font-medium" style={{ color: "rgba(255,255,255,0.55)" }}>7-day guarantee</span>
                 </div>
               </div>
             </div>
@@ -289,7 +289,7 @@ export default function Navbar() {
                       style={{ background: "#34d399", boxShadow: "0 0 5px rgba(52,211,153,0.95)", animation: "pulse 2.5s ease-in-out infinite" }}
                     />
                     <span className="text-xs" style={{ color: "rgba(255,255,255,0.34)" }}>
-                      Instant download · 30-day guarantee
+                      Instant download · 7-day guarantee
                     </span>
                   </motion.div>
 
