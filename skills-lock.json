@@ -1267,6 +1267,12 @@
       "skillPath": "skills/popups/SKILL.md",
       "computedHash": "f6a8d630cee8d07bcb8dced3e4717b9533fd79a8f31bfeb3f244058520900512"
     },
+    "positioning-messaging": {
+      "source": "refoundai/lenny-skills",
+      "sourceType": "github",
+      "skillPath": "skills/positioning-messaging/SKILL.md",
+      "computedHash": "75a749f83c52908b835d43c0b2ad2bb8d8af65424464ac97477e7de506beab7a"
+    },
     "positioning-statement": {
       "source": "deanpeters/product-manager-skills",
       "sourceType": "github",
