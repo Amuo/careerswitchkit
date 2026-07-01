@@ -78,4 +78,8 @@ This gives the iframe its own real 390px CSS viewport, so all Tailwind breakpoin
 This is mandatory for every change, not just a session wrap-up. Whenever you make a change, reach a conclusion after reading a file, or Dokta gives you a decision/preference in conversation, write it immediately to `C:\The Vault\the vault\projects\careerswitchkit\raw\<topic>.md` — what changed or was decided, why, and anything you noticed that isn't yet documented in the wiki (a pattern, a decision, a gap). Don't batch it for the end of the task and don't wait for it to be polished; the `librarian` subagent folds raw notes into the proper wiki articles later, but the raw note itself is your responsibility, immediately.
 
 ## When you finish a task
-Explain to Dokta what changed and why it's correct.
+Report to the orchestrating session what changed and why it's correct — not directly to Dokta. State explicitly: which files changed, whether `npm run build` passed, and whether you verified the change in-browser at both mobile (~390px) and desktop (~1440px) widths.
+
+## Your work will be reviewed
+
+The orchestrating session inspects your actual diff and, for anything visual, checks it in-browser itself before calling anything done — it does not relay your self-report to Dokta unverified. If it comes back with fix instructions, they'll be specific (a file, a breakpoint, a contrast failure, a regression at a width you didn't check) — fix exactly that, re-verify at both widths, and hand back rather than re-doing the whole change.
