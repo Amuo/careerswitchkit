@@ -893,7 +893,7 @@ export default function SystemDashboard() {
   }
 
   return (
-    <div className="w-full">
+    <div className="w-full" style={{ minWidth: 900 }}>
       {/* ── Title bar ── */}
       <div className="bg-white/10 backdrop-blur-md border border-white/10 rounded-t-xl px-4 py-2 flex items-center justify-between text-[13px] font-medium text-white/90 shadow-2xl">
         <div className="flex items-center gap-4">
