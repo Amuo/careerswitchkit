@@ -12,14 +12,20 @@ This is non-negotiable — do not write a single line of code before all
 relevant skills are loaded.
 
 1. `frontend-design` — all visual and aesthetic decisions
-2. `design-taste` (DESIGN_VARIANCE:7–8, MOTION_INTENSITY:4–6, VISUAL_DENSITY:2–3)
+2. `design-taste-frontend` (DESIGN_VARIANCE:7–8, MOTION_INTENSITY:4–6, VISUAL_DENSITY:2–3)
    — push design quality beyond defaults. Note: the user may refer to this as
-   "taste-skill" — they are the same skill.
+   "taste-skill" — they are the same skill. (Renamed from the bare `design-taste`
+   originally listed here — that directory was emptied at some point; this is
+   the actual installed skill, sourced from `Leonxlnx/taste-skill` via the
+   `skills` CLI, same pipeline as everything else in this list.)
 3. `impeccable` — marketing-site craft and conversion copy quality
 4. `vercel-react-best-practices` — all React/Next.js code decisions
 5. `cro` — every layout and copy decision is a conversion decision on a
-   single-product $19 sales page; informs CTA placement, proof hierarchy,
-   section order, and friction reduction
+   single-product $37 sales page; informs CTA placement, proof hierarchy,
+   section order, and friction reduction. (Reinstalled 2026-07-01 from
+   `coreyhaines31/marketingskills` via the `skills` CLI — 28.5K installs,
+   scanned Safe/Low-Risk — after the original copy of this skill was found
+   emptied on disk.)
 6. `ui-animation` — motion design; always activate for any task touching
    animations, transitions, or interactive states
 7. `ui-ux-pro-max` — UI/UX quality control across accessibility, interaction,
@@ -34,7 +40,7 @@ design task. Never skip any of them.
 ## What we're building
 
 CareerSwitchKit is a digital product for US career switchers — people applying
-to a field they've never formally worked in. It sells at **$19** as an instant
+to a field they've never formally worked in. It sells at **$37** as an instant
 download.
 
 **Positioning (locked — never revert to old framing):**
@@ -152,17 +158,25 @@ Design direction: sleek, minimal, premium, SaaS-like. Confident and trustworthy
    - The 4 stages: walk through Stage 1–4 with outcomes, not file names
    - How it works: the transformation sequence
    - Proof: before/after showing the translation problem being solved
-   - Pricing: ONE plan, $19
+   - Pricing: ONE plan, $37
    - FAQ
-   - Contact
-   - Footer: links to /terms and /preview, and "© 2026 CareerSwitchKit"
+   - Footer: links to /terms, and "© 2026 CareerSwitchKit"
 
-2. Preview page (/preview)
-   - A gallery of real product screenshots, square (1:1), with labels and a
-     repeated CTA button
+   Note (2026-07-01): this section list is stale beyond price — `/preview` was
+   removed entirely, a `/thank-you` post-purchase page and a `/blog` route now
+   exist, and there's no dedicated Contact section on the current page. See
+   `C:\The Vault\the vault\projects\careerswitchkit\wiki\website.md` for the
+   current real structure; this file needs a fuller pass to catch up, flagged
+   here rather than silently rewritten.
 
-3. Terms page (/terms)
+2. Terms page (/terms)
    - Combined Terms + Refund + Privacy
+
+3. Thank-you page (/thank-you)
+   - Post-purchase confirmation, added 2026-06-28
+
+(Note: /preview was removed entirely 2026-06-23 — do not recreate it or assume
+it exists.)
 
 ---
 
@@ -180,10 +194,9 @@ Design direction: sleek, minimal, premium, SaaS-like. Confident and trustworthy
 ## Payments
 
 - Processor: Polar (acts as Merchant of Record).
-- The primary CTA button will trigger Polar's checkout (a hosted link or an
-  embedded overlay). Polar product details to be provided once approved.
-- For now, keep the button a clearly-marked placeholder so the layout is ready
-  to wire up later.
+- **Live since 2026-06-28** — all landing-page CTAs are wired to real Polar
+  checkout at $37, not a placeholder. A `/thank-you` post-purchase page exists.
+  Do not treat checkout as unwired or revert it to a placeholder state.
 
 ---
 

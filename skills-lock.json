@@ -611,7 +611,7 @@
       "source": "coreyhaines31/marketingskills",
       "sourceType": "github",
       "skillPath": "skills/copywriting/SKILL.md",
-      "computedHash": "20663e361c3b6767e1318de69111b75edc1fb19ded6369cffca677b8bd0c8696"
+      "computedHash": "cb9761b92e140cd68c1de6397c51dd9952da198382abfdbf26589ef26f6572b4"
     },
     "cost-optimization": {
       "source": "rampstackco/claude-skills",
@@ -1021,6 +1021,12 @@
       "skillPath": "invoice-organizer/SKILL.md",
       "computedHash": "9bed4335d5a8792140c7bf8a602a5b661a469f8f4bb94ea943b43d14fcef024b"
     },
+    "jobs-to-be-done": {
+      "source": "wondelai/skills",
+      "sourceType": "github",
+      "skillPath": "jobs-to-be-done/SKILL.md",
+      "computedHash": "8f7af64243d50676d2c4af931ab90b945384615cbb6221c6f136a803e78f59ee"
+    },
     "journey-mapping": {
       "source": "rampstackco/claude-skills",
       "sourceType": "github",
@@ -1260,6 +1266,12 @@
       "sourceType": "github",
       "skillPath": "skills/popups/SKILL.md",
       "computedHash": "f6a8d630cee8d07bcb8dced3e4717b9533fd79a8f31bfeb3f244058520900512"
+    },
+    "positioning-statement": {
+      "source": "deanpeters/product-manager-skills",
+      "sourceType": "github",
+      "skillPath": "skills/positioning-statement/SKILL.md",
+      "computedHash": "3a9435bb1d231522f6a83dbce105ff50b2252592bca68bb88ae817a14ece3d77"
     },
     "post-formatter": {
       "source": "charlie947/social-media-skills",
