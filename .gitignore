@@ -34,3 +34,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# design-sync (generated/machine state — not committed)
+.ds-sync/
+ds-bundle/
+ds-entry/built.css
+.design-sync/.cache/
+.design-sync/learnings/
+.design-sync/node_modules

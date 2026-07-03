@@ -28,8 +28,8 @@ const stages = [
   {
     number: "03",
     title: "Optimize and Score",
-    doc: "ATS Checklist + AI Prompt Pack",
-    desc: "50 prompts and a checklist to sharpen every line until it clears the filter and reads right to a human.",
+    doc: "ATS Checker + AI Prompt Pack",
+    desc: "An interactive ATS Checker and 50 prompts (PDF) to sharpen every line until it clears the filter and reads right to a human.",
     icon: "tune",
     isStart: false,
   },
