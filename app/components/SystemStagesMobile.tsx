@@ -1,7 +1,13 @@
+"use client";
+
 // Mobile / tablet version of the "how it works" section.
 // The desktop SystemDashboard is a fixed-width interactive app mockup that can
 // only sideways-scroll on small screens, so below `lg` we show this instead:
-// a clean, single-column, touch-friendly walkthrough of the same four stages.
+// a clean, single-column walkthrough of the same four stages — animated so it
+// reveals stage-by-stage as you scroll (it IS a sequence), with the START HERE
+// stage gently pulsing to show where to begin.
+
+import { useEffect, useRef, useState } from "react";
 
 const STAGES = [
   {
@@ -36,12 +42,36 @@ const STAGES = [
 ];
 
 export default function SystemStagesMobile() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    // Safety: if the browser can't observe, just show everything.
+    if (typeof IntersectionObserver === "undefined") {
+      setInView(true);
+      return;
+    }
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="flex flex-col gap-3">
+    <div ref={ref} className={`stages-mobile flex flex-col gap-3${inView ? " in" : ""}`}>
       {STAGES.map((s) => (
         <div
           key={s.n}
-          className="relative rounded-2xl p-5"
+          className="stage-card relative rounded-2xl p-5"
           style={{
             background: "rgba(22,22,52,0.55)",
             backdropFilter: "blur(12px)",
@@ -64,7 +94,7 @@ export default function SystemStagesMobile() {
           <div className="flex items-start gap-4">
             {/* Icon */}
             <div
-              className="flex items-center justify-center w-11 h-11 rounded-xl shrink-0"
+              className={`flex items-center justify-center w-11 h-11 rounded-xl shrink-0${s.start ? " stage-start-icon" : ""}`}
               style={{
                 background: s.start ? "rgba(55,146,232,0.15)" : "rgba(255,255,255,0.05)",
                 border: `1px solid ${s.start ? "rgba(55,146,232,0.3)" : "rgba(255,255,255,0.08)"}`,
