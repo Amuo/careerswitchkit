@@ -14,10 +14,8 @@ import { useEffect, useRef } from "react";
 const SRC =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_064122_c4750c0e-7476-4b44-94a2-a85a65c63bf2.mp4";
 
-// The video is displayed at brightness(0.6), so its near-black background renders
-// around this colour. Matching the container to it makes the fade invisible in
-// the dark areas.
-const VIDEO_BG = "#050510";
+// Colour the video fades to at the loop point. Black.
+const VIDEO_BG = "#000000";
 
 const FADE = 0.2; // seconds of fade on each side of the loop seam (kept quick)
 
