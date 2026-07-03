@@ -51,6 +51,7 @@ export default function Navbar() {
 
   const navLinks = [
     { href: "#system", pageHref: "/#system", label: "How It Works" },
+    { href: "#pricing", pageHref: "/#pricing", label: "Pricing" },
     { href: "#faq", pageHref: "/#faq", label: "FAQ" },
   ];
 
@@ -100,7 +101,7 @@ export default function Navbar() {
                 onClick={(e) => {
                   if (isHome) { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }
                 }}
-                className="flex items-center gap-3"
+                className="flex items-center gap-3 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-[#3792E8]/70"
               >
                 <svg viewBox="0 0 60 64" width="28" height="30" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
                   <path d="M 30,4 L 54,18 L 54,46 L 30,60 L 6,46 L 6,18 Z" fill="rgba(55,146,232,0.07)" stroke="#3792E8" strokeWidth="2" opacity="0.88"/>
@@ -127,9 +128,9 @@ export default function Navbar() {
                   onClick={isHome ? (e) => { e.preventDefault(); scrollTo(link.href.slice(1)); } : undefined}
                   onMouseEnter={() => setHoveredLink(link.href)}
                   onMouseLeave={() => setHoveredLink(null)}
-                  className="relative px-3 py-1.5 text-xs font-medium tracking-wide rounded-xl cursor-pointer select-none"
+                  className="relative px-3 py-1.5 text-xs font-medium tracking-wide rounded-xl cursor-pointer select-none outline-none focus-visible:ring-2 focus-visible:ring-[#3792E8]/70"
                   style={{
-                    color: hoveredLink === link.href ? "rgba(255,255,255,0.92)" : "rgba(255,255,255,0.44)",
+                    color: hoveredLink === link.href ? "rgba(255,255,255,0.92)" : "rgba(255,255,255,0.62)",
                     transition: "color 0.15s ease",
                   }}
                 >
@@ -150,36 +151,6 @@ export default function Navbar() {
                   <span className="relative z-10">{link.label}</span>
                 </a>
               ))}
-
-              <div className="w-px h-3.5 mx-2" style={{ background: "rgba(255,255,255,0.08)" }} />
-
-              {/* Trust badges */}
-              <div className="hidden lg:flex items-center gap-2">
-                <div
-                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-full"
-                  style={{
-                    background: "rgba(52,211,153,0.08)",
-                    border: "1px solid rgba(52,211,153,0.2)",
-                  }}
-                >
-                  <span className="relative flex items-center justify-center w-2 h-2 shrink-0">
-                    <span className="absolute inline-flex w-full h-full rounded-full opacity-60" style={{ background: "#34d399", animation: "ping 2s cubic-bezier(0,0,0.2,1) infinite" }} />
-                    <span className="relative w-1.5 h-1.5 rounded-full" style={{ background: "#34d399", boxShadow: "0 0 4px rgba(52,211,153,0.9)" }} />
-                  </span>
-                  <span className="text-[11px] font-medium" style={{ color: "rgba(52,211,153,0.85)" }}>Instant download</span>
-                </div>
-
-                <div
-                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-full"
-                  style={{
-                    background: "rgba(255,255,255,0.05)",
-                    border: "1px solid rgba(255,255,255,0.1)",
-                  }}
-                >
-                  <span className="material-symbols-outlined" style={{ fontSize: 11, color: "rgba(255,255,255,0.5)" }}>verified</span>
-                  <span className="text-[11px] font-medium" style={{ color: "rgba(255,255,255,0.55)" }}>7-day guarantee</span>
-                </div>
-              </div>
             </div>
 
             {/* ── Right: CTA + mobile hamburger ── */}
@@ -187,7 +158,7 @@ export default function Navbar() {
               {/* Desktop CTA */}
               <motion.button
                 onClick={handleCheckout}
-                className="hidden md:flex relative items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-full text-white overflow-hidden shrink-0"
+                className="hidden md:flex relative items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-full text-white overflow-hidden shrink-0 outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8ec5ff]"
                 style={{
                   background: "linear-gradient(135deg, #4aa3f5 0%, #2878d0 100%)",
                   boxShadow: "0 0 18px rgba(55,146,232,0.45), inset 0 1px 0 rgba(255,255,255,0.22)",
@@ -206,9 +177,23 @@ export default function Navbar() {
                 </motion.span>
               </motion.button>
 
+              {/* Mobile compact CTA — keeps buying one tap away on phones */}
+              <button
+                onClick={handleCheckout}
+                aria-label="Claim access for $37"
+                className="md:hidden flex items-center gap-1 text-xs font-bold pl-3.5 pr-3 py-2 rounded-full text-white shrink-0 outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8ec5ff]"
+                style={{
+                  background: "linear-gradient(135deg, #4aa3f5 0%, #2878d0 100%)",
+                  boxShadow: "0 0 14px rgba(55,146,232,0.4), inset 0 1px 0 rgba(255,255,255,0.2)",
+                }}
+              >
+                $37
+                <span className="material-symbols-outlined" style={{ fontSize: 13 }}>arrow_forward</span>
+              </button>
+
               {/* Mobile hamburger */}
               <button
-              className="md:hidden flex items-center justify-center w-8 h-8 rounded-xl transition-colors duration-150"
+              className="md:hidden flex items-center justify-center w-8 h-8 rounded-xl transition-colors duration-150 outline-none focus-visible:ring-2 focus-visible:ring-[#3792E8]/70"
               style={{ color: "rgba(255,255,255,0.6)" }}
               onClick={() => setMenuOpen(!menuOpen)}
               aria-expanded={menuOpen}
@@ -274,7 +259,7 @@ export default function Navbar() {
                         setMenuOpen(false);
                         if (isHome) { e.preventDefault(); scrollTo(link.href.slice(1)); }
                       }}
-                      className="text-sm py-2.5 px-3 rounded-xl cursor-pointer transition-all duration-150"
+                      className="text-sm py-2.5 px-3 rounded-xl cursor-pointer transition-all duration-150 outline-none focus-visible:ring-2 focus-visible:ring-[#3792E8]/70"
                       style={{ color: "rgba(255,255,255,0.6)" }}
                       onMouseEnter={e => { e.currentTarget.style.color = "#fff"; e.currentTarget.style.background = "rgba(255,255,255,0.05)"; }}
                       onMouseLeave={e => { e.currentTarget.style.color = "rgba(255,255,255,0.6)"; e.currentTarget.style.background = "transparent"; }}
@@ -296,7 +281,7 @@ export default function Navbar() {
                   <motion.button
                     variants={itemVariants}
                     onClick={() => { setMenuOpen(false); handleCheckout(); }}
-                    className="mt-1 relative text-sm font-bold py-3 px-4 rounded-xl text-white flex items-center justify-center gap-2 overflow-hidden"
+                    className="mt-1 relative text-sm font-bold py-3 px-4 rounded-xl text-white flex items-center justify-center gap-2 overflow-hidden outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8ec5ff]"
                     style={{
                       background: "linear-gradient(135deg, #4aa3f5 0%, #2878d0 100%)",
                       boxShadow: "0 0 20px rgba(55,146,232,0.4), inset 0 1px 0 rgba(255,255,255,0.18)",

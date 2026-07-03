@@ -54,7 +54,7 @@ export default function ProofExample() {
         </p>
       </div>
 
-      <p className="text-center text-xs mb-8" style={{ color: "rgba(255,255,255,0.35)" }}>
+      <p className="text-center text-xs mb-8" style={{ color: "rgba(255,255,255,0.55)" }}>
         Illustrative example — the system applied to a sample career switch. Not a real customer.
       </p>
 
@@ -62,7 +62,7 @@ export default function ProofExample() {
       <div className="flex flex-wrap items-center justify-center gap-2 mb-8">
         <span
           className="text-[11px] font-bold uppercase tracking-widest mr-1"
-          style={{ color: "rgba(255,255,255,0.4)" }}
+          style={{ color: "rgba(255,255,255,0.55)" }}
         >
           Target role scans for:
         </span>
@@ -85,7 +85,12 @@ export default function ProofExample() {
         {/* BEFORE */}
         <div
           className="rounded-2xl overflow-hidden flex flex-col"
-          style={{ background: "rgba(239,68,68,0.04)", border: "1px solid rgba(239,68,68,0.2)" }}
+          style={{
+            background: "rgba(28,12,15,0.6)",
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
+            border: "1px solid rgba(239,68,68,0.25)",
+          }}
         >
           <div
             className="flex items-center justify-between px-5 py-3"
@@ -211,7 +216,7 @@ export default function ProofExample() {
 
       <p
         className="text-center text-[13px] mt-8 leading-relaxed"
-        style={{ color: "rgba(255,255,255,0.45)", maxWidth: "60ch", margin: "2rem auto 0" }}
+        style={{ color: "rgba(255,255,255,0.6)", maxWidth: "60ch", margin: "2rem auto 0" }}
       >
         An ATS scans each posting for role-specific terms, then ranks résumés by how many they hit.
         Same career, same facts — only the language changed.

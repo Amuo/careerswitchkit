@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
-import TermsBackground from "@/app/components/TermsBackground";
 import {
   Scale,
   Building2,
@@ -28,8 +27,7 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <div className="relative min-h-screen text-white">
-      {/* Video + overlays portaled to document.body to escape motion.div stacking context */}
-      <TermsBackground />
+      {/* Background video comes from the global LandingBackground in the root layout. */}
 
       {/* Noise overlay — inside page is fine, it's decorative only */}
       <div className="fixed inset-0 z-50 pointer-events-none noise-overlay" />
@@ -45,8 +43,13 @@ export default function TermsPage() {
               <Scale className="w-3 h-3 mr-2 text-[#3792E8]" aria-hidden />
               Legal Overview
             </div>
-            <h1 className="text-6xl md:text-8xl font-bold mb-6 tracking-tighter">
-              <span className="shiny-text">Terms &amp; Privacy</span>
+            <h1
+              className="font-bold mb-6 tracking-tighter"
+              style={{ fontSize: "clamp(44px, 7.5vw, 96px)" }}
+            >
+              <span className="hero-headline-gradient" data-text="Terms & Privacy">
+                Terms &amp; Privacy
+              </span>
             </h1>
             <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
               The fine print governing your use of the CareerSwitchKit system.

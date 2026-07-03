@@ -141,7 +141,7 @@ export default function Home() {
               </a>
             </div>
 
-            <p className="mt-6 text-sm" style={{ color: "rgba(255,255,255,0.45)" }}>
+            <p className="mt-6 text-sm" style={{ color: "rgba(255,255,255,0.62)" }}>
               $37 one-time · Instant download · 7-day refund
             </p>
 
@@ -219,7 +219,7 @@ export default function Home() {
                   >
                     {title}
                   </h4>
-                  <p style={{ fontSize: "0.8rem", lineHeight: 1.7, color: "rgba(255,255,255,0.45)", maxWidth: "20ch" }}>
+                  <p style={{ fontSize: "0.8rem", lineHeight: 1.7, color: "rgba(255,255,255,0.6)", maxWidth: "20ch" }}>
                     {desc}
                   </p>
                 </div>
