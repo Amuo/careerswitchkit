@@ -6,6 +6,7 @@ import FAQAccordion from "./components/FAQAccordion";
 import FadeUpObserver from "./components/FadeUpObserver";
 import FinalCTA from "./components/FinalCTA";
 import ProofExample from "./components/ProofExample";
+import WhoItsFor from "./components/WhoItsFor";
 
 export const metadata: Metadata = {
   title: "Resume System for Career Switchers | CareerSwitchKit",
@@ -165,6 +166,9 @@ export default function Home() {
               </p>
             </div>
           </section>
+
+          {/* ── Who it's for ─────────────────────────────────────────────── */}
+          <WhoItsFor />
 
           {/* ── Trust strip ──────────────────────────────────────────────── */}
           <section className="relative px-6 max-w-4xl mx-auto mb-16 fade-up">
