@@ -492,3 +492,88 @@ html.js-reveal .stages-mobile.in .stage-card:nth-child(4) { transition-delay: 0.
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+
+/* ── Free-guides cards (homepage "Keep reading") ──────────────────
+   Glass cards that lift + glow on hover; the icon brightens and the
+   "Read" pill picks up an accent glow with the arrow sliding right.
+   All hover state lives here (not inline) so it can actually animate. */
+.guide-card {
+  position: relative;
+  background: rgba(16, 16, 45, 0.5);
+  border: 1px solid rgba(55, 146, 232, 0.15);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s ease,
+              background-color 0.35s ease,
+              box-shadow 0.35s ease;
+}
+.guide-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(160, 201, 255, 0.5);
+  background: rgba(22, 22, 58, 0.62);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35),
+              0 0 30px rgba(55, 146, 232, 0.14),
+              inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+/* Top accent line, revealed on hover */
+.guide-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 1.5rem;
+  right: 1.5rem;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(160, 201, 255, 0.5), transparent);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.guide-card:hover::before { opacity: 1; }
+
+.guide-icon {
+  background: rgba(55, 146, 232, 0.1);
+  border: 1px solid rgba(55, 146, 232, 0.2);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.35s ease,
+              box-shadow 0.35s ease;
+}
+.guide-card:hover .guide-icon {
+  transform: scale(1.06);
+  background: rgba(55, 146, 232, 0.16);
+  box-shadow: 0 0 20px rgba(55, 146, 232, 0.35);
+}
+
+.guide-read {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #a0c9ff;
+  background: rgba(55, 146, 232, 0.1);
+  border: 1px solid rgba(55, 146, 232, 0.25);
+  transition: color 0.35s ease,
+              background-color 0.35s ease,
+              border-color 0.35s ease,
+              box-shadow 0.35s ease;
+}
+.guide-card:hover .guide-read {
+  color: #ffffff;
+  background: rgba(55, 146, 232, 0.22);
+  border-color: rgba(160, 201, 255, 0.5);
+  box-shadow: 0 0 22px rgba(55, 146, 232, 0.4);
+}
+.guide-arrow { transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+.guide-card:hover .guide-arrow { transform: translateX(4px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .guide-card,
+  .guide-card:hover,
+  .guide-icon,
+  .guide-card:hover .guide-icon,
+  .guide-arrow,
+  .guide-card:hover .guide-arrow {
+    transform: none;
+  }
+}

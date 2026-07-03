@@ -18,11 +18,13 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://careerswitchkit.org"),
   title: "Resume System for Career Switchers | CareerSwitchKit",
   description:
-    "Most career switchers get filtered out before a human reads their resume. CareerSwitchKit is the 4-stage system that fixes that: CV templates, cover letter templates, an interactive ATS Checker, and 50 AI prompts. $37, instant download, 7-day guarantee.",
+    "Career switchers get filtered out before a human reads their resume. CareerSwitchKit is the 4-stage system that fixes that — $37, instant download.",
   icons: {
     icon: "/favicon.svg",
+    apple: "/apple-icon",
   },
   alternates: {
     canonical: "https://careerswitchkit.org",

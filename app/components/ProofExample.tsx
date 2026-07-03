@@ -179,7 +179,7 @@ export default function ProofExample() {
             <div className="mb-4">
               <div className="font-geist font-bold text-white">Jordan Bennett</div>
               <div className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>
-                Front Desk Supervisor · chronological résumé
+                Front Desk Supervisor · chronological resume
               </div>
             </div>
             <ul className="space-y-3">
@@ -273,7 +273,7 @@ export default function ProofExample() {
         className="text-center text-[13px] mt-8 leading-relaxed"
         style={{ color: "rgba(255,255,255,0.6)", maxWidth: "60ch", margin: "2rem auto 0" }}
       >
-        An ATS scans each posting for role-specific terms, then ranks résumés by how many they hit.
+        An ATS scans each posting for role-specific terms, then ranks resumes by how many they hit.
         Same career, same facts — only the language changed.
       </p>
     </section>

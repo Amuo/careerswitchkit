@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import SystemDashboardLoader from "./components/SystemDashboardLoader";
@@ -11,7 +12,7 @@ import WhoItsFor from "./components/WhoItsFor";
 export const metadata: Metadata = {
   title: "Resume System for Career Switchers | CareerSwitchKit",
   description:
-    "Most career switchers get filtered out before a human reads their resume. CareerSwitchKit is the 4-stage system that fixes that: the language rewrites, interactive ATS Checker, and 50 AI prompts you need to translate your background credibly. $37, instant download.",
+    "Career switchers get filtered out before a human reads their resume. CareerSwitchKit is the 4-stage system that fixes that — $37, instant download.",
 };
 
 const faqSchema = {
@@ -37,6 +38,14 @@ const productSchema = {
   brand: { "@type": "Brand", name: "CareerSwitchKit" },
   offers: { "@type": "Offer", price: "37.00", priceCurrency: "USD", availability: "https://schema.org/InStock", priceValidUntil: "2027-12-31", seller: { "@type": "Organization", name: "Zorby&Co" } },
 };
+
+// A few free guides, linked from the homepage — helps readers and passes link
+// equity to the blog posts so they can rank. Keyword-rich anchor text on purpose.
+const guides = [
+  { slug: "how-to-write-a-career-change-resume", icon: "description", tag: "Resume", title: "How to write a career-change resume" },
+  { slug: "what-is-ats-career-switchers", icon: "filter_alt", tag: "ATS", title: "What is ATS — and how to pass it" },
+  { slug: "transferable-skills-career-change", icon: "insights", tag: "Skills", title: "Find your transferable skills" },
+];
 
 export default function Home() {
   return (
@@ -385,6 +394,53 @@ export default function Home() {
 
           {/* ── Final CTA ────────────────────────────────────────────────── */}
           <FinalCTA />
+
+          {/* ── Free guides (keep reading) ───────────────────────────────── */}
+          <section className="max-w-5xl mx-auto px-6 pb-32 fade-up">
+            <div className="text-center mb-10">
+              <span className="section-eyebrow">Free guides</span>
+              <h2 className="text-3xl font-black font-geist mb-3">Keep reading.</h2>
+              <p style={{ color: "#c0c7d3", maxWidth: "44ch", margin: "0 auto" }}>
+                Practical walkthroughs on resumes, ATS, and reframing your background — free.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              {guides.map((g) => (
+                <Link
+                  key={g.slug}
+                  href={`/blog/${g.slug}`}
+                  className="guide-card group flex flex-col rounded-2xl p-7"
+                >
+                  <span className="guide-icon flex items-center justify-center w-11 h-11 rounded-xl mb-6">
+                    <span className="material-symbols-outlined" style={{ fontSize: 20, color: "#a0c9ff" }}>
+                      {g.icon}
+                    </span>
+                  </span>
+                  <span className="text-[10px] font-bold uppercase tracking-[0.18em] mb-2" style={{ color: "rgba(160,201,255,0.7)" }}>
+                    {g.tag}
+                  </span>
+                  <h3 className="font-geist font-bold text-white leading-snug mb-7 flex-1" style={{ fontSize: "1.1rem" }}>
+                    {g.title}
+                  </h3>
+                  <span className="guide-read self-start">
+                    Read
+                    <span className="material-symbols-outlined guide-arrow" style={{ fontSize: 15 }}>arrow_forward</span>
+                  </span>
+                </Link>
+              ))}
+            </div>
+
+            <div className="text-center mt-10">
+              <Link
+                href="/blog"
+                className="group inline-flex items-center gap-1 text-sm font-medium text-white/55 hover:text-white transition-colors"
+              >
+                View all career-switch guides
+                <span className="material-symbols-outlined transition-transform group-hover:translate-x-0.5" style={{ fontSize: 15 }}>arrow_forward</span>
+              </Link>
+            </div>
+          </section>
 
         </main>
 
