@@ -17,7 +17,7 @@ const SRC =
 // Colour the video fades to at the loop point. Black.
 const VIDEO_BG = "#000000";
 
-const FADE = 0.2; // seconds of fade on each side of the loop seam (kept quick)
+const FADE = 0.5; // seconds of fade on each side of the loop seam
 
 export default function LandingBackground() {
   const videoRef = useRef<HTMLVideoElement>(null);
