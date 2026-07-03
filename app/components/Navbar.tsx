@@ -49,6 +49,14 @@ export default function Navbar() {
     return () => observer.disconnect();
   }, []);
 
+  // Close the mobile sheet on Escape
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setMenuOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
+
   const navLinks = [
     { href: "#system", pageHref: "/#system", label: "How It Works" },
     { href: "#pricing", pageHref: "/#pricing", label: "Pricing" },
@@ -64,9 +72,26 @@ export default function Navbar() {
       <div ref={sentinelRef} className="absolute top-1 pointer-events-none" aria-hidden="true" />
 
       <div className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-4">
+        {/* Mobile menu scrim — dims the page and closes the sheet on tap */}
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.div
+              key="scrim"
+              onClick={() => setMenuOpen(false)}
+              className="md:hidden fixed inset-0"
+              style={{ background: "rgba(3,3,12,0.55)", zIndex: 0 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2, ease: EASE }}
+              aria-hidden="true"
+            />
+          )}
+        </AnimatePresence>
+
         <nav
           aria-label="Main navigation"
-          className="w-full max-w-7xl nav-reveal"
+          className="relative z-[1] w-full max-w-7xl nav-reveal"
         >
           {/* Pill */}
           <div
@@ -151,7 +176,9 @@ export default function Navbar() {
             </div>
 
             {/* ── Right: CTA + mobile hamburger ── */}
-            <div className="flex items-center justify-end gap-2">
+            {/* Pinned to column 3 so the hamburger hugs the right edge even
+                when the center column is hidden (display:none drops it from the grid). */}
+            <div className="flex items-center justify-end gap-2" style={{ gridColumnStart: 3 }}>
               {/* Desktop CTA */}
               <motion.button
                 onClick={handleCheckout}
@@ -173,20 +200,6 @@ export default function Navbar() {
                   arrow_forward
                 </motion.span>
               </motion.button>
-
-              {/* Mobile compact CTA — keeps buying one tap away on phones */}
-              <button
-                onClick={handleCheckout}
-                aria-label="Claim access for $37"
-                className="md:hidden flex items-center gap-1 text-xs font-bold pl-3.5 pr-3 py-2 rounded-full text-white shrink-0 outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8ec5ff]"
-                style={{
-                  background: "linear-gradient(135deg, #4aa3f5 0%, #2878d0 100%)",
-                  boxShadow: "0 0 14px rgba(55,146,232,0.4), inset 0 1px 0 rgba(255,255,255,0.2)",
-                }}
-              >
-                $37
-                <span className="material-symbols-outlined" style={{ fontSize: 13 }}>arrow_forward</span>
-              </button>
 
               {/* Mobile hamburger */}
               <button
@@ -227,7 +240,7 @@ export default function Navbar() {
             </div>{/* end right column */}
           </div>
 
-          {/* ── Mobile menu ── */}
+          {/* ── Mobile menu (premium sheet) ── */}
           <AnimatePresence>
             {menuOpen && (
               <motion.div
@@ -235,19 +248,20 @@ export default function Navbar() {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                className="mt-2"
+                className="md:hidden mt-2"
                 style={{
-                  borderRadius: 18,
+                  borderRadius: 22,
                   overflow: "hidden",
-                  background: "rgba(7,7,25,0.97)",
-                  border: "1px solid rgba(255,255,255,0.08)",
+                  background: "rgba(9,9,26,0.98)",
+                  border: "1px solid rgba(255,255,255,0.09)",
                   backdropFilter: "blur(28px)",
                   WebkitBackdropFilter: "blur(28px)",
-                  boxShadow: "0 16px 48px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.06)",
+                  boxShadow: "0 24px 64px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.07)",
                 }}
               >
-                <div className="p-3 flex flex-col gap-1">
-                  {navLinks.map((link) => (
+                <div className="p-2.5">
+                  {/* Section links — tappable rows */}
+                  {navLinks.map((link, i) => (
                     <motion.a
                       key={link.href}
                       variants={itemVariants}
@@ -256,41 +270,56 @@ export default function Navbar() {
                         setMenuOpen(false);
                         if (isHome) { e.preventDefault(); scrollTo(link.href.slice(1)); }
                       }}
-                      className="text-sm py-2.5 px-3 rounded-xl cursor-pointer transition-all duration-150 outline-none focus-visible:ring-2 focus-visible:ring-[#3792E8]/70"
-                      style={{ color: "rgba(255,255,255,0.6)" }}
-                      onMouseEnter={e => { e.currentTarget.style.color = "#fff"; e.currentTarget.style.background = "rgba(255,255,255,0.05)"; }}
-                      onMouseLeave={e => { e.currentTarget.style.color = "rgba(255,255,255,0.6)"; e.currentTarget.style.background = "transparent"; }}
+                      className="group flex items-center justify-between py-3.5 px-3.5 rounded-2xl cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#3792E8]/70"
+                      style={{
+                        color: "rgba(255,255,255,0.72)",
+                        borderBottom: i < navLinks.length - 1 ? "1px solid rgba(255,255,255,0.05)" : "none",
+                        transition: "color 0.15s ease",
+                      }}
+                      onMouseEnter={e => (e.currentTarget.style.color = "#fff")}
+                      onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.72)")}
                     >
-                      {link.label}
+                      <span className="text-[15px] font-medium tracking-tight">{link.label}</span>
+                      <span
+                        className="material-symbols-outlined transition-transform duration-200 group-hover:translate-x-0.5"
+                        style={{ fontSize: 18, color: "rgba(255,255,255,0.28)" }}
+                      >
+                        chevron_right
+                      </span>
                     </motion.a>
                   ))}
 
-                  <motion.div variants={itemVariants} className="flex items-center gap-2 px-3 py-2">
-                    <span
-                      className="w-1.5 h-1.5 rounded-full shrink-0"
-                      style={{ background: "#34d399", boxShadow: "0 0 5px rgba(52,211,153,0.95)", animation: "pulse 2.5s ease-in-out infinite" }}
-                    />
-                    <span className="text-xs" style={{ color: "rgba(255,255,255,0.34)" }}>
-                      Instant download · 7-day guarantee
-                    </span>
-                  </motion.div>
-
-                  <motion.button
+                  {/* Primary action + reassurance right beneath it */}
+                  <motion.div
                     variants={itemVariants}
-                    onClick={() => { setMenuOpen(false); handleCheckout(); }}
-                    className="mt-1 relative text-sm font-bold py-3 px-4 rounded-xl text-white flex items-center justify-center gap-2 overflow-hidden outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8ec5ff]"
-                    style={{
-                      background: "linear-gradient(135deg, #4aa3f5 0%, #2878d0 100%)",
-                      boxShadow: "0 0 20px rgba(55,146,232,0.4), inset 0 1px 0 rgba(255,255,255,0.18)",
-                    }}
-                    whileHover={{ boxShadow: "0 0 30px rgba(55,146,232,0.6), inset 0 1px 0 rgba(255,255,255,0.24)" }}
-                    whileTap={{ scale: 0.97 }}
-                    transition={{ duration: 0.18 }}
+                    className="mt-2.5 pt-3"
+                    style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}
                   >
-                    <span className="nav-cta-shimmer" aria-hidden="true" />
-                    Claim Access — $37
-                    <span className="material-symbols-outlined" style={{ fontSize: 15 }}>arrow_forward</span>
-                  </motion.button>
+                    <motion.button
+                      onClick={() => { setMenuOpen(false); handleCheckout(); }}
+                      whileTap={{ scale: 0.97 }}
+                      transition={{ duration: 0.18 }}
+                      className="relative w-full text-[15px] font-bold py-3.5 px-4 rounded-2xl text-white flex items-center justify-center gap-2 overflow-hidden outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8ec5ff]"
+                      style={{
+                        background: "linear-gradient(135deg, #4aa3f5 0%, #2878d0 100%)",
+                        boxShadow: "0 0 24px rgba(55,146,232,0.45), inset 0 1px 0 rgba(255,255,255,0.2)",
+                      }}
+                    >
+                      <span className="nav-cta-shimmer" aria-hidden="true" />
+                      Claim Access — $37
+                      <span className="material-symbols-outlined" style={{ fontSize: 16 }}>arrow_forward</span>
+                    </motion.button>
+
+                    <div className="flex items-center justify-center gap-2 mt-3">
+                      <span
+                        className="w-1.5 h-1.5 rounded-full shrink-0"
+                        style={{ background: "#34d399", boxShadow: "0 0 5px rgba(52,211,153,0.95)", animation: "pulse 2.5s ease-in-out infinite" }}
+                      />
+                      <span className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>
+                        Instant download · 7-day guarantee
+                      </span>
+                    </div>
+                  </motion.div>
                 </div>
               </motion.div>
             )}
