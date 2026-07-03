@@ -179,67 +179,6 @@ export default function Home() {
           {/* ── Who it's for ─────────────────────────────────────────────── */}
           <WhoItsFor />
 
-          {/* ── Trust strip ──────────────────────────────────────────────── */}
-          <section className="relative px-6 max-w-4xl mx-auto mb-16 fade-up">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              {[
-                {
-                  icon: "verified_user",
-                  title: "7-Day Guarantee",
-                  desc: "Doesn't work for your situation? Email us within 7 days for a full refund.",
-                  accent: "#3792E8",
-                },
-                {
-                  icon: "bolt",
-                  title: "Instant Download",
-                  desc: "Pay once, access immediately. Files in your inbox within minutes.",
-                  accent: "#a0c9ff",
-                },
-                {
-                  icon: "all_inclusive",
-                  title: "No Subscription",
-                  desc: "$37 once. You own it forever. No renewals, no locked content.",
-                  accent: "#3792E8",
-                },
-              ].map(({ icon, title, desc, accent }) => (
-                <div
-                  key={title}
-                  className="relative flex flex-col items-center text-center px-7 py-8 rounded-2xl overflow-hidden"
-                  style={{
-                    background: "rgba(16,16,45,0.6)",
-                    border: "1px solid rgba(55,146,232,0.15)",
-                    boxShadow: "inset 0 1px 0 rgba(255,255,255,0.06)",
-                  }}
-                >
-                  {/* Top accent line */}
-                  <div className="absolute top-0 left-8 right-8 h-px" style={{ background: `linear-gradient(to right, transparent, ${accent}66, transparent)` }} />
-                  {/* Icon with glow container */}
-                  <div
-                    className="flex items-center justify-center w-12 h-12 rounded-xl mb-4"
-                    style={{
-                      background: "rgba(55,146,232,0.1)",
-                      border: "1px solid rgba(55,146,232,0.2)",
-                      boxShadow: "0 0 20px rgba(55,146,232,0.12)",
-                    }}
-                  >
-                    <span className="material-symbols-outlined" style={{ fontSize: 22, color: accent }}>
-                      {icon}
-                    </span>
-                  </div>
-                  <div
-                    className="font-geist font-bold text-white mb-2"
-                    style={{ fontSize: "1rem", letterSpacing: "-0.01em" }}
-                  >
-                    {title}
-                  </div>
-                  <p style={{ fontSize: "0.8rem", lineHeight: 1.7, color: "rgba(255,255,255,0.6)", maxWidth: "20ch" }}>
-                    {desc}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </section>
-
           {/* ── Pricing ──────────────────────────────────────────────────── */}
           <section id="pricing" className="relative py-32 overflow-hidden fade-up visible">
             {/* Noise layer for this section */}
@@ -261,7 +200,7 @@ export default function Home() {
                   One payment. <span style={{ color: "#a0c9ff" }}>No coach required.</span>
                 </h2>
                 <p style={{ color: "#c0c7d3" }} className="max-w-xl mx-auto">
-                  One payment. Lifetime updates. No monthly subscriptions or hidden fees.
+                  Lifetime updates. No monthly subscriptions or hidden fees.
                 </p>
               </div>
 
@@ -273,7 +212,6 @@ export default function Home() {
                     <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)" }}>Career Coaching</p>
                   </div>
                   <div className="mb-10">
-                    <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#f87171", marginBottom: 8 }}>CAREER COACHING</div>
                     <div className="font-geist font-black tracking-tighter" style={{ fontSize: "clamp(48px,5vw,72px)", color: "#f87171" }}>
                       $2,500<span style={{ fontSize: "1.5rem", opacity: 0.6 }}>+</span>
                     </div>
@@ -336,39 +274,19 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-3 mb-10 relative z-10">
-                    {[{ icon: "verified_user", text: "7-Day\nGuarantee" }, { icon: "bolt", text: "Instant\nDownload" }].map(({ icon, text }) => (
-                      <div key={icon} className="flex items-center gap-2 px-3 py-2.5 rounded-xl"
-                        style={{ background: "rgba(26,26,45,1)", border: "1px solid rgba(160,201,255,0.15)" }}>
-                        <span className="material-symbols-outlined text-lg" style={{ color: "#a0c9ff" }}>{icon}</span>
-                        <span className="text-[10px] font-bold leading-tight whitespace-pre-line">{text}</span>
+                  <div className="space-y-3 mb-8 flex-1 relative z-10">
+                    {[
+                      "The full 4-stage career switch system",
+                      "3 CV templates + 3 cover letters, built to translate your experience",
+                      "AI Prompt Pack — 50 prompts to sharpen every line",
+                      "Lifetime updates for 2026 hiring — yours forever, no subscription",
+                      "Instant download — files in your inbox within minutes",
+                    ].map((t) => (
+                      <div key={t} className="flex items-start gap-3">
+                        <span className="material-symbols-outlined text-lg" style={{ color: "#a0c9ff" }}>check_circle</span>
+                        <div className="text-sm font-medium" style={{ color: "rgba(255,255,255,0.9)" }}>{t}</div>
                       </div>
                     ))}
-                  </div>
-
-                  <div className="space-y-6 mb-10 flex-1 relative z-10">
-                    <div>
-                      <div className="text-[10px] font-bold uppercase tracking-widest mb-3" style={{ color: "rgba(255,255,255,0.4)" }}>Core System</div>
-                      <ul className="space-y-3">
-                        {["The full 4-stage career switch system", "3 CV templates + 3 cover letters, built to translate your experience"].map(t => (
-                          <li key={t} className="flex items-start gap-3">
-                            <span className="material-symbols-outlined text-lg" style={{ color: "#a0c9ff" }}>check_circle</span>
-                            <div className="text-sm font-medium" style={{ color: "rgba(255,255,255,0.9)" }}>{t}</div>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <div className="text-[10px] font-bold uppercase tracking-widest mb-3" style={{ color: "#a0c9ff" }}>Also included</div>
-                      <ul className="space-y-3">
-                        {["AI Prompt Pack — 50 prompts to sharpen every line", "Lifetime updates for 2026 hiring"].map(t => (
-                          <li key={t} className="flex items-start gap-3">
-                            <span className="material-symbols-outlined text-lg" style={{ color: "#a0c9ff" }}>add_moderator</span>
-                            <div className="text-sm font-medium" style={{ color: "rgba(255,255,255,0.9)" }}>{t}</div>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
                   </div>
 
                   <a
@@ -379,6 +297,11 @@ export default function Home() {
                     <span className="relative z-10">Claim Lifetime Access — $37</span>
                     <span className="material-symbols-outlined relative z-10 transition-transform group-hover/btn:translate-x-1">arrow_forward</span>
                   </a>
+
+                  <div className="flex items-center justify-center gap-2 mt-4 relative z-10">
+                    <span className="material-symbols-outlined" style={{ fontSize: 16, color: "rgba(160,201,255,0.8)" }}>verified_user</span>
+                    <span className="text-xs" style={{ color: "rgba(255,255,255,0.55)" }}>7-day refund — not right for you? Email us and we&rsquo;ll refund it.</span>
+                  </div>
                 </div>
               </div>
             </div>

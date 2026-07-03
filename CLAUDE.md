@@ -100,8 +100,8 @@ Regenerated from the live code on 2026-07-02. The site drifts; if this list and 
 code ever disagree, **trust the code and fix this list** — never hand-maintain a
 full mirror of the code.
 
-- **The landing page is `app/page.tsx`, and much of it is inline.** The hero, the
-  trust strip, and the **entire pricing block** are written inline in `page.tsx`.
+- **The landing page is `app/page.tsx`, and much of it is inline.** The hero and
+  the **entire pricing block** are written inline in `page.tsx`.
   The parts pulled out as components are: `Navbar`, `Footer`, `FAQAccordion`,
   `FadeUpObserver`, `FinalCTA`, and `SystemDashboardLoader` (which dynamically
   loads `SystemDashboard`, client-only). So: to change the bottom CTA, edit
