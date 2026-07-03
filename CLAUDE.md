@@ -69,8 +69,7 @@ JTBD) is in the vault brand doc, Part 9.
 
 Next.js (App Router) · Tailwind CSS · shadcn/ui (use its primitives; don't
 hand-roll what shadcn provides) · TypeScript · deployed on Vercel. Single marketing
-site — no database, login, or backend unless I ask. (There is a small
-`/api/subscribe` route and a blog under `/blog`.)
+site — no database, login, or backend unless I ask. (There is a blog under `/blog`.)
 
 ## Design rules — do not break
 

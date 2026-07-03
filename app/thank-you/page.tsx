@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
 import FadeUpObserver from "@/app/components/FadeUpObserver";
