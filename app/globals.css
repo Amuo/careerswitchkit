@@ -409,15 +409,36 @@ h1, h2, h3, h4, .font-geist {
   transform: rotate(180deg);
 }
 
-/* Fade-up scroll animation */
+/* Fade-up scroll animation.
+   Visible by DEFAULT so content is never lost if JS is off or fails. The hidden
+   start state only applies once <html> is flagged `.js-reveal` (set synchronously
+   in <head>); the IntersectionObserver in FadeUpObserver then adds `.visible` to
+   fade each section in on scroll. No JS -> everything just shows. */
 .fade-up {
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+html.js-reveal .fade-up {
   opacity: 0;
   transform: translateY(20px);
-  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.fade-up.visible {
+html.js-reveal .fade-up.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Navbar entrance — done in CSS, not JS, so the bar is ALWAYS visible even if the
+   motion library or hydration never runs (the old bug). Base state is fully
+   visible; this only layers on a gentle fade-down as enhancement. */
+.nav-reveal {
+  animation: navReveal 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes navReveal {
+  from { opacity: 0; transform: translateY(-18px); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-reveal { animation: none; }
 }
 
 /* Traffic lights */

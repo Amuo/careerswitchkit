@@ -64,12 +64,9 @@ export default function Navbar() {
       <div ref={sentinelRef} className="absolute top-1 pointer-events-none" aria-hidden="true" />
 
       <div className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-4">
-        <motion.nav
+        <nav
           aria-label="Main navigation"
-          className="w-full max-w-7xl"
-          initial={{ opacity: 0, y: -18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.65, ease: EASE }}
+          className="w-full max-w-7xl nav-reveal"
         >
           {/* Pill */}
           <div
@@ -298,7 +295,7 @@ export default function Navbar() {
               </motion.div>
             )}
           </AnimatePresence>
-        </motion.nav>
+        </nav>
       </div>
     </>
   );

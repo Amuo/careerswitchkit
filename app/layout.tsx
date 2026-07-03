@@ -55,6 +55,17 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" />
+        {/*
+          Progressive-reveal flag. Scroll-in sections (.fade-up) render hidden and
+          are faded in by JS. This runs synchronously before first paint and only
+          marks the page as JS-capable — so if JS is disabled or fails to load, the
+          CSS leaves every section visible instead of trapping it at opacity:0.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.classList.add('js-reveal');",
+          }}
+        />
       </head>
       <body
         className={`${sora.variable} ${dmSans.variable} font-sans antialiased`}

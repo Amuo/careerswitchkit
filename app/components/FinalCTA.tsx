@@ -1,10 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
 import { handleCheckout } from "@/lib/checkout";
 import { IconCheck } from "@tabler/icons-react";
-
-const EASE = [0.22, 1, 0.36, 1] as const;
 
 const reassurances = [
   "Instant download",
@@ -13,8 +10,6 @@ const reassurances = [
 ];
 
 export default function FinalCTA() {
-  const reduce = useReducedMotion();
-
   return (
     <section className="max-w-7xl mx-auto px-6 py-40 text-center relative overflow-hidden rounded-3xl">
       {/* Aurora fill */}
@@ -68,42 +63,28 @@ export default function FinalCTA() {
 
       <div className="relative z-10">
         {/* Heading */}
-        <motion.h2
-          suppressHydrationWarning
-          className="font-geist font-black mb-8 leading-none"
+        <h2
+          className="font-geist font-black mb-8 leading-none fade-up"
           style={{ fontSize: "clamp(48px, 8vw, 96px)" }}
-          initial={reduce ? {} : { opacity: 0, y: 28 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.7, ease: EASE }}
         >
           Stop wishing.
           <br />
           <span style={{ color: "#a0c9ff" }}>Start applying.</span>
-        </motion.h2>
+        </h2>
 
         {/* Body */}
-        <motion.p
-          suppressHydrationWarning
-          className="text-xl max-w-xl mx-auto mb-12 text-pretty"
-          style={{ color: "#c0c7d3" }}
-          initial={reduce ? {} : { opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.65, delay: 0.15, ease: EASE }}
+        <p
+          className="text-xl max-w-xl mx-auto mb-12 text-pretty fade-up"
+          style={{ color: "#c0c7d3", transitionDelay: "0.12s" }}
         >
           Your resume is the only thing between you and the role.
           <br />Fix it today.
-        </motion.p>
+        </p>
 
         {/* CTA group */}
-        <motion.div
-          suppressHydrationWarning
-          className="flex flex-col items-center gap-5"
-          initial={reduce ? {} : { opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.65, delay: 0.28, ease: EASE }}
+        <div
+          className="flex flex-col items-center gap-5 fade-up"
+          style={{ transitionDelay: "0.22s" }}
         >
           <button
             onClick={handleCheckout}
@@ -138,7 +119,7 @@ export default function FinalCTA() {
               </span>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
