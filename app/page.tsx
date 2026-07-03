@@ -5,6 +5,7 @@ import SystemDashboardLoader from "./components/SystemDashboardLoader";
 import FAQAccordion from "./components/FAQAccordion";
 import FadeUpObserver from "./components/FadeUpObserver";
 import FinalCTA from "./components/FinalCTA";
+import ProofExample from "./components/ProofExample";
 
 export const metadata: Metadata = {
   title: "Resume System for Career Switchers | CareerSwitchKit",
@@ -21,6 +22,7 @@ const faqSchema = {
     { "@type": "Question", name: "I've been applying for months and getting nothing. Will this help?", acceptedAnswer: { "@type": "Answer", text: "Probably yes — and this is exactly who the system is built for. If you're getting no responses, the most likely cause is that your resume isn't translating your background into language the new field recognises. The system is specifically designed to fix that translation gap, not to give you a prettier version of what you already have." } },
     { "@type": "Question", name: "Is this just for tech jobs?", acceptedAnswer: { "@type": "Answer", text: "No. The system works across Healthcare, Finance, Operations, Marketing, and other fields. Your past experience is the raw material. The system shows you how to reframe it for the new field." } },
     { "@type": "Question", name: "How is this different from a resume template I can find for free?", acceptedAnswer: { "@type": "Answer", text: "Free templates give you blank boxes. CareerSwitchKit tells you what to put in them. The AI prompts and language guides translate your past experience into terms hiring managers in your new field actually use." } },
+    { "@type": "Question", name: "How do I get it after I pay?", acceptedAnswer: { "@type": "Answer", text: "The moment you check out, you get an email with your download link — usually within a minute. No account to create, no software to install. Everything is yours to keep and reuse for every application." } },
     { "@type": "Question", name: "What if it doesn't help me land interviews?", acceptedAnswer: { "@type": "Answer", text: "If it doesn't work for your situation, email support@careerswitchkit.org within 7 days and we'll refund you." } },
   ],
 };
@@ -139,7 +141,14 @@ export default function Home() {
               </a>
             </div>
 
+            <p className="mt-6 text-sm" style={{ color: "rgba(255,255,255,0.45)" }}>
+              $37 one-time · Instant download · 7-day refund
+            </p>
+
           </section>
+
+          {/* ── Proof: worked example ────────────────────────────────────── */}
+          <ProofExample />
 
           {/* ── System Dashboard ─────────────────────────────────────────── */}
           <section id="system" className="max-w-7xl mx-auto px-6 mb-40 fade-up visible">
@@ -328,7 +337,7 @@ export default function Home() {
                     <div>
                       <div className="text-[10px] font-bold uppercase tracking-widest mb-3" style={{ color: "rgba(255,255,255,0.4)" }}>Core System</div>
                       <ul className="space-y-3">
-                        {["The full 4-stage career switch system", "3 CV templates + 3 cover letter templates (.docx)"].map(t => (
+                        {["The full 4-stage career switch system", "3 CV templates + 3 cover letters, built to translate your experience"].map(t => (
                           <li key={t} className="flex items-start gap-3">
                             <span className="material-symbols-outlined text-lg" style={{ color: "#a0c9ff" }}>check_circle</span>
                             <div className="text-sm font-medium" style={{ color: "rgba(255,255,255,0.9)" }}>{t}</div>
@@ -339,7 +348,7 @@ export default function Home() {
                     <div>
                       <div className="text-[10px] font-bold uppercase tracking-widest mb-3" style={{ color: "#a0c9ff" }}>Also included</div>
                       <ul className="space-y-3">
-                        {["AI Prompt Pack — 50 prompts (PDF)", "Lifetime updates for 2026 hiring"].map(t => (
+                        {["AI Prompt Pack — 50 prompts to sharpen every line", "Lifetime updates for 2026 hiring"].map(t => (
                           <li key={t} className="flex items-start gap-3">
                             <span className="material-symbols-outlined text-lg" style={{ color: "#a0c9ff" }}>add_moderator</span>
                             <div className="text-sm font-medium" style={{ color: "rgba(255,255,255,0.9)" }}>{t}</div>

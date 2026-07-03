@@ -24,6 +24,10 @@ const FAQS = [
     a: "Free templates give you blank boxes. CareerSwitchKit tells you what to put in them. The AI prompts and language guides are specifically designed to translate your past experience into the terms hiring managers in your new field actually use.",
   },
   {
+    q: "How do I get it after I pay?",
+    a: "The moment you check out, you get an email with your download link — usually within a minute. No account to create, no software to install. Everything is yours to keep and reuse for every application.",
+  },
+  {
     q: "What if it doesn't help me land interviews?",
     a: "If it doesn't work for your situation, email support@careerswitchkit.org within 7 days and we'll refund you. We'd rather give you your money back than have you sitting on something that isn't working.",
   },
