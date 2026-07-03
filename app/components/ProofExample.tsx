@@ -45,17 +45,72 @@ export default function ProofExample() {
     <section id="example" className="max-w-6xl mx-auto px-6 mb-40 fade-up visible">
       <div className="text-center mb-3">
         <span className="section-eyebrow">See the method</span>
-        <h2 className="text-4xl font-black font-geist mb-4">
+        <h2 className="text-4xl font-black font-geist mb-6">
           The same experience. <span style={{ color: "#a0c9ff" }}>Translated.</span>
         </h2>
-        <p style={{ color: "#c0c7d3", maxWidth: "48ch", margin: "0 auto" }}>
-          A hospitality worker applying for an Operations Coordinator role. Same jobs, same
-          person — rewritten into the language the new field (and its ATS) recognizes.
-        </p>
+
+        {/* The switch, shown not spelled out: their current role -> the role it becomes.
+            "From" is neutral (their background isn't the problem); "To" is accent blue. */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+          <div
+            className="inline-flex items-center gap-2.5 rounded-full pl-2 pr-4 py-2"
+            style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.1)" }}
+          >
+            <span
+              className="flex items-center justify-center w-9 h-9 rounded-full shrink-0"
+              style={{ background: "rgba(255,255,255,0.06)" }}
+            >
+              <span className="material-symbols-outlined" style={{ fontSize: 19, color: "rgba(255,255,255,0.6)" }}>
+                concierge
+              </span>
+            </span>
+            <span className="text-left leading-tight">
+              <span className="block text-[10px] uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.4)" }}>
+                From
+              </span>
+              <span className="block text-sm font-semibold" style={{ color: "rgba(255,255,255,0.88)" }}>
+                Front Desk Supervisor
+              </span>
+            </span>
+          </div>
+
+          <span
+            className="material-symbols-outlined rotate-90 sm:rotate-0"
+            style={{ fontSize: 24, color: "#a0c9ff" }}
+          >
+            arrow_forward
+          </span>
+
+          <div
+            className="inline-flex items-center gap-2.5 rounded-full pl-2 pr-4 py-2"
+            style={{
+              background: "rgba(160,201,255,0.08)",
+              border: "1px solid rgba(160,201,255,0.3)",
+              boxShadow: "0 0 28px rgba(160,201,255,0.08)",
+            }}
+          >
+            <span
+              className="flex items-center justify-center w-9 h-9 rounded-full shrink-0"
+              style={{ background: "rgba(160,201,255,0.15)" }}
+            >
+              <span className="material-symbols-outlined" style={{ fontSize: 19, color: "#a0c9ff" }}>
+                hub
+              </span>
+            </span>
+            <span className="text-left leading-tight">
+              <span className="block text-[10px] uppercase tracking-widest" style={{ color: "rgba(160,201,255,0.7)" }}>
+                To
+              </span>
+              <span className="block text-sm font-semibold" style={{ color: "#cfe4ff" }}>
+                Operations Coordinator
+              </span>
+            </span>
+          </div>
+        </div>
       </div>
 
-      <p className="text-center text-xs mb-8" style={{ color: "rgba(255,255,255,0.55)" }}>
-        Illustrative example — the system applied to a sample career switch. Not a real customer.
+      <p className="text-center text-xs mb-8 mt-5" style={{ color: "rgba(255,255,255,0.5)" }}>
+        Illustrative example — a sample career switch, not a real customer.
       </p>
 
       {/* Shared keyword row — what the target role's ATS is scanning for */}
