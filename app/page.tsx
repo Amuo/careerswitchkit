@@ -156,7 +156,7 @@ export default function Home() {
             <div className="text-center mb-12">
               <h2 className="text-4xl font-black font-geist mb-4">Walk through the system yourself.</h2>
               <p style={{ color: "#c0c7d3", maxWidth: "38ch", margin: "0 auto" }}>
-                Start with Stage 01 and click through the four stages in order.
+                Start with Stage 01 and follow the four stages in order.
               </p>
             </div>
             <div className="relative">

@@ -2,17 +2,17 @@
 // rather than overselling — no fake testimonials, no guarantees (per brand rules).
 
 const FOR = [
-  "You're moving into a field you haven't formally worked in.",
-  "You're capable and experienced — but the replies just aren't coming.",
-  "Your background is real; it only reads wrong to the new field, not to you.",
-  "You'll put in a focused weekend to do the reframing work yourself.",
+  "You're moving into a field you haven't formally worked in before.",
+  "You're experienced and capable — the interviews just aren't coming yet.",
+  "You can feel your background is strong; it's just not landing with the new field.",
+  "You're happy to spend a focused weekend doing the reframing yourself.",
 ];
 
 const NOT_FOR = [
-  "You're not actually changing fields — this is built only for the translation problem switchers hit.",
-  "You want it done for you — this is a system you run yourself (that's why it's $37, not $2,500).",
-  "You just want a better-looking template — the value here is reframing your experience, not restyling it.",
-  "You expect guaranteed interviews — we stand behind the method with a 7-day refund, not a promise of outcomes.",
+  "You're staying in your current field. This was made specifically for the switch.",
+  "You'd rather have it done for you. It's a system you run yourself, which is how it stays $37 instead of $2,500.",
+  "You're looking mainly for a nicer-looking template. The real work here is reframing your experience, not restyling it.",
+  "You're hoping for guaranteed interviews. We stand behind the method with a 7-day refund, and the results come from the work you put in.",
 ];
 
 export default function WhoItsFor() {
