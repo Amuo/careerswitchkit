@@ -1,5 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
+import SystemStagesMobile from "./SystemStagesMobile";
 
 const SystemDashboard = dynamic(() => import("./SystemDashboard"), {
   ssr: false,
@@ -20,12 +21,15 @@ const SystemDashboard = dynamic(() => import("./SystemDashboard"), {
 export default function SystemDashboardLoader() {
   return (
     <div>
-      <div className="overflow-x-auto" style={{ WebkitOverflowScrolling: "touch" }}>
+      {/* Desktop (lg+): the full interactive dashboard mockup */}
+      <div className="hidden lg:block overflow-x-auto" style={{ WebkitOverflowScrolling: "touch" }}>
         <SystemDashboard />
       </div>
-      <p className="text-center text-xs mt-3 lg:hidden" style={{ color: "rgba(160,201,255,0.5)" }}>
-        Swipe to explore →
-      </p>
+
+      {/* Mobile / tablet (<lg): a clean single-column walkthrough — no sideways scroll */}
+      <div className="lg:hidden">
+        <SystemStagesMobile />
+      </div>
     </div>
   );
 }

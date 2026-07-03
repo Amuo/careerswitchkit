@@ -37,19 +37,19 @@ export default function Footer() {
           >
             <a
               href="mailto:support@careerswitchkit.org"
-              className="text-sm text-white/55 hover:text-white transition-colors"
+              className="inline-flex items-center min-h-[44px] text-sm text-white/55 hover:text-white transition-colors"
             >
               Contact
             </a>
             <Link
               href="/blog"
-              className="text-sm text-white/55 hover:text-white transition-colors"
+              className="inline-flex items-center min-h-[44px] text-sm text-white/55 hover:text-white transition-colors"
             >
               Blog
             </Link>
             <Link
               href="/terms"
-              className="text-sm text-white/55 hover:text-white transition-colors"
+              className="inline-flex items-center min-h-[44px] text-sm text-white/55 hover:text-white transition-colors"
             >
               Terms &amp; Privacy
             </Link>
