@@ -1,6 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
-import SystemStagesMobile from "./SystemStagesMobile";
+import SystemJourneyMobile from "./SystemJourneyMobile";
 
 const SystemDashboard = dynamic(() => import("./SystemDashboard"), {
   ssr: false,
@@ -26,9 +26,9 @@ export default function SystemDashboardLoader() {
         <SystemDashboard />
       </div>
 
-      {/* Mobile / tablet (<lg): a clean single-column walkthrough — no sideways scroll */}
+      {/* Mobile / tablet (<lg): a self-playing demo of the same journey — no sideways scroll */}
       <div className="lg:hidden">
-        <SystemStagesMobile />
+        <SystemJourneyMobile />
       </div>
     </div>
   );
