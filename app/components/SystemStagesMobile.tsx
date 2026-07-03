@@ -122,9 +122,9 @@ export default function SystemStagesMobile() {
                   {s.doc}
                 </span>
               </div>
-              <h3 className="font-geist font-bold text-white mb-1.5" style={{ fontSize: "1.05rem" }}>
+              <div className="font-geist font-bold text-white mb-1.5" style={{ fontSize: "1.05rem" }}>
                 {s.title}
-              </h3>
+              </div>
               <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.62)" }}>
                 {s.desc}
               </p>

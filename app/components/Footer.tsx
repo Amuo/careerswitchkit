@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { IconBrandInstagram, IconBrandFacebook } from "@tabler/icons-react";
 
 export default function Footer() {
   return (
@@ -30,30 +31,52 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Links */}
-          <nav
-            aria-label="Footer navigation"
-            className="flex gap-6 md:justify-end"
-          >
-            <a
-              href="mailto:support@careerswitchkit.org"
-              className="inline-flex items-center min-h-[44px] text-sm text-white/55 hover:text-white transition-colors"
+          {/* Links + socials */}
+          <div className="flex flex-col gap-4 md:items-end">
+            <nav
+              aria-label="Footer navigation"
+              className="flex gap-6"
             >
-              Contact
-            </a>
-            <Link
-              href="/blog"
-              className="inline-flex items-center min-h-[44px] text-sm text-white/55 hover:text-white transition-colors"
-            >
-              Blog
-            </Link>
-            <Link
-              href="/terms"
-              className="inline-flex items-center min-h-[44px] text-sm text-white/55 hover:text-white transition-colors"
-            >
-              Terms &amp; Privacy
-            </Link>
-          </nav>
+              <a
+                href="mailto:support@careerswitchkit.org"
+                className="inline-flex items-center min-h-[44px] text-sm text-white/55 hover:text-white transition-colors"
+              >
+                Contact
+              </a>
+              <Link
+                href="/blog"
+                className="inline-flex items-center min-h-[44px] text-sm text-white/55 hover:text-white transition-colors"
+              >
+                Blog
+              </Link>
+              <Link
+                href="/terms"
+                className="inline-flex items-center min-h-[44px] text-sm text-white/55 hover:text-white transition-colors"
+              >
+                Terms &amp; Privacy
+              </Link>
+            </nav>
+            <div className="flex items-center gap-2" aria-label="Social media">
+              <a
+                href="https://www.instagram.com/careerswitchkit/?hl=en"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="CareerSwitchKit on Instagram"
+                className="inline-flex items-center justify-center w-11 h-11 rounded-lg text-white/45 hover:text-white transition-colors"
+              >
+                <IconBrandInstagram size={20} strokeWidth={1.75} />
+              </a>
+              <a
+                href="https://www.facebook.com/profile.php?id=61586615141672"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="CareerSwitchKit on Facebook"
+                className="inline-flex items-center justify-center w-11 h-11 rounded-lg text-white/45 hover:text-white transition-colors"
+              >
+                <IconBrandFacebook size={20} strokeWidth={1.75} />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

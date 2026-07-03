@@ -35,7 +35,7 @@ export default function WhoItsFor() {
             <span className="material-symbols-outlined" style={{ fontSize: 20, color: "#a0c9ff" }}>
               check_circle
             </span>
-            <h3 className="font-geist font-bold text-white">This is for you if…</h3>
+            <div className="font-geist font-bold text-white">This is for you if…</div>
           </div>
           <ul className="space-y-4">
             {FOR.map((t) => (
@@ -60,9 +60,9 @@ export default function WhoItsFor() {
             <span className="material-symbols-outlined" style={{ fontSize: 20, color: "rgba(255,255,255,0.5)" }}>
               do_not_disturb_on
             </span>
-            <h3 className="font-geist font-bold" style={{ color: "rgba(255,255,255,0.85)" }}>
+            <div className="font-geist font-bold" style={{ color: "rgba(255,255,255,0.85)" }}>
               It&apos;s probably not for you if…
-            </h3>
+            </div>
           </div>
           <ul className="space-y-4">
             {NOT_FOR.map((t) => (

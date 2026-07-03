@@ -274,7 +274,7 @@ export default function ProofExample() {
         style={{ color: "rgba(255,255,255,0.6)", maxWidth: "60ch", margin: "2rem auto 0" }}
       >
         An ATS scans each posting for role-specific terms, then ranks resumes by how many they hit.
-        Same career, same facts — only the language changed.
+        Same career, same facts — the problem was never the background, only the language.
       </p>
     </section>
   );

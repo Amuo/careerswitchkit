@@ -226,12 +226,12 @@ export default function Home() {
                       {icon}
                     </span>
                   </div>
-                  <h4
+                  <div
                     className="font-geist font-bold text-white mb-2"
                     style={{ fontSize: "1rem", letterSpacing: "-0.01em" }}
                   >
                     {title}
-                  </h4>
+                  </div>
                   <p style={{ fontSize: "0.8rem", lineHeight: 1.7, color: "rgba(255,255,255,0.6)", maxWidth: "20ch" }}>
                     {desc}
                   </p>
@@ -401,7 +401,7 @@ export default function Home() {
               <span className="section-eyebrow">Free guides</span>
               <h2 className="text-3xl font-black font-geist mb-3">Keep reading.</h2>
               <p style={{ color: "#c0c7d3", maxWidth: "44ch", margin: "0 auto" }}>
-                Practical walkthroughs on resumes, ATS, and reframing your background — free.
+                Practical walkthroughs for career switchers: resumes, ATS, and reframing your background.
               </p>
             </div>
 
@@ -420,9 +420,9 @@ export default function Home() {
                   <span className="text-[10px] font-bold uppercase tracking-[0.18em] mb-2" style={{ color: "rgba(160,201,255,0.7)" }}>
                     {g.tag}
                   </span>
-                  <h3 className="font-geist font-bold text-white leading-snug mb-7 flex-1" style={{ fontSize: "1.1rem" }}>
+                  <div className="font-geist font-bold text-white leading-snug mb-7 flex-1" style={{ fontSize: "1.1rem" }}>
                     {g.title}
-                  </h3>
+                  </div>
                   <span className="guide-read self-start">
                     Read
                     <span className="material-symbols-outlined guide-arrow" style={{ fontSize: 15 }}>arrow_forward</span>
