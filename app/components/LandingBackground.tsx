@@ -1,52 +1,77 @@
 "use client";
 
-// Full-screen looping background video.
+// Full-screen seamless background video.
 //
-// Uses ONE <video> with native autoPlay/muted/loop/playsInline. (A previous
-// version crossfaded two videos in JS to hide the loop seam, but real mobile
-// browsers block JS-driven autoplay and choke on two full-screen videos, which
-// broke the mobile site. Native autoplay on a single muted/playsInline video is
-// the mobile-safe pattern.)
+// The clip's end doesn't match its start, so a single looping <video> shows a
+// visible jump at the loop point. Fading one video through black hides the cut
+// but adds a noticeable dip. To make the loop truly unnoticeable we play the
+// SAME clip on two stacked layers, offset by half its length, and cross-fade
+// between them: whenever one layer reaches its seam, the other is at its mid-
+// point (nowhere near a seam) and fully covering it, so the jump is never on
+// screen. Motion stays continuous — no dip, no cut.
 //
-// To hide the loop seam WITHOUT a second video, a tiny bit of JS fades this one
-// video's opacity down just before it loops and back up just after — driven by
-// the video's own currentTime, so the dissolve always lands on the real seam
-// even if playback stalls. The dip reveals the dark #070719 base behind it,
-// turning the hard jump-cut into a gentle dissolve. If JS is blocked the video
-// still plays and loops natively (just with the original seam) — nothing breaks.
+// Mobile-safe: both layers use native autoPlay/muted/loop/playsInline (we never
+// call .play() from JS, which phones block). If JS is disabled the overlay stays
+// hidden and the base video just loops natively as before — nothing breaks.
 
 import { useEffect, useRef } from "react";
 
 const SRC =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_064122_c4750c0e-7476-4b44-94a2-a85a65c63bf2.mp4";
 
-const FADE = 0.7; // seconds of dissolve on each side of the loop seam
+// Fraction of each half-cycle spent cross-fading (bigger = softer, longer blend).
+const OVERLAP = 0.4;
+
+const videoStyle: React.CSSProperties = {
+  position: "absolute",
+  inset: 0,
+  width: "100%",
+  height: "100%",
+  objectFit: "cover",
+  // Tame the swirl's white-hot core so it never blows out text over it.
+  filter: "brightness(0.6) saturate(1.05)",
+  willChange: "opacity",
+};
 
 export default function LandingBackground() {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const baseRef = useRef<HTMLVideoElement>(null);
+  const overlayRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
+    const base = baseRef.current;
+    const overlay = overlayRef.current;
+    if (!base || !overlay) return;
+
+    // Offset the overlay by half the clip so it is always half a loop ahead of
+    // the base — one is mid-clip whenever the other is at its seam.
+    const setOffset = () => {
+      const d = overlay.duration;
+      if (d && Number.isFinite(d)) {
+        try {
+          overlay.currentTime = d / 2;
+        } catch {
+          /* seeking can throw before data is ready; the retry on metadata covers it */
+        }
+      }
+    };
+    if (overlay.readyState >= 1) setOffset();
+    else overlay.addEventListener("loadedmetadata", setOffset, { once: true });
+
+    const smoothstep = (x: number) => x * x * (3 - 2 * x);
 
     let raf = 0;
-    let hasLooped = false; // don't fade in on the very first play, only after a loop
-    let last = 0;
-
     const tick = () => {
-      const d = v.duration;
-      if (d && Number.isFinite(d) && d > FADE * 2) {
-        const t = v.currentTime;
-        if (t < last - 0.5) hasLooped = true; // currentTime jumped back => it looped
-        last = t;
-
-        const fadeOut = Math.min((d - t) / FADE, 1); // 1 -> 0 across the last FADE seconds
-        const fadeIn = hasLooped ? Math.min(t / FADE, 1) : 1; // 0 -> 1 across the first FADE seconds
-        v.style.opacity = String(Math.max(0, Math.min(fadeIn, fadeOut)));
+      const d = overlay.duration;
+      if (d && Number.isFinite(d)) {
+        const t = overlay.currentTime;
+        // 1 at the clip's mid-point, 0 at its seam (start/end).
+        const distToSeam = Math.min(t, d - t) / (d / 2);
+        // Overlay is fully visible mid-clip and fades out only around its own
+        // seam — where the base video (now mid-clip) is covering everything.
+        overlay.style.opacity = String(smoothstep(Math.min(distToSeam / OVERLAP, 1)));
       }
       raf = requestAnimationFrame(tick);
     };
-
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, []);
@@ -59,26 +84,16 @@ export default function LandingBackground() {
         zIndex: -1,
         overflow: "hidden",
         pointerEvents: "none",
-        background: "#070719", // dark base the video dissolves through at the seam
+        background: "#070719",
       }}
     >
-      <video
-        ref={videoRef}
-        autoPlay
-        muted
-        loop
-        playsInline
-        style={{
-          position: "absolute",
-          inset: 0,
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          // Tame the swirl's white-hot core so it never blows out text over it.
-          filter: "brightness(0.6) saturate(1.05)",
-          willChange: "opacity",
-        }}
-      >
+      {/* Base layer — always visible; the sole fallback if JS is off. */}
+      <video ref={baseRef} autoPlay muted loop playsInline style={{ ...videoStyle, opacity: 1 }}>
+        <source src={SRC} type="video/mp4" />
+      </video>
+
+      {/* Overlay layer — same clip, half a loop ahead; cross-faded over the base. */}
+      <video ref={overlayRef} autoPlay muted loop playsInline style={{ ...videoStyle, opacity: 0 }}>
         <source src={SRC} type="video/mp4" />
       </video>
 
