@@ -50,8 +50,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // suppressHydrationWarning: the inline <head> script below adds the `js-reveal`
+  // class to <html> before React hydrates (the progressive-reveal flag), which is
+  // an intentional server/client difference on this one element.
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

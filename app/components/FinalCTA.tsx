@@ -91,14 +91,8 @@ export default function FinalCTA() {
             className="group relative w-full sm:w-auto px-14 py-6 bg-white font-bold rounded-2xl transition-all duration-300 text-xl overflow-hidden inline-flex items-center justify-center gap-2 active:scale-[0.98] hover:scale-[1.03] hover:shadow-[0_0_64px_rgba(160,201,255,0.35)]"
             style={{ color: "#000" }}
           >
-            {/* Shimmer sweep */}
-            <div
-              className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_ease-in-out] pointer-events-none"
-              style={{
-                background:
-                  "linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)",
-              }}
-            />
+            {/* Accent shine — auto-sweeps like the navbar CTA */}
+            <span className="white-cta-shimmer" aria-hidden="true" />
             <span className="relative z-10">Claim Lifetime Access — $37</span>
           </button>
 

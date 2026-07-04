@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import SystemDashboardLoader from "./components/SystemDashboardLoader";
 import FAQAccordion from "./components/FAQAccordion";
 import FadeUpObserver from "./components/FadeUpObserver";
 import FinalCTA from "./components/FinalCTA";
+import ProblemSection from "./components/ProblemSection";
 import ProofExample from "./components/ProofExample";
-import WhoItsFor from "./components/WhoItsFor";
+import Typewriter from "./components/Typewriter";
 
 export const metadata: Metadata = {
   title: "Resume System for Career Switchers | CareerSwitchKit",
@@ -24,6 +24,7 @@ const faqSchema = {
     { "@type": "Question", name: "I've been applying for months and getting nothing. Will this help?", acceptedAnswer: { "@type": "Answer", text: "Probably yes — and this is exactly who the system is built for. If you're getting no responses, the most likely cause is that your resume isn't translating your background into language the new field recognises. The system is specifically designed to fix that translation gap, not to give you a prettier version of what you already have." } },
     { "@type": "Question", name: "Is this just for tech jobs?", acceptedAnswer: { "@type": "Answer", text: "No. The system works across Healthcare, Finance, Operations, Marketing, and other fields. Your past experience is the raw material. The system shows you how to reframe it for the new field." } },
     { "@type": "Question", name: "How is this different from a resume template I can find for free?", acceptedAnswer: { "@type": "Answer", text: "Free templates give you blank boxes. CareerSwitchKit tells you what to put in them. The AI prompts and language guides translate your past experience into terms hiring managers in your new field actually use." } },
+    { "@type": "Question", name: "Do you write it for me?", acceptedAnswer: { "@type": "Answer", text: "No — it's a system you run yourself, and that's the point. Doing the reframing yourself is what keeps it $37 instead of the $2,500+ a coach charges to do it for you. You bring your experience; the templates, prompts, and guides show you exactly how to translate it." } },
     { "@type": "Question", name: "How do I get it after I pay?", acceptedAnswer: { "@type": "Answer", text: "The moment you check out, you get an email with your download link — usually within a minute. No account to create, no software to install. Everything is yours to keep and reuse for every application." } },
     { "@type": "Question", name: "What if it doesn't help me land interviews?", acceptedAnswer: { "@type": "Answer", text: "If it doesn't work for your situation, email support@careerswitchkit.org within 7 days and we'll refund you." } },
   ],
@@ -120,7 +121,7 @@ export default function Home() {
               className="text-xl md:text-2xl max-w-2xl mx-auto mb-10 leading-relaxed"
               style={{ color: "#c0c7d3" }}
             >
-              Stop explaining yourself. Start getting interviews.
+              <Typewriter text="Stop explaining yourself. Start getting interviews." />
             </p>
 
             {/* CTAs */}
@@ -134,20 +135,19 @@ export default function Home() {
                 {/* Mouse-glow overlay */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                   style={{ background: "radial-gradient(circle at 50% 50%, rgba(160,201,255,0.35) 0%, transparent 60%)" }} />
-                {/* Shimmer sweep */}
-                <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_ease-in-out]"
-                  style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)" }} />
+                {/* Accent shine — auto-sweeps like the navbar CTA */}
+                <span className="white-cta-shimmer" aria-hidden="true" />
                 <span className="relative z-10 flex items-center gap-2">
                   Claim Lifetime Access — <strong>$37</strong>
                 </span>
               </a>
               {/* Secondary — liquid glass */}
               <a
-                href="#system"
+                href="#example"
                 className="w-full sm:w-auto px-10 py-4 font-bold rounded-xl transition-all text-center border border-white/10 hover:border-white/20 hover:bg-white/5"
                 style={{ color: "#e2e0fa" }}
               >
-                Walk Through the 4 Stages
+                See how it works
               </a>
             </div>
 
@@ -157,27 +157,11 @@ export default function Home() {
 
           </section>
 
+          {/* ── The problem (agitation + real, cited evidence) ───────────── */}
+          <ProblemSection />
+
           {/* ── Proof: worked example ────────────────────────────────────── */}
           <ProofExample />
-
-          {/* ── System Dashboard ─────────────────────────────────────────── */}
-          <section id="system" className="max-w-7xl mx-auto px-6 mb-40 fade-up visible">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-black font-geist mb-4">Walk through the system yourself.</h2>
-              <p style={{ color: "#c0c7d3", maxWidth: "38ch", margin: "0 auto" }}>
-                Start with Stage 01 and follow the four stages in order.
-              </p>
-            </div>
-            <div className="relative">
-              <SystemDashboardLoader />
-              <p className="text-center text-xs mt-4" style={{ color: "rgba(255,255,255,0.3)" }}>
-                Visual overview only. CareerSwitchKit is an instant download, not an app or subscription.
-              </p>
-            </div>
-          </section>
-
-          {/* ── Who it's for ─────────────────────────────────────────────── */}
-          <WhoItsFor />
 
           {/* ── Pricing ──────────────────────────────────────────────────── */}
           <section id="pricing" className="relative py-32 overflow-hidden fade-up visible">
@@ -274,17 +258,28 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="space-y-3 mb-8 flex-1 relative z-10">
+                  <div className="grid grid-cols-2 gap-3 mb-8 flex-1 content-start relative z-10">
                     {[
-                      "The full 4-stage career switch system",
-                      "3 CV templates + 3 cover letters, built to translate your experience",
-                      "AI Prompt Pack — 50 prompts to sharpen every line",
-                      "Lifetime updates for 2026 hiring — yours forever, no subscription",
-                      "Instant download — files in your inbox within minutes",
-                    ].map((t) => (
-                      <div key={t} className="flex items-start gap-3">
-                        <span className="material-symbols-outlined text-lg" style={{ color: "#a0c9ff" }}>check_circle</span>
-                        <div className="text-sm font-medium" style={{ color: "rgba(255,255,255,0.9)" }}>{t}</div>
+                      { icon: "map", title: "4-stage system", sub: "the full method, start to apply" },
+                      { icon: "description", title: "6 templates", sub: "3 CV + 3 cover letters" },
+                      { icon: "auto_awesome", title: "50 AI prompts", sub: "sharpen every line" },
+                      { icon: "all_inclusive", title: "Lifetime updates", sub: "yours forever, no subscription" },
+                    ].map(({ icon, title, sub }) => (
+                      <div
+                        key={title}
+                        className="lift-card flex flex-col gap-2.5 rounded-xl p-3.5"
+                        style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(160,201,255,0.14)" }}
+                      >
+                        <span
+                          className="flex items-center justify-center w-9 h-9 rounded-lg"
+                          style={{ background: "rgba(160,201,255,0.1)", border: "1px solid rgba(160,201,255,0.2)" }}
+                        >
+                          <span className="material-symbols-outlined" style={{ fontSize: 19, color: "#a0c9ff" }}>{icon}</span>
+                        </span>
+                        <div>
+                          <div className="text-sm font-bold leading-tight" style={{ color: "#fff" }}>{title}</div>
+                          <div className="text-[11px] leading-snug mt-0.5" style={{ color: "rgba(255,255,255,0.5)" }}>{sub}</div>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -294,13 +289,19 @@ export default function Home() {
                     className="group/btn w-full py-5 rounded-2xl bg-white font-black hover:scale-[1.02] transition-all shadow-xl text-lg flex items-center justify-center gap-2 relative overflow-hidden z-10"
                     style={{ color: "#000" }}
                   >
+                    <span className="white-cta-shimmer" aria-hidden="true" />
                     <span className="relative z-10">Claim Lifetime Access — $37</span>
                     <span className="material-symbols-outlined relative z-10 transition-transform group-hover/btn:translate-x-1">arrow_forward</span>
                   </a>
 
-                  <div className="flex items-center justify-center gap-2 mt-4 relative z-10">
-                    <span className="material-symbols-outlined" style={{ fontSize: 16, color: "rgba(160,201,255,0.8)" }}>verified_user</span>
-                    <span className="text-xs" style={{ color: "rgba(255,255,255,0.55)" }}>7-day refund — not right for you? Email us and we&rsquo;ll refund it.</span>
+                  <div
+                    className="flex items-center justify-center gap-2.5 mt-5 px-4 py-3 rounded-xl relative z-10"
+                    style={{ background: "rgba(160,201,255,0.06)", border: "1px solid rgba(160,201,255,0.22)" }}
+                  >
+                    <span className="material-symbols-outlined" style={{ fontSize: 18, color: "#a0c9ff" }}>verified_user</span>
+                    <span className="text-[13px] font-medium" style={{ color: "rgba(255,255,255,0.78)" }}>
+                      7-day money-back guarantee — no questions asked.
+                    </span>
                   </div>
                 </div>
               </div>

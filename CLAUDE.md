@@ -58,10 +58,10 @@ JTBD) is in the vault brand doc, Part 9.
 
 ## The two "stage" systems — don't conflate
 
-- The **website** sells a **4-stage** walkthrough (the interactive dashboard):
-  1 Map your transfer (Start Here) · 2 Build materials (CV + cover-letter templates)
-  · 3 Optimize & score (ATS Checker + AI Prompt Pack) · 4 Apply with proof
-  (completed example).
+- The **website** sells a **4-stage** system in copy (map your transfer · build
+  materials · optimize & score · apply with proof). Note: the old interactive
+  dashboard that walked through these was **removed** on 2026-07-03 — the 4-stage
+  framing now lives only as text in the pricing card, not as a live component.
 - The **AI Prompt Pack** has its own internal **6 stages** (the 50 prompts).
   Different thing — never merge the two counts.
 
@@ -103,9 +103,10 @@ full mirror of the code.
 - **The landing page is `app/page.tsx`, and much of it is inline.** The hero and
   the **entire pricing block** are written inline in `page.tsx`.
   The parts pulled out as components are: `Navbar`, `Footer`, `FAQAccordion`,
-  `FadeUpObserver`, `FinalCTA`, and `SystemDashboardLoader` (which dynamically
-  loads `SystemDashboard`, client-only). So: to change the bottom CTA, edit
-  `components/FinalCTA.tsx`; to change pricing, edit it inline in `page.tsx`.
+  `FadeUpObserver`, `FinalCTA`, `ProblemSection` (the problem/empathy beat with
+  count-up stats), `ProofExample` (the before→after typewriter proof, client-only),
+  and `Typewriter` (reusable char-by-char typing effect). So: to change the bottom
+  CTA, edit `components/FinalCTA.tsx`; to change pricing, edit it inline in `page.tsx`.
 - **The Polar checkout URL is hardcoded in 3 places** — `lib/checkout.ts`, and
   twice directly in `page.tsx` (the hero primary CTA and the pricing-card CTA use a
   raw `href=` to the Polar URL). If the URL changes, update all three.
@@ -114,7 +115,7 @@ full mirror of the code.
   then redirects. The hero and pricing-card CTAs link straight to Polar via `href`
   and **skip** that event. Keep this in mind before trusting checkout-funnel data.
 - **FAQ content lives in two places that must stay in sync**: the visible accordion
-  (`components/FAQAccordion.tsx`, the `FAQS` array — currently 6 items) AND the
+  (`components/FAQAccordion.tsx`, the `FAQS` array — currently 8 items) AND the
   JSON-LD `faqSchema` in `page.tsx` (for SEO). Edit both together.
 - **Geist is loaded differently from the other fonts** — via a plain `<link>` to
   Google Fonts in `layout.tsx` `<head>`, not `next/font` (Sora + DM Sans use
@@ -125,11 +126,13 @@ full mirror of the code.
   `:root` vars (`--accent`), AND hardcoded as raw hex in inline `style=` props
   throughout (the inline styles do NOT use the CSS vars). Changing a brand color
   can mean touching all three.
-- **Meta Pixel is a placeholder** — `layout.tsx` calls `fbq('init','META_PIXEL_ID')`
-  with that literal string, so Meta tracking isn't live yet. GA4 (`G-T395SJKKNW`)
-  and Microsoft Clarity are wired.
-- Home-page anchors: `#system` (the dashboard, labelled "How It Works") and `#faq`.
-  The pricing section has `id="pricing"` but nothing currently links to it.
+- **Meta Pixel AND Microsoft Clarity are both placeholders** — `layout.tsx` calls
+  `fbq('init','META_PIXEL_ID')` with that literal string, and the Clarity project ID
+  is the placeholder `x84g7j2y7p`, so neither is actually live yet. Only GA4
+  (`G-T395SJKKNW`) is wired. (Get the real Clarity ID from the Clarity dashboard.)
+- Home-page anchors: `#problem` (the problem/empathy beat), `#example` (the
+  before→after proof, labelled "How It Works" in the navbar), `#pricing`, and
+  `#faq`. The old `#system` dashboard anchor no longer exists.
 - Background stack: `LandingBackground` (a video, in `layout.tsx`) sits behind a
   fixed SVG-noise overlay (the `#c3-noise` filter, defined in `page.tsx`); page
   content sits above at `z-index:2`.

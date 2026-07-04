@@ -58,7 +58,7 @@ export default function Navbar() {
   }, [menuOpen]);
 
   const navLinks = [
-    { href: "#system", pageHref: "/#system", label: "How It Works" },
+    { href: "#example", pageHref: "/#example", label: "How It Works" },
     { href: "#pricing", pageHref: "/#pricing", label: "Pricing" },
     { href: "#faq", pageHref: "/#faq", label: "FAQ" },
   ];

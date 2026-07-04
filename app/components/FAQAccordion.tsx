@@ -24,6 +24,10 @@ const FAQS = [
     a: "Free templates give you blank boxes. CareerSwitchKit tells you what to put in them. The AI prompts and language guides are specifically designed to translate your past experience into the terms hiring managers in your new field actually use.",
   },
   {
+    q: "Do you write it for me?",
+    a: "No — it's a system you run yourself, and that's the point. Doing the reframing yourself is what keeps it $37 instead of the $2,500+ a coach charges to do it for you. You bring your experience; the templates, prompts, and guides show you exactly how to translate it.",
+  },
+  {
     q: "How do I get it after I pay?",
     a: "The moment you check out, you get an email with your download link — usually within a minute. No account to create, no software to install. Everything is yours to keep and reuse for every application.",
   },
