@@ -126,10 +126,13 @@ full mirror of the code.
   `:root` vars (`--accent`), AND hardcoded as raw hex in inline `style=` props
   throughout (the inline styles do NOT use the CSS vars). Changing a brand color
   can mean touching all three.
-- **Meta Pixel AND Microsoft Clarity are both placeholders** — `layout.tsx` calls
-  `fbq('init','META_PIXEL_ID')` with that literal string, and the Clarity project ID
-  is the placeholder `x84g7j2y7p`, so neither is actually live yet. Only GA4
-  (`G-T395SJKKNW`) is wired. (Get the real Clarity ID from the Clarity dashboard.)
+- **Tracking is env-driven with baked-in live defaults** (`layout.tsx`). Each ID
+  reads `process.env.NEXT_PUBLIC_*` and falls back to a real default, so all three
+  work on deploy with no Vercel config: GA4 `G-VZTZ8KD05Z`, Microsoft Clarity
+  `x84g7j2y7p`, Meta Pixel `2156940741754118`. (The old GA4 `G-T395SJKKNW` is
+  retired.) A `purchase` conversion fires on `/thank-you` for GA4 + Meta (client-
+  side, best-effort — the accurate version is a Polar webhook). To swap any ID, set
+  the matching `NEXT_PUBLIC_*` env var in Vercel or edit the default line.
 - Home-page anchors: `#problem` (the problem/empathy beat), `#example` (the
   before→after proof, labelled "How It Works" in the navbar), `#pricing`, and
   `#faq`. The old `#system` dashboard anchor no longer exists.

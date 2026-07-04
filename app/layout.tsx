@@ -50,6 +50,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // Tracking IDs. Each falls back to the live default baked in here, so all three
+  // tools work on deploy with zero config; set the matching NEXT_PUBLIC_* var in
+  // Vercel (or .env.local) only if you ever want to override without editing code.
+  const gaId = process.env.NEXT_PUBLIC_GA_ID || "G-VZTZ8KD05Z";
+  const clarityId = process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID || "x84g7j2y7p";
+  const metaPixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID || "2156940741754118";
+
   // suppressHydrationWarning: the inline <head> script below adds the `js-reveal`
   // class to <html> before React hydrates (the progressive-reveal flag), which is
   // an intentional server/client difference on this one element.
@@ -80,28 +87,45 @@ export default function RootLayout({
         <div className="stitch-anim-fade-in">
           <MotionProvider>{children}</MotionProvider>
         </div>
-        <GoogleAnalytics gaId="G-T395SJKKNW" />
-        {/* Microsoft Clarity — replace x84g7j2y7p with your ID from clarity.microsoft.com */}
-        <Script id="clarity" strategy="afterInteractive">
-          {`(function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-          })(window,document,"clarity","script","x84g7j2y7p");`}
-        </Script>
-        {/* Meta Pixel — replace META_PIXEL_ID with your ID from business.facebook.com/events/manager */}
-        <Script id="meta-pixel" strategy="afterInteractive">
-          {`!function(f,b,e,v,n,t,s)
-          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-          n.queue=[];t=b.createElement(e);t.async=!0;
-          t.src=v;s=b.getElementsByTagName(e)[0];
-          s.parentNode.insertBefore(t,s)}(window,document,'script',
-          'https://connect.facebook.net/en_US/fbevents.js');
-          fbq('init','META_PIXEL_ID');
-          fbq('track','PageView');`}
-        </Script>
+        <GoogleAnalytics gaId={gaId} />
+
+        {/* Microsoft Clarity — set NEXT_PUBLIC_CLARITY_PROJECT_ID (from clarity.microsoft.com) */}
+        {clarityId && (
+          <Script id="clarity" strategy="afterInteractive">
+            {`(function(c,l,a,r,i,t,y){
+              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window,document,"clarity","script","${clarityId}");`}
+          </Script>
+        )}
+
+        {/* Meta Pixel — set NEXT_PUBLIC_META_PIXEL_ID (from business.facebook.com/events/manager) */}
+        {metaPixelId && (
+          <>
+            <Script id="meta-pixel" strategy="afterInteractive">
+              {`!function(f,b,e,v,n,t,s)
+              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+              n.queue=[];t=b.createElement(e);t.async=!0;
+              t.src=v;s=b.getElementsByTagName(e)[0];
+              s.parentNode.insertBefore(t,s)}(window,document,'script',
+              'https://connect.facebook.net/en_US/fbevents.js');
+              fbq('init','${metaPixelId}');
+              fbq('track','PageView');`}
+            </Script>
+            <noscript>
+              <img
+                height="1"
+                width="1"
+                style={{ display: "none" }}
+                src={`https://www.facebook.com/tr?id=${metaPixelId}&ev=PageView&noscript=1`}
+                alt=""
+              />
+            </noscript>
+          </>
+        )}
       </body>
     </html>
   );

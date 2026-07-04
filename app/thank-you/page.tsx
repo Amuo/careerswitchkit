@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
@@ -57,9 +57,55 @@ const particles = [
 export default function ThankYouPage() {
   const [mounted, setMounted] = useState(false);
   const [hoveredStage, setHoveredStage] = useState<number | null>(null);
+  const conversionFired = useRef(false);
 
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  // Fire the purchase conversion once, when someone lands here after checkout.
+  // Polar redirects to /thank-you after a completed payment, so this is our
+  // signal that a sale happened — it lets GA4 + the Meta Pixel measure real
+  // sales, not just pageviews. NOTE: this is client-side and best-effort — anyone
+  // who opens /thank-you directly (without paying) would also count. The accurate
+  // version is a Polar webhook firing the conversion server-side; this is the
+  // good-enough first step to start seeing sales in the dashboards.
+  useEffect(() => {
+    if (conversionFired.current) return;
+    conversionFired.current = true;
+
+    const value = 37;
+    const w = window as unknown as {
+      gtag?: (...args: unknown[]) => void;
+      fbq?: (...args: unknown[]) => void;
+    };
+    // A transaction id (if Polar passes one back in the URL) lets GA4 de-dupe
+    // repeat page loads. Harmless if it's absent.
+    const params = new URLSearchParams(window.location.search);
+    const transactionId =
+      params.get("checkout_id") ||
+      params.get("order_id") ||
+      params.get("checkout_session_id") ||
+      undefined;
+
+    if (typeof w.gtag === "function") {
+      w.gtag("event", "purchase", {
+        currency: "USD",
+        value,
+        transaction_id: transactionId,
+        items: [
+          {
+            item_id: "careerswitchkit",
+            item_name: "CareerSwitchKit",
+            price: value,
+            quantity: 1,
+          },
+        ],
+      });
+    }
+    if (typeof w.fbq === "function") {
+      w.fbq("track", "Purchase", { currency: "USD", value });
+    }
   }, []);
 
   return (
