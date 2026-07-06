@@ -3,6 +3,7 @@ import { Sora, DM_Sans } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import Script from "next/script";
 import MotionProvider from "@/app/components/MotionProvider";
+import ClarityAnalytics from "@/app/components/ClarityAnalytics";
 import LandingBackground from "@/app/components/LandingBackground";
 import SmoothScroll from "@/app/components/SmoothScroll";
 import "@/app/globals.css";
@@ -89,16 +90,8 @@ export default function RootLayout({
         </div>
         <GoogleAnalytics gaId={gaId} />
 
-        {/* Microsoft Clarity — set NEXT_PUBLIC_CLARITY_PROJECT_ID (from clarity.microsoft.com) */}
-        {clarityId && (
-          <Script id="clarity" strategy="afterInteractive">
-            {`(function(c,l,a,r,i,t,y){
-              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-            })(window,document,"clarity","script","${clarityId}");`}
-          </Script>
-        )}
+        {/* Microsoft Clarity — via @microsoft/clarity. Set NEXT_PUBLIC_CLARITY_PROJECT_ID (from clarity.microsoft.com) */}
+        {clarityId && <ClarityAnalytics projectId={clarityId} />}
 
         {/* Meta Pixel — set NEXT_PUBLIC_META_PIXEL_ID (from business.facebook.com/events/manager) */}
         {metaPixelId && (
