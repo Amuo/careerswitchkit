@@ -1,9 +1,11 @@
 declare function gtag(...args: unknown[]): void;
 
-const POLAR_CHECKOUT_URL =
+export const POLAR_CHECKOUT_URL =
   "https://buy.polar.sh/polar_cl_yp2D8rcrj84BMejvasXb4zDwa36czvOw21K2q4XtbWG";
 
-export function handleCheckout() {
+// Fires the GA4 begin_checkout event only (no navigation). Shared by every buy
+// button so checkout starts are reported no matter which CTA the user clicks.
+export function fireBeginCheckout() {
   if (typeof gtag !== "undefined") {
     gtag("event", "begin_checkout", {
       currency: "USD",
@@ -18,6 +20,11 @@ export function handleCheckout() {
       ],
     });
   }
+}
 
+// Fire the event, then redirect. Used by <button> CTAs (navbar, FinalCTA) that
+// have no href of their own.
+export function handleCheckout() {
+  fireBeginCheckout();
   window.location.href = POLAR_CHECKOUT_URL;
 }

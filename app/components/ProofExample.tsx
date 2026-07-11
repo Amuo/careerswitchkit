@@ -319,22 +319,60 @@ export default function ProofExample() {
         </div>
       </div>
 
-      {/* Soft CTA — desire peaks right after the proof */}
-      <div className="text-center mt-10">
+      {/* The mechanism — kept brief, and no longer the final beat (so the
+          section doesn't read as a conclusion people close the tab on). */}
+      <p className="text-center text-[13px] mt-8 leading-relaxed" style={{ color: "rgba(255,255,255,0.55)", maxWidth: "58ch", margin: "1.75rem auto 0" }}>
+        An ATS scans each posting for the exact terms a role expects, then ranks resumes by how many they hit.
+        Same career, same facts — only the language changed.
+      </p>
+
+      {/* ── Seam into the offer ──────────────────────────────────────────────
+          This is where engaged readers were leaving (right after the proof,
+          before pricing). Carry the momentum: reframe as a repeatable system,
+          reassure with honest risk-reversal, then pull them into the offer. */}
+      <div
+        className="relative max-w-2xl mx-auto mt-12 rounded-2xl px-8 py-9 text-center liquid-glass overflow-hidden"
+        style={{ border: "1px solid rgba(160,201,255,0.28)", boxShadow: "0 0 44px rgba(160,201,255,0.1)" }}
+      >
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: "linear-gradient(135deg, rgba(160,201,255,0.08) 0%, transparent 60%)" }}
+          aria-hidden="true"
+        />
+
+        <h3 className="font-geist font-black leading-snug relative z-10" style={{ fontSize: "clamp(22px, 3.2vw, 30px)" }}>
+          This isn&rsquo;t a one-off rewrite.{" "}
+          <span style={{ color: "#a0c9ff" }}>It&rsquo;s a system you run on your own experience.</span>
+        </h3>
+        <p className="text-sm md:text-base leading-relaxed mt-4 relative z-10" style={{ color: "#c0c7d3", maxWidth: "46ch", margin: "1rem auto 0" }}>
+          The 50 prompts, templates, and built-in ATS Checker do the translation for you — for every role you
+          apply to, as many times as you need.
+        </p>
+
+        {/* Honest reassurance — risk reversal + what they get. No fabricated proof. */}
+        <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 mt-6 relative z-10">
+          {[
+            { icon: "verified_user", text: "7-day money-back" },
+            { icon: "bolt", text: "Instant download" },
+            { icon: "workspace_premium", text: "Works for any field" },
+          ].map(({ icon, text }) => (
+            <span key={text} className="flex items-center gap-1.5 text-[13px]" style={{ color: "rgba(255,255,255,0.7)" }}>
+              <span className="material-symbols-outlined" style={{ fontSize: 16, color: "#a0c9ff" }}>{icon}</span>
+              {text}
+            </span>
+          ))}
+        </div>
+
+        {/* Strong pull into the pricing/offer directly below */}
         <a
           href="#pricing"
-          className="group inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-semibold transition-all hover:bg-white/[0.08]"
-          style={{ color: "#e2e0fa", border: "1px solid rgba(160,201,255,0.3)", background: "rgba(160,201,255,0.05)" }}
+          className="group inline-flex items-center gap-2 mt-8 px-9 py-4 rounded-xl font-bold bg-white transition-all hover:scale-[1.02] relative z-10"
+          style={{ color: "#000", boxShadow: "0 8px 30px rgba(0,0,0,0.35)" }}
         >
-          Get the system that does this — <strong>$37</strong>
-          <span className="material-symbols-outlined transition-transform group-hover:translate-x-0.5" style={{ fontSize: 18 }}>arrow_forward</span>
+          See everything you get — <strong>$37</strong>
+          <span className="material-symbols-outlined transition-transform group-hover:translate-y-0.5" style={{ fontSize: 18 }}>arrow_downward</span>
         </a>
       </div>
-
-      <p className="text-center text-[13px] mt-8 leading-relaxed" style={{ color: "rgba(255,255,255,0.6)", maxWidth: "60ch", margin: "2rem auto 0" }}>
-        An ATS scans each posting for role-specific terms, then ranks resumes by how many they hit.
-        Same career, same facts — the problem was never the background, only the language.
-      </p>
     </section>
   );
 }

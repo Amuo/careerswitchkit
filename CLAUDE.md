@@ -107,20 +107,25 @@ full mirror of the code.
   count-up stats), `ProofExample` (the before→after typewriter proof, client-only),
   and `Typewriter` (reusable char-by-char typing effect). So: to change the bottom
   CTA, edit `components/FinalCTA.tsx`; to change pricing, edit it inline in `page.tsx`.
-- **The Polar checkout URL is hardcoded in 3 places** — `lib/checkout.ts`, and
-  twice directly in `page.tsx` (the hero primary CTA and the pricing-card CTA use a
-  raw `href=` to the Polar URL). If the URL changes, update all three.
-- **Two CTA paths that behave differently for analytics.** The navbar CTAs and the
-  FinalCTA call `handleCheckout()` — which fires the GA4 `begin_checkout` event,
-  then redirects. The hero and pricing-card CTAs link straight to Polar via `href`
-  and **skip** that event. Keep this in mind before trusting checkout-funnel data.
+- **The Polar checkout URL now lives in ONE place** — `POLAR_CHECKOUT_URL` in
+  `lib/checkout.ts`. The hero + pricing-card CTAs render `<CheckoutLink>` (imports
+  the constant); the navbar + FinalCTA call `handleCheckout()` (also imports it).
+  If the URL changes, edit only `lib/checkout.ts`. (Was hardcoded in 3 places until
+  2026-07-11.)
+- **All four buy CTAs now fire the GA4 `begin_checkout` event** (fixed 2026-07-11 —
+  the hero + pricing CTAs used to skip it). Two mechanisms: `<button>` CTAs (navbar,
+  FinalCTA) call `handleCheckout()` = fire event then redirect; `<a href>` CTAs
+  (hero, pricing card) use `<CheckoutLink>` = fire event, then the native href
+  navigates. Both share `fireBeginCheckout()` in `lib/checkout.ts`. Note: GA4
+  `begin_checkout` is only accurate for traffic AFTER this fix is deployed.
 - **FAQ content lives in two places that must stay in sync**: the visible accordion
   (`components/FAQAccordion.tsx`, the `FAQS` array — currently 8 items) AND the
   JSON-LD `faqSchema` in `page.tsx` (for SEO). Edit both together.
-- **Geist is loaded differently from the other fonts** — via a plain `<link>` to
-  Google Fonts in `layout.tsx` `<head>`, not `next/font` (Sora + DM Sans use
-  `next/font`). It resolves as `font-geist` via both `tailwind.config.js` and a
-  `globals.css` rule (`h1,h2,h3,h4,.font-geist { font-family:'Geist' }`).
+- **Geist now loads via `next/font` like Sora + DM Sans** (self-hosted, exposes
+  `--font-geist`; changed 2026-07-07 for performance — was a render-blocking
+  `<link>` to Google Fonts). It resolves as `font-geist` via `tailwind.config.js`
+  and a `globals.css` rule (`h1,h2,h3,h4,.font-geist { font-family: var(--font-geist), 'Geist', sans-serif }`).
+  Material Symbols is still the one remaining Google-Fonts `<link>` in the head.
 - **Colors have no single source of truth.** They live in `tailwind.config.js`
   (plus many leftover "Stitch"/Material tokens you can ignore), in `globals.css`
   `:root` vars (`--accent`), AND hardcoded as raw hex in inline `style=` props
@@ -136,6 +141,9 @@ full mirror of the code.
 - Home-page anchors: `#problem` (the problem/empathy beat), `#example` (the
   before→after proof, labelled "How It Works" in the navbar), `#pricing`, and
   `#faq`. The old `#system` dashboard anchor no longer exists.
-- Background stack: `LandingBackground` (a video, in `layout.tsx`) sits behind a
-  fixed SVG-noise overlay (the `#c3-noise` filter, defined in `page.tsx`); page
-  content sits above at `z-index:2`.
+- Background stack: `LandingBackground` (a video, in `layout.tsx`; lazy-loaded on
+  idle so it doesn't delay LCP) sits behind a fixed grain overlay — the `.grain`
+  class in `globals.css` (a baked noise data-URI). This replaced the old live
+  `#c3-noise` SVG turbulence filter on 2026-07-07 for performance; three divs use
+  `.grain` now (full-page in `page.tsx`, the pricing section, and `FinalCTA`).
+  Page content sits above at `z-index:2`.

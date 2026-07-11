@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "./components/Navbar";
+import CheckoutLink from "./components/CheckoutLink";
 import Footer from "./components/Footer";
 import FAQAccordion from "./components/FAQAccordion";
 import FadeUpObserver from "./components/FadeUpObserver";
@@ -54,17 +55,8 @@ export default function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
 
-      {/* SVG noise filter — same as Stitch */}
-      <svg aria-hidden="true" style={{ position: "absolute", width: 0, height: 0, overflow: "hidden" }}>
-        <defs>
-          <filter id="c3-noise">
-            <feTurbulence baseFrequency="0.8" numOctaves={4} stitchTiles="stitch" type="fractalNoise" />
-            <feColorMatrix type="matrix" values="1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 0.15 0" />
-          </filter>
-        </defs>
-      </svg>
-      {/* Noise texture overlay */}
-      <div className="fixed inset-0 pointer-events-none opacity-50" style={{ zIndex: 1, filter: "url(#c3-noise)" }} aria-hidden="true" />
+      {/* Noise texture overlay — baked grain tile (see .grain in globals.css) */}
+      <div className="grain fixed inset-0 pointer-events-none opacity-50" style={{ zIndex: 1 }} aria-hidden="true" />
 
       <div className="relative min-h-screen" style={{ color: "#e2e0fa", overflowX: "clip" }}>
         <FadeUpObserver />
@@ -127,8 +119,7 @@ export default function Home() {
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               {/* Primary — white with shimmer on hover */}
-              <a
-                href="https://buy.polar.sh/polar_cl_yp2D8rcrj84BMejvasXb4zDwa36czvOw21K2q4XtbWG"
+              <CheckoutLink
                 className="group relative w-full sm:w-auto px-10 py-4 bg-white font-semibold rounded-xl transition-all duration-500 active:scale-95 overflow-hidden font-geist tracking-[0.02em] flex items-center justify-center hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(160,201,255,0.4)]"
                 style={{ color: "#000", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.4), 0 4px 24px rgba(0,0,0,0.3)" }}
               >
@@ -140,7 +131,7 @@ export default function Home() {
                 <span className="relative z-10 flex items-center gap-2">
                   Claim Lifetime Access — <strong>$37</strong>
                 </span>
-              </a>
+              </CheckoutLink>
               {/* Secondary — liquid glass */}
               <a
                 href="#example"
@@ -166,7 +157,7 @@ export default function Home() {
           {/* ── Pricing ──────────────────────────────────────────────────── */}
           <section id="pricing" className="relative py-32 overflow-hidden fade-up visible">
             {/* Noise layer for this section */}
-            <div className="absolute inset-0 pointer-events-none opacity-30" style={{ filter: "url(#c3-noise)" }} aria-hidden="true" />
+            <div className="grain absolute inset-0 pointer-events-none opacity-30" aria-hidden="true" />
             {/* Watermark */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden" aria-hidden="true">
               <span className="watermark-text text-white select-none">Lifetime Access.</span>
@@ -284,15 +275,14 @@ export default function Home() {
                     ))}
                   </div>
 
-                  <a
-                    href="https://buy.polar.sh/polar_cl_yp2D8rcrj84BMejvasXb4zDwa36czvOw21K2q4XtbWG"
+                  <CheckoutLink
                     className="group/btn w-full py-5 rounded-2xl bg-white font-black hover:scale-[1.02] transition-all shadow-xl text-lg flex items-center justify-center gap-2 relative overflow-hidden z-10"
                     style={{ color: "#000" }}
                   >
                     <span className="white-cta-shimmer" aria-hidden="true" />
                     <span className="relative z-10">Claim Lifetime Access — $37</span>
                     <span className="material-symbols-outlined relative z-10 transition-transform group-hover/btn:translate-x-1">arrow_forward</span>
-                  </a>
+                  </CheckoutLink>
 
                   <div
                     className="flex items-center justify-center gap-2.5 mt-5 px-4 py-3 rounded-xl relative z-10"
