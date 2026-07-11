@@ -149,7 +149,7 @@ export default function Navbar() {
               {navLinks.map((link) => (
                 <a
                   key={link.href}
-                  href={link.route ? link.href : isHome ? link.href : link.pageHref}
+                  href={link.route || isHome ? link.href : link.pageHref}
                   onClick={!link.route && isHome ? (e) => { e.preventDefault(); scrollTo(link.href.slice(1)); } : undefined}
                   onMouseEnter={() => setHoveredLink(link.href)}
                   onMouseLeave={() => setHoveredLink(null)}
@@ -268,7 +268,7 @@ export default function Navbar() {
                     <motion.a
                       key={link.href}
                       variants={itemVariants}
-                      href={link.route ? link.href : isHome ? link.href : link.pageHref}
+                      href={link.route || isHome ? link.href : link.pageHref}
                       onClick={(e) => {
                         setMenuOpen(false);
                         if (!link.route && isHome) { e.preventDefault(); scrollTo(link.href.slice(1)); }

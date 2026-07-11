@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import ScoreGauge from "./ScoreGauge";
 
 /* ────────────────────────────────────────────────────────────────────────
    Live preview of File 06 — the ATS Score Checker.
@@ -339,7 +340,7 @@ function checkResume(resume: string, jd: string): Result {
   }
 
   // 9. Length / density (8pts)
-  const wordCount = resume.trim().split(/\s+/).filter((w) => w.length > 0).length;
+  const wordCount = wordCountOf(resume);
   if (wordCount >= 280 && wordCount <= 700) {
     points += 8;
     flags.push({ type: "pass", title: `Optimal length (${wordCount.toLocaleString()} words)`, detail: "Concise enough for a one-page read, substantial enough for keyword coverage." });
@@ -420,42 +421,39 @@ export default function AtsCheckerDemo() {
     return () => cancelAnimationFrame(raf);
   }, [result]);
 
+  // Reset state, then (after a beat that reads as real work) score the inputs
+  // and scroll the results into view. Shared by run() and loadSample().
+  function analyze(r: string, j: string) {
+    setNotice(false);
+    setLoading(true);
+    setResult(null);
+    setDisplayScore(0);
+    setTimeout(() => {
+      setResult(checkResume(r, j));
+      setLoading(false);
+      setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 120);
+    }, 650);
+  }
+
   function run() {
     if (!resume.trim() || !jd.trim()) {
       setNotice(true);
       setTimeout(() => setNotice(false), 3000);
       return;
     }
-    setNotice(false);
-    setLoading(true);
-    setResult(null);
-    setDisplayScore(0);
-    // Small delay so the "analyzing" state reads as real work.
-    setTimeout(() => {
-      setResult(checkResume(resume, jd));
-      setLoading(false);
-      setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 120);
-    }, 650);
+    analyze(resume, jd);
   }
 
   function loadSample() {
     setResume(SAMPLE_RESUME);
     setJd(SAMPLE_JD);
-    setNotice(false);
-    setLoading(true);
-    setResult(null);
-    setDisplayScore(0);
-    setTimeout(() => {
-      setResult(checkResume(SAMPLE_RESUME, SAMPLE_JD));
-      setLoading(false);
-      setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 120);
-    }, 650);
+    analyze(SAMPLE_RESUME, SAMPLE_JD);
   }
 
   const colors = result ? getColors(result.score) : null;
   const sortedFlags = result ? [...result.flags].sort((a, b) => FLAG_ORDER[a.type] - FLAG_ORDER[b.type]) : [];
-  const circumference = 270;
-  const gaugeOffset = result ? circumference - (result.score / 100) * circumference : circumference;
+  const resumeWords = wordCountOf(resume);
+  const jdWords = wordCountOf(jd);
 
   return (
     <div className="pv-card" style={{ padding: "clamp(20px, 4vw, 36px)" }}>
@@ -491,7 +489,7 @@ export default function AtsCheckerDemo() {
           <div className="pv-field-label">
             <span>Your Résumé</span>
             <span style={{ fontWeight: 400, letterSpacing: 0, textTransform: "none", opacity: 0.6 }}>
-              {wordCountOf(resume) > 0 ? `${wordCountOf(resume).toLocaleString()} words` : ""}
+              {resumeWords > 0 ? `${resumeWords.toLocaleString()} words` : ""}
             </span>
           </div>
           <textarea
@@ -507,7 +505,7 @@ export default function AtsCheckerDemo() {
           <div className="pv-field-label">
             <span>Job Description</span>
             <span style={{ fontWeight: 400, letterSpacing: 0, textTransform: "none", opacity: 0.6 }}>
-              {wordCountOf(jd) > 0 ? `${wordCountOf(jd).toLocaleString()} words` : ""}
+              {jdWords > 0 ? `${jdWords.toLocaleString()} words` : ""}
             </span>
           </div>
           <textarea
@@ -543,20 +541,14 @@ export default function AtsCheckerDemo() {
             className="rounded-2xl p-6 md:p-8 flex flex-col sm:flex-row items-center gap-7"
             style={{ background: "rgba(7,7,25,0.5)", border: "1px solid rgba(255,255,255,0.08)" }}
           >
-            <div className="relative shrink-0" style={{ width: 104, height: 104 }}>
-              <svg className="pv-gauge-svg" viewBox="0 0 100 100">
-                <circle className="pv-gauge-track" cx="50" cy="50" r="43" />
-                <circle
-                  className="pv-gauge-fill"
-                  cx="50" cy="50" r="43"
-                  style={{ stroke: colors.main, strokeDashoffset: gaugeOffset }}
-                />
-              </svg>
-              <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="font-geist font-black" style={{ fontSize: 30, lineHeight: 1, color: colors.main }}>{displayScore}</span>
-                <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(148,163,184,0.8)", marginTop: 2 }}>/ 100</span>
-              </div>
-            </div>
+            <ScoreGauge
+              fill={result.score}
+              display={displayScore}
+              color={colors.main}
+              size={104}
+              numberSize={30}
+              className="shrink-0"
+            />
 
             <div className="flex-1 text-center sm:text-left">
               <div className="font-geist font-black text-xl md:text-2xl" style={{ color: colors.main }}>{colors.label}</div>
@@ -583,7 +575,7 @@ export default function AtsCheckerDemo() {
           </div>
 
           {/* Flags */}
-          <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)" }} className="mt-8 mb-3">
+          <p className="pv-eyebrow mt-8 mb-3">
             Detailed checks
           </p>
           <div className="flex flex-col gap-2">
@@ -599,7 +591,7 @@ export default function AtsCheckerDemo() {
           </div>
 
           {/* Keywords */}
-          <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)" }} className="mt-8 mb-3">
+          <p className="pv-eyebrow mt-8 mb-3">
             Keyword match — <span style={{ color: "#86efac" }}>{result.keywords.found.length} found</span>, <span style={{ color: "#fca5a5" }}>{result.keywords.missing.length} missing</span>
           </p>
           <div className="flex flex-wrap gap-1.5">

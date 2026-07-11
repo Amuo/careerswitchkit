@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import ScoreGauge from "./ScoreGauge";
 
 /* ────────────────────────────────────────────────────────────────────────
    The interactive walkthrough — the site's 4-stage system spine
@@ -104,7 +105,7 @@ function StageVisual({ kind }: { kind: Stage["visual"] }) {
   if (kind === "keywords") {
     return (
       <div className="pv-visual">
-        <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: 14 }}>
+        <div className="pv-eyebrow" style={{ marginBottom: 14 }}>
           Keywords pulled from the posting
         </div>
         <div className="flex flex-wrap gap-2">
@@ -122,7 +123,7 @@ function StageVisual({ kind }: { kind: Stage["visual"] }) {
   if (kind === "cv") {
     return (
       <div className="pv-visual">
-        <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: 14 }}>
+        <div className="pv-eyebrow" style={{ marginBottom: 14 }}>
           Skills-led Hybrid CV
         </div>
         <div className="pv-wire">
@@ -143,33 +144,19 @@ function StageVisual({ kind }: { kind: Stage["visual"] }) {
     );
   }
   if (kind === "score") {
-    const circumference = 270;
-    const offset = circumference - (94 / 100) * circumference;
     return (
       <div className="pv-visual" style={{ alignItems: "center", textAlign: "center" }}>
-        <div className="relative mx-auto" style={{ width: 120, height: 120 }}>
-          <svg className="pv-gauge-svg" viewBox="0 0 100 100" style={{ width: 120, height: 120 }}>
-            <circle className="pv-gauge-track" cx="50" cy="50" r="43" />
-            <circle className="pv-gauge-fill" cx="50" cy="50" r="43" style={{ stroke: "#22C55E", strokeDashoffset: offset }} />
-          </svg>
-          <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <span className="font-geist font-black" style={{ fontSize: 34, color: "#22C55E", lineHeight: 1 }}>94</span>
-            <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.1em", color: "rgba(148,163,184,0.8)" }}>/ 100</span>
-          </div>
-        </div>
+        <ScoreGauge fill={94} display={94} color="#22C55E" size={120} numberSize={34} className="mx-auto" />
         <div className="mt-3 flex items-center justify-center gap-2 text-sm">
           <span style={{ color: "rgba(255,255,255,0.4)", textDecoration: "line-through" }}>19</span>
           <span className="material-symbols-outlined" style={{ fontSize: 16, color: "#a0c9ff" }}>arrow_forward</span>
           <span style={{ color: "#86efac", fontWeight: 600 }}>Likely to pass ATS</span>
         </div>
+        {/* SmoothScroll (mounted globally in layout) intercepts this hash link. */}
         <a
           href="#ats-checker"
           className="pv-chip mt-4 mx-auto"
           style={{ cursor: "pointer", borderColor: "rgba(160,201,255,0.35)", color: "#fff" }}
-          onClick={(e) => {
-            e.preventDefault();
-            document.getElementById("ats-checker")?.scrollIntoView({ behavior: "smooth", block: "start" });
-          }}
         >
           <span className="material-symbols-outlined">bolt</span>
           Try the live checker below
@@ -180,7 +167,7 @@ function StageVisual({ kind }: { kind: Stage["visual"] }) {
   // apply
   return (
     <div className="pv-visual">
-      <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: 14 }}>
+      <div className="pv-eyebrow" style={{ marginBottom: 14 }}>
         Ready-to-send checklist
       </div>
       <div className="flex flex-col gap-2.5">
