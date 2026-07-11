@@ -56,8 +56,7 @@ export default function FinalCTA() {
 
       {/* Noise */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-20"
-        style={{ filter: "url(#c3-noise)" }}
+        className="grain absolute inset-0 pointer-events-none opacity-20"
         aria-hidden="true"
       />
 

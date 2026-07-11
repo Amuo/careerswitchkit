@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Sora, DM_Sans } from "next/font/google";
+import { Sora, DM_Sans, Geist } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import Script from "next/script";
 import MotionProvider from "@/app/components/MotionProvider";
@@ -16,6 +16,17 @@ const sora = Sora({
 const dmSans = DM_Sans({
   subsets: ["latin"],
   variable: "--font-dm-sans",
+});
+
+// Geist powers every heading (the big hero line included). Loading it through
+// next/font self-hosts it, preloads it, and generates a size-matched fallback —
+// so the headline paints without a Google-Fonts round-trip (faster LCP) and
+// doesn't jump when the real font arrives (lower CLS). Was a render-blocking
+// <link> to fonts.googleapis.com before.
+const geist = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -67,7 +78,6 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" />
         {/*
           Progressive-reveal flag. Scroll-in sections (.fade-up) render hidden and
           are faded in by JS. This runs synchronously before first paint and only
@@ -81,7 +91,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${sora.variable} ${dmSans.variable} font-sans antialiased`}
+        className={`${sora.variable} ${dmSans.variable} ${geist.variable} font-sans antialiased`}
       >
         <LandingBackground />
         <SmoothScroll />
@@ -96,7 +106,7 @@ export default function RootLayout({
         {/* Meta Pixel — set NEXT_PUBLIC_META_PIXEL_ID (from business.facebook.com/events/manager) */}
         {metaPixelId && (
           <>
-            <Script id="meta-pixel" strategy="afterInteractive">
+            <Script id="meta-pixel" strategy="lazyOnload">
               {`!function(f,b,e,v,n,t,s)
               {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
               n.callMethod.apply(n,arguments):n.queue.push(arguments)};

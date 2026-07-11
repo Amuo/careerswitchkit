@@ -39,13 +39,22 @@ export default function Typewriter({
     };
   }, [text, speed, startDelay]);
 
+  // The two spans are stacked in one grid cell. The first holds the FULL text
+  // but is invisible — it reserves the final width/height from the very first
+  // frame, so the typing animation never resizes the line or shoves the buttons
+  // below it down. That reflow was a source of layout shift (CLS).
   return (
-    <span className={className}>
-      <span className="sr-only">{text}</span>
-      <span aria-hidden="true">
-        {text.slice(0, count)}
-        <span className="tw-cursor" style={{ opacity: done ? 0 : 1 }}>
-          |
+    <span className={className} style={{ display: "inline-grid" }}>
+      <span aria-hidden="true" style={{ gridArea: "1 / 1", visibility: "hidden" }}>
+        {text}
+      </span>
+      <span style={{ gridArea: "1 / 1" }}>
+        <span className="sr-only">{text}</span>
+        <span aria-hidden="true">
+          {text.slice(0, count)}
+          <span className="tw-cursor" style={{ opacity: done ? 0 : 1 }}>
+            |
+          </span>
         </span>
       </span>
     </span>

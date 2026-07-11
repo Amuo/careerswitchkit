@@ -11,8 +11,11 @@
 
 import { useEffect, useRef } from "react";
 
-const SRC =
-  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_064122_c4750c0e-7476-4b44-94a2-a85a65c63bf2.mp4";
+// Self-hosted, re-encoded 2026-07-11: was a 15.8 MB external clip; now a 2.69 MB
+// same-origin file (H.264 CRF 28, audio stripped, +faststart). ~6x smaller and no
+// cross-origin round-trip, so it loads far faster on mobile. Re-encode the source
+// with ffmpeg if you ever swap the clip; keep it well under ~3 MB.
+const SRC = "/hero-bg.mp4";
 
 // Colour the video fades to at the loop point. Black.
 const VIDEO_BG = "#000000";
@@ -26,9 +29,35 @@ export default function LandingBackground() {
     const v = videoRef.current;
     if (!v) return;
 
+    // Lazy-load the video: only start fetching the (multi-MB) clip once the
+    // browser is idle, so it doesn't steal bandwidth from the hero text/fonts
+    // during the initial load. This is what lets LCP happen sooner.
+    const startVideo = () => {
+      if (v.src) return;
+      // Spare data-constrained visitors the ~16 MB clip: honour Save-Data and skip
+      // on 2G / slow-2G. Everyone on a normal connection still gets the video; when
+      // skipped, the matching black background + scrim shows instead (no empty state).
+      const conn = (navigator as Navigator & {
+        connection?: { saveData?: boolean; effectiveType?: string };
+      }).connection;
+      if (conn && (conn.saveData || /(^|-)2g$/.test(conn.effectiveType || ""))) return;
+      v.src = SRC;
+      v.load();
+      v.play().catch(() => {}); // muted autoplay is allowed; ignore if blocked
+    };
+    const w = window as typeof window & {
+      requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
+      cancelIdleCallback?: (id: number) => void;
+    };
+    let idleId = 0;
+    let timeoutId = 0;
+    if (w.requestIdleCallback) idleId = w.requestIdleCallback(startVideo, { timeout: 2500 });
+    else timeoutId = window.setTimeout(startVideo, 1200);
+
     let raf = 0;
     let hasLooped = false; // don't fade in on the very first play, only after a loop
     let last = 0;
+    let lastOpacity = ""; // only write to the DOM when the value actually changes
 
     const tick = () => {
       const d = v.duration;
@@ -39,13 +68,21 @@ export default function LandingBackground() {
 
         const fadeOut = Math.min((d - t) / FADE, 1);
         const fadeIn = hasLooped ? Math.min(t / FADE, 1) : 1;
-        v.style.opacity = String(Math.max(0, Math.min(fadeIn, fadeOut)));
+        const next = String(Math.max(0, Math.min(fadeIn, fadeOut)));
+        if (next !== lastOpacity) {
+          v.style.opacity = next;
+          lastOpacity = next;
+        }
       }
       raf = requestAnimationFrame(tick);
     };
 
     raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+    return () => {
+      cancelAnimationFrame(raf);
+      if (idleId && w.cancelIdleCallback) w.cancelIdleCallback(idleId);
+      if (timeoutId) window.clearTimeout(timeoutId);
+    };
   }, []);
 
   return (
@@ -59,12 +96,14 @@ export default function LandingBackground() {
         background: VIDEO_BG, // matches the video's dark base, so the fade doesn't show
       }}
     >
+      {/* No `autoPlay` / no <source> on purpose — the src is set in the effect
+          above once the browser is idle, so the download doesn't delay LCP. */}
       <video
         ref={videoRef}
-        autoPlay
         muted
         loop
         playsInline
+        preload="none"
         style={{
           position: "absolute",
           inset: 0,
@@ -75,9 +114,7 @@ export default function LandingBackground() {
           filter: "brightness(0.6) saturate(1.05)",
           willChange: "opacity",
         }}
-      >
-        <source src={SRC} type="video/mp4" />
-      </video>
+      />
 
       {/* Readability scrim — darker behind the nav/footer, lighter through the middle. */}
       <div
