@@ -57,8 +57,11 @@ export default function Navbar() {
     return () => window.removeEventListener("keydown", onKey);
   }, [menuOpen]);
 
+  // `route: true` marks a real page link (not an on-page hash anchor), so it
+  // navigates normally instead of trying to smooth-scroll to an element id.
   const navLinks = [
     { href: "#example", pageHref: "/#example", label: "How It Works" },
+    { href: "/preview", pageHref: "/preview", label: "Preview", route: true },
     { href: "#pricing", pageHref: "/#pricing", label: "Pricing" },
     { href: "#faq", pageHref: "/#faq", label: "FAQ" },
   ];
@@ -146,8 +149,8 @@ export default function Navbar() {
               {navLinks.map((link) => (
                 <a
                   key={link.href}
-                  href={isHome ? link.href : link.pageHref}
-                  onClick={isHome ? (e) => { e.preventDefault(); scrollTo(link.href.slice(1)); } : undefined}
+                  href={link.route ? link.href : isHome ? link.href : link.pageHref}
+                  onClick={!link.route && isHome ? (e) => { e.preventDefault(); scrollTo(link.href.slice(1)); } : undefined}
                   onMouseEnter={() => setHoveredLink(link.href)}
                   onMouseLeave={() => setHoveredLink(null)}
                   className="relative px-3 py-1.5 text-xs font-medium tracking-wide rounded-xl cursor-pointer select-none outline-none focus-visible:ring-2 focus-visible:ring-[#3792E8]/70"
@@ -265,10 +268,10 @@ export default function Navbar() {
                     <motion.a
                       key={link.href}
                       variants={itemVariants}
-                      href={isHome ? link.href : link.pageHref}
+                      href={link.route ? link.href : isHome ? link.href : link.pageHref}
                       onClick={(e) => {
                         setMenuOpen(false);
-                        if (isHome) { e.preventDefault(); scrollTo(link.href.slice(1)); }
+                        if (!link.route && isHome) { e.preventDefault(); scrollTo(link.href.slice(1)); }
                       }}
                       className="group flex items-center justify-between py-3.5 px-3.5 rounded-2xl cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#3792E8]/70"
                       style={{

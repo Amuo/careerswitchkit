@@ -132,14 +132,14 @@ export default function Home() {
                   Claim Lifetime Access — <strong>$37</strong>
                 </span>
               </CheckoutLink>
-              {/* Secondary — liquid glass */}
-              <a
-                href="#example"
+              {/* Secondary — liquid glass; sends people into the interactive preview */}
+              <Link
+                href="/preview"
                 className="w-full sm:w-auto px-10 py-4 font-bold rounded-xl transition-all text-center border border-white/10 hover:border-white/20 hover:bg-white/5"
                 style={{ color: "#e2e0fa" }}
               >
                 See how it works
-              </a>
+              </Link>
             </div>
 
             <p className="mt-6 text-sm" style={{ color: "rgba(255,255,255,0.62)" }}>
@@ -152,6 +152,8 @@ export default function Home() {
           <ProblemSection />
 
           {/* ── Proof: worked example ────────────────────────────────────── */}
+          {/* Proof section ends with its own "See what's included in the system"
+              CTA (in ProofExample's seam card) that leads into /preview. */}
           <ProofExample />
 
           {/* ── Pricing ──────────────────────────────────────────────────── */}
@@ -249,29 +251,39 @@ export default function Home() {
                     </div>
                   </div>
 
+                  {/* Each tile links to the matching part of the interactive preview. */}
                   <div className="grid grid-cols-2 gap-3 mb-8 flex-1 content-start relative z-10">
                     {[
-                      { icon: "map", title: "4-stage system", sub: "the full method, start to apply" },
-                      { icon: "description", title: "6 templates", sub: "3 CV + 3 cover letters" },
-                      { icon: "auto_awesome", title: "50 AI prompts", sub: "sharpen every line" },
-                      { icon: "all_inclusive", title: "Lifetime updates", sub: "yours forever, no subscription" },
-                    ].map(({ icon, title, sub }) => (
-                      <div
+                      { icon: "map", title: "4-stage system", sub: "the full method, start to apply", href: "/preview#tour" },
+                      { icon: "description", title: "6 templates", sub: "3 CV + 3 cover letters", href: "/preview#included" },
+                      { icon: "auto_awesome", title: "50 AI prompts", sub: "sharpen every line", href: "/preview#prompts" },
+                      { icon: "all_inclusive", title: "Lifetime updates", sub: "yours forever, no subscription", href: "/preview#included" },
+                    ].map(({ icon, title, sub, href }) => (
+                      <Link
                         key={title}
-                        className="lift-card flex flex-col gap-2.5 rounded-xl p-3.5"
+                        href={href}
+                        className="lift-card group flex flex-col gap-2.5 rounded-xl p-3.5"
                         style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(160,201,255,0.14)" }}
                       >
-                        <span
-                          className="flex items-center justify-center w-9 h-9 rounded-lg"
-                          style={{ background: "rgba(160,201,255,0.1)", border: "1px solid rgba(160,201,255,0.2)" }}
-                        >
-                          <span className="material-symbols-outlined" style={{ fontSize: 19, color: "#a0c9ff" }}>{icon}</span>
-                        </span>
+                        <div className="flex items-center justify-between">
+                          <span
+                            className="flex items-center justify-center w-9 h-9 rounded-lg"
+                            style={{ background: "rgba(160,201,255,0.1)", border: "1px solid rgba(160,201,255,0.2)" }}
+                          >
+                            <span className="material-symbols-outlined" style={{ fontSize: 19, color: "#a0c9ff" }}>{icon}</span>
+                          </span>
+                          <span
+                            className="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity"
+                            style={{ fontSize: 16, color: "#a0c9ff" }}
+                          >
+                            arrow_outward
+                          </span>
+                        </div>
                         <div>
                           <div className="text-sm font-bold leading-tight" style={{ color: "#fff" }}>{title}</div>
                           <div className="text-[11px] leading-snug mt-0.5" style={{ color: "rgba(255,255,255,0.5)" }}>{sub}</div>
                         </div>
-                      </div>
+                      </Link>
                     ))}
                   </div>
 

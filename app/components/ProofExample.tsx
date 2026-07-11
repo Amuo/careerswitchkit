@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 // Cinematic "watch the translation happen" section. On scroll-in it plays a timeline:
@@ -363,15 +364,15 @@ export default function ProofExample() {
           ))}
         </div>
 
-        {/* Strong pull into the pricing/offer directly below */}
-        <a
-          href="#pricing"
+        {/* Send engaged readers into the interactive preview to explore the system */}
+        <Link
+          href="/preview"
           className="group inline-flex items-center gap-2 mt-8 px-9 py-4 rounded-xl font-bold bg-white transition-all hover:scale-[1.02] relative z-10"
           style={{ color: "#000", boxShadow: "0 8px 30px rgba(0,0,0,0.35)" }}
         >
-          See everything you get — <strong>$37</strong>
-          <span className="material-symbols-outlined transition-transform group-hover:translate-y-0.5" style={{ fontSize: 18 }}>arrow_downward</span>
-        </a>
+          See what&rsquo;s included in the system
+          <span className="material-symbols-outlined transition-transform group-hover:translate-x-1" style={{ fontSize: 18 }}>arrow_forward</span>
+        </Link>
       </div>
     </section>
   );
