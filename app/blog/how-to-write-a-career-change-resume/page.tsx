@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import BlogCTA from "@/app/blog/BlogCTA";
+import ArticleLayout from "@/app/blog/ArticleLayout";
 
 export const metadata: Metadata = {
   title: "How to Write a Resume When Switching Careers | CareerSwitchKit",
@@ -20,39 +19,23 @@ export const metadata: Metadata = {
 
 export default function Post() {
   return (
-    <div className="bg-white min-h-screen">
-      {/* Hero */}
-      <div className="bg-[#070719] pt-28 pb-16">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-1.5 text-xs mb-8 transition-colors"
-            style={{ color: "rgba(255,255,255,0.35)" }}
-          >
-            ← All resources
-          </Link>
-          <div className="flex items-center gap-3 mb-5">
-            <span className="text-xs" style={{ color: "rgba(255,255,255,0.28)" }}>June 2026</span>
-            <span style={{ color: "rgba(255,255,255,0.12)" }}>·</span>
-            <span className="text-xs" style={{ color: "rgba(255,255,255,0.28)" }}>6 min read</span>
-          </div>
-          <h1 className="font-sora font-black text-3xl md:text-4xl text-white tracking-tight leading-tight">
-            How to Write a Resume When Switching Careers
-          </h1>
-          <p
-            className="mt-4 text-lg leading-relaxed"
-            style={{ color: "rgba(255,255,255,0.48)" }}
-          >
-            Career switchers don&apos;t fail because they&apos;re unqualified. They fail
-            because their resume doesn&apos;t translate their background into the
-            language of the new field. Here&apos;s the framework to fix it.
-          </p>
-        </div>
-      </div>
-
-      {/* Article */}
-      <article className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="prose prose-gray max-w-none" style={{ fontSize: "17px", lineHeight: "1.75" }}>
+    <ArticleLayout
+      title="How to Write a Resume When Switching Careers"
+      date="June 2026"
+      readTime="6 min read"
+      subhead={
+        <>
+          Career switchers don&apos;t fail because they&apos;re unqualified. They fail
+          because their resume doesn&apos;t translate their background into the
+          language of the new field. Here&apos;s the framework to fix it.
+        </>
+      }
+      ctaHeading="The 4-stage system that does the translation work for you."
+      ctaBody="Stage 1 maps your background. Stage 2 gives you the templates. Stage 3 scores your resume before you submit. $37, instant download."
+      related={[
+        { href: "/blog/what-is-ats-career-switchers", label: "What Is ATS and Why Career Switchers Fail It (And How to Pass) →" },
+      ]}
+    >
 
           <p style={{ color: "#374151" }}>
             Career switching is more common than it&apos;s ever been. More than half
@@ -219,28 +202,6 @@ export default function Post() {
             Once you&apos;ve done that translation work, the resume almost writes
             itself. The difficulty isn&apos;t the writing — it&apos;s the mapping.
           </p>
-        </div>
-
-        <BlogCTA
-          heading="The 4-stage system that does the translation work for you."
-          body="Stage 1 maps your background. Stage 2 gives you the templates. Stage 3 scores your resume before you submit. $37, instant download."
-        />
-
-        {/* Related */}
-        <div className="mt-12 pt-10" style={{ borderTop: "1px solid #E5E7EB" }}>
-          <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-5">
-            Related
-          </p>
-          <Link
-            href="/blog/what-is-ats-career-switchers"
-            className="group block"
-          >
-            <p className="font-sora font-semibold text-[#070719] group-hover:text-[#3792E8] transition-colors duration-200">
-              What Is ATS and Why Career Switchers Fail It (And How to Pass) →
-            </p>
-          </Link>
-        </div>
-      </article>
-    </div>
+    </ArticleLayout>
   );
 }

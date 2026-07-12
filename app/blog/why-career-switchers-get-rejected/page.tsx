@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import BlogCTA from "@/app/blog/BlogCTA";
+import ArticleLayout from "@/app/blog/ArticleLayout";
 
 export const metadata: Metadata = {
   title: "Why Career Switchers Keep Getting Rejected Before the Interview | CareerSwitchKit",
@@ -20,39 +19,24 @@ export const metadata: Metadata = {
 
 export default function Post() {
   return (
-    <div className="bg-white min-h-screen">
-      {/* Hero */}
-      <div className="bg-[#070719] pt-28 pb-16">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-1.5 text-xs mb-8 transition-colors"
-            style={{ color: "rgba(255,255,255,0.35)" }}
-          >
-            ← All resources
-          </Link>
-          <div className="flex items-center gap-3 mb-5">
-            <span className="text-xs" style={{ color: "rgba(255,255,255,0.28)" }}>June 2026</span>
-            <span style={{ color: "rgba(255,255,255,0.12)" }}>·</span>
-            <span className="text-xs" style={{ color: "rgba(255,255,255,0.28)" }}>6 min read</span>
-          </div>
-          <h1 className="font-sora font-black text-3xl md:text-4xl text-white tracking-tight leading-tight">
-            Why Career Switchers Keep Getting Rejected Before the Interview
-          </h1>
-          <p
-            className="mt-4 text-lg leading-relaxed"
-            style={{ color: "rgba(255,255,255,0.48)" }}
-          >
-            Sending applications into silence is the most demoralizing part of
-            switching careers. Before you conclude you&apos;re unqualified, read this.
-            The problem is almost always something else entirely.
-          </p>
-        </div>
-      </div>
-
-      {/* Article */}
-      <article className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="prose prose-gray max-w-none" style={{ fontSize: "17px", lineHeight: "1.75" }}>
+    <ArticleLayout
+      title="Why Career Switchers Keep Getting Rejected Before the Interview"
+      date="June 2026"
+      readTime="6 min read"
+      subhead={
+        <>
+          Sending applications into silence is the most demoralizing part of
+          switching careers. Before you conclude you&apos;re unqualified, read this.
+          The problem is almost always something else entirely.
+        </>
+      }
+      ctaHeading="The system that fixes all four problems at once."
+      ctaBody="The CareerSwitchKit walks you through the translation work, gives you the right resume format for career switchers, and scores your application before you submit. $37, instant download."
+      related={[
+        { href: "/blog/what-is-ats-career-switchers", label: "What Is ATS and Why Career Switchers Fail It (And How to Pass) →" },
+        { href: "/blog/transferable-skills-career-change", label: "How to Identify Your Transferable Skills for a Career Change →" },
+      ]}
+    >
 
           <p style={{ color: "#374151" }}>
             There&apos;s a specific kind of frustration that career switchers know
@@ -212,38 +196,6 @@ export default function Post() {
           <p style={{ color: "#374151" }}>
             Qualifications are rarely the issue. Presentation almost always is.
           </p>
-        </div>
-
-        <BlogCTA
-          heading="The system that fixes all four problems at once."
-          body="The CareerSwitchKit walks you through the translation work, gives you the right resume format for career switchers, and scores your application before you submit. $37, instant download."
-        />
-
-        {/* Related */}
-        <div className="mt-12 pt-10" style={{ borderTop: "1px solid #E5E7EB" }}>
-          <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-5">
-            Related
-          </p>
-          <div className="space-y-4">
-            <Link
-              href="/blog/what-is-ats-career-switchers"
-              className="group block"
-            >
-              <p className="font-sora font-semibold text-[#070719] group-hover:text-[#3792E8] transition-colors duration-200">
-                What Is ATS and Why Career Switchers Fail It (And How to Pass) →
-              </p>
-            </Link>
-            <Link
-              href="/blog/transferable-skills-career-change"
-              className="group block"
-            >
-              <p className="font-sora font-semibold text-[#070719] group-hover:text-[#3792E8] transition-colors duration-200">
-                How to Identify Your Transferable Skills for a Career Change →
-              </p>
-            </Link>
-          </div>
-        </div>
-      </article>
-    </div>
+    </ArticleLayout>
   );
 }

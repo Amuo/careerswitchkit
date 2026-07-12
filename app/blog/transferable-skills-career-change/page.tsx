@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import BlogCTA from "@/app/blog/BlogCTA";
+import ArticleLayout from "@/app/blog/ArticleLayout";
 
 export const metadata: Metadata = {
   title: "How to Identify Your Transferable Skills for a Career Change | CareerSwitchKit",
@@ -20,39 +19,24 @@ export const metadata: Metadata = {
 
 export default function Post() {
   return (
-    <div className="bg-white min-h-screen">
-      {/* Hero */}
-      <div className="bg-[#070719] pt-28 pb-16">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-1.5 text-xs mb-8 transition-colors"
-            style={{ color: "rgba(255,255,255,0.35)" }}
-          >
-            ← All resources
-          </Link>
-          <div className="flex items-center gap-3 mb-5">
-            <span className="text-xs" style={{ color: "rgba(255,255,255,0.28)" }}>June 2026</span>
-            <span style={{ color: "rgba(255,255,255,0.12)" }}>·</span>
-            <span className="text-xs" style={{ color: "rgba(255,255,255,0.28)" }}>6 min read</span>
-          </div>
-          <h1 className="font-sora font-black text-3xl md:text-4xl text-white tracking-tight leading-tight">
-            How to Identify Your Transferable Skills for a Career Change
-          </h1>
-          <p
-            className="mt-4 text-lg leading-relaxed"
-            style={{ color: "rgba(255,255,255,0.48)" }}
-          >
-            Most career switchers already have more relevant experience than they
-            think. The problem isn&apos;t the experience itself — it&apos;s that they can&apos;t
-            see it the way a hiring manager in a new field would.
-          </p>
-        </div>
-      </div>
-
-      {/* Article */}
-      <article className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="prose prose-gray max-w-none" style={{ fontSize: "17px", lineHeight: "1.75" }}>
+    <ArticleLayout
+      title="How to Identify Your Transferable Skills for a Career Change"
+      date="June 2026"
+      readTime="6 min read"
+      subhead={
+        <>
+          Most career switchers already have more relevant experience than they
+          think. The problem isn&apos;t the experience itself — it&apos;s that they can&apos;t
+          see it the way a hiring manager in a new field would.
+        </>
+      }
+      ctaHeading="Stage 1 of the system does this mapping for you."
+      ctaBody="The START HERE document walks you through a structured process to identify, translate, and position your existing experience for a new field. $37, instant download."
+      related={[
+        { href: "/blog/how-to-write-a-career-change-resume", label: "How to Write a Resume When Switching Careers →" },
+        { href: "/blog/cover-letter-career-change", label: "How to Write a Cover Letter When Switching Careers →" },
+      ]}
+    >
 
           <p style={{ color: "#374151" }}>
             &ldquo;Transferable skills&rdquo; is one of those phrases that sounds useful until
@@ -251,38 +235,6 @@ export default function Post() {
             surface real relevance that wasn&apos;t visible before because it was
             dressed in the wrong vocabulary.
           </p>
-        </div>
-
-        <BlogCTA
-          heading="Stage 1 of the system does this mapping for you."
-          body="The START HERE document walks you through a structured process to identify, translate, and position your existing experience for a new field. $37, instant download."
-        />
-
-        {/* Related */}
-        <div className="mt-12 pt-10" style={{ borderTop: "1px solid #E5E7EB" }}>
-          <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-5">
-            Related
-          </p>
-          <div className="space-y-4">
-            <Link
-              href="/blog/how-to-write-a-career-change-resume"
-              className="group block"
-            >
-              <p className="font-sora font-semibold text-[#070719] group-hover:text-[#3792E8] transition-colors duration-200">
-                How to Write a Resume When Switching Careers →
-              </p>
-            </Link>
-            <Link
-              href="/blog/cover-letter-career-change"
-              className="group block"
-            >
-              <p className="font-sora font-semibold text-[#070719] group-hover:text-[#3792E8] transition-colors duration-200">
-                How to Write a Cover Letter When Switching Careers →
-              </p>
-            </Link>
-          </div>
-        </div>
-      </article>
-    </div>
+    </ArticleLayout>
   );
 }

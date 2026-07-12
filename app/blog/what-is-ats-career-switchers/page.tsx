@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import BlogCTA from "@/app/blog/BlogCTA";
+import ArticleLayout from "@/app/blog/ArticleLayout";
 
 export const metadata: Metadata = {
   title: "What Is ATS and Why Career Switchers Fail It | CareerSwitchKit",
@@ -20,39 +19,23 @@ export const metadata: Metadata = {
 
 export default function Post() {
   return (
-    <div className="bg-white min-h-screen">
-      {/* Hero */}
-      <div className="bg-[#070719] pt-28 pb-16">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-1.5 text-xs mb-8 transition-colors"
-            style={{ color: "rgba(255,255,255,0.35)" }}
-          >
-            ← All resources
-          </Link>
-          <div className="flex items-center gap-3 mb-5">
-            <span className="text-xs" style={{ color: "rgba(255,255,255,0.28)" }}>June 2026</span>
-            <span style={{ color: "rgba(255,255,255,0.12)" }}>·</span>
-            <span className="text-xs" style={{ color: "rgba(255,255,255,0.28)" }}>5 min read</span>
-          </div>
-          <h1 className="font-sora font-black text-3xl md:text-4xl text-white tracking-tight leading-tight">
-            What Is ATS and Why Career Switchers Fail It (And How to Pass)
-          </h1>
-          <p
-            className="mt-4 text-lg leading-relaxed"
-            style={{ color: "rgba(255,255,255,0.48)" }}
-          >
-            Most career switchers get filtered out by Applicant Tracking Systems
-            before a human reads their resume. Here&apos;s what ATS actually is and
-            the specific steps to pass it.
-          </p>
-        </div>
-      </div>
-
-      {/* Article */}
-      <article className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="prose prose-gray max-w-none" style={{ fontSize: "17px", lineHeight: "1.75" }}>
+    <ArticleLayout
+      title="What Is ATS and Why Career Switchers Fail It (And How to Pass)"
+      date="June 2026"
+      readTime="5 min read"
+      subhead={
+        <>
+          Most career switchers get filtered out by Applicant Tracking Systems
+          before a human reads their resume. Here&apos;s what ATS actually is and
+          the specific steps to pass it.
+        </>
+      }
+      ctaHeading="Stage 3 is built specifically to clear ATS."
+      ctaBody="50 AI prompts for keyword extraction and rewriting (PDF), plus an interactive ATS Checker you reuse for every application. $37, instant download."
+      related={[
+        { href: "/blog/how-to-write-a-career-change-resume", label: "How to Write a Resume When Switching Careers →" },
+      ]}
+    >
 
           <p style={{ color: "#374151" }}>
             If you&apos;ve applied for jobs in the last decade and heard nothing back,
@@ -235,28 +218,6 @@ export default function Post() {
             higher — but 65 is a reasonable floor, and 80+ means you&apos;re
             competitive.
           </p>
-        </div>
-
-        <BlogCTA
-          heading="Stage 3 is built specifically to clear ATS."
-          body="50 AI prompts for keyword extraction and rewriting (PDF), plus an interactive ATS Checker you reuse for every application. $37, instant download."
-        />
-
-        {/* Related */}
-        <div className="mt-12 pt-10" style={{ borderTop: "1px solid #E5E7EB" }}>
-          <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-5">
-            Related
-          </p>
-          <Link
-            href="/blog/how-to-write-a-career-change-resume"
-            className="group block"
-          >
-            <p className="font-sora font-semibold text-[#070719] group-hover:text-[#3792E8] transition-colors duration-200">
-              How to Write a Resume When Switching Careers →
-            </p>
-          </Link>
-        </div>
-      </article>
-    </div>
+    </ArticleLayout>
   );
 }

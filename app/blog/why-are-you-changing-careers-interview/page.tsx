@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import BlogCTA from "@/app/blog/BlogCTA";
+import ArticleLayout from "@/app/blog/ArticleLayout";
 
 export const metadata: Metadata = {
   title: "How to Answer 'Why Are You Changing Careers?' in a Job Interview | CareerSwitchKit",
@@ -20,39 +19,24 @@ export const metadata: Metadata = {
 
 export default function Post() {
   return (
-    <div className="bg-white min-h-screen">
-      {/* Hero */}
-      <div className="bg-[#070719] pt-28 pb-16">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-1.5 text-xs mb-8 transition-colors"
-            style={{ color: "rgba(255,255,255,0.35)" }}
-          >
-            ← All resources
-          </Link>
-          <div className="flex items-center gap-3 mb-5">
-            <span className="text-xs" style={{ color: "rgba(255,255,255,0.28)" }}>June 2026</span>
-            <span style={{ color: "rgba(255,255,255,0.12)" }}>·</span>
-            <span className="text-xs" style={{ color: "rgba(255,255,255,0.28)" }}>7 min read</span>
-          </div>
-          <h1 className="font-sora font-black text-3xl md:text-4xl text-white tracking-tight leading-tight">
-            How to Answer &ldquo;Why Are You Changing Careers?&rdquo; in a Job Interview
-          </h1>
-          <p
-            className="mt-4 text-lg leading-relaxed"
-            style={{ color: "rgba(255,255,255,0.48)" }}
-          >
-            Every career switcher gets asked this question. Most give answers
-            that are technically honest but strategically wrong. Here&apos;s what to
-            say instead.
-          </p>
-        </div>
-      </div>
-
-      {/* Article */}
-      <article className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="prose prose-gray max-w-none" style={{ fontSize: "17px", lineHeight: "1.75" }}>
+    <ArticleLayout
+      title={"How to Answer “Why Are You Changing Careers?” in a Job Interview"}
+      date="June 2026"
+      readTime="7 min read"
+      subhead={
+        <>
+          Every career switcher gets asked this question. Most give answers
+          that are technically honest but strategically wrong. Here&apos;s what to
+          say instead.
+        </>
+      }
+      ctaHeading="The system that prepares you for this question — on paper first."
+      ctaBody="Before you get to the interview, your resume and cover letter have to make the case. Stage 2 and Stage 4 of the system give you the materials and the proof to back it up. $37, instant download."
+      related={[
+        { href: "/blog/why-career-switchers-get-rejected", label: "Why Career Switchers Keep Getting Rejected Before the Interview →" },
+        { href: "/blog/transferable-skills-career-change", label: "How to Identify Your Transferable Skills for a Career Change →" },
+      ]}
+    >
 
           <p style={{ color: "#374151" }}>
             &ldquo;So, walk me through why you&apos;re making this switch.&rdquo; For career
@@ -264,38 +248,6 @@ export default function Post() {
             it as a liability you&apos;re hoping to get past, that&apos;s how they&apos;ll see
             it too.
           </p>
-        </div>
-
-        <BlogCTA
-          heading="The system that prepares you for this question — on paper first."
-          body="Before you get to the interview, your resume and cover letter have to make the case. Stage 2 and Stage 4 of the system give you the materials and the proof to back it up. $37, instant download."
-        />
-
-        {/* Related */}
-        <div className="mt-12 pt-10" style={{ borderTop: "1px solid #E5E7EB" }}>
-          <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-5">
-            Related
-          </p>
-          <div className="space-y-4">
-            <Link
-              href="/blog/why-career-switchers-get-rejected"
-              className="group block"
-            >
-              <p className="font-sora font-semibold text-[#070719] group-hover:text-[#3792E8] transition-colors duration-200">
-                Why Career Switchers Keep Getting Rejected Before the Interview →
-              </p>
-            </Link>
-            <Link
-              href="/blog/transferable-skills-career-change"
-              className="group block"
-            >
-              <p className="font-sora font-semibold text-[#070719] group-hover:text-[#3792E8] transition-colors duration-200">
-                How to Identify Your Transferable Skills for a Career Change →
-              </p>
-            </Link>
-          </div>
-        </div>
-      </article>
-    </div>
+    </ArticleLayout>
   );
 }
