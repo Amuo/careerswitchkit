@@ -531,6 +531,119 @@ html.js-reveal .fade-up.visible {
   .nav-reveal { animation: none; }
 }
 
+/* ── Navbar interactions (CSS, was framer-motion) ──────────────────────────
+   These replace the motion/react hover/tap/entrance animations the navbar used
+   to run, so the whole library drops out of the landing/preview/blog bundles.
+   Deliberately NOT gated behind prefers-reduced-motion: the sheet + its rows
+   START at opacity:0 and fade in, so disabling the animation would freeze them
+   invisible — the same reason MotionConfig used reducedMotion="never". The fades
+   are gentle and always complete. */
+
+/* Logo — subtle lift on hover */
+.nav-logo {
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nav-logo:hover {
+  transform: scale(1.025);
+}
+
+/* Desktop nav link — pill fades in behind the label on hover */
+.nav-link {
+  color: rgba(255, 255, 255, 0.62);
+  transition: color 0.15s ease;
+}
+.nav-link:hover {
+  color: rgba(255, 255, 255, 0.92);
+}
+.nav-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background: rgba(255, 255, 255, 0.065);
+  opacity: 0;
+  transition: opacity 0.14s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nav-link:hover::before {
+  opacity: 1;
+}
+
+/* Desktop CTA — glow deepens on hover, presses in on tap, arrow nudges right */
+.nav-cta {
+  box-shadow: 0 0 18px rgba(55, 146, 232, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s ease;
+}
+.nav-cta:hover {
+  box-shadow: 0 0 28px rgba(55, 146, 232, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+.nav-cta:active {
+  transform: scale(0.96);
+}
+.nav-cta-arrow {
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nav-cta:hover .nav-cta-arrow {
+  transform: translateX(3px);
+}
+
+/* Mobile CTA — press-in on tap */
+.nav-cta-mobile {
+  transition: transform 0.18s ease;
+}
+.nav-cta-mobile:active {
+  transform: scale(0.97);
+}
+
+/* Mobile hamburger — background tints on hover; icon spins in when it swaps */
+.nav-burger {
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.nav-burger:hover {
+  background: rgba(255, 255, 255, 0.07);
+}
+.nav-burger-icon {
+  display: flex;
+  animation: navBurgerIcon 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes navBurgerIcon {
+  from { opacity: 0; transform: rotate(-30deg) scale(0.7); }
+  to   { opacity: 1; transform: rotate(0) scale(1); }
+}
+
+/* Mobile scrim — always mounted, fades in/out via the .is-open flag */
+.nav-scrim {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nav-scrim.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Mobile sheet — the panel drops in, then its rows stagger in beneath it */
+.nav-sheet {
+  animation: navSheetIn 0.22s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes navSheetIn {
+  from { opacity: 0; transform: translateY(-8px) scale(0.98); }
+  to   { opacity: 1; transform: none; }
+}
+.nav-sheet-item {
+  opacity: 0;
+  animation: navSheetItemIn 0.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.nav-sheet-item:nth-child(1) { animation-delay: 0.05s; }
+.nav-sheet-item:nth-child(2) { animation-delay: 0.105s; }
+.nav-sheet-item:nth-child(3) { animation-delay: 0.16s; }
+.nav-sheet-item:nth-child(4) { animation-delay: 0.215s; }
+.nav-sheet-item:nth-child(5) { animation-delay: 0.27s; }
+@keyframes navSheetItemIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to   { opacity: 1; transform: none; }
+}
+
 /* Traffic lights */
 .traffic-light {
   width: 12px;

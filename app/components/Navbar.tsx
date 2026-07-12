@@ -5,36 +5,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { IconMenu2, IconX } from "@tabler/icons-react";
 import { handleCheckout } from "@/lib/checkout";
-import { motion, AnimatePresence } from "motion/react";
-
-const EASE = [0.22, 1, 0.36, 1] as const;
-
-const menuVariants = {
-  hidden: { opacity: 0, y: -8, scale: 0.98 },
-  visible: {
-    opacity: 1, y: 0, scale: 1,
-    transition: { duration: 0.22, ease: EASE, staggerChildren: 0.055, delayChildren: 0.05 },
-  },
-  exit: {
-    opacity: 0, y: -6, scale: 0.98,
-    transition: { duration: 0.16, ease: [0.4, 0, 1, 1] as [number, number, number, number] },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: -5 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.2, ease: EASE } },
-};
-
-const arrowVariants = {
-  rest: { x: 0 },
-  hover: { x: 3 },
-};
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const isHome = pathname === "/";
@@ -75,22 +49,14 @@ export default function Navbar() {
       <div ref={sentinelRef} className="absolute top-1 pointer-events-none" aria-hidden="true" />
 
       <div className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-4">
-        {/* Mobile menu scrim — dims the page and closes the sheet on tap */}
-        <AnimatePresence>
-          {menuOpen && (
-            <motion.div
-              key="scrim"
-              onClick={() => setMenuOpen(false)}
-              className="md:hidden fixed inset-0"
-              style={{ background: "rgba(3,3,12,0.55)", zIndex: 0 }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2, ease: EASE }}
-              aria-hidden="true"
-            />
-          )}
-        </AnimatePresence>
+        {/* Mobile menu scrim — dims the page and closes the sheet on tap. Always
+            mounted; the `is-open` flag fades it in and turns on pointer events. */}
+        <div
+          onClick={() => setMenuOpen(false)}
+          className={`nav-scrim md:hidden fixed inset-0${menuOpen ? " is-open" : ""}`}
+          style={{ background: "rgba(3,3,12,0.55)", zIndex: 0 }}
+          aria-hidden="true"
+        />
 
         <nav
           aria-label="Main navigation"
@@ -116,11 +82,7 @@ export default function Navbar() {
             }}
           >
             {/* ── Logo ── */}
-            <motion.div
-              whileHover={{ scale: 1.025 }}
-              transition={{ duration: 0.2, ease: EASE }}
-              className="shrink-0"
-            >
+            <div className="nav-logo shrink-0">
               <Link
                 href="/"
                 onClick={(e) => {
@@ -142,7 +104,7 @@ export default function Navbar() {
                   </div>
                 </div>
               </Link>
-            </motion.div>
+            </div>
 
             {/* ── Center (nav links + trust) ── */}
             <div className="hidden md:flex items-center justify-center gap-1">
@@ -151,28 +113,8 @@ export default function Navbar() {
                   key={link.href}
                   href={link.route || isHome ? link.href : link.pageHref}
                   onClick={!link.route && isHome ? (e) => { e.preventDefault(); scrollTo(link.href.slice(1)); } : undefined}
-                  onMouseEnter={() => setHoveredLink(link.href)}
-                  onMouseLeave={() => setHoveredLink(null)}
-                  className="relative px-3 py-1.5 text-xs font-medium tracking-wide rounded-xl cursor-pointer select-none outline-none focus-visible:ring-2 focus-visible:ring-[#3792E8]/70"
-                  style={{
-                    color: hoveredLink === link.href ? "rgba(255,255,255,0.92)" : "rgba(255,255,255,0.62)",
-                    transition: "color 0.15s ease",
-                  }}
+                  className="nav-link relative px-3 py-1.5 text-xs font-medium tracking-wide rounded-xl cursor-pointer select-none outline-none focus-visible:ring-2 focus-visible:ring-[#3792E8]/70"
                 >
-                  <AnimatePresence>
-                    {hoveredLink === link.href && (
-                      <motion.span
-                        key="hover-bg"
-                        layoutId="nav-link-hover"
-                        className="absolute inset-0 rounded-xl"
-                        style={{ background: "rgba(255,255,255,0.065)" }}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.14, ease: EASE }}
-                      />
-                    )}
-                  </AnimatePresence>
                   <span className="relative z-10">{link.label}</span>
                 </a>
               ))}
@@ -183,150 +125,110 @@ export default function Navbar() {
                 when the center column is hidden (display:none drops it from the grid). */}
             <div className="flex items-center justify-end gap-2" style={{ gridColumnStart: 3 }}>
               {/* Desktop CTA */}
-              <motion.button
+              <button
                 onClick={handleCheckout}
-                className="hidden md:flex relative items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-full text-white overflow-hidden shrink-0 outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8ec5ff]"
-                style={{
-                  background: "linear-gradient(135deg, #4aa3f5 0%, #2878d0 100%)",
-                  boxShadow: "0 0 18px rgba(55,146,232,0.45), inset 0 1px 0 rgba(255,255,255,0.22)",
-                }}
-                initial="rest"
-                whileHover="hover"
-                whileTap={{ scale: 0.96 }}
-                onMouseEnter={e => { e.currentTarget.style.boxShadow = "0 0 28px rgba(55,146,232,0.7), inset 0 1px 0 rgba(255,255,255,0.28)"; }}
-                onMouseLeave={e => { e.currentTarget.style.boxShadow = "0 0 18px rgba(55,146,232,0.45), inset 0 1px 0 rgba(255,255,255,0.22)"; }}
-                transition={{ duration: 0.2, ease: EASE }}
+                className="nav-cta hidden md:flex relative items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-full text-white overflow-hidden shrink-0 outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8ec5ff]"
+                style={{ background: "linear-gradient(135deg, #4aa3f5 0%, #2878d0 100%)" }}
               >
                 <span className="nav-cta-shimmer" aria-hidden="true" />
                 Claim Access — $37
-                <motion.span variants={arrowVariants} transition={{ duration: 0.2, ease: EASE }} className="material-symbols-outlined" style={{ fontSize: 13 }}>
+                <span className="nav-cta-arrow material-symbols-outlined" style={{ fontSize: 13 }}>
                   arrow_forward
-                </motion.span>
-              </motion.button>
+                </span>
+              </button>
 
               {/* Mobile hamburger */}
               <button
-              className="md:hidden flex items-center justify-center w-8 h-8 rounded-xl transition-colors duration-150 outline-none focus-visible:ring-2 focus-visible:ring-[#3792E8]/70"
-              style={{ color: "rgba(255,255,255,0.6)" }}
-              onClick={() => setMenuOpen(!menuOpen)}
-              aria-expanded={menuOpen}
-              aria-label={menuOpen ? "Close menu" : "Open menu"}
-              onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.07)")}
-              onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
-            >
-              <AnimatePresence mode="wait" initial={false}>
+                className="nav-burger md:hidden flex items-center justify-center w-8 h-8 rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-[#3792E8]/70"
+                style={{ color: "rgba(255,255,255,0.6)" }}
+                onClick={() => setMenuOpen(!menuOpen)}
+                aria-expanded={menuOpen}
+                aria-label={menuOpen ? "Close menu" : "Open menu"}
+              >
                 {menuOpen ? (
-                  <motion.span
-                    key="x"
-                    initial={{ opacity: 0, rotate: -45, scale: 0.7 }}
-                    animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                    exit={{ opacity: 0, rotate: 45, scale: 0.7 }}
-                    transition={{ duration: 0.18, ease: EASE }}
-                    style={{ display: "flex" }}
-                  >
+                  <span key="x" className="nav-burger-icon">
                     <IconX size={16} strokeWidth={2} />
-                  </motion.span>
+                  </span>
                 ) : (
-                  <motion.span
-                    key="menu"
-                    initial={{ opacity: 0, rotate: 45, scale: 0.7 }}
-                    animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                    exit={{ opacity: 0, rotate: -45, scale: 0.7 }}
-                    transition={{ duration: 0.18, ease: EASE }}
-                    style={{ display: "flex" }}
-                  >
+                  <span key="menu" className="nav-burger-icon">
                     <IconMenu2 size={16} strokeWidth={2} />
-                  </motion.span>
+                  </span>
                 )}
-              </AnimatePresence>
-            </button>
+              </button>
             </div>{/* end right column */}
           </div>
 
           {/* ── Mobile menu (premium sheet) ── */}
-          <AnimatePresence>
-            {menuOpen && (
-              <motion.div
-                variants={menuVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                className="md:hidden mt-2"
-                style={{
-                  borderRadius: 22,
-                  overflow: "hidden",
-                  background: "rgba(9,9,26,0.98)",
-                  border: "1px solid rgba(255,255,255,0.09)",
-                  backdropFilter: "blur(28px)",
-                  WebkitBackdropFilter: "blur(28px)",
-                  boxShadow: "0 24px 64px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.07)",
-                }}
-              >
-                <div className="p-2.5">
-                  {/* Section links — tappable rows */}
-                  {navLinks.map((link, i) => (
-                    <motion.a
-                      key={link.href}
-                      variants={itemVariants}
-                      href={link.route || isHome ? link.href : link.pageHref}
-                      onClick={(e) => {
-                        setMenuOpen(false);
-                        if (!link.route && isHome) { e.preventDefault(); scrollTo(link.href.slice(1)); }
-                      }}
-                      className="group flex items-center justify-between py-3.5 px-3.5 rounded-2xl cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#3792E8]/70"
-                      style={{
-                        color: "rgba(255,255,255,0.72)",
-                        borderBottom: i < navLinks.length - 1 ? "1px solid rgba(255,255,255,0.05)" : "none",
-                        transition: "color 0.15s ease",
-                      }}
-                      onMouseEnter={e => (e.currentTarget.style.color = "#fff")}
-                      onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.72)")}
-                    >
-                      <span className="text-[15px] font-medium tracking-tight">{link.label}</span>
-                      <span
-                        className="material-symbols-outlined transition-transform duration-200 group-hover:translate-x-0.5"
-                        style={{ fontSize: 18, color: "rgba(255,255,255,0.28)" }}
-                      >
-                        chevron_right
-                      </span>
-                    </motion.a>
-                  ))}
-
-                  {/* Primary action + reassurance right beneath it */}
-                  <motion.div
-                    variants={itemVariants}
-                    className="mt-2.5 pt-3"
-                    style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}
+          {menuOpen && (
+            <div
+              className="nav-sheet md:hidden mt-2"
+              style={{
+                borderRadius: 22,
+                overflow: "hidden",
+                background: "rgba(9,9,26,0.98)",
+                border: "1px solid rgba(255,255,255,0.09)",
+                backdropFilter: "blur(28px)",
+                WebkitBackdropFilter: "blur(28px)",
+                boxShadow: "0 24px 64px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.07)",
+              }}
+            >
+              <div className="p-2.5">
+                {/* Section links — tappable rows */}
+                {navLinks.map((link, i) => (
+                  <a
+                    key={link.href}
+                    href={link.route || isHome ? link.href : link.pageHref}
+                    onClick={(e) => {
+                      setMenuOpen(false);
+                      if (!link.route && isHome) { e.preventDefault(); scrollTo(link.href.slice(1)); }
+                    }}
+                    className="nav-sheet-item group flex items-center justify-between py-3.5 px-3.5 rounded-2xl cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#3792E8]/70"
+                    style={{
+                      color: "rgba(255,255,255,0.72)",
+                      borderBottom: i < navLinks.length - 1 ? "1px solid rgba(255,255,255,0.05)" : "none",
+                      transition: "color 0.15s ease",
+                    }}
+                    onMouseEnter={e => (e.currentTarget.style.color = "#fff")}
+                    onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.72)")}
                   >
-                    <motion.button
-                      onClick={() => { setMenuOpen(false); handleCheckout(); }}
-                      whileTap={{ scale: 0.97 }}
-                      transition={{ duration: 0.18 }}
-                      className="relative w-full text-[15px] font-bold py-3.5 px-4 rounded-2xl text-white flex items-center justify-center gap-2 overflow-hidden outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8ec5ff]"
-                      style={{
-                        background: "linear-gradient(135deg, #4aa3f5 0%, #2878d0 100%)",
-                        boxShadow: "0 0 24px rgba(55,146,232,0.45), inset 0 1px 0 rgba(255,255,255,0.2)",
-                      }}
+                    <span className="text-[15px] font-medium tracking-tight">{link.label}</span>
+                    <span
+                      className="material-symbols-outlined transition-transform duration-200 group-hover:translate-x-0.5"
+                      style={{ fontSize: 18, color: "rgba(255,255,255,0.28)" }}
                     >
-                      <span className="nav-cta-shimmer" aria-hidden="true" />
-                      Claim Access — $37
-                      <span className="material-symbols-outlined" style={{ fontSize: 16 }}>arrow_forward</span>
-                    </motion.button>
+                      chevron_right
+                    </span>
+                  </a>
+                ))}
 
-                    <div className="flex items-center justify-center gap-2 mt-3">
-                      <span
-                        className="w-1.5 h-1.5 rounded-full shrink-0"
-                        style={{ background: "#34d399", boxShadow: "0 0 5px rgba(52,211,153,0.95)", animation: "pulse 2.5s ease-in-out infinite" }}
-                      />
-                      <span className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>
-                        Instant download · 7-day guarantee
-                      </span>
-                    </div>
-                  </motion.div>
+                {/* Primary action + reassurance right beneath it */}
+                <div className="nav-sheet-item mt-2.5 pt-3" style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}>
+                  <button
+                    onClick={() => { setMenuOpen(false); handleCheckout(); }}
+                    className="nav-cta-mobile relative w-full text-[15px] font-bold py-3.5 px-4 rounded-2xl text-white flex items-center justify-center gap-2 overflow-hidden outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8ec5ff]"
+                    style={{
+                      background: "linear-gradient(135deg, #4aa3f5 0%, #2878d0 100%)",
+                      boxShadow: "0 0 24px rgba(55,146,232,0.45), inset 0 1px 0 rgba(255,255,255,0.2)",
+                    }}
+                  >
+                    <span className="nav-cta-shimmer" aria-hidden="true" />
+                    Claim Access — $37
+                    <span className="material-symbols-outlined" style={{ fontSize: 16 }}>arrow_forward</span>
+                  </button>
+
+                  <div className="flex items-center justify-center gap-2 mt-3">
+                    <span
+                      className="w-1.5 h-1.5 rounded-full shrink-0"
+                      style={{ background: "#34d399", boxShadow: "0 0 5px rgba(52,211,153,0.95)", animation: "pulse 2.5s ease-in-out infinite" }}
+                    />
+                    <span className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>
+                      Instant download · 7-day guarantee
+                    </span>
+                  </div>
                 </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+              </div>
+            </div>
+          )}
         </nav>
       </div>
     </>

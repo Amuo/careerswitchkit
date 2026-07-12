@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
+import MotionProvider from "@/app/components/MotionProvider";
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
 import FadeUpObserver from "@/app/components/FadeUpObserver";
@@ -88,7 +89,7 @@ export default function ThankYouPage() {
   }, []);
 
   return (
-    <>
+    <MotionProvider>
       <FadeUpObserver />
 
       {/* Reuse the page noise filter */}
@@ -550,6 +551,6 @@ export default function ThankYouPage() {
 
         <Footer />
       </div>
-    </>
+    </MotionProvider>
   );
 }

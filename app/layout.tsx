@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Sora, DM_Sans, Geist } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import Script from "next/script";
-import MotionProvider from "@/app/components/MotionProvider";
 import ClarityAnalytics from "@/app/components/ClarityAnalytics";
 import LandingBackground from "@/app/components/LandingBackground";
 import SmoothScroll from "@/app/components/SmoothScroll";
@@ -103,9 +102,9 @@ export default function RootLayout({
       >
         <LandingBackground />
         <SmoothScroll />
-        <div className="stitch-anim-fade-in">
-          <MotionProvider>{children}</MotionProvider>
-        </div>
+        {/* framer-motion now lives only on /thank-you (see MotionProvider there),
+            so the landing/preview/blog bundles no longer ship the library. */}
+        <div className="stitch-anim-fade-in">{children}</div>
         <GoogleAnalytics gaId={gaId} />
 
         {/* Microsoft Clarity — via @microsoft/clarity. Set NEXT_PUBLIC_CLARITY_PROJECT_ID (from clarity.microsoft.com) */}
