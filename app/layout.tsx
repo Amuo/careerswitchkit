@@ -77,7 +77,15 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block" />
+        {/*
+          Material Symbols, subsetted to only the icons the site actually renders
+          via &icon_names= — this drops the font from ~3.9 MB to ~49 KB (the full
+          set ships every glyph across 4 axes). display=block keeps icon ligatures
+          from flashing as text while it loads; now that it's tiny that's instant.
+          IMPORTANT: if you use a NEW Material Symbols icon anywhere, add its name
+          to this list (alphabetical) or it will silently not render.
+        */}
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=all_inclusive,arrow_back,arrow_downward,arrow_forward,arrow_outward,auto_awesome,badge,bolt,broken_image,cancel,check,check_circle,checklist,chevron_right,compare_arrows,concierge,content_copy,dangerous,description,edit_note,expand_more,fact_check,filter_alt,flag,folder_open,hub,inbox,insights,lightbulb,mail,map,menu_book,play_arrow,query_stats,rocket_launch,search,send,timer_off,translate,trending_up,tune,verified,verified_user,warning,workspace_premium&display=block" />
         {/*
           Progressive-reveal flag. Scroll-in sections (.fade-up) render hidden and
           are faded in by JS. This runs synchronously before first paint and only

@@ -10,6 +10,7 @@
 // If JS is off the video just loops natively as before.
 
 import { useEffect, useRef } from "react";
+import { runWhenIdle } from "@/lib/runWhenIdle";
 
 // Self-hosted, re-encoded 2026-07-11: was a 15.8 MB external clip; now a 2.69 MB
 // same-origin file (H.264 CRF 28, audio stripped, +faststart). ~6x smaller and no
@@ -28,31 +29,6 @@ export default function LandingBackground() {
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
-
-    // Lazy-load the video: only start fetching the (multi-MB) clip once the
-    // browser is idle, so it doesn't steal bandwidth from the hero text/fonts
-    // during the initial load. This is what lets LCP happen sooner.
-    const startVideo = () => {
-      if (v.src) return;
-      // Spare data-constrained visitors the ~16 MB clip: honour Save-Data and skip
-      // on 2G / slow-2G. Everyone on a normal connection still gets the video; when
-      // skipped, the matching black background + scrim shows instead (no empty state).
-      const conn = (navigator as Navigator & {
-        connection?: { saveData?: boolean; effectiveType?: string };
-      }).connection;
-      if (conn && (conn.saveData || /(^|-)2g$/.test(conn.effectiveType || ""))) return;
-      v.src = SRC;
-      v.load();
-      v.play().catch(() => {}); // muted autoplay is allowed; ignore if blocked
-    };
-    const w = window as typeof window & {
-      requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
-      cancelIdleCallback?: (id: number) => void;
-    };
-    let idleId = 0;
-    let timeoutId = 0;
-    if (w.requestIdleCallback) idleId = w.requestIdleCallback(startVideo, { timeout: 2500 });
-    else timeoutId = window.setTimeout(startVideo, 1200);
 
     let raf = 0;
     let hasLooped = false; // don't fade in on the very first play, only after a loop
@@ -77,11 +53,31 @@ export default function LandingBackground() {
       raf = requestAnimationFrame(tick);
     };
 
-    raf = requestAnimationFrame(tick);
+    // Lazy-load the video: only start fetching the (multi-MB) clip once the
+    // browser is idle, so it doesn't steal bandwidth from the hero text/fonts
+    // during the initial load. This is what lets LCP happen sooner.
+    const startVideo = () => {
+      if (v.src) return;
+      // Spare data-constrained visitors the clip: honour Save-Data and skip on
+      // 2G / slow-2G. Everyone on a normal connection still gets the video; when
+      // skipped, the matching black background + scrim shows instead (no empty state).
+      const conn = (navigator as Navigator & {
+        connection?: { saveData?: boolean; effectiveType?: string };
+      }).connection;
+      if (conn && (conn.saveData || /(^|-)2g$/.test(conn.effectiveType || ""))) return;
+      v.src = SRC;
+      v.load();
+      v.play().catch(() => {}); // muted autoplay is allowed; ignore if blocked
+      // Only run the fade loop once a video is actually playing — otherwise it
+      // would spin every frame for the whole session (forever on Save-Data / 2G,
+      // where we return above and no video ever loads).
+      raf = requestAnimationFrame(tick);
+    };
+
+    const cancelIdle = runWhenIdle(startVideo, { idleTimeout: 2500, fallbackDelay: 1200 });
     return () => {
       cancelAnimationFrame(raf);
-      if (idleId && w.cancelIdleCallback) w.cancelIdleCallback(idleId);
-      if (timeoutId) window.clearTimeout(timeoutId);
+      cancelIdle();
     };
   }, []);
 
