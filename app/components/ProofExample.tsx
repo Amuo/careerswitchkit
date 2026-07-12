@@ -127,12 +127,8 @@ export default function ProofExample() {
   const rootRef = useRef<HTMLElement>(null);
   const done = useRef(false);
   const [started, setStarted] = useState(false);
-  const [bChars, setBChars] = useState(0);
-  const [aChars, setAChars] = useState(0);
-  const [bScore, setBScore] = useState(0);
-  const [aScore, setAScore] = useState(0);
-  const [matched, setMatched] = useState(0);
-  const [aActive, setAActive] = useState(false);
+  // One clock drives the whole timeline; every value below is derived from it.
+  const [elapsed, setElapsed] = useState(0);
 
   useEffect(() => {
     const el = rootRef.current;
@@ -146,21 +142,11 @@ export default function ProofExample() {
           const start = performance.now();
           const loop = (now: number) => {
             const t = (now - start) / 1000;
-            setBChars(Math.round(BEFORE_TOTAL * clamp01((t - 0.2) / 1.2)));
-            setBScore(Math.round(BEFORE_SCORE * clamp01((t - 1.4) / 0.6)));
-            if (t >= 2.2) setAActive(true);
-            setAChars(Math.round(AFTER_TOTAL * clamp01((t - 2.2) / 1.4)));
-            const sp = clamp01((t - 3.6) / 0.8);
-            setAScore(Math.round(AFTER_SCORE * sp));
-            setMatched(Math.round(4 * sp));
             if (t < 4.6) {
+              setElapsed(t);
               raf = requestAnimationFrame(loop);
             } else {
-              setBChars(BEFORE_TOTAL);
-              setAChars(AFTER_TOTAL);
-              setBScore(BEFORE_SCORE);
-              setAScore(AFTER_SCORE);
-              setMatched(4);
+              setElapsed(4.6); // saturates every derived value to its final state
             }
           };
           raf = requestAnimationFrame(loop);
@@ -175,6 +161,16 @@ export default function ProofExample() {
       cancelAnimationFrame(raf);
     };
   }, []);
+
+  // Derived from the single `elapsed` clock — same formulas that used to live
+  // inside the rAF loop, now computed at render time.
+  const bChars = Math.round(BEFORE_TOTAL * clamp01((elapsed - 0.2) / 1.2));
+  const bScore = Math.round(BEFORE_SCORE * clamp01((elapsed - 1.4) / 0.6));
+  const aActive = elapsed >= 2.2;
+  const aChars = Math.round(AFTER_TOTAL * clamp01((elapsed - 2.2) / 1.4));
+  const aSp = clamp01((elapsed - 3.6) / 0.8);
+  const aScore = Math.round(AFTER_SCORE * aSp);
+  const matched = Math.round(4 * aSp);
 
   return (
     <section ref={rootRef} id="example" className="max-w-6xl mx-auto px-6 mb-40 fade-up visible">
