@@ -377,9 +377,9 @@ function checkResume(resume: string, jd: string): Result {
 }
 
 function getColors(score: number) {
-  if (score >= 75) return { main: "#22C55E", label: "Likely to Pass ATS" };
-  if (score >= 55) return { main: "#EAB308", label: "Needs Improvement" };
-  return { main: "#EF4444", label: "High Rejection Risk" };
+  if (score >= 75) return { main: "#22C55E", label: "Likely to Pass ATS", blurb: "This résumé has a strong chance of clearing automated filters and reaching a human recruiter." };
+  if (score >= 55) return { main: "#EAB308", label: "Needs Improvement", blurb: "Several issues may cause ATS rejection. Fix the flagged items below before submitting." };
+  return { main: "#EF4444", label: "High Rejection Risk", blurb: "This résumé is likely to be filtered out before any human sees it. Address the critical issues below." };
 }
 
 function wordCountOf(text: string) {
@@ -553,11 +553,7 @@ export default function AtsCheckerDemo() {
             <div className="flex-1 text-center sm:text-left">
               <div className="font-geist font-black text-xl md:text-2xl" style={{ color: colors.main }}>{colors.label}</div>
               <p className="text-sm mt-2 leading-relaxed" style={{ color: "#c0c7d3" }}>
-                {result.score >= 75
-                  ? "This résumé has a strong chance of clearing automated filters and reaching a human recruiter."
-                  : result.score >= 55
-                  ? "Several issues may cause ATS rejection. Fix the flagged items below before submitting."
-                  : "This résumé is likely to be filtered out before any human sees it. Address the critical issues below."}
+                {colors.blurb}
               </p>
               <div className="flex items-center justify-center sm:justify-start gap-6 mt-4">
                 {[

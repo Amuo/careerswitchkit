@@ -5,13 +5,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --accent: #3792E8;
-  --accent-hover: #6EB0EE;
-  --dark-base: #070719;
-  --dark-secondary: #10102D;
-}
-
 @layer base {
   body {
     @apply antialiased;

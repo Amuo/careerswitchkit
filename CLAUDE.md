@@ -127,10 +127,10 @@ full mirror of the code.
   and a `globals.css` rule (`h1,h2,h3,h4,.font-geist { font-family: var(--font-geist), 'Geist', sans-serif }`).
   Material Symbols is still the one remaining Google-Fonts `<link>` in the head.
 - **Colors have no single source of truth.** They live in `tailwind.config.js`
-  (plus many leftover "Stitch"/Material tokens you can ignore), in `globals.css`
-  `:root` vars (`--accent`), AND hardcoded as raw hex in inline `style=` props
-  throughout (the inline styles do NOT use the CSS vars). Changing a brand color
-  can mean touching all three.
+  (plus many leftover "Stitch"/Material tokens you can ignore) AND hardcoded as
+  raw hex in inline `style=` props throughout. Changing a brand color can mean
+  touching both. (The dead `globals.css` `:root` vars — `--accent` etc., which
+  nothing read — were removed 2026-07-12.)
 - **Tracking is env-driven with baked-in live defaults** (`layout.tsx`). Each ID
   reads `process.env.NEXT_PUBLIC_*` and falls back to a real default, so all three
   work on deploy with no Vercel config: GA4 `G-VZTZ8KD05Z`, Microsoft Clarity

@@ -11,7 +11,8 @@ import ScoreGauge from "./ScoreGauge";
    ──────────────────────────────────────────────────────────────────────── */
 
 interface Stage {
-  phase: string;
+  stageNo: string;
+  phaseLabel: string;
   title: string;
   titleAccent: string;
   time: string;
@@ -24,7 +25,8 @@ interface Stage {
 
 const STAGES: Stage[] = [
   {
-    phase: "Stage 01 · Prepare",
+    stageNo: "Stage 01",
+    phaseLabel: "Prepare",
     title: "Map your",
     titleAccent: "transfer.",
     time: "≈ 45 min",
@@ -40,7 +42,8 @@ const STAGES: Stage[] = [
     visual: "keywords",
   },
   {
-    phase: "Stage 02 · Build",
+    stageNo: "Stage 02",
+    phaseLabel: "Build",
     title: "Build your",
     titleAccent: "materials.",
     time: "≈ 2 hours",
@@ -56,7 +59,8 @@ const STAGES: Stage[] = [
     visual: "cv",
   },
   {
-    phase: "Stage 03 · Optimize",
+    stageNo: "Stage 03",
+    phaseLabel: "Optimize",
     title: "Optimize &",
     titleAccent: "score.",
     time: "≈ 15 min",
@@ -72,7 +76,8 @@ const STAGES: Stage[] = [
     visual: "score",
   },
   {
-    phase: "Stage 04 · Apply",
+    stageNo: "Stage 04",
+    phaseLabel: "Apply",
     title: "Apply with",
     titleAccent: "proof.",
     time: "≈ 15 min",
@@ -203,7 +208,7 @@ export default function PreviewTour() {
                 {i < active ? <span className="material-symbols-outlined" style={{ fontSize: 18 }}>check</span> : i + 1}
               </span>
               <span>
-                <span className="pv-stage-phase" style={{ display: "block" }}>{s.phase.split("·")[1].trim()}</span>
+                <span className="pv-stage-phase" style={{ display: "block" }}>{s.phaseLabel}</span>
                 <span className="pv-stage-title">{s.title} {s.titleAccent}</span>
                 <span className="pv-stage-time" style={{ display: "block" }}>{s.time}</span>
               </span>
@@ -220,7 +225,7 @@ export default function PreviewTour() {
                 <div className="flex items-center gap-2 mb-3">
                   <span className="material-symbols-outlined" style={{ fontSize: 18, color: "#a0c9ff" }}>{stage.icon}</span>
                   <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#a0c9ff" }}>
-                    {stage.phase}
+                    {stage.stageNo} · {stage.phaseLabel}
                   </span>
                 </div>
                 <h3 className="font-geist font-black text-3xl leading-tight mb-4">

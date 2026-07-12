@@ -9,6 +9,7 @@ import FinalCTA from "./components/FinalCTA";
 import ProblemSection from "./components/ProblemSection";
 import ProofExample from "./components/ProofExample";
 import Typewriter from "./components/Typewriter";
+import { FAQS } from "@/lib/faqs";
 
 export const metadata: Metadata = {
   title: "Resume System for Career Switchers | CareerSwitchKit",
@@ -16,19 +17,16 @@ export const metadata: Metadata = {
     "Career switchers get filtered out before a human reads their resume. CareerSwitchKit is the 4-stage system that fixes that — $37, instant download.",
 };
 
+// Built from the same FAQS the accordion renders, so the structured data always
+// matches the visible text (a Google requirement).
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: [
-    { "@type": "Question", name: "What's in the system?", acceptedAnswer: { "@type": "Answer", text: "CareerSwitchKit is an instant download: a Start Here Guide (PDF), three CV templates (.docx), three cover letter templates (.docx), an interactive ATS Checker (standalone HTML app), an AI Prompt Pack (PDF, 50 prompts), and a completed example. No login, no subscription." } },
-    { "@type": "Question", name: "How long does it take to complete?", acceptedAnswer: { "@type": "Answer", text: "Most people finish the core sequence in a weekend. Stage 1 takes an hour or two. By the end you have a tailored resume, cover letter, and an ATS-ready checklist." } },
-    { "@type": "Question", name: "I've been applying for months and getting nothing. Will this help?", acceptedAnswer: { "@type": "Answer", text: "Probably yes — and this is exactly who the system is built for. If you're getting no responses, the most likely cause is that your resume isn't translating your background into language the new field recognises. The system is specifically designed to fix that translation gap, not to give you a prettier version of what you already have." } },
-    { "@type": "Question", name: "Is this just for tech jobs?", acceptedAnswer: { "@type": "Answer", text: "No. The system works across Healthcare, Finance, Operations, Marketing, and other fields. Your past experience is the raw material. The system shows you how to reframe it for the new field." } },
-    { "@type": "Question", name: "How is this different from a resume template I can find for free?", acceptedAnswer: { "@type": "Answer", text: "Free templates give you blank boxes. CareerSwitchKit tells you what to put in them. The AI prompts and language guides translate your past experience into terms hiring managers in your new field actually use." } },
-    { "@type": "Question", name: "Do you write it for me?", acceptedAnswer: { "@type": "Answer", text: "No — it's a system you run yourself, and that's the point. Doing the reframing yourself is what keeps it $37 instead of the $2,500+ a coach charges to do it for you. You bring your experience; the templates, prompts, and guides show you exactly how to translate it." } },
-    { "@type": "Question", name: "How do I get it after I pay?", acceptedAnswer: { "@type": "Answer", text: "The moment you check out, you get an email with your download link — usually within a minute. No account to create, no software to install. Everything is yours to keep and reuse for every application." } },
-    { "@type": "Question", name: "What if it doesn't help me land interviews?", acceptedAnswer: { "@type": "Answer", text: "If it doesn't work for your situation, email support@careerswitchkit.org within 7 days and we'll refund you." } },
-  ],
+  mainEntity: FAQS.map((faq) => ({
+    "@type": "Question",
+    name: faq.q,
+    acceptedAnswer: { "@type": "Answer", text: faq.a },
+  })),
 };
 
 const productSchema = {

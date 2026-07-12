@@ -5,6 +5,7 @@ import { motion } from "motion/react";
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
 import FadeUpObserver from "@/app/components/FadeUpObserver";
+import { firePurchase } from "@/lib/checkout";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -74,11 +75,6 @@ export default function ThankYouPage() {
     if (conversionFired.current) return;
     conversionFired.current = true;
 
-    const value = 37;
-    const w = window as unknown as {
-      gtag?: (...args: unknown[]) => void;
-      fbq?: (...args: unknown[]) => void;
-    };
     // A transaction id (if Polar passes one back in the URL) lets GA4 de-dupe
     // repeat page loads. Harmless if it's absent.
     const params = new URLSearchParams(window.location.search);
@@ -88,24 +84,7 @@ export default function ThankYouPage() {
       params.get("checkout_session_id") ||
       undefined;
 
-    if (typeof w.gtag === "function") {
-      w.gtag("event", "purchase", {
-        currency: "USD",
-        value,
-        transaction_id: transactionId,
-        items: [
-          {
-            item_id: "careerswitchkit",
-            item_name: "CareerSwitchKit",
-            price: value,
-            quantity: 1,
-          },
-        ],
-      });
-    }
-    if (typeof w.fbq === "function") {
-      w.fbq("track", "Purchase", { currency: "USD", value });
-    }
+    firePurchase(transactionId);
   }, []);
 
   return (
