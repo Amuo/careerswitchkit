@@ -84,7 +84,11 @@ site — no database, login, or backend unless I ask. (There is a blog under `/b
 
 Polar is Merchant of Record. Checkout is real and live at $37, not a placeholder.
 `lib/checkout.ts` → `handleCheckout()` fires a GA4 `begin_checkout` event, then
-redirects to the Polar URL. A `/thank-you` page exists. Don't revert checkout to a stub.
+opens Polar's checkout as a **dark on-page overlay** via the `@polar-sh/checkout`
+embed (changed 2026-07-12 — it used to redirect to buy.polar.sh; the buyer now
+stays on careerswitchkit.org). If the embed fails to load it falls back to the old
+redirect. On success Polar redirects the page to the checkout's success URL, so the
+`/thank-you` conversion still fires. Don't revert checkout to a stub or a redirect.
 
 ## How to work with me
 
@@ -112,12 +116,14 @@ full mirror of the code.
   the constant); the navbar + FinalCTA call `handleCheckout()` (also imports it).
   If the URL changes, edit only `lib/checkout.ts`. (Was hardcoded in 3 places until
   2026-07-11.)
-- **All four buy CTAs now fire the GA4 `begin_checkout` event** (fixed 2026-07-11 —
-  the hero + pricing CTAs used to skip it). Two mechanisms: `<button>` CTAs (navbar,
-  FinalCTA) call `handleCheckout()` = fire event then redirect; `<a href>` CTAs
-  (hero, pricing card) use `<CheckoutLink>` = fire event, then the native href
-  navigates. Both share `fireBeginCheckout()` in `lib/checkout.ts`. Note: GA4
-  `begin_checkout` is only accurate for traffic AFTER this fix is deployed.
+- **Every buy CTA fires `begin_checkout` and opens the same on-page overlay.** As of
+  2026-07-12 there's really **one path**: `handleCheckout()` in `lib/checkout.ts`
+  fires the GA4 event then calls `PolarEmbedCheckout.create(url, "dark")`. The
+  `<button>` CTAs (navbar, FinalCTA, BlogCTA) call it directly; the `<a href>` CTAs
+  (hero, pricing card, preview) use `<CheckoutLink>`, which keeps a real Polar `href`
+  as a no-JS/crawler fallback but on click does `preventDefault()` + `handleCheckout()`.
+  So to change checkout behaviour for the whole site, edit only `handleCheckout()`.
+  Note: GA4 `begin_checkout` is only accurate for traffic AFTER the 2026-07-11 fix.
 - **FAQ content lives in two places that must stay in sync**: the visible accordion
   (`components/FAQAccordion.tsx`, the `FAQS` array — currently 8 items) AND the
   JSON-LD `faqSchema` in `page.tsx` (for SEO). Edit both together.

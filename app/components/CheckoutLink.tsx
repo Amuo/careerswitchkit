@@ -1,11 +1,12 @@
 "use client";
 
 import type { ComponentPropsWithoutRef } from "react";
-import { POLAR_CHECKOUT_URL, fireBeginCheckout } from "@/lib/checkout";
+import { POLAR_CHECKOUT_URL, handleCheckout } from "@/lib/checkout";
 
-// A real <a href> to Polar that also fires the GA4 begin_checkout event on click.
-// Use this for buy CTAs that link out (hero, pricing card) so their checkout
-// starts are tracked — matching the <button> CTAs that call handleCheckout().
+// A buy CTA rendered as a real <a href> to Polar (so it still degrades to a normal
+// link for crawlers or if JS is off), but on click it opens the Polar checkout as
+// a dark on-page overlay and fires begin_checkout — identical behaviour to the
+// <button> CTAs. Used by the hero + pricing-card CTAs.
 export default function CheckoutLink({
   href = POLAR_CHECKOUT_URL,
   onClick,
@@ -16,7 +17,8 @@ export default function CheckoutLink({
     <a
       href={href}
       onClick={(e) => {
-        fireBeginCheckout();
+        e.preventDefault();
+        handleCheckout();
         onClick?.(e);
       }}
       {...rest}

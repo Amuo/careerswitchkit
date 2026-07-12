@@ -1,3 +1,5 @@
+import { PolarEmbedCheckout } from "@polar-sh/checkout/embed";
+
 declare function gtag(...args: unknown[]): void;
 declare function fbq(...args: unknown[]): void;
 
@@ -27,9 +29,17 @@ export function firePurchase(transactionId?: string) {
   }
 }
 
-// Fire the event, then redirect. Used by <button> CTAs (navbar, FinalCTA) that
-// have no href of their own.
-export function handleCheckout() {
+// Fires begin_checkout, then opens Polar's checkout as a dark on-page overlay
+// (no full-page redirect — the buyer never leaves careerswitchkit.org). Shared by
+// every buy CTA (the <button>s call this directly; the <a> CheckoutLinks call it
+// on click). If the embed can't load for any reason, it falls back to a normal
+// redirect so checkout never breaks. On success Polar redirects the page to the
+// checkout's success URL (/thank-you), so the purchase conversion still fires.
+export async function handleCheckout() {
   fireBeginCheckout();
-  window.location.href = POLAR_CHECKOUT_URL;
+  try {
+    await PolarEmbedCheckout.create(POLAR_CHECKOUT_URL, "dark");
+  } catch {
+    window.location.href = POLAR_CHECKOUT_URL;
+  }
 }
