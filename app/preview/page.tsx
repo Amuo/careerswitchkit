@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import PageShell from "../components/PageShell";
 import CheckoutLink from "../components/CheckoutLink";
-import FadeUpObserver from "../components/FadeUpObserver";
 import PreviewTour from "./PreviewTour";
 import AtsCheckerDemo from "./AtsCheckerDemo";
 import PromptSample from "./PromptSample";
@@ -33,19 +31,7 @@ const includes = [
 
 export default function PreviewPage() {
   return (
-    <>
-      {/* Noise texture overlay — same baked grain as the landing page */}
-      <div className="grain fixed inset-0 pointer-events-none opacity-50" style={{ zIndex: 1 }} aria-hidden="true" />
-
-      <div className="relative min-h-screen" style={{ color: "#e2e0fa", overflowX: "clip" }}>
-        <FadeUpObserver />
-
-        <div className="vertical-guide guide-left hidden lg:block" aria-hidden="true" />
-        <div className="vertical-guide guide-right hidden lg:block" aria-hidden="true" />
-
-        <Navbar />
-
-        <main className="relative pt-32" style={{ position: "relative", zIndex: 2 }}>
+    <PageShell>
           {/* ── Hero ──────────────────────────────────────────────────────── */}
           <section className="max-w-4xl mx-auto text-center px-6 mb-24 fade-up visible relative">
             <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
@@ -203,10 +189,6 @@ export default function PreviewPage() {
               </div>
             </div>
           </section>
-        </main>
-
-        <Footer />
-      </div>
-    </>
+    </PageShell>
   );
 }

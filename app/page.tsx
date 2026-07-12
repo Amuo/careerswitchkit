@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Navbar from "./components/Navbar";
+import PageShell from "./components/PageShell";
 import CheckoutLink from "./components/CheckoutLink";
-import Footer from "./components/Footer";
 import FAQAccordion from "./components/FAQAccordion";
-import FadeUpObserver from "./components/FadeUpObserver";
 import FinalCTA from "./components/FinalCTA";
 import ProblemSection from "./components/ProblemSection";
 import ProofExample from "./components/ProofExample";
@@ -53,18 +51,7 @@ export default function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
 
-      {/* Noise texture overlay — baked grain tile (see .grain in globals.css) */}
-      <div className="grain fixed inset-0 pointer-events-none opacity-50" style={{ zIndex: 1 }} aria-hidden="true" />
-
-      <div className="relative min-h-screen" style={{ color: "#e2e0fa", overflowX: "clip" }}>
-        <FadeUpObserver />
-
-        <div className="vertical-guide guide-left hidden lg:block" aria-hidden="true" />
-        <div className="vertical-guide guide-right hidden lg:block" aria-hidden="true" />
-
-        <Navbar />
-
-        <main className="relative pt-32" style={{ position: "relative", zIndex: 2 }}>
+      <PageShell>
 
           {/* ── Hero ─────────────────────────────────────────────────────── */}
           <section className="max-w-5xl mx-auto text-center px-6 mb-32 fade-up visible relative">
@@ -366,10 +353,7 @@ export default function Home() {
             </div>
           </section>
 
-        </main>
-
-        <Footer />
-      </div>
+      </PageShell>
     </>
   );
 }
